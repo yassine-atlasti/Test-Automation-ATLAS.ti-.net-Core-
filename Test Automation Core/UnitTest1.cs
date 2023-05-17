@@ -46,6 +46,6 @@ namespace Test_Automation_ATLAS.ti
             optionsWindow.ClickSwitchLibraryButton();
         }
 
-        //Test
+        //Test 2
     }
 }
