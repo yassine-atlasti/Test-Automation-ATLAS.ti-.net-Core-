@@ -45,5 +45,7 @@ namespace Test_Automation_ATLAS.ti
             OptionsWindow optionsWindow = welcomeWindow.OpenOptionsWindow();
             optionsWindow.ClickSwitchLibraryButton();
         }
+
+        //Test
     }
 }
