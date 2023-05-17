@@ -2,12 +2,11 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Support.UI;
-using Test_Automation_ATLAS.ti.WelcomeWindow.Dialogs;
 using SeleniumExtras.WaitHelpers;
-using Test_Automation_ATLAS.ti.WelcomeWindow;
 using OpenQA.Selenium.Interactions;
+using Test_Automation_Core.UIElements.Dialogs;
 
-namespace TestAutomationFramework
+namespace Test_Automation_Core.UIElements.WelcomeWindow
 {
     public class WelcomeControl
     {
@@ -58,7 +57,7 @@ namespace TestAutomationFramework
         }
 
 
-        
+
 
 
 
@@ -87,13 +86,13 @@ namespace TestAutomationFramework
         {
             SearchProject(projectName);
             WindowsElement projectElement = driver.FindElementByName(projectName);
-           
+
             Actions actions = new Actions(driver);
             actions.ContextClick(projectElement).Perform();
         }
-       
 
-       
+
+
         public void SelectProjectContextMenuOption(string projectName, string menuOption)
         {
             RightClickProject(projectName);
@@ -110,7 +109,7 @@ namespace TestAutomationFramework
 
 
 
-        
+
 
         public NewProjectDialog OpenNewProjectDialog()
         {
@@ -123,7 +122,7 @@ namespace TestAutomationFramework
             return new FilePicker(driver);
         }
 
-       
+
 
 
 

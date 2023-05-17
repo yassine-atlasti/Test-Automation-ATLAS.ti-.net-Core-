@@ -2,10 +2,10 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Support.UI;
-using Test_Automation_ATLAS.ti.Dialogs;
-using Test_Automation_ATLAS.ti.WelcomeWindow.Wizards;
+using Test_Automation_Core.UIElements.Dialogs;
+using Test_Automation_Core.UIElements.WelcomeWindow.Wizards;
 
-namespace Test_Automation_ATLAS.ti.WelcomeWindow
+namespace Test_Automation_Core.UIElements.WelcomeWindow
 {
     public class OptionsWindow
     {

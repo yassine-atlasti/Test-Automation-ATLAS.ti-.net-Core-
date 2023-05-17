@@ -3,7 +3,8 @@
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
-namespace Test_Automation_ATLAS.ti.Dialogs
+
+namespace Test_Automation_Core.UIElements.Dialogs
 
 {
     public class ReportProblemDialog

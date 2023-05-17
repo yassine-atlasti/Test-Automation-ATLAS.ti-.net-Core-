@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
-namespace Test_Automation_ATLAS.ti.ProjectWindow
+
+namespace Test_Automation_Core.UIElements.ProjectWindow
 {
     public class AtlasProjectWindow
     {

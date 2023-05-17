@@ -5,7 +5,7 @@ using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using Test_Automation_ATLAS.ti.ProjectWindow;
 
-namespace Test_Automation_ATLAS.ti.WelcomeWindow.Dialogs
+namespace Test_Automation_Core.UIElements.Dialogs
 {
     public class ImportAtlProjDialog
     {

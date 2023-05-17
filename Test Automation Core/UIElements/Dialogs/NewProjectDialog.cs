@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
 
-namespace Test_Automation_ATLAS.ti.WelcomeWindow.Dialogs
+namespace Test_Automation_Core.UIElements.Dialogs
 {
     public class NewProjectDialog
     {
@@ -10,7 +10,7 @@ namespace Test_Automation_ATLAS.ti.WelcomeWindow.Dialogs
         public NewProjectDialog(WindowsDriver<WindowsElement> driver)
         {
             this.driver = driver;
-           
+
         }
 
         public void EnterProjectName(string projectName)
