@@ -30,5 +30,10 @@ namespace Test_Automation_Core.UIElements.Dialogs
         {
             driver.FindElementByName("Select Folder").Click();
         }
+
+        public void ClickSaveButton()
+        {
+            driver.FindElementByName("Save").Click();
+        }
     }
 }

@@ -2,7 +2,7 @@
 using OpenQA.Selenium.Appium.Windows;
 using Test_Automation_Core.UIElements.Dialogs;
 
-namespace Test_Automation_Core.UIElements.WelcomeWindow.Wizards
+namespace Test_Automation_Core.UIElements.Wizards
 {
     public class SwitchLibraryWizard
     {

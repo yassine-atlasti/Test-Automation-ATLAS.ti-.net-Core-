@@ -4,12 +4,11 @@ using NUnit.Framework;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Support.UI;
-using Test_Automation_ATLAS.ti.WelcomeWindow;
-using TestAutomationFramework;
 
 using System;
+using Test_Automation_Core.UIElements.WelcomeWindow;
 
-namespace Test_Automation_ATLAS.ti
+namespace Test_Automation_Core.Tests
 {
     [TestFixture]
     public class NUnitTestClass
@@ -41,7 +40,7 @@ namespace Test_Automation_ATLAS.ti
         [Test]
         public void TestMethod1()
         {
-            WelcomeControl welcomeWindow = new WelcomeControl(_driver);
+            WelcomeWindow welcomeWindow = new WelcomeWindow(_driver);
             OptionsWindow optionsWindow = welcomeWindow.OpenOptionsWindow();
             optionsWindow.ClickSwitchLibraryButton();
         }

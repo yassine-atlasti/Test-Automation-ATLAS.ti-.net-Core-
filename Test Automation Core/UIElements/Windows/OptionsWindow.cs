@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Support.UI;
 using Test_Automation_Core.UIElements.Dialogs;
-using Test_Automation_Core.UIElements.WelcomeWindow.Wizards;
+using Test_Automation_Core.UIElements.Wizards;
 
 namespace Test_Automation_Core.UIElements.WelcomeWindow
 {

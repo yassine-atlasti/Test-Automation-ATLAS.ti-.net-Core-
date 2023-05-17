@@ -1,13 +1,13 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
 
-namespace Test_Automation_Core.UIElements.ProjectWindow
+namespace Test_Automation_Core.UIElements.AtlasWindows
 {
-    public class AtlasProjectWindow
+    public class ProjectWindow
     {
         private readonly WindowsDriver<WindowsElement> driver;
 
-        public AtlasProjectWindow(WindowsDriver<WindowsElement> driver)
+        public ProjectWindow(WindowsDriver<WindowsElement> driver)
         {
             this.driver = driver;
         }

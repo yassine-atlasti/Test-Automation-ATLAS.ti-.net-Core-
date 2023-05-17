@@ -8,11 +8,11 @@ using Test_Automation_Core.UIElements.Dialogs;
 
 namespace Test_Automation_Core.UIElements.WelcomeWindow
 {
-    public class WelcomeControl
+    public class WelcomeWindow
     {
         private readonly WindowsDriver<WindowsElement> driver;
 
-        public WelcomeControl(WindowsDriver<WindowsElement> driver)
+        public WelcomeWindow(WindowsDriver<WindowsElement> driver)
         {
             this.driver = driver;
         }
@@ -28,10 +28,14 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
 
         public void ClickImportProjectButton()
         {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Name("Import Project")));
             driver.FindElementByName("Import Project").Click();
         }
         public void ClickOptionsButton()
         {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Name("Options Dialog Link")));
             WindowsElement optionsButton = driver.FindElementByName("Options Dialog Link");
             optionsButton.Click();
 
@@ -48,12 +52,12 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
             return new OptionsWindow(driver);
         }
 
-        public ImportAtlProjDialog WaitForImportAtlProjDialog()
+        public ImportProjectDialog WaitForImportAtlProjDialog()
         {
             // You can use an explicit wait to wait for the dialog to appear.
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Name("Project Name")));
-            return new ImportAtlProjDialog(driver);
+            return new ImportProjectDialog(driver);
         }
 
 
@@ -82,19 +86,20 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
             searchField.Clear();
         }
         public void RightClickProject(string projectName)
-
         {
-            SearchProject(projectName);
-            WindowsElement projectElement = driver.FindElementByName(projectName);
+            //to implement
 
-            Actions actions = new Actions(driver);
-            actions.ContextClick(projectElement).Perform();
+           
+
         }
+
 
 
 
         public void SelectProjectContextMenuOption(string projectName, string menuOption)
         {
+            SearchProject(projectName);
+
             RightClickProject(projectName);
 
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
