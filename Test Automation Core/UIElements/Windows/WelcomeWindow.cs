@@ -61,10 +61,27 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
         }
 
 
+        public void OpenProject(string projectName)
+        {
+            // Assume there is an element with the name of the project that can be clicked to open the project
+            var projectElement = driver.FindElementByName(projectName);
+            projectElement.Click();
+        }
 
 
-
-
+        public bool IsWelcomeWindowDisplayed()
+        {
+            try
+            {
+                // Assume that when the welcome window is displayed, an element with the name "WelcomeWindow" exists
+                driver.FindElementByName("WelcomeWindow");
+                return true;  // If the element was found, the welcome window is displayed
+            }
+            catch (NoSuchElementException)
+            {
+                return false;  // If the element was not found, the welcome window is not displayed
+            }
+        }
 
 
 

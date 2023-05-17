@@ -41,6 +41,11 @@ namespace Test_Automation_Core.UIElements.AppMenu
             return new ExportControl(_driver);
         }
 
+        public void ClickClose()
+        {
+            var closeButton = _driver.FindElementByName("Close");
+            closeButton.Click();
+        }
         // ... add other methods for other controls within the tab.
     }
 

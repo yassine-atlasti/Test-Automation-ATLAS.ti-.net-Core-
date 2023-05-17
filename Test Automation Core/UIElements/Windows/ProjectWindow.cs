@@ -11,6 +11,19 @@ namespace Test_Automation_Core.UIElements.AtlasWindows
         {
             this.driver = driver;
         }
+        public bool IsProjectOpen(string projectName)
+        {
+            try
+            {
+                // Assume that when a project is open, an element with the name of the project exists
+                var projectElement = driver.FindElementByName(projectName);
+                return projectElement != null;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
 
         // Add methods for interacting with Project Window elements as needed
     }
