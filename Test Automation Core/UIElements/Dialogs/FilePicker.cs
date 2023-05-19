@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
-
+using OpenQA.Selenium.Support.UI;
+using System.Net;
 namespace Test_Automation_Core.UIElements.Dialogs
 {
     public class FilePicker
@@ -14,8 +15,15 @@ namespace Test_Automation_Core.UIElements.Dialogs
 
         public void EnterFilePath(string filePath)
         {
-            driver.FindElementByClassName("Edit").SendKeys(filePath);
+
+            OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+            action.KeyDown(Keys.Control).SendKeys("l").KeyUp(Keys.Control).SendKeys(filePath).Perform();
         }
+
+
+
+
+
 
         public void ClickOpenButton()
         {

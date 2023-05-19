@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
-using Test_Automation_ATLAS.ti.ProjectWindow;
+
 using Test_Automation_Core.UIElements.AtlasWindows;
 
 namespace Test_Automation_Core.UIElements.Dialogs

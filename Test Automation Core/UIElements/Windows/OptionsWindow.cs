@@ -21,7 +21,7 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
         //Application Preferences
         public void ClickApplicationPreferences()
         {
-            driver.FindElementByName("Application Preferences").Click();
+            driver.FindElementByName("SSD.ATLASti.UI.Preferences.PreferenceCategory").Click();
         }
 
         public SwitchLibraryWizard ClickSwitchLibraryButton()
@@ -30,7 +30,7 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
             switchLibraryButton.Click();
 
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Name("UniqueElementInSwitchLibraryWizard")));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Name("Next >")));
 
             return new SwitchLibraryWizard(driver);
         }

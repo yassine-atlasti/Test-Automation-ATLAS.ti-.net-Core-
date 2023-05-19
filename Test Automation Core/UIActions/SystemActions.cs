@@ -50,7 +50,7 @@ namespace Test_Automation_Core.Actions
         public void UninstallAtlas(string majorVersion)
         {
             Process.Start("cmd.exe", $"/C wmic product where name=\"ATLAS.ti {majorVersion}\" call uninstall");
-            // Please replace "ATLAS.ti" with the exact name of the product as registered in the system
+           
         }
 
         public void CreateFolder(string folderName)

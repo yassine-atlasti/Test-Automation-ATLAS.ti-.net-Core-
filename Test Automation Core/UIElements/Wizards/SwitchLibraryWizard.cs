@@ -1,5 +1,7 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Windows;
+using System.Collections.ObjectModel;
 using Test_Automation_Core.UIElements.Dialogs;
 
 namespace Test_Automation_Core.UIElements.Wizards
@@ -15,7 +17,7 @@ namespace Test_Automation_Core.UIElements.Wizards
 
         public void ClickNextButton()
         {
-            driver.FindElementByName("Next").Click();
+            driver.FindElementByName("Next >").Click();
         }
 
         public void ClickCancelButton()
@@ -35,7 +37,19 @@ namespace Test_Automation_Core.UIElements.Wizards
 
         public FilePicker OpenFilePicker()
         {
-            driver.FindElementByName("File Picker").Click();
+
+            // Code to identify file picker button until new Autmation Properties are set
+            WindowsElement wizard = driver.FindElementByClassName("LibraryLocationWizard"); // replace with actual locator
+
+            var allImagesInWizard = wizard.FindElementsByTagName("Image");
+            if (allImagesInWizard.Count > 0)
+            {
+                var imageElement = allImagesInWizard[0];
+                imageElement.Click();
+            }
+
+
+
             return new FilePicker(driver);
         }
     }

@@ -10,11 +10,11 @@ using Test_Automation_Core.UIElements.Dialogs;
 
 namespace Test_Automation_Core.Actions
 {
-    public class Actions
+    public class ApplicationActions
     {
         private readonly App _app;
 
-        public Actions(App app)
+        public ApplicationActions(App app)
         {
             _app = app;
         }
@@ -61,12 +61,13 @@ namespace Test_Automation_Core.Actions
             // Assume that each method performs the action that its name suggests
             fileTab.ClickFile();
             ExportControl exportControl = fileTab.ClickExport();
+            string exportTypeLower = exportType.ToLower();
 
-            if (exportType == "QDPX")
+            if (exportTypeLower == "qdpx")
             {
                 exportControl.ClickQDPXProjectBundleTabItem();
             }
-            else if (exportType == "AtlProj")
+            else if (exportTypeLower == "atlproj")
             {
                 exportControl.ClickProjectBundleTabItem();
             }

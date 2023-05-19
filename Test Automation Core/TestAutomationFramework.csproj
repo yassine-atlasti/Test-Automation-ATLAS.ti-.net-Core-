@@ -18,10 +18,12 @@
     <PackageReference Include="NUnit3TestAdapter" Version="4.4.2" />
     <PackageReference Include="NUnit.Analyzers" Version="3.6.1" />
     <PackageReference Include="coverlet.collector" Version="3.2.0" />
+    <PackageReference Include="System.Windows.Forms.Ribbon35" Version="3.5.8" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Data\SmokeTestData\" />
+    <Folder Include="UIElements\Wizards\Images\" />
   </ItemGroup>
 
 </Project>
