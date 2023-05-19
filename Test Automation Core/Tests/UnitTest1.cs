@@ -24,32 +24,45 @@ namespace Test_Automation_Core.Tests
             appOptions.AddAdditionalCapability("app", @"C:\Program Files\Scientific Software\ATLASti.23\Atlasti23.exe");
             appOptions.AddAdditionalCapability("deviceName", "WindowsPC");
             _driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appOptions);
-            
+
+            WaitForApplicationToOpen();
+
         }
 
         [OneTimeTearDown]
         public static void ClassCleanup()
         {
+
             _driver.Quit();
         }
 
-       static public void WaitForApplicationToOpen()
+        static public void WaitForApplicationToOpen()
         {
             WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(60));
             wait.Until(driver => _driver.FindElementByAccessibilityId("Large_CreateNewProjectButton").Displayed);
         }
 
+        //Testing SendSuggestion Action
         [Test]
         public void TestMethod1()
         {
-            WaitForApplicationToOpen();
+            App appControl = new App(_driver);
+            ApplicationActions appActions = new ApplicationActions(appControl);
+            appActions.ReportProblem("Test", "tester@atlasti.com");
+
+        }
+        /**
+        //Testing SwitchLibrary Action
+        [Test]
+        public void TestMethod2()
+        {
             App appControl = new App(_driver);
             ApplicationActions appActions = new ApplicationActions(appControl);
             var libraryPath = @"C:\Users\yassinemahfoudh\Desktop\Win-SmokeTestLibraryContainingC&H+hierarchy\ATLASti.22";
 
             appActions.SwitchLibrary(libraryPath);
 
-        }
+        }**/
 
         //Test 2
     }

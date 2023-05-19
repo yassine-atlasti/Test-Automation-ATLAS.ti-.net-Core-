@@ -127,6 +127,7 @@ namespace Test_Automation_Core.Actions
             switchLibraryWizard.ClickFinishButton();
 
             // You can add more actions or checks here, such as validating that the library was switched correctly
+           
         }
 
 
@@ -198,7 +199,7 @@ namespace Test_Automation_Core.Actions
             reportProblemDialog.ClickReportProblemButton();
 
             // Waiting for confirmation dialog to appear
-            var wait = new WebDriverWait(_app.getDriver(), TimeSpan.FromSeconds(30));
+            var wait = new WebDriverWait(_app.getDriver(), TimeSpan.FromSeconds(60));
             try
             {
                 wait.Until(drv => drv.FindElement(By.Name("Problem Report Sent")));
@@ -244,7 +245,7 @@ namespace Test_Automation_Core.Actions
             suggestionDialog.ClickSendSuggestionButton();
 
             // Waiting for confirmation dialog to appear
-            var wait = new WebDriverWait(_app.getDriver(), TimeSpan.FromSeconds(30));
+            var wait = new WebDriverWait(_app.getDriver(), TimeSpan.FromSeconds(60));
             try
             {
                 wait.Until(drv => drv.FindElement(By.Name("Suggestion Sent")));

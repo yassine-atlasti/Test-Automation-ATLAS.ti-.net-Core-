@@ -74,7 +74,7 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
             try
             {
                 // Assume that when the welcome window is displayed, an element with the name "WelcomeWindow" exists
-                driver.FindElementByName("WelcomeWindow");
+                driver.FindElementByName("Your Projects");
                 return true;  // If the element was found, the welcome window is displayed
             }
             catch (NoSuchElementException)

@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
+using OpenQA.Selenium.Support.UI;
 
 namespace Test_Automation_Core.UIElements.Dialogs
 {
@@ -15,14 +16,16 @@ namespace Test_Automation_Core.UIElements.Dialogs
         // Add methods for interacting with Send Suggestion Dialog elements as needed
         public void EnterSuggestionDescription(string suggestionDescription)
         {
-            WindowsElement suggestionDescriptionTextField = driver.FindElementByName("SuggestionDescription");
-            suggestionDescriptionTextField.Clear();
+            WindowsElement suggestionDescriptionTextField = driver.FindElementByAccessibilityId("FeedbackText");
+            suggestionDescriptionTextField.Click();
+            
             suggestionDescriptionTextField.SendKeys(suggestionDescription);
         }
 
         public void EnterEmail(string email)
         {
-            WindowsElement emailTextField = driver.FindElementByName("Email");
+            WindowsElement emailTextField = driver.FindElementByAccessibilityId("EMailAddress");
+            emailTextField.Click();
             emailTextField.Clear();
             emailTextField.SendKeys(email);
         }
@@ -39,7 +42,8 @@ namespace Test_Automation_Core.UIElements.Dialogs
 
         public void CloseConfirmationDialog()
         {
-            driver.FindElementByName("OK").Click();
+          
+            driver.FindElementByName("OK\\").Click();
 
         }
     }

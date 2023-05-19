@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Support.UI;
@@ -40,7 +41,19 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
         //ATLAS.ti Options
         public void ClickATLASti()
         {
-            driver.FindElementByName("ATLAS.ti").Click();
+            var lastTabItem = driver.FindElementByAccessibilityId("CategoriesTabControl").FindElementsByClassName("TabItem").LastOrDefault(); 
+           
+            if (lastTabItem != null)
+            {
+                // Now you can interact with the lastTabItem.
+                // For instance, you could click it:
+                lastTabItem.Click();
+            }
+            else
+            {
+                Console.WriteLine("TabItem not found");
+            }
+
         }
         private void ClickReportProblemButton()
         {
@@ -60,20 +73,16 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
         public ReportProblemDialog OpenReportProblemDialog()
         {
             ClickReportProblemButton();
-            // Wait for a unique element in the Report Problem Dialog to appear.
-            // Replace "UniqueElementInReportProblemDialog" with an actual unique element name or locator.
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Name("UniqueElementInReportProblemDialog")));
+            //Could add code to Wait for a unique element in the Report Problem Dialog to appear.
+            
             return new ReportProblemDialog(driver);
         }
 
         public SuggestionDialog OpenSendSuggestionDialog()
         {
             ClickSendSuggestionButton();
-            // Wait for a unique element in the Send Suggestion Dialog to appear.
-            // Replace "UniqueElementInSendSuggestionDialog" with an actual unique element name or locator.
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Name("UniqueElementInSendSuggestionDialog")));
+            // Could add code to Wait for a unique element in the Send Suggestion Dialog to appear.
+            
             return new SuggestionDialog(driver);
         }
 
