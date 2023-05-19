@@ -41,5 +41,13 @@ namespace Test_Automation_Core.UIElements.Dialogs
         {
             driver.FindElementByName("Cancel").Click();
         }
+
+        public void CloseConfirmationDialog()
+        {
+            driver.FindElementByName("OK").Click();
+
+        }
+
+
     }
 }

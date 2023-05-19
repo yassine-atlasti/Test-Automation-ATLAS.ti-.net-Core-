@@ -3,11 +3,11 @@ using OpenQA.Selenium.Appium.Windows;
 
 namespace Test_Automation_Core.UIElements.Dialogs
 {
-    public class SendSuggestionDialog
+    public class SuggestionDialog
     {
         private readonly WindowsDriver<WindowsElement> driver;
 
-        public SendSuggestionDialog(WindowsDriver<WindowsElement> driver)
+        public SuggestionDialog(WindowsDriver<WindowsElement> driver)
         {
             this.driver = driver;
         }
@@ -35,6 +35,12 @@ namespace Test_Automation_Core.UIElements.Dialogs
         public void ClickCancelButton()
         {
             driver.FindElementByName("Cancel").Click();
+        }
+
+        public void CloseConfirmationDialog()
+        {
+            driver.FindElementByName("OK").Click();
+
         }
     }
 }

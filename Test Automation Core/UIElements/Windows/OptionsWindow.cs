@@ -38,6 +38,10 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
 
 
         //ATLAS.ti Options
+        public void ClickATLASti()
+        {
+            driver.FindElementByName("ATLAS.ti").Click();
+        }
         private void ClickReportProblemButton()
         {
             driver.FindElementByName("Report Problem").Click();
@@ -63,14 +67,14 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
             return new ReportProblemDialog(driver);
         }
 
-        public SendSuggestionDialog OpenSendSuggestionDialog()
+        public SuggestionDialog OpenSendSuggestionDialog()
         {
             ClickSendSuggestionButton();
             // Wait for a unique element in the Send Suggestion Dialog to appear.
             // Replace "UniqueElementInSendSuggestionDialog" with an actual unique element name or locator.
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Name("UniqueElementInSendSuggestionDialog")));
-            return new SendSuggestionDialog(driver);
+            return new SuggestionDialog(driver);
         }
 
         public CheckForUpdatesDialog OpenCheckForUpdatesDialog()

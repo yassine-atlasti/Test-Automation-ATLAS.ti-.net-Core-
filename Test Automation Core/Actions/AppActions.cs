@@ -171,8 +171,114 @@ namespace Test_Automation_Core.Actions
                 Console.WriteLine("Failed to close project");
             }
         }
+        public void ReportProblem(string description, string email)
+        {
+            ReportProblemDialog reportProblemDialog;
+
+            if (_app.GetWelcomeControl().IsWelcomeWindowDisplayed())
+            {
+                // Reporting problem from welcome window
+                var optionsWindow = _app.GetWelcomeControl().OpenOptionsWindow();
+                 optionsWindow.ClickATLASti();
+
+                reportProblemDialog = optionsWindow.OpenReportProblemDialog();
+            }
+            else
+            {
+                // Reporting problem from project window
+                var appMenu = _app.GetProjectWindow().getAppMenu();
+               var helpRibbon = appMenu.ClickHelp();
+
+                reportProblemDialog = helpRibbon.OpenReportProblemDialog();
+            }
+
+            reportProblemDialog.EnterProblemDescription(description);
+            reportProblemDialog.EnterEmail(email);
+            reportProblemDialog.ClickReportProblemButton();
+
+            // Waiting for confirmation dialog to appear
+            var wait = new WebDriverWait(_app.getDriver(), TimeSpan.FromSeconds(30));
+            try
+            {
+                wait.Until(drv => drv.FindElement(By.Name("Problem Report Sent")));
+            }
+            catch (WebDriverTimeoutException)
+            {
+                throw new Exception("The problem report was not successfully sent");
+            }
+
+
+            // Once confirmation dialog is found, confirm the dialog
+            Console.WriteLine("The problem report was  successfully sent");
+            reportProblemDialog.CloseConfirmationDialog();
+            
+        }
+
+
+
+
+        public void SendSuggestion(string description, string email)
+        {
+            SuggestionDialog suggestionDialog;
+
+            if (_app.GetWelcomeControl().IsWelcomeWindowDisplayed())
+            {
+                // Sending suggestion from welcome window
+                var optionsWindow = _app.GetWelcomeControl().OpenOptionsWindow();
+                optionsWindow.ClickATLASti();
+
+                suggestionDialog = optionsWindow.OpenSendSuggestionDialog();
+            }
+            else
+            {
+                // Sending suggestion from project window
+                var appMenu = _app.GetProjectWindow().getAppMenu();
+                var helpRibbon = appMenu.ClickHelp();
+
+                suggestionDialog = helpRibbon.OpenSendSuggestionDialog();
+            }
+
+            suggestionDialog.EnterSuggestionDescription(description);
+            suggestionDialog.EnterEmail(email);
+            suggestionDialog.ClickSendSuggestionButton();
+
+            // Waiting for confirmation dialog to appear
+            var wait = new WebDriverWait(_app.getDriver(), TimeSpan.FromSeconds(30));
+            try
+            {
+                wait.Until(drv => drv.FindElement(By.Name("Suggestion Sent")));
+            }
+            catch (WebDriverTimeoutException)
+            {
+                throw new Exception("The suggestion was not successfully sent");
+            }
+
+            // Once confirmation dialog is found, confirm the dialog
+            Console.WriteLine("The suggestion was  successfully sent");
+            suggestionDialog.CloseConfirmationDialog();
+        }
+
+        public void LiveChat(string chatText)
+        {
+            // Open the project window's app menu
+            var appMenu = _app.GetProjectWindow().getAppMenu();
+
+            // Click on 'Help' to get the HelpRibbon
+            var helpRibbon = appMenu.ClickHelp();
+
+            // Open the live chat dialog
+            var liveChatDialog = helpRibbon.OpenLiveChatDialog();
+
+            //  Start the chat and enter the chat text 
+            liveChatDialog.StartChat();
+
+            liveChatDialog.EnterChatText(chatText);
+            liveChatDialog.EndChat();
+            // Additional actions or checks can be added here
+        }
+
+
 
 
     }
-
 }

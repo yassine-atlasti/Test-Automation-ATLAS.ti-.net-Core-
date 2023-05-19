@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
+using Test_Automation_Core.UIElements.AppMenu;
 
 namespace Test_Automation_Core.UIElements.AtlasWindows
 {
@@ -23,6 +24,11 @@ namespace Test_Automation_Core.UIElements.AtlasWindows
             {
                 return false;
             }
+        }
+
+        public Menu getAppMenu()
+        {
+            return new Menu(driver);
         }
 
         // Add methods for interacting with Project Window elements as needed

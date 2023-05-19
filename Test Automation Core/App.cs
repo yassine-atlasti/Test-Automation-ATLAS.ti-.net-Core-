@@ -20,11 +20,16 @@ namespace Test_Automation_Core
         private static WindowsDriver<WindowsElement> _driver;
         private static readonly TimeSpan _timeout = TimeSpan.FromSeconds(10);
 
+
         public App(WindowsDriver<WindowsElement> driver)
         {
             _driver = driver;
         }
 
+        public WindowsDriver<WindowsElement>  getDriver()
+        {
+            return _driver;
+        }
         public WelcomeWindow GetWelcomeControl()
         {
            
@@ -67,9 +72,9 @@ namespace Test_Automation_Core
             return new CheckForUpdatesDialog(_driver);
         }
 
-        public SendSuggestionDialog GetSendSuggestionDialog()
+        public SuggestionDialog GetSendSuggestionDialog()
         {
-            return new SendSuggestionDialog(_driver);
+            return new SuggestionDialog(_driver);
         }
 
         public ReportProblemDialog GetReportProblemDialog()
