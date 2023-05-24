@@ -1,10 +1,14 @@
 ﻿using System;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Appium;
+
 using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using OpenQA.Selenium.Interactions;
 using Test_Automation_Core.UIElements.Dialogs;
+using Test_Automation_Core.UIElements.AtlasWindows;
+using System.Xml.Linq;
 
 namespace Test_Automation_Core.UIElements.WelcomeWindow
 {
@@ -63,9 +67,26 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
 
         public void OpenProject(string projectName)
         {
-            // Assume there is an element with the name of the project that can be clicked to open the project
-            var projectElement = driver.FindElementByName(projectName);
-            projectElement.Click();
+
+            //Add a way to open the project if another project is already open
+
+
+            SearchProject(projectName);
+
+            var projectList = driver.FindElementByTagName("List");
+
+            var project= projectList.FindElementByName(projectName);
+
+            // Create an Actions object
+            OpenQA.Selenium.Interactions.Actions actions = new OpenQA.Selenium.Interactions.Actions(driver);
+
+            // Double click the element
+            actions.DoubleClick(project).Perform();
+
+            //Wait for the project to open by identifying a unique UI Element in the project Window
+            // Add a delay to allow the application window to open
+            Thread.Sleep(TimeSpan.FromSeconds(15));
+
         }
 
 

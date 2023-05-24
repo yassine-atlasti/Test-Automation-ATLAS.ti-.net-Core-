@@ -19,8 +19,9 @@ namespace Test_Automation_Core.UIElements.AppMenu
 
         public void ClickFile()
         {
-            var FileButton = _driver.FindElementByName("File");
-            FileButton.Click();
+            var tabItem = _driver.FindElementByTagName("TabItem");
+            var fileItem= tabItem.FindElementByName("File\\");
+            fileItem.Click();
         }
         public void ClickSave()
         {

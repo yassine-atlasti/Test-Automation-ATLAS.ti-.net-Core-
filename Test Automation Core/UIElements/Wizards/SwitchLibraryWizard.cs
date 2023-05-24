@@ -52,5 +52,19 @@ namespace Test_Automation_Core.UIElements.Wizards
 
             return new FilePicker(driver);
         }
+
+        public bool IsElementDisplayed(string uiElement)
+        {
+            try
+            {
+               
+                driver.FindElementByName(uiElement);
+                return true;  
+            }
+            catch (NoSuchElementException)
+            {
+                return false; 
+            }
+        }
     }
 }

@@ -53,10 +53,19 @@ namespace Test_Automation_Core.Actions
 
 
 
-        public void ExportProject(string filePath, string exportType)
+        public void ExportProject(string filePath, string exportType, string projectName)
         {
+            var welcomeWindow= _app.GetWelcomeControl();
             var fileTab = _app.GetFileTab();
             var atlasProjectWindow = _app.GetProjectWindow();
+
+            //check if welcome Window is displayed, if yes open the project that should be exported
+
+            if(welcomeWindow.IsWelcomeWindowDisplayed())
+            {
+                welcomeWindow.OpenProject(projectName);
+
+            }
 
             // Assume that each method performs the action that its name suggests
             fileTab.ClickFile();
@@ -113,6 +122,14 @@ namespace Test_Automation_Core.Actions
             // In the Switch Library Wizard, click the 'Next' button
             switchLibraryWizard.ClickNextButton();
 
+            //If the current library is not the Default Library, the user should select "Choose Library Location
+            string uiElement = "Choose Library Location";
+            
+           if(switchLibraryWizard.IsElementDisplayed(uiElement))
+            {
+                switchLibraryWizard.SelectOption(uiElement);
+
+            }
 
             // Open the File Picker dialog, enter the path of the new library and click 'Select Folder'
             var filePickerDialog = switchLibraryWizard.OpenFilePicker();
