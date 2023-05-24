@@ -1,6 +1,8 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
+using OpenQA.Selenium.Support.UI;
 using Test_Automation_Core.UIElements.AppMenu;
+using System;
 
 namespace Test_Automation_Core.UIElements.AtlasWindows
 {
@@ -17,7 +19,7 @@ namespace Test_Automation_Core.UIElements.AtlasWindows
             try
             {
                 // Assume that when a project is open, a unique element of the project window exists
-                var projectElement = driver.FindElementByName(uniqueElement);
+                var projectElement = driver.FindElementByName(uniqueElement + " - ATLAS.ti");
                 return projectElement != null;
             }
             catch (NoSuchElementException)
@@ -25,6 +27,33 @@ namespace Test_Automation_Core.UIElements.AtlasWindows
                 return false;
             }
         }
+
+
+
+
+
+        public void WaitForProjectToDisplay(string projectName)
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60)); // Set the maximum wait time
+
+            // Define the expected condition
+            Func<IWebDriver, bool> condition = (drv) =>
+            {
+                try
+                {
+                    var titleElement = ((WindowsDriver<WindowsElement>)drv).FindElementByAccessibilityId("PART_RibbonTitleBar").FindElementByName(projectName+" - ATLAS.ti");
+                    return titleElement.Displayed;
+                }
+                catch (NoSuchElementException)
+                {
+                    return false;
+                }
+            };
+
+            // Wait until the condition is met
+            wait.Until(condition);
+        }
+
 
         public Menu getAppMenu()
         {

@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium.Appium.Windows;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Appium.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,10 +20,10 @@ namespace Test_Automation_Core.UIElements.AppMenu
 
         public FileTab ClickFile()
         {
-            // Locate the File Menu item and perform the click action
-            var fileMenu = _driver.FindElementByName("File");
-            fileMenu.Click();
+           
 
+            var file = _driver.FindElementByTagName("Menu");
+            file.Click();
             // Return a new FileTab object
             return new FileTab(_driver);
         }
@@ -31,7 +32,7 @@ namespace Test_Automation_Core.UIElements.AppMenu
         public HomeRibbon ClickHome()
         {
             // Locate the Home Menu item and perform the click action
-            var homeMenu = _driver.FindElementByName("Home");
+            var homeMenu = _driver.FindElementByName("Ribbon").FindElementByName("Home");
             homeMenu.Click();
 
             // Return a new HomeRibbon object
@@ -40,31 +41,31 @@ namespace Test_Automation_Core.UIElements.AppMenu
 
         public SearchCodeRibbon ClickSearchCode()
         {
-            _driver.FindElementByName("Search & Code").Click();
+            _driver.FindElementByName("Ribbon").FindElementByName("Search & Code").Click();
             return new SearchCodeRibbon(_driver);
         }
 
         public AnalyzeRibbon ClickAnalyze()
         {
-            _driver.FindElementByName("Analyze").Click();
+            _driver.FindElementByName("Ribbon").FindElementByName("Analyze").Click();
             return new AnalyzeRibbon(_driver);
         }
 
         public ImportExportRibbon ClickImportExport()
         {
-            _driver.FindElementByName("Import & Export").Click();
+            _driver.FindElementByName("Ribbon").FindElementByName("Import & Export").Click();
             return new ImportExportRibbon(_driver);
         }
 
         public ToolsRibbon ClickTools()
         {
-            _driver.FindElementByName("Tools").Click();
+            _driver.FindElementByName("Ribbon").FindElementByName("Tools").Click();
             return new ToolsRibbon(_driver);
         }
 
         public HelpRibbon ClickHelp()
         {
-            _driver.FindElementByName("Help").Click();
+            _driver.FindElementByName("Ribbon").FindElementByName("Help").Click();
             return new HelpRibbon(_driver);
         }
 

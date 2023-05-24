@@ -32,14 +32,24 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
 
         public void ClickImportProjectButton()
         {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Name("Import Project")));
-            driver.FindElementByName("Import Project").Click();
+
+            // Get the parent control
+            WindowsElement parentControl = driver.FindElementByAccessibilityId("TheWelcomeControl");
+
+            // Find all image elements within the control
+            var images = parentControl.FindElementsByTagName("Image");
+
+            // Check if there are at least 3 images
+            if (images.Count >= 4)
+            {
+                // Click the third image (0-based index, so index 2 is the third image)
+                images[3].Click();
+            }
         }
+
         public void ClickOptionsButton()
         {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Name("Options Dialog Link")));
+            
             WindowsElement optionsButton = driver.FindElementByName("Options Dialog Link");
             optionsButton.Click();
 
@@ -68,8 +78,7 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
         public void OpenProject(string projectName)
         {
 
-            //Add a way to open the project if another project is already open
-
+            
 
             SearchProject(projectName);
 
@@ -92,17 +101,10 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
 
         public bool IsWelcomeWindowDisplayed()
         {
-            try
-            {
-                // Assume that when the welcome window is displayed, an element with the name "WelcomeWindow" exists
-                driver.FindElementByName("Your Projects");
-                return true;  // If the element was found, the welcome window is displayed
-            }
-            catch (NoSuchElementException)
-            {
-                return false;  // If the element was not found, the welcome window is not displayed
-            }
+            var welcomeWindowElements = driver.FindElementsByName("Your Projects");
+            return welcomeWindowElements.Count > 0;
         }
+
 
 
 

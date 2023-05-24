@@ -19,20 +19,41 @@ namespace Test_Automation_Core.UIElements.AppMenu.File
 
         public void ClickProjectBundleTabItem()
         {
-            var projectBundleTabItem = _driver.FindElementByName("Project Bundle Item");
-            projectBundleTabItem.Click();
+            // Locate the TabItem by name
+            var tabItem = _driver.FindElementByAccessibilityId("TransferBundleTab");
+
+            // Find the button within the TabItem
+            var button = tabItem.FindElementByName("Project Bundle");
+
+            // Click the button
+            button.Click();
         }
 
         public void ClickQDPXProjectBundleTabItem()
         {
-            var qdpxProjectBundleTabItem = _driver.FindElementByName("QDPX Project Bundle Item");
-            qdpxProjectBundleTabItem.Click();
+            
+            // Locate the TabItem by name
+            var tabItem = _driver.FindElementByAccessibilityId("QDPXBundleTab");
+
+            // Find the button within the TabItem
+            var button = tabItem.FindElementByName("QDPX Project Bundle");
+
+            // Click the button
+            button.Click();
         }
 
-        public FilePicker ClickProjectBundleButton()
+        public FilePicker ClickProjectBundleButton(string tabType)
         {
-            var ProjectBundleButton = _driver.FindElementByName("Project Bundle Button");
-            ProjectBundleButton.Click();
+
+
+            // Locate the TabItem by name
+            var tabItem = _driver.FindElementByAccessibilityId(tabType).FindElementByTagName("Button");
+
+            // Find the button within the TabItem
+            var button = tabItem.FindElementByName("Project Bundle");
+
+            // Click the button
+            button.Click();
             return new FilePicker(_driver);
         }
         // ... add other methods for other controls within the ExportControl.

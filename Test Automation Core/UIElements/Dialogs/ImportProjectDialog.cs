@@ -21,6 +21,7 @@ namespace Test_Automation_Core.UIElements.Dialogs
         public void EnterProjectName(string projectName)
         {
             driver.FindElementByName("Project Name").SendKeys(projectName);
+
         }
 
         public void ClickImportButton()
@@ -34,7 +35,7 @@ namespace Test_Automation_Core.UIElements.Dialogs
         }
 
 
-        public ProjectWindow ClickImportAndWaitForProjectWindow()
+        public ProjectWindow ClickImportAndWaitForProjectWindow(string projectName)
         {
             //Check if project name already exists 
 
@@ -43,9 +44,10 @@ namespace Test_Automation_Core.UIElements.Dialogs
             ClickImportButton();
             // Wait for a unique element in the Project Window to appear.
             // Replace "UniqueElementInProjectWindow" with an actual unique element name or locator.
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Name("UniqueElementInProjectWindow")));
-            return new ProjectWindow(driver);
+           
+            var projectWindow= new ProjectWindow(driver);
+            projectWindow.WaitForProjectToDisplay(projectName);
+            return projectWindow;
         }
 
 

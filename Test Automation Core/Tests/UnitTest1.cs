@@ -42,17 +42,9 @@ namespace Test_Automation_Core.Tests
         }
         **/
 
-        static public void WaitForApplicationToOpen()
-        {
-            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(60));
-            wait.Until(driver => _driver.FindElementByName("Your Projects").Displayed);
-        }
 
-        private static bool IsApplicationRunning(string processName)
-        {
-            Process[] processes = Process.GetProcessesByName(processName);
-            return processes.Length > 0;
-        }
+
+
 
         /**
         //Testing SendSuggestion Action
@@ -82,7 +74,7 @@ namespace Test_Automation_Core.Tests
 
         //Test 2
 
-
+        /**
 
         [Test]
         public void TestMethod2()
@@ -96,7 +88,33 @@ namespace Test_Automation_Core.Tests
 
         }
 
+        **/
 
+        /**
+        [Test]
+        public void TestMethod2()
+        {
+            App appControl = new App(_driver);
+            ApplicationActions appActions = new ApplicationActions(appControl);
+            var exportPath = @"C:\Users\yassinemahfoudh\Desktop";
+            var exportType = "qdpx";
+            var projectName = "Survey Project";
+            appActions.ExportProject(exportPath, exportType, projectName);
 
+        }
+        **/
+
+        [Test]
+        public void TestMethod2()
+        {
+            App appControl = new App(_driver);
+            ApplicationActions appActions = new ApplicationActions(appControl);
+            var filePath =  @"C:\Users\yassinemahfoudh\Desktop\Survey Project (Yassine Mahfoudh 2023-05-24).qdpx"
+;
+            var importType = "qdpx";
+            var projectName = "Survey Project 2";
+            appActions.ImportProject(filePath, importType, projectName);
+
+        }
     }
 }

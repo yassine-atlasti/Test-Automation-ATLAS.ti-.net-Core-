@@ -22,7 +22,12 @@ namespace Test_Automation_Core.UIElements.Dialogs
 
 
 
-
+        public void EnterFileName(string fileName)
+        {
+            //Entering the file path in the adress box of the file picker using shortcut CTRL+L, the filePath parameter , and the Enter Key
+            OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+            action.KeyDown(Keys.Alt).SendKeys("n").KeyUp(Keys.Control).SendKeys(fileName).SendKeys(Keys.Enter).Perform();
+        }
 
 
         public void ClickOpenButton()

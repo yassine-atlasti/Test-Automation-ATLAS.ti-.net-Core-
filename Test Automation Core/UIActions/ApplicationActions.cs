@@ -26,9 +26,12 @@ namespace Test_Automation_Core.Actions
             var importProjectDialog = _app.GetImportProjectDialog();
             var atlasProjectWindow = _app.GetProjectWindow();
 
+            if(!welcomeControlWindow.IsWelcomeWindowDisplayed()) { CloseProject(); }
+
             // Assume that each method performs the action that its name suggests
             welcomeControlWindow.ClickImportProjectButton();
-            filePickerDialog.EnterFilePath(filePath);
+            filePickerDialog.EnterFileName(filePath);
+
             filePickerDialog.ClickOpenButton();
 
             // If import type is QDPX and the MediaFolderButton is visible, handle the media folder selection
@@ -39,14 +42,14 @@ namespace Test_Automation_Core.Actions
 
                 importProjectDialog.ClickBrowseMediaFolderButton();
                 filePickerDialog.EnterFilePath(mediaFolderPath);
-                filePickerDialog.ClickSelectFolderButton();
+                filePickerDialog.ClickOpenButton() ;
 
             }
 
             // Set project name
             importProjectDialog.EnterProjectName(projectName);
 
-            importProjectDialog.ClickImportAndWaitForProjectWindow();
+            importProjectDialog.ClickImportAndWaitForProjectWindow(projectName);
 
             // You can add more actions or checks here, such as validating that the project was imported correctly
         }
@@ -56,44 +59,53 @@ namespace Test_Automation_Core.Actions
         public void ExportProject(string filePath, string exportType, string projectName)
         {
             var welcomeWindow= _app.GetWelcomeControl();
-            var fileTab = _app.GetFileTab();
-            var atlasProjectWindow = _app.GetProjectWindow();
+           
+            var projectWindow = _app.GetProjectWindow();
+            var appMenu= projectWindow.getAppMenu();
 
             //check if welcome Window is displayed, if yes open the project that should be exported
 
             if(welcomeWindow.IsWelcomeWindowDisplayed())
             {
-                welcomeWindow.OpenProject(projectName);
+                OpenProject(projectName);
 
             }
 
             // Assume that each method performs the action that its name suggests
-            fileTab.ClickFile();
+            var fileTab = appMenu.ClickFile();
+
             ExportControl exportControl = fileTab.ClickExport();
             string exportTypeLower = exportType.ToLower();
+            FilePicker filePickerDialog ;
 
             if (exportTypeLower == "qdpx")
             {
                 exportControl.ClickQDPXProjectBundleTabItem();
+                 filePickerDialog = exportControl.ClickProjectBundleButton("QDPXBundleTab");
+
             }
             else if (exportTypeLower == "atlproj")
             {
-                exportControl.ClickProjectBundleTabItem();
+                filePickerDialog = exportControl.ClickProjectBundleButton("TransferBundleTab");
             }
             else
             {
                 throw new ArgumentException("Invalid export type: " + exportType);
             }
 
-            FilePicker filePickerDialog = exportControl.ClickProjectBundleButton();
+
+            // Add a delay of 2 seconds
+            Thread.Sleep(2000); // Delay in milliseconds
 
             filePickerDialog.EnterFilePath(filePath);
             filePickerDialog.ClickSaveButton();
 
             //handle QDPX Export Results
-            if (exportType == "QDPX")
+            if (exportTypeLower == "qdpx")
             {
                 var exportResultsDialog = _app.GetExportResultsDialog();
+                // projectWindow.WaitForProjectToDisplay();
+                Thread.Sleep(15000);
                 exportResultsDialog.CancelQDPXResultsExport();
 
             }
@@ -154,16 +166,19 @@ namespace Test_Automation_Core.Actions
             var welcomeWindow = _app.GetWelcomeControl();
             var projectWindow = _app.GetProjectWindow();
 
+            if (welcomeWindow.IsWelcomeWindowDisplayed()==false)
+            {
+                CloseProject();
+
+            }
             // Open project
             welcomeWindow.OpenProject(projectName);
 
             // Verify if the project is open
-            bool isOpen = projectWindow.IsProjectOpen(projectName);
+             projectWindow.WaitForProjectToDisplay(projectName);
 
-            if (!isOpen)
-            {
-                throw new Exception($"Failed to open the project {projectName}");
-            }
+
+          
 
             Console.WriteLine($"Project {projectName} opened successfully");
         }
@@ -173,13 +188,15 @@ namespace Test_Automation_Core.Actions
 
         public void CloseProject()
         {
-            var fileTab = _app.GetFileTab();
             var welcomeWindow = _app.GetWelcomeControl();
+            var projectWindow=_app.GetProjectWindow();
+            var appMenu = projectWindow.getAppMenu();
+            var fileTab = appMenu.ClickFile();
 
             // Assume that each method performs the action that its name suggests
-            fileTab.ClickFile();
             fileTab.ClickClose();
 
+            Thread.Sleep(6000);
             // You can add more actions or checks here, such as validating that the project was closed correctly
             if (welcomeWindow.IsWelcomeWindowDisplayed())
             {
