@@ -23,6 +23,7 @@ namespace Test_Automation_Core.UIElements.Dialogs
         public void EnterProjectName(string projectName)
         {
 
+
             var projectBox = driver.FindElementByAccessibilityId("NewProjectNameBox");
             projectBox.Clear();
             projectBox.SendKeys(projectName);

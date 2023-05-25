@@ -30,27 +30,8 @@ namespace Test_Automation_Core.UIElements.Dialogs
 
 
 
-        public void WaitForCancelButton()
-        {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60)); // Set the maximum wait time
-
-            // Define the expected condition
-            Func<IWebDriver, bool> condition = (drv) =>
-            {
-                try
-                {
-                    var cancelElement = ((WindowsDriver<WindowsElement>)drv).FindElementByAccessibilityId("Close_Button");
-                    return cancelElement.Displayed;
-                }
-                catch (NoSuchElementException)
-                {
-                    return false;
-                }
-            };
-
-            // Wait until the condition is met
-            wait.Until(condition);
-        }
+       
+        
 
 
 

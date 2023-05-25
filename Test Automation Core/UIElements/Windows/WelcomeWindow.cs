@@ -26,7 +26,16 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
 
         public void ClickNewProjectButton()
         {
-            driver.FindElementByName("New Project").Click();
+            // Get the parent control
+            WindowsElement parentControl = driver.FindElementByAccessibilityId("TheWelcomeControl");
+
+            // Find all image elements within the control
+            var images = parentControl.FindElementsByTagName("Image").Take(4).ToArray();
+
+
+
+            // Click the third image (0-based index, so index 2 is the third image)
+            images[2].Click();
         }
 
 
@@ -37,11 +46,11 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
             WindowsElement parentControl = driver.FindElementByAccessibilityId("TheWelcomeControl");
 
             // Find all image elements within the control
-            var images = parentControl.FindElementsByTagName("Image");
+            var images = parentControl.FindElementsByTagName("Image").Take(4).ToArray();
 
            
             
-                // Click the third image (0-based index, so index 2 is the third image)
+                // Click the third image (0-based index, so index 3 is the fourth image)
                 images[3].Click();
             
         }

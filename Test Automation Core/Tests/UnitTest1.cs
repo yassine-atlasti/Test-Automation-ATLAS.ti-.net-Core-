@@ -42,7 +42,20 @@ namespace Test_Automation_Core.Tests
                 process = Process.Start(processStartInfo);
 
                 // Wait for application to open
-                System.Threading.Thread.Sleep(20000); // Delay for 30 seconds
+                int maxWaitTimeInMilliseconds = 30000;
+                int intervalInMilliseconds = 500;
+                int elapsedWaitTimeInMilliseconds = 0;
+                while (elapsedWaitTimeInMilliseconds < maxWaitTimeInMilliseconds)
+                {
+                    processes = Process.GetProcessesByName(applicationName);
+                    if (processes.Length > 0)
+                    {
+                        process = processes[0];
+                        break;
+                    }
+                    System.Threading.Thread.Sleep(intervalInMilliseconds);
+                    elapsedWaitTimeInMilliseconds += intervalInMilliseconds;
+                }
             }
             else
             {
@@ -52,14 +65,16 @@ namespace Test_Automation_Core.Tests
 
             // Now initialize the WindowsDriver
             AppiumOptions appOptions = new AppiumOptions();
-            appOptions.AddAdditionalCapability("app", @"C:\Program Files\Scientific Software\ATLASti.23\Atlasti23.exe");
-
-
-            // Attach to the running app
+            appOptions.AddAdditionalCapability("app", applicationPath);
             appOptions.AddAdditionalCapability("deviceName", "WindowsPC");
 
+            // Set the command timeout to a higher value
+            appOptions.AddAdditionalCapability("newCommandTimeout", 600);  // Timeout in seconds
+
             _driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appOptions);
+
         }
+
 
         /**
         [OneTimeTearDown]
@@ -86,19 +101,21 @@ namespace Test_Automation_Core.Tests
         }
         **/
 
-        /**
+
+     
+
         //Testing SwitchLibrary Action
         [Test]
         public void TestMethod2()
         {
             App appControl = new App(_driver);
             ApplicationActions appActions = new ApplicationActions(appControl);
-            var libraryPath = @"C:\Users\yassinemahfoudh\Desktop\SmokeTestLibraryWin(Yanik)\ATLASti.8";
+            var libraryPath = @"C:\Users\yassinemahfoudh\Desktop\Win-SmokeTestLibraryContainingC&H+hierarchy\ATLASti.22";
 
-            appActions.SwitchLibrary(libraryPath);
-
+          bool switchResult=  appActions.SwitchLibrary(libraryPath);
+Assert.IsTrue(switchResult);
         }
-        **/
+        
 
         //Test 2
 
@@ -119,6 +136,7 @@ namespace Test_Automation_Core.Tests
         **/
 
         /**
+        
         [Test]
         public void TestMethod2()
         {
@@ -127,11 +145,14 @@ namespace Test_Automation_Core.Tests
             var exportPath = @"C:\Users\yassinemahfoudh\Desktop";
             var exportType = "qdpx";
             var projectName = "Survey Project";
-            appActions.ExportProject(exportPath, exportType, projectName);
+           bool exportResult= appActions.ExportProject(exportPath, exportType, projectName);
+
+            Assert.IsTrue(exportResult);
 
         }
         **/
 
+        /**
         [Test]
         public void TestMethod2()
         {
@@ -141,9 +162,14 @@ namespace Test_Automation_Core.Tests
 ;
             var importType = "atlproj";
             //Use a project name only with capital letters!
-            string projectName = "CHJKSL";
-            appActions.ImportProject(filePath, importType, projectName);
+            string projectName = "CHJKSLKSD";
+          bool actual=  appActions.ImportProject(filePath, importType, projectName);
 
-        }
+            Assert.IsTrue(actual);
+
+        }**/
+
+
+
     }
 }

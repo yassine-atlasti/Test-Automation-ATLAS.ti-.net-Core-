@@ -1,4 +1,6 @@
 ﻿
+using OpenQA.Selenium.Appium.Windows;
+using OpenQA.Selenium;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -78,6 +80,82 @@ namespace Test_Automation_Core.Actions
         }
 
 
+        public bool WaitForElementToBeDisplayed(WindowsDriver<WindowsElement> driver, string accessibilityId, int timeoutInSeconds)
+        {
+            for (int i = 0; i < timeoutInSeconds; i++)
+            {
+                try
+                {
+                    var element = driver.FindElementByAccessibilityId(accessibilityId);
+                    if (element.Displayed)
+                    {
+                        return true;
+                    }
+                }
+                catch (OpenQA.Selenium.WebDriverException)
+                {
+                    // Swallow the exception that element is not found, because we will try again
+                }
+
+                // wait for 1 second before trying again
+                System.Threading.Thread.Sleep(1000);
+            }
+
+            return false; // element was not found within the time limit
+        }
+
+        public bool WaitForElementToBeDisplayedByName(WindowsDriver<WindowsElement> driver, string name, int timeoutInSeconds)
+        {
+            for (int i = 0; i < timeoutInSeconds; i++)
+            {
+                try
+                {
+                    var element = driver.FindElementByName(name);
+
+                    if (element.Displayed)
+                    {
+                        return true;
+                    }
+
+                }
+                catch (OpenQA.Selenium.WebDriverException)
+                {
+                    // Ignore the exception, and try again
+                }
+
+                // Wait for 1 second before trying again
+                System.Threading.Thread.Sleep(1000);
+            }
+
+            return false; // element was not found within the time limit
+        }
+        public bool WaitForElementToBeDisplayedByTagName(WindowsDriver<WindowsElement> driver, string tagName, string name, int timeoutInSeconds)
+        {
+            for (int i = 0; i < timeoutInSeconds; i++)
+            {
+                try
+                {
+                    var element = driver.FindElementByTagName(tagName).FindElementByName(name);
+                   
+                        if ( element.Displayed)
+                        {
+                            return true;
+                        }
+                    
+                }
+                catch (OpenQA.Selenium.WebDriverException)
+                {
+                    // Ignore the exception, and try again
+                }
+
+                // Wait for 1 second before trying again
+                System.Threading.Thread.Sleep(1000);
+            }
+
+            return false; // element was not found within the time limit
+        }
+
+       
 
     }
 

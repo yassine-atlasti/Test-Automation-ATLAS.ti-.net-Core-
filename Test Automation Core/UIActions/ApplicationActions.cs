@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Test_Automation_Core.UIElements.AppMenu.File;
 using Test_Automation_Core.UIElements.Dialogs;
+using OpenQA.Selenium.Appium.Windows;
 
 namespace Test_Automation_Core.Actions
 {
@@ -19,7 +20,7 @@ namespace Test_Automation_Core.Actions
             _app = app;
         }
 
-        public void ImportProject(string filePath, string importType, string projectName)
+        public bool ImportProject(string filePath, string importType, string projectName)
         {
             var welcomeControlWindow = _app.GetWelcomeControl();
             var filePickerDialog = _app.GetFilePickerDialog();
@@ -55,27 +56,38 @@ namespace Test_Automation_Core.Actions
             // Set project name
             importProjectDialog.EnterProjectName(projectName);
 
-            importProjectDialog.ClickImportAndWaitForProjectWindow(projectName);
+            importProjectDialog.ClickImportButton();
+
+
 
             // You can add more actions or checks here, such as validating that the project was imported correctly
+
+            SystemActions systemActions = new SystemActions();
+            string windowName = projectName + " - ATLAS.ti";
+          bool importState=  systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(),"Window", windowName, 35);
+
+            return importState;
         }
 
 
 
-        public void ExportProject(string filePath, string exportType, string projectName)
+        public bool ExportProject(string filePath, string exportType, string projectName)
         {
             var welcomeWindow= _app.GetWelcomeControl();
            
             var projectWindow = _app.GetProjectWindow();
             var appMenu= projectWindow.getAppMenu();
 
-            //check if welcome Window is displayed, if yes open the project that should be exported
+            //check if welcome Window is displayed or another project is actually open, if yes open the project that should be exported
 
-            if(welcomeWindow.IsWelcomeWindowDisplayed())
+            if(welcomeWindow.IsWelcomeWindowDisplayed() || !projectWindow.IsProjectOpen(projectName))
             {
                 OpenProject(projectName);
 
             }
+
+
+          
 
             // Assume that each method performs the action that its name suggests
             var fileTab = appMenu.ClickFile();
@@ -107,24 +119,53 @@ namespace Test_Automation_Core.Actions
             filePickerDialog.ClickSaveButton();
 
             //handle QDPX Export Results
+            // You can add more actions or checks here, such as validating that the project was exported correctly
+
+            bool exportState = false;
+
             if (exportTypeLower == "qdpx")
             {
                 var exportResultsDialog = _app.GetExportResultsDialog();
-                // projectWindow.WaitForProjectToDisplay();
-                Thread.Sleep(15000);
-                exportResultsDialog.CancelQDPXResultsExport();
 
+                SystemActions systemActions = new SystemActions();
+
+                //for now , if the QDPX project was successfully exported we will see the Cancel Button of the Export Results. But in Future we should check that there are no errors or crashes 
+
+                exportState = systemActions.WaitForElementToBeDisplayedByName(_app.getDriver(),  "Cancel", 30);
+                    exportResultsDialog.CancelQDPXResultsExport();
+                
             }
-            // You can add more actions or checks here, such as validating that the project was exported correctly
+            else if (exportTypeLower == "atlproj")
+            {
+                //for now , if the project was successfully exported we will see the Home Menu Item. But in Future we should check that there are no errors or crashes 
+
+                SystemActions systemActions = new SystemActions();
+                exportState = systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(),"TabItem", "Home", 30);
+
+              
+            }
+
+            return exportState;
+
+
+
+
+
         }
 
 
 
-        public void SwitchLibrary(string libraryPath)
+        public bool SwitchLibrary(string libraryPath)
         {
             var welcomeWindow = _app.GetWelcomeControl();
             var optionsWindow = _app.GetOptionsWindow();
             var switchLibraryWizard = _app.GetSwitchLibraryWizard();
+
+
+            if (!welcomeWindow.IsWelcomeWindowDisplayed())
+            {
+                CloseProject();
+            }
 
 
             // Open the options window and click the 'Switch Library' button
@@ -153,6 +194,7 @@ namespace Test_Automation_Core.Actions
             var filePickerDialog = switchLibraryWizard.OpenFilePicker();
 
             filePickerDialog.EnterFilePath(libraryPath);
+
             filePickerDialog.ClickSelectFolderButton();
 
             // Back in the Switch Library Wizard, click the 'Next' button
@@ -161,13 +203,21 @@ namespace Test_Automation_Core.Actions
             // Confirm the switch by clicking the 'Finish' button
             switchLibraryWizard.ClickFinishButton();
 
-            // You can add more actions or checks here, such as validating that the library was switched correctly
-           
+            // You can add more actions or checks here, such as validating that the library was switched correctly 
+
+            //We should check that there are no errors or crashes (the solution below is a temporary solution for testing purposes)
+
+            SystemActions systemActions = new SystemActions();
+            bool switchLibState = systemActions.WaitForElementToBeDisplayed(_app.getDriver(), "SearchControl", 35);
+
+            return switchLibState;
+
+             
         }
 
 
 
-        public void OpenProject(string projectName)
+        public bool OpenProject(string projectName)
         {
             var welcomeWindow = _app.GetWelcomeControl();
             var projectWindow = _app.GetProjectWindow();
@@ -179,20 +229,19 @@ namespace Test_Automation_Core.Actions
             }
             // Open project
             welcomeWindow.OpenProject(projectName);
+            // You can add more actions or checks here, such as validating that the project was imported correctly
 
-            // Verify if the project is open
-             projectWindow.WaitForProjectToDisplay(projectName);
+            SystemActions systemActions = new SystemActions();
+            string windowName = projectName + " - ATLAS.ti";
+            bool openState = systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "Window", windowName, 35);
 
-
-          
-
-            Console.WriteLine($"Project {projectName} opened successfully");
+            return openState;
         }
 
 
 
 
-        public void CloseProject()
+        public bool CloseProject()
         {
             var welcomeWindow = _app.GetWelcomeControl();
             var projectWindow=_app.GetProjectWindow();
@@ -202,18 +251,14 @@ namespace Test_Automation_Core.Actions
             // Assume that each method performs the action that its name suggests
             fileTab.ClickClose();
 
-            Thread.Sleep(6000);
             // You can add more actions or checks here, such as validating that the project was closed correctly
-            if (welcomeWindow.IsWelcomeWindowDisplayed())
-            {
-                Console.WriteLine("Project successfully closed");
-            }
-            else
-            {
-                Console.WriteLine("Failed to close project");
-            }
+            SystemActions systemActions = new SystemActions();
+            string windowName =   "ATLAS.ti";
+            bool closeState = systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "Window", windowName, 20);
+
+            return closeState;
         }
-        public void ReportProblem(string description, string email)
+        public bool ReportProblem(string description, string email)
         {
             ReportProblemDialog reportProblemDialog;
 
@@ -239,27 +284,24 @@ namespace Test_Automation_Core.Actions
             reportProblemDialog.ClickReportProblemButton();
 
             // Waiting for confirmation dialog to appear
-            var wait = new WebDriverWait(_app.getDriver(), TimeSpan.FromSeconds(60));
-            try
-            {
-                wait.Until(drv => drv.FindElement(By.Name("Problem Report Sent")));
-            }
-            catch (WebDriverTimeoutException)
-            {
-                throw new Exception("The problem report was not successfully sent");
-            }
+            
+           
 
+            SystemActions systemActions = new SystemActions();
+
+            bool reportState = systemActions.WaitForElementToBeDisplayedByName(_app.getDriver(),  "The problem report was not successfully sent", 30);
 
             // Once confirmation dialog is found, confirm the dialog
-            Console.WriteLine("The problem report was  successfully sent");
             reportProblemDialog.CloseConfirmationDialog();
-            
+
+            return reportState;
+
         }
 
 
 
 
-        public void SendSuggestion(string description, string email)
+        public bool SendSuggestion(string description, string email)
         {
             SuggestionDialog suggestionDialog;
 
@@ -285,19 +327,16 @@ namespace Test_Automation_Core.Actions
             suggestionDialog.ClickSendSuggestionButton();
 
             // Waiting for confirmation dialog to appear
-            var wait = new WebDriverWait(_app.getDriver(), TimeSpan.FromSeconds(60));
-            try
-            {
-                wait.Until(drv => drv.FindElement(By.Name("Suggestion Sent")));
-            }
-            catch (WebDriverTimeoutException)
-            {
-                throw new Exception("The suggestion was not successfully sent");
-            }
+           
+
+            SystemActions systemActions = new SystemActions();
+            bool reportState = systemActions.WaitForElementToBeDisplayedByName(_app.getDriver(), "Suggestion Sent", 30);
+
 
             // Once confirmation dialog is found, confirm the dialog
-            Console.WriteLine("The suggestion was  successfully sent");
             suggestionDialog.CloseConfirmationDialog();
+
+            return reportState;
         }
 
         public void LiveChat(string chatText)
@@ -317,6 +356,9 @@ namespace Test_Automation_Core.Actions
             liveChatDialog.EnterChatText(chatText);
             liveChatDialog.EndChat();
             // Additional actions or checks can be added here
+
+
+
         }
 
 

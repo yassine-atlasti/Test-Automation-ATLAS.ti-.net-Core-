@@ -26,7 +26,7 @@ namespace Test_Automation_Core.UIElements.Dialogs
             System.Threading.Thread.Sleep(1000);
 
             // Use CTRL+L to focus on the address bar, then paste the clipboard content 
-            action.KeyDown(Keys.Control).SendKeys("l").KeyUp(Keys.Control).SendKeys(Keys.Control + "v").Perform();
+            action.KeyDown(Keys.Control).SendKeys("l").KeyUp(Keys.Control).SendKeys(Keys.Control + "v").KeyUp(Keys.Control).SendKeys(Keys.Enter).Perform();
         }
 
 
@@ -41,7 +41,8 @@ namespace Test_Automation_Core.UIElements.Dialogs
             System.Threading.Thread.Sleep(1000);
 
             // Use Alt+N to focus on the address bar, then paste the clipboard content 
-            action.SendKeys(Keys.Control + "v").Perform();
+            action.SendKeys(Keys.Control + "v").KeyUp(Keys.Control).Perform();
+            
         }
         
 
