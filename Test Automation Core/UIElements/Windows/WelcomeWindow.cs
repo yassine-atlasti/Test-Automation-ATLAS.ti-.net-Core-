@@ -39,12 +39,11 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
             // Find all image elements within the control
             var images = parentControl.FindElementsByTagName("Image");
 
-            // Check if there are at least 3 images
-            if (images.Count >= 4)
-            {
+           
+            
                 // Click the third image (0-based index, so index 2 is the third image)
                 images[3].Click();
-            }
+            
         }
 
         public void ClickOptionsButton()

@@ -22,15 +22,43 @@ namespace Test_Automation_Core.Tests
         [OneTimeSetUp]
         public static void ClassInitialize()
         {
-            // Launch the ATLAS.ti application
+            string applicationPath = @"C:\Program Files\Scientific Software\ATLASti.23\Atlasti23.exe";
+            string applicationName = Path.GetFileNameWithoutExtension(applicationPath);
+
+            // Check if the ATLAS.ti application is already running
+            Process[] processes = Process.GetProcessesByName(applicationName);
+
+            Process process;
+            if (processes.Length == 0)
+            {
+                // If the application is not running, start it
+                var processStartInfo = new ProcessStartInfo
+                {
+                    FileName = applicationPath,
+                    UseShellExecute = true,
+                    WindowStyle = ProcessWindowStyle.Normal
+                };
+
+                process = Process.Start(processStartInfo);
+
+                // Wait for application to open
+                System.Threading.Thread.Sleep(20000); // Delay for 30 seconds
+            }
+            else
+            {
+                // If the application is already running, attach to the first instance
+                process = processes[0];
+            }
+
+            // Now initialize the WindowsDriver
             AppiumOptions appOptions = new AppiumOptions();
             appOptions.AddAdditionalCapability("app", @"C:\Program Files\Scientific Software\ATLASti.23\Atlasti23.exe");
+
+
+            // Attach to the running app
             appOptions.AddAdditionalCapability("deviceName", "WindowsPC");
-            appOptions.AddAdditionalCapability("appWaitActivity", "ATLAS.ti");
 
             _driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appOptions);
-
-
         }
 
         /**
@@ -109,10 +137,11 @@ namespace Test_Automation_Core.Tests
         {
             App appControl = new App(_driver);
             ApplicationActions appActions = new ApplicationActions(appControl);
-            var filePath =  @"C:\Users\yassinemahfoudh\Desktop\Survey Project (Yassine Mahfoudh 2023-05-24).qdpx"
+            string filePath = @"\\Mac\Home\Library\CloudStorage\OneDrive-ATLAS.tiScientificSoftwareDevelopmentGmbH\Testing stuff\Test Data\Projects\C&H all versions\Win\VUT\23.1.2-Windows11-C&HII+hierarchy.atlproj23"
 ;
-            var importType = "qdpx";
-            var projectName = "Survey Project 2";
+            var importType = "atlproj";
+            //Use a project name only with capital letters!
+            string projectName = "CHJKSL";
             appActions.ImportProject(filePath, importType, projectName);
 
         }

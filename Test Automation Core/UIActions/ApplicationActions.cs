@@ -26,13 +26,19 @@ namespace Test_Automation_Core.Actions
             var importProjectDialog = _app.GetImportProjectDialog();
             var atlasProjectWindow = _app.GetProjectWindow();
 
-            if(!welcomeControlWindow.IsWelcomeWindowDisplayed()) { CloseProject(); }
+            if(!welcomeControlWindow.IsWelcomeWindowDisplayed()) { CloseProject();
+                System.Threading.Thread.Sleep(5000);
+            }
 
             // Assume that each method performs the action that its name suggests
             welcomeControlWindow.ClickImportProjectButton();
+            System.Threading.Thread.Sleep(2000);
             filePickerDialog.EnterFileName(filePath);
 
             filePickerDialog.ClickOpenButton();
+
+            //Wait 5 seconds for Import dialog to appear
+            System.Threading.Thread.Sleep(3000);
 
             // If import type is QDPX and the MediaFolderButton is visible, handle the media folder selection
             if (importType == "QDPX" && importProjectDialog.IsMediaFolderButtonVisible())

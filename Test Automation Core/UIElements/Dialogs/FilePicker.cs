@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Support.UI;
 using System.Net;
+using TextCopy;
 namespace Test_Automation_Core.UIElements.Dialogs
 {
     public class FilePicker
@@ -15,19 +16,34 @@ namespace Test_Automation_Core.UIElements.Dialogs
 
         public void EnterFilePath(string filePath)
         {
-            //Entering the file path in the adress box of the file picker using shortcut CTRL+L, the filePath parameter , and the Enter Key
+
+
+            TextCopy.ClipboardService.SetText(filePath);
+
+            // Create a new Actions object
             OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
-            action.KeyDown(Keys.Control).SendKeys("l").KeyUp(Keys.Control).SendKeys(filePath).SendKeys(Keys.Enter).Perform();
+
+            System.Threading.Thread.Sleep(1000);
+
+            // Use CTRL+L to focus on the address bar, then paste the clipboard content 
+            action.KeyDown(Keys.Control).SendKeys("l").KeyUp(Keys.Control).SendKeys(Keys.Control + "v").Perform();
         }
 
 
 
         public void EnterFileName(string fileName)
         {
-            //Entering the file path in the adress box of the file picker using shortcut CTRL+L, the filePath parameter , and the Enter Key
+            TextCopy.ClipboardService.SetText(fileName);
+
+            // Create a new Actions object
             OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
-            action.KeyDown(Keys.Alt).SendKeys("n").KeyUp(Keys.Control).SendKeys(fileName).SendKeys(Keys.Enter).Perform();
+
+            System.Threading.Thread.Sleep(1000);
+
+            // Use Alt+N to focus on the address bar, then paste the clipboard content 
+            action.SendKeys(Keys.Control + "v").Perform();
         }
+        
 
 
         public void ClickOpenButton()

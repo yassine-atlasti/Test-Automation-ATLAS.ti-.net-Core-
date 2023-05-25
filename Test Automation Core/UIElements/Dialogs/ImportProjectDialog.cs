@@ -4,8 +4,10 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
+using System.Windows.Forms;
 
 using Test_Automation_Core.UIElements.AtlasWindows;
+using TextCopy;
 
 namespace Test_Automation_Core.UIElements.Dialogs
 {
@@ -20,9 +22,14 @@ namespace Test_Automation_Core.UIElements.Dialogs
 
         public void EnterProjectName(string projectName)
         {
-            driver.FindElementByName("Project Name").SendKeys(projectName);
 
+            var projectBox = driver.FindElementByAccessibilityId("NewProjectNameBox");
+            projectBox.Clear();
+            projectBox.SendKeys(projectName);
         }
+
+
+
 
         public void ClickImportButton()
         {
@@ -44,9 +51,10 @@ namespace Test_Automation_Core.UIElements.Dialogs
             ClickImportButton();
             // Wait for a unique element in the Project Window to appear.
             // Replace "UniqueElementInProjectWindow" with an actual unique element name or locator.
-           
-            var projectWindow= new ProjectWindow(driver);
-            projectWindow.WaitForProjectToDisplay(projectName);
+            System.Threading.Thread.Sleep(35000);
+
+            var projectWindow = new ProjectWindow(driver);
+            projectWindow.IsProjectOpen(projectName);
             return projectWindow;
         }
 
