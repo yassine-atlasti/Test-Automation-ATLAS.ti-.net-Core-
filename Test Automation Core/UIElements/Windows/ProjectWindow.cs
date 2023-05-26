@@ -27,7 +27,24 @@ namespace Test_Automation_Core.UIElements.AtlasWindows
 
 
 
-        
+        public bool IsErrorDialogDisplayed(string dialogAccessibilityId, string dialogName)
+        {
+            try
+            {
+                var errorDialog = driver.FindElementByAccessibilityId(dialogAccessibilityId);
+
+                if (errorDialog != null && errorDialog.Displayed && errorDialog.Text.Contains(dialogName))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
 
 
 

@@ -176,6 +176,42 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
         }
 
 
+        public bool IsErrorDialogDisplayed(string dialogAccessibilityId, string dialogName)
+        {
+            try
+            {
+                var errorDialog = driver.FindElementByAccessibilityId(dialogAccessibilityId);
+
+                if (errorDialog != null && errorDialog.Displayed && errorDialog.Text.Contains(dialogName))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
+        public bool IsCrashReportDisplayed(string crashReportAccessibilityId, string crashReportName)
+        {
+            try
+            {
+                var crashReportDialog = driver.FindElementByAccessibilityId(crashReportAccessibilityId);
+
+                if (crashReportDialog != null && crashReportDialog.Displayed && crashReportDialog.Text.Contains(crashReportName))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
 
 
 

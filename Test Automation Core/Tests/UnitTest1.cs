@@ -19,7 +19,7 @@ namespace Test_Automation_Core.Tests
     {
         private static WindowsDriver<WindowsElement> _driver;
 
-        [OneTimeSetUp]
+       [OneTimeSetUp]
         public static void ClassInitialize()
         {
             string applicationPath = @"C:\Program Files\Scientific Software\ATLASti.23\Atlasti23.exe";
@@ -102,6 +102,7 @@ namespace Test_Automation_Core.Tests
         **/
 
 
+        /**
      
 
         //Testing SwitchLibrary Action
@@ -110,12 +111,27 @@ namespace Test_Automation_Core.Tests
         {
             App appControl = new App(_driver);
             ApplicationActions appActions = new ApplicationActions(appControl);
-            var libraryPath = @"C:\Users\yassinemahfoudh\Desktop\Win-SmokeTestLibraryContainingC&H+hierarchy\ATLASti.22";
+            var libraryPath = @"C:\Users\yassinemahfoudh\Desktop\emptyWinA22library";
+  appActions.SwitchLibrary(libraryPath);
+            // Wait for the application to fully restart. The exact time will depend on your application.
+            Thread.Sleep(TimeSpan.FromSeconds(5));
 
-          bool switchResult=  appActions.SwitchLibrary(libraryPath);
+            bool switchResult = ValidateLibSwitch();
+
 Assert.IsTrue(switchResult);
+
         }
         
+        public bool ValidateLibSwitch()
+        { 
+            //Reinitialize WinAppDriver after ATLAS.ti restarts
+            ClassInitialize();
+            App appControl2 = new App(_driver);
+            ApplicationActions appActions2 = new ApplicationActions(appControl2);
+            bool switchResult = appActions2.ValidateLibSwitch();
+            return switchResult;
+        }
+        **/
 
         //Test 2
 
@@ -168,8 +184,36 @@ Assert.IsTrue(switchResult);
             Assert.IsTrue(actual);
 
         }**/
+        /**
+
+        [Test]
+        public void TestMethod2()
+        {
+            string folderPath = "C:\\Users\\yassinemahfoudh\\Desktop\\Test1";
+            string zipFile = @"\\Mac\Home\Library\CloudStorage\OneDrive-ATLAS.tiScientificSoftwareDevelopmentGmbH\Testing stuff\Test Data\Smoke Tests data\Win\Smoke Test Libraries\SmokeTestLibraryWin(Yanik).zip";
+        SystemActions systemActions = new SystemActions();
+            systemActions.CreateFolder(folderPath);
+            systemActions.ExtractZip(zipFile, folderPath);
+
+        
+        
+        }
+        **/
+
+        [Test]
+
+        public async Task TestMethod2()
+        {
+            string downloadUrl = @"https://cdn.atlasti.com/win/nightly/23-C4E24425-7597-4DB4-BEAC-4C2CFBBB7A7C/develop/Atlasti_Nightly_develop.exe";
+            string major = "23";
+            string downloadPath = @"C:\Users\yassinemahfoudh\Desktop\Test1";
+            string installPath = @"C:\Program Files";
+            SystemActions systemActions = new SystemActions();
+           await systemActions.DownloadAtlasAsync(downloadUrl,downloadPath);
+          // await systemActions.DownloadAndInstallAtlasAsync(downloadUrl, downloadPath, installPath);
+
+        }
 
 
-
-    }
+        }
 }

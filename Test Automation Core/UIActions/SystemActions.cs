@@ -22,19 +22,26 @@ namespace Test_Automation_Core.Actions
             InstallAtlas(downloadPath, installPath);
         }
 
-        private async Task DownloadAtlasAsync(string url, string destinationPath)
+        //This method fails to copy the download file to the destination path " System.UnauthorizedAccessException : Access to the path 'C:\Users\yassinemahfoudh\Desktop\Test1' "
+
+        public async Task DownloadAtlasAsync(string url, string destinationPath)
         {
             using HttpClient client = new HttpClient();
+            client.Timeout = TimeSpan.FromMinutes(15); // Increase the timeout duration to 15 minutes
+
             var response = await client.GetAsync(url);
 
             using var fileStream = new FileStream(destinationPath, FileMode.Create, FileAccess.Write, FileShare.None);
             await response.Content.CopyToAsync(fileStream);
 
+            
             Console.WriteLine($"File downloaded to {destinationPath}");
         }
 
 
-        private void InstallAtlas(string downloadPath, string installPath)
+        //This requires Viusal Studio to  run as an admin, find another way to install it , an msi file should make more sense 
+
+        public void InstallAtlas(string downloadPath, string installPath)
         {
             Process process = new Process();
 
@@ -48,16 +55,34 @@ namespace Test_Automation_Core.Actions
             Console.WriteLine($"ATLAS.ti installed at {installPath}");
         }
 
-
+        //This requires Viusal Studio to run as an admin, find another way to uninstall it , an msi file should make more sense 
         public void UninstallAtlas(string majorVersion)
         {
+            string applicationPath = $@"C:\Program Files\Scientific Software\ATLASti.{majorVersion}\Atlasti{majorVersion}\.exe";
+            string applicationName = Path.GetFileNameWithoutExtension(applicationPath);
+            // Close the application before uninstalling
+            Process[] processes = Process.GetProcessesByName(applicationName);
+            foreach (Process process in processes)
+            {
+                process.CloseMainWindow();
+                process.WaitForExit(5000); // Wait for the application to exit gracefully for a maximum of 5 seconds
+                if (!process.HasExited)
+                {
+                    process.Kill(); // Forcefully terminate the application if it doesn't exit within the given time
+                }
+            }
+
+            // Uninstall the application
             Process.Start("cmd.exe", $"/C wmic product where name=\"ATLAS.ti {majorVersion}\" call uninstall");
-           
         }
+
 
         public void CreateFolder(string folderName)
         {
-            Directory.CreateDirectory(folderName);
+            if (!Directory.Exists(folderName))
+            {
+                Directory.CreateDirectory(folderName);
+            }
         }
 
         public void ExtractZip(string zipPath, string extractPath)

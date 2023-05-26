@@ -155,7 +155,7 @@ namespace Test_Automation_Core.Actions
 
 
 
-        public bool SwitchLibrary(string libraryPath)
+        public void SwitchLibrary(string libraryPath)
         {
             var welcomeWindow = _app.GetWelcomeControl();
             var optionsWindow = _app.GetOptionsWindow();
@@ -203,6 +203,9 @@ namespace Test_Automation_Core.Actions
             // Confirm the switch by clicking the 'Finish' button
             switchLibraryWizard.ClickFinishButton();
 
+
+            //The App will restart so the connection with the driver will be lost. We need to compare the results in another method ValidateLibSwitch() that will be called in the test method after reinitilazing the WinAppDriver parameters
+            /**
             // You can add more actions or checks here, such as validating that the library was switched correctly 
 
             //We should check that there are no errors or crashes (the solution below is a temporary solution for testing purposes)
@@ -211,10 +214,22 @@ namespace Test_Automation_Core.Actions
             bool switchLibState = systemActions.WaitForElementToBeDisplayed(_app.getDriver(), "SearchControl", 35);
 
             return switchLibState;
-
+            **/
              
         }
 
+        public bool ValidateLibSwitch()
+        {
+
+            // You can add more actions or checks here, such as validating that the library was switched correctly 
+
+            //We should check that there are no errors or crashes (the solution below is a temporary solution for testing purposes)
+
+            SystemActions systemActions = new SystemActions();
+            bool switchState = systemActions.WaitForElementToBeDisplayed(_app.getDriver(), "SearchControl", 35);
+            return switchState;
+
+        }
 
 
         public bool OpenProject(string projectName)
