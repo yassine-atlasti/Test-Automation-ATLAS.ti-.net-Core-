@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Test_Automation_Core.UIElements.Dialogs;
+using Test_Automation_Core.OS.Windows;
 
 namespace Test_Automation_Core.UIElements.AppMenu.File
 {

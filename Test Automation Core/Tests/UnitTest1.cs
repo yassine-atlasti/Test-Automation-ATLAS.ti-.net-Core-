@@ -7,10 +7,11 @@ using OpenQA.Selenium.Support.UI;
 
 using System;
 using Test_Automation_Core.UIElements.WelcomeWindow;
-using Test_Automation_Core.Actions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using System.Diagnostics;
+using Test_Automation_Core.OS.Windows;
+using Test_Automation_Core.Installer;
 
 namespace Test_Automation_Core.Tests
 {
@@ -18,8 +19,9 @@ namespace Test_Automation_Core.Tests
     public class NUnitTestClass
     {
         private static WindowsDriver<WindowsElement> _driver;
+        private static WindowsDriver<WindowsElement> driver2;
 
-       [OneTimeSetUp]
+      // [OneTimeSetUp]
         public static void ClassInitialize()
         {
             string applicationPath = @"C:\Program Files\Scientific Software\ATLASti.23\Atlasti23.exe";
@@ -75,6 +77,17 @@ namespace Test_Automation_Core.Tests
 
         }
 
+        public void initBackUpApp()
+        {
+            var applicationPath2 = @"C:\Program Files\Scientific Software\ATLASti.23\SSD.ATLASti.Backup.exe";
+            var appOptions2 = new AppiumOptions();
+            appOptions2.AddAdditionalCapability("app", applicationPath2);
+            appOptions2.AddAdditionalCapability("deviceName", "WindowsPC");
+
+             driver2 = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4725"), appOptions2);
+            // Perform automation for the second application
+
+        }
 
         /**
         [OneTimeTearDown]
@@ -200,19 +213,46 @@ Assert.IsTrue(switchResult);
         }
         **/
 
+        /**
         [Test]
 
         public async Task TestMethod2()
         {
             string downloadUrl = @"https://cdn.atlasti.com/win/nightly/23-C4E24425-7597-4DB4-BEAC-4C2CFBBB7A7C/develop/Atlasti_Nightly_develop.exe";
             string major = "23";
-            string downloadPath = @"C:\Users\yassinemahfoudh\Desktop\Test1";
-            string installPath = @"C:\Program Files";
+            string downloadPath = @"C:\Users\yassinemahfoudh\Downloads";
             SystemActions systemActions = new SystemActions();
            await systemActions.DownloadAtlasAsync(downloadUrl,downloadPath);
-          // await systemActions.DownloadAndInstallAtlasAsync(downloadUrl, downloadPath, installPath);
+
+
+            //get the most recently downloaded file from Download Path
+            var directory = new DirectoryInfo(downloadPath);
+            var myFile = directory.GetFiles()
+                         .OrderByDescending(f => f.LastWriteTime)
+                         .First();
+            string installerFileName = myFile.Name;
+
+
+            //Set the installer Path and start installation 
+            string installerPath = downloadPath + "\\" + installerFileName;
+
+            InstallerActions installer = new InstallerActions(_driver);
+           bool installState = installer.InstallATLASti(downloadPath, major);
+
+            Assert.IsTrue(installState);
+        }
+        **/
+
+
+        [Test]
+
+        public void TestMethod2()
+        {
+
+            Process.Start("Control Panel\\Programs\\Programs and Features\\ATLAS.ti 23");
 
         }
+
 
 
         }

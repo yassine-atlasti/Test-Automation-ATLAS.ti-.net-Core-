@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Support.UI;
+using Test_Automation_Core.ATLAS.ti.UIElements.Dialogs;
+using Test_Automation_Core.OS.Windows;
 using Test_Automation_Core.UIElements.Dialogs;
 using Test_Automation_Core.UIElements.Wizards;
 
@@ -91,8 +93,8 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
             ClickCheckForUpdatesButton();
             // Wait for a unique element in the Check for Updates Dialog to appear.
             // Replace "UniqueElementInCheckForUpdatesDialog" with an actual unique element name or locator.
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Name("UniqueElementInCheck")));
+            SystemActions systemActions = new SystemActions();
+            systemActions.WaitForElementToBeDisplayedByTagName(driver, "Text", "UniqueElementInUpdater", 30);
 
             return new CheckForUpdatesDialog(driver);
 

@@ -3,7 +3,7 @@ using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Support.UI;
 using System.Net;
 using TextCopy;
-namespace Test_Automation_Core.UIElements.Dialogs
+namespace Test_Automation_Core.OS.Windows
 {
     public class FilePicker
     {
@@ -18,12 +18,12 @@ namespace Test_Automation_Core.UIElements.Dialogs
         {
 
 
-            TextCopy.ClipboardService.SetText(filePath);
+            ClipboardService.SetText(filePath);
 
             // Create a new Actions object
             OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
 
-            System.Threading.Thread.Sleep(1000);
+            Thread.Sleep(1000);
 
             // Use CTRL+L to focus on the address bar, then paste the clipboard content 
             action.KeyDown(Keys.Control).SendKeys("l").KeyUp(Keys.Control).SendKeys(Keys.Control + "v").KeyUp(Keys.Control).SendKeys(Keys.Enter).Perform();
@@ -33,18 +33,18 @@ namespace Test_Automation_Core.UIElements.Dialogs
 
         public void EnterFileName(string fileName)
         {
-            TextCopy.ClipboardService.SetText(fileName);
+            ClipboardService.SetText(fileName);
 
             // Create a new Actions object
             OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
 
-            System.Threading.Thread.Sleep(1000);
+            Thread.Sleep(1000);
 
-            // Use Alt+N to focus on the address bar, then paste the clipboard content 
+            // If the address bar is automatically selected, then paste the clipboard content 
             action.SendKeys(Keys.Control + "v").KeyUp(Keys.Control).Perform();
-            
+
         }
-        
+
 
 
         public void ClickOpenButton()

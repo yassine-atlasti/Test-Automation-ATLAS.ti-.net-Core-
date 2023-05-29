@@ -2,7 +2,7 @@
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Windows;
 using System.Collections.ObjectModel;
-using Test_Automation_Core.UIElements.Dialogs;
+using Test_Automation_Core.OS.Windows;
 
 namespace Test_Automation_Core.UIElements.Wizards
 {

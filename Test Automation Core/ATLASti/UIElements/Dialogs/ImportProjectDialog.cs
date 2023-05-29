@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 using Test_Automation_Core.UIElements.AtlasWindows;
 using TextCopy;
+using Test_Automation_Core.OS.Windows;
 
 namespace Test_Automation_Core.UIElements.Dialogs
 {

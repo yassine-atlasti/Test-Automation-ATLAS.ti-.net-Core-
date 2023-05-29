@@ -9,6 +9,8 @@ using OpenQA.Selenium.Interactions;
 using Test_Automation_Core.UIElements.Dialogs;
 using Test_Automation_Core.UIElements.AtlasWindows;
 using System.Xml.Linq;
+using Test_Automation_Core.OS.Windows;
+using Test_Automation_Core.ATLAS.ti.UIElements.Dialogs;
 
 namespace Test_Automation_Core.UIElements.WelcomeWindow
 {

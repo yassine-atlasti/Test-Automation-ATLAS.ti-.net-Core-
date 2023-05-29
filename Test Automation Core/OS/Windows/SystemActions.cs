@@ -8,19 +8,16 @@ using System.IO.Compression;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Test_Automation_Core.Installer;
 
-namespace Test_Automation_Core.Actions
+namespace Test_Automation_Core.OS.Windows
 {
 
 
     public class SystemActions
     {
 
-        public async Task DownloadAndInstallAtlasAsync(string downloadUrl, string downloadPath, string installPath)
-        {
-            await DownloadAtlasAsync(downloadUrl, downloadPath);
-            InstallAtlas(downloadPath, installPath);
-        }
+       
 
         //This method fails to copy the download file to the destination path " System.UnauthorizedAccessException : Access to the path 'C:\Users\yassinemahfoudh\Desktop\Test1' "
 
@@ -33,13 +30,13 @@ namespace Test_Automation_Core.Actions
 
             using var fileStream = new FileStream(destinationPath, FileMode.Create, FileAccess.Write, FileShare.None);
             await response.Content.CopyToAsync(fileStream);
-
             
+
             Console.WriteLine($"File downloaded to {destinationPath}");
         }
 
 
-        //This requires Viusal Studio to  run as an admin, find another way to install it , an msi file should make more sense 
+        //This requires Viusal Studio to  run as an admin, find another way to install it , an msi file should make more sense , or use UI (See InstallerActions.cs)
 
         public void InstallAtlas(string downloadPath, string installPath)
         {
@@ -55,7 +52,7 @@ namespace Test_Automation_Core.Actions
             Console.WriteLine($"ATLAS.ti installed at {installPath}");
         }
 
-        //This requires Viusal Studio to run as an admin, find another way to uninstall it , an msi file should make more sense 
+        //This requires Viusal Studio to run as an admin, find another way to uninstall it , an msi file should make more sense ,or use UI (See InstallerActions.cs)
         public void UninstallAtlas(string majorVersion)
         {
             string applicationPath = $@"C:\Program Files\Scientific Software\ATLASti.{majorVersion}\Atlasti{majorVersion}\.exe";
@@ -117,13 +114,13 @@ namespace Test_Automation_Core.Actions
                         return true;
                     }
                 }
-                catch (OpenQA.Selenium.WebDriverException)
+                catch (WebDriverException)
                 {
                     // Swallow the exception that element is not found, because we will try again
                 }
 
                 // wait for 1 second before trying again
-                System.Threading.Thread.Sleep(1000);
+                Thread.Sleep(1000);
             }
 
             return false; // element was not found within the time limit
@@ -143,13 +140,13 @@ namespace Test_Automation_Core.Actions
                     }
 
                 }
-                catch (OpenQA.Selenium.WebDriverException)
+                catch (WebDriverException)
                 {
                     // Ignore the exception, and try again
                 }
 
                 // Wait for 1 second before trying again
-                System.Threading.Thread.Sleep(1000);
+                Thread.Sleep(1000);
             }
 
             return false; // element was not found within the time limit
@@ -161,28 +158,46 @@ namespace Test_Automation_Core.Actions
                 try
                 {
                     var element = driver.FindElementByTagName(tagName).FindElementByName(name);
-                   
-                        if ( element.Displayed)
-                        {
-                            return true;
-                        }
-                    
+
+                    if (element.Displayed)
+                    {
+                        return true;
+                    }
+
                 }
-                catch (OpenQA.Selenium.WebDriverException)
+                catch (WebDriverException)
                 {
                     // Ignore the exception, and try again
                 }
 
                 // Wait for 1 second before trying again
-                System.Threading.Thread.Sleep(1000);
+                Thread.Sleep(1000);
             }
 
             return false; // element was not found within the time limit
         }
 
-       
 
+        public void CloseAtlasTiProcesses(string majorVersion)
+        {
+            Process[] processes = Process.GetProcesses();
+
+            foreach (Process process in processes)
+            {
+                if (process.ProcessName.StartsWith($"ATLAS.ti {majorVersion}"))
+                {
+                    process.CloseMainWindow();
+                    process.WaitForExit(5000); // Wait for the process to exit gracefully for a maximum of 5 seconds
+                    if (!process.HasExited)
+                    {
+                        process.Kill(); // Forcefully terminate the process if it doesn't exit within the given time
+                    }
+                }
+            }
+        }
     }
 
+
+    
 }
 

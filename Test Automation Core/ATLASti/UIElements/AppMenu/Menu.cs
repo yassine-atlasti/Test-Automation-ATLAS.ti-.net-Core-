@@ -5,9 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Test_Automation_Core.ATLAS.ti.UIElements.AppMenu.File;
 using Test_Automation_Core.UIElements.AppMenu.Ribbons;
 
-namespace Test_Automation_Core.UIElements.AppMenu
+namespace Test_Automation_Core.ATLAS.ti.UIElements.AppMenu
 {
     public class Menu
     {
@@ -20,7 +21,7 @@ namespace Test_Automation_Core.UIElements.AppMenu
 
         public FileTab ClickFile()
         {
-           
+
 
             var file = _driver.FindElementByTagName("Menu");
             file.Click();

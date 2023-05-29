@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
 
-namespace Test_Automation_Core.UIElements.Dialogs
+namespace Test_Automation_Core.ATLAS.ti.UIElements.Dialogs
 {
     public class NewProjectDialog
     {

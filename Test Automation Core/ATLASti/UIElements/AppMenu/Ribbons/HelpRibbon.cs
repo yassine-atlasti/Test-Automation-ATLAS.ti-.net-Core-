@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Test_Automation_Core.ATLAS.ti.UIElements.Dialogs;
 using Test_Automation_Core.UIElements.Dialogs;
 
 namespace Test_Automation_Core.UIElements.AppMenu.Ribbons

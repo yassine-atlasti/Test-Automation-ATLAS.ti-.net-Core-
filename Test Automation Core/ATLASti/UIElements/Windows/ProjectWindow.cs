@@ -3,7 +3,8 @@ using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Support.UI;
 using Test_Automation_Core.UIElements.AppMenu;
 using System;
-using Test_Automation_Core.Actions;
+using Test_Automation_Core.OS.Windows;
+using Test_Automation_Core.ATLAS.ti.UIElements.AppMenu;
 
 namespace Test_Automation_Core.UIElements.AtlasWindows
 {

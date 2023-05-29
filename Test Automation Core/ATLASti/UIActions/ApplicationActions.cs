@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Test_Automation_Core.UIElements.AppMenu.File;
-using Test_Automation_Core.UIElements.Dialogs;
 using OpenQA.Selenium.Appium.Windows;
+using Test_Automation_Core.ATLAS.ti.UIElements.AppMenu.File;
+using Test_Automation_Core.ATLAS.ti.UIElements.Dialogs;
+using Test_Automation_Core.OS.Windows;
+using Test_Automation_Core.UIElements.AppMenu.File;
 
-namespace Test_Automation_Core.Actions
+namespace Test_Automation_Core.ATLAS.ti.UIActions
 {
     public class ApplicationActions
     {
@@ -27,19 +29,21 @@ namespace Test_Automation_Core.Actions
             var importProjectDialog = _app.GetImportProjectDialog();
             var atlasProjectWindow = _app.GetProjectWindow();
 
-            if(!welcomeControlWindow.IsWelcomeWindowDisplayed()) { CloseProject();
-                System.Threading.Thread.Sleep(5000);
+            if (!welcomeControlWindow.IsWelcomeWindowDisplayed())
+            {
+                CloseProject();
+                Thread.Sleep(5000);
             }
 
             // Assume that each method performs the action that its name suggests
             welcomeControlWindow.ClickImportProjectButton();
-            System.Threading.Thread.Sleep(2000);
+            Thread.Sleep(2000);
             filePickerDialog.EnterFileName(filePath);
 
             filePickerDialog.ClickOpenButton();
 
             //Wait 5 seconds for Import dialog to appear
-            System.Threading.Thread.Sleep(3000);
+            Thread.Sleep(3000);
 
             // If import type is QDPX and the MediaFolderButton is visible, handle the media folder selection
             if (importType == "QDPX" && importProjectDialog.IsMediaFolderButtonVisible())
@@ -49,7 +53,7 @@ namespace Test_Automation_Core.Actions
 
                 importProjectDialog.ClickBrowseMediaFolderButton();
                 filePickerDialog.EnterFilePath(mediaFolderPath);
-                filePickerDialog.ClickOpenButton() ;
+                filePickerDialog.ClickOpenButton();
 
             }
 
@@ -64,7 +68,7 @@ namespace Test_Automation_Core.Actions
 
             SystemActions systemActions = new SystemActions();
             string windowName = projectName + " - ATLAS.ti";
-          bool importState=  systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(),"Window", windowName, 35);
+            bool importState = systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "Window", windowName, 35);
 
             return importState;
         }
@@ -73,33 +77,33 @@ namespace Test_Automation_Core.Actions
 
         public bool ExportProject(string filePath, string exportType, string projectName)
         {
-            var welcomeWindow= _app.GetWelcomeControl();
-           
+            var welcomeWindow = _app.GetWelcomeControl();
+
             var projectWindow = _app.GetProjectWindow();
-            var appMenu= projectWindow.getAppMenu();
+            var appMenu = projectWindow.getAppMenu();
 
             //check if welcome Window is displayed or another project is actually open, if yes open the project that should be exported
 
-            if(welcomeWindow.IsWelcomeWindowDisplayed() || !projectWindow.IsProjectOpen(projectName))
+            if (welcomeWindow.IsWelcomeWindowDisplayed() || !projectWindow.IsProjectOpen(projectName))
             {
                 OpenProject(projectName);
 
             }
 
 
-          
+
 
             // Assume that each method performs the action that its name suggests
             var fileTab = appMenu.ClickFile();
 
             ExportControl exportControl = fileTab.ClickExport();
             string exportTypeLower = exportType.ToLower();
-            FilePicker filePickerDialog ;
+            FilePicker filePickerDialog;
 
             if (exportTypeLower == "qdpx")
             {
                 exportControl.ClickQDPXProjectBundleTabItem();
-                 filePickerDialog = exportControl.ClickProjectBundleButton("QDPXBundleTab");
+                filePickerDialog = exportControl.ClickProjectBundleButton("QDPXBundleTab");
 
             }
             else if (exportTypeLower == "atlproj")
@@ -131,18 +135,18 @@ namespace Test_Automation_Core.Actions
 
                 //for now , if the QDPX project was successfully exported we will see the Cancel Button of the Export Results. But in Future we should check that there are no errors or crashes 
 
-                exportState = systemActions.WaitForElementToBeDisplayedByName(_app.getDriver(),  "Cancel", 30);
-                    exportResultsDialog.CancelQDPXResultsExport();
-                
+                exportState = systemActions.WaitForElementToBeDisplayedByName(_app.getDriver(), "Cancel", 30);
+                exportResultsDialog.CancelQDPXResultsExport();
+
             }
             else if (exportTypeLower == "atlproj")
             {
                 //for now , if the project was successfully exported we will see the Home Menu Item. But in Future we should check that there are no errors or crashes 
 
                 SystemActions systemActions = new SystemActions();
-                exportState = systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(),"TabItem", "Home", 30);
+                exportState = systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "TabItem", "Home", 30);
 
-              
+
             }
 
             return exportState;
@@ -183,8 +187,8 @@ namespace Test_Automation_Core.Actions
 
             //If the current library is not the Default Library, the user should select "Choose Library Location
             string uiElement = "Choose Library Location";
-            
-           if(switchLibraryWizard.IsElementDisplayed(uiElement))
+
+            if (switchLibraryWizard.IsElementDisplayed(uiElement))
             {
                 switchLibraryWizard.SelectOption(uiElement);
 
@@ -215,7 +219,7 @@ namespace Test_Automation_Core.Actions
 
             return switchLibState;
             **/
-             
+
         }
 
         public bool ValidateLibSwitch()
@@ -237,7 +241,7 @@ namespace Test_Automation_Core.Actions
             var welcomeWindow = _app.GetWelcomeControl();
             var projectWindow = _app.GetProjectWindow();
 
-            if (welcomeWindow.IsWelcomeWindowDisplayed()==false)
+            if (welcomeWindow.IsWelcomeWindowDisplayed() == false)
             {
                 CloseProject();
 
@@ -259,7 +263,7 @@ namespace Test_Automation_Core.Actions
         public bool CloseProject()
         {
             var welcomeWindow = _app.GetWelcomeControl();
-            var projectWindow=_app.GetProjectWindow();
+            var projectWindow = _app.GetProjectWindow();
             var appMenu = projectWindow.getAppMenu();
             var fileTab = appMenu.ClickFile();
 
@@ -268,7 +272,7 @@ namespace Test_Automation_Core.Actions
 
             // You can add more actions or checks here, such as validating that the project was closed correctly
             SystemActions systemActions = new SystemActions();
-            string windowName =   "ATLAS.ti";
+            string windowName = "ATLAS.ti";
             bool closeState = systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "Window", windowName, 20);
 
             return closeState;
@@ -281,7 +285,7 @@ namespace Test_Automation_Core.Actions
             {
                 // Reporting problem from welcome window
                 var optionsWindow = _app.GetWelcomeControl().OpenOptionsWindow();
-                 optionsWindow.ClickATLASti();
+                optionsWindow.ClickATLASti();
 
                 reportProblemDialog = optionsWindow.OpenReportProblemDialog();
             }
@@ -289,7 +293,7 @@ namespace Test_Automation_Core.Actions
             {
                 // Reporting problem from project window
                 var appMenu = _app.GetProjectWindow().getAppMenu();
-               var helpRibbon = appMenu.ClickHelp();
+                var helpRibbon = appMenu.ClickHelp();
 
                 reportProblemDialog = helpRibbon.OpenReportProblemDialog();
             }
@@ -299,12 +303,12 @@ namespace Test_Automation_Core.Actions
             reportProblemDialog.ClickReportProblemButton();
 
             // Waiting for confirmation dialog to appear
-            
-           
+
+
 
             SystemActions systemActions = new SystemActions();
 
-            bool reportState = systemActions.WaitForElementToBeDisplayedByName(_app.getDriver(),  "The problem report was not successfully sent", 30);
+            bool reportState = systemActions.WaitForElementToBeDisplayedByName(_app.getDriver(), "The problem report was not successfully sent", 30);
 
             // Once confirmation dialog is found, confirm the dialog
             reportProblemDialog.CloseConfirmationDialog();
@@ -342,7 +346,7 @@ namespace Test_Automation_Core.Actions
             suggestionDialog.ClickSendSuggestionButton();
 
             // Waiting for confirmation dialog to appear
-           
+
 
             SystemActions systemActions = new SystemActions();
             bool reportState = systemActions.WaitForElementToBeDisplayedByName(_app.getDriver(), "Suggestion Sent", 30);

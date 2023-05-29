@@ -6,12 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Test_Automation_Core.UIElements.AppMenu.File;
+using Test_Automation_Core.ATLAS.ti.UIElements.AppMenu.File;
+using Test_Automation_Core.ATLAS.ti.UIElements.Dialogs;
 using Test_Automation_Core.UIElements.WelcomeWindow;
+using Test_Automation_Core.UIElements.AtlasWindows;
+using Test_Automation_Core.OS.Windows;
 using Test_Automation_Core.UIElements.Dialogs;
 using Test_Automation_Core.UIElements.Wizards;
-using Test_Automation_Core.UIElements.AtlasWindows;
-using Test_Automation_Core.UIElements.AppMenu.File;
-using Test_Automation_Core.UIElements.AppMenu;
+
 
 namespace Test_Automation_Core
 {

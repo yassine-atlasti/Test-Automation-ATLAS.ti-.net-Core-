@@ -2,7 +2,7 @@
 using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Support.UI;
 
-namespace Test_Automation_Core.UIElements.Dialogs
+namespace Test_Automation_Core.ATLAS.ti.UIElements.Dialogs
 {
     public class SuggestionDialog
     {
@@ -18,7 +18,7 @@ namespace Test_Automation_Core.UIElements.Dialogs
         {
             WindowsElement suggestionDescriptionTextField = driver.FindElementByAccessibilityId("FeedbackText");
             suggestionDescriptionTextField.Click();
-            
+
             suggestionDescriptionTextField.SendKeys(suggestionDescription);
         }
 
@@ -42,7 +42,7 @@ namespace Test_Automation_Core.UIElements.Dialogs
 
         public void CloseConfirmationDialog()
         {
-          
+
             driver.FindElementByName("OK\\").Click();
 
         }

@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Support.UI;
 
-namespace Test_Automation_Core.UIElements.Dialogs
+namespace Test_Automation_Core.ATLAS.ti.UIElements.Dialogs
 
 {
     public class ReportProblemDialog
@@ -29,7 +29,7 @@ namespace Test_Automation_Core.UIElements.Dialogs
         public void EnterEmail(string email)
         {
             WindowsElement emailTextField = driver.FindElementByAccessibilityId("EmailTextField");
-            emailTextField.Click(); 
+            emailTextField.Click();
             emailTextField.Clear();
             emailTextField.SendKeys(email);
         }
@@ -46,7 +46,7 @@ namespace Test_Automation_Core.UIElements.Dialogs
 
         public void CloseConfirmationDialog()
         {
-           
+
             driver.FindElementByName("OK\\").Click();
 
         }
