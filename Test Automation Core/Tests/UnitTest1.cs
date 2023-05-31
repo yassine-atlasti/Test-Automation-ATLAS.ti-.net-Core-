@@ -242,7 +242,7 @@ Assert.IsTrue(switchResult);
             string major = "23";
             string downloadPath = @"C:\Users\yassinemahfoudh\Downloads";
             SystemActions systemActions = new SystemActions();
-            await systemActions.DownloadFileAsync(downloadUrl);
+            await systemActions.DownloadFileAsync(downloadUrl, "VisualStudioSetup.exe");
 
 
             /**
