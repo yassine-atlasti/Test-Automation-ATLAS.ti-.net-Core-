@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium.Appium.Windows;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Appium.Windows;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,36 +25,37 @@ namespace Test_Automation_Core.Installer
         
         public bool InstallATLASti(string installerPath, string majorVersion) {
 
-            OpenInstaller(installerPath);
 
             //Wait for Installer to be displayed
             SystemActions systemActions = new SystemActions();
-            bool installerState = systemActions.WaitForElementToBeDisplayedByTagName(driver, "Window", $"Setup - ATLAS.ti {majorVersion}", 60);
+            bool installerState = systemActions.WaitForElementToBeDisplayedByTagName(driver, "Window", $"Setup - ATLAS.ti {majorVersion}", 80);
 
             if (installerState) {
                 //Add 1 second sleep between each page change in the Installer Wizard
 
-            driver.FindElementByTagName("Button").FindElementByName("Next").Click();
+                var window = driver.FindElementByTagName("Window").FindElementByName($"Setup - ATLAS.ti {majorVersion}");
+
+            window.FindElementByName("Next").Click();
                 
                 Thread.Sleep(1000);
 
-                driver.FindElementByTagName("CheckBox").Click();
-                driver.FindElementByTagName("Button").FindElementByName("Next").Click();
+                window.FindElementByTagName("CheckBox").Click();
+                window.FindElementByName("Next").Click();
 
                 Thread.Sleep(1000);
 
-                driver.FindElementByTagName("Button").FindElementByName("Next").Click();
+                window.FindElementByName("Next").Click();
 
                 Thread.Sleep(1000);
 
-                driver.FindElementByTagName("Button").FindElementByName("Install").Click();
+                window.FindElementByName("Install").Click();
 
                 Thread.Sleep(1000);
-                installerState = systemActions.WaitForElementToBeDisplayedByTagName(driver, "CheckBox", "Launch ATLAS.ti", 60);
+                installerState = systemActions.WaitForElementToBeDisplayedByTagName(driver, "CheckBox", "Launch ATLAS.ti", 80);
 
-                driver.FindElementByTagName("CheckBox").Click() ;
+               // window.FindElementByTagName("CheckBox").Click() ;
                 
-                driver.FindElementByTagName("Button").FindElementByName("Close").Click();
+                window.FindElementByName("Close").Click();
 
             }
             else { installerState = false; }
@@ -64,33 +66,12 @@ namespace Test_Automation_Core.Installer
 
 
 
-        public void UninstallATLASti(string majorVersion)
-        {
-            string controlPanelCommand = "control";
-            string programsAndFeaturesCommand = "appwiz.cpl";
-            string atlasEntryDisplayName = $"ATLAS.ti {majorVersion}";
-
-            Process.Start(controlPanelCommand, $"{programsAndFeaturesCommand},::{atlasEntryDisplayName}\\Uninstall");
         
 
-        // Delay for 60 seconds
-        //Thread.Sleep(60000);
-
-        //We need to kill all ATLAS.ti processes to close the installer.
-        //closeInstaller(majorVersion);
-
-
-    }
 
 
 
-        public void closeInstaller(string majorVersion)
-        {
-            SystemActions systemActions = new SystemActions();
-
-            systemActions.CloseAtlasTiProcesses(majorVersion);
-
-        }
+     
 
     }
 }

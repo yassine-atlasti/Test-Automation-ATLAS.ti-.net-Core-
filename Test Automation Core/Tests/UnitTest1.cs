@@ -12,6 +12,9 @@ using OpenQA.Selenium.Remote;
 using System.Diagnostics;
 using Test_Automation_Core.OS.Windows;
 using Test_Automation_Core.Installer;
+using OpenQA.Selenium.Appium.Enums;
+using Microsoft.VisualStudio.TestPlatform.TestHost;
+using Test_Automation_Core.ATLAS.ti.UIActions;
 
 namespace Test_Automation_Core.Tests
 {
@@ -22,11 +25,14 @@ namespace Test_Automation_Core.Tests
         private static WindowsDriver<WindowsElement> driver2;
 
       // [OneTimeSetUp]
-        public static void ClassInitialize()
+        public static void ClassInitialize(string appPath)
         {
-            string applicationPath = @"C:\Program Files\Scientific Software\ATLASti.23\Atlasti23.exe";
+            //string applicationPath = @"C:\Program Files\Scientific Software\ATLASti.23\Atlasti23.exe";
+            string applicationPath = appPath;
+            /**
             string applicationName = Path.GetFileNameWithoutExtension(applicationPath);
 
+            
             // Check if the ATLAS.ti application is already running
             Process[] processes = Process.GetProcessesByName(applicationName);
 
@@ -64,19 +70,33 @@ namespace Test_Automation_Core.Tests
                 // If the application is already running, attach to the first instance
                 process = processes[0];
             }
-
+            **/
             // Now initialize the WindowsDriver
             AppiumOptions appOptions = new AppiumOptions();
             appOptions.AddAdditionalCapability("app", applicationPath);
             appOptions.AddAdditionalCapability("deviceName", "WindowsPC");
 
             // Set the command timeout to a higher value
-            appOptions.AddAdditionalCapability("newCommandTimeout", 600);  // Timeout in seconds
+            appOptions.AddAdditionalCapability("newCommandTimeout", 30000);  // Timeout in seconds
 
             _driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appOptions);
 
         }
 
+        public void InitializeWindowsDriver()
+        {
+
+            // Set the desired capabilities for the application
+            AppiumOptions options = new AppiumOptions();
+            options.AddAdditionalCapability("app", "Root");
+            options.AddAdditionalCapability("deviceName", "WindowsPC");
+
+             _driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), options);
+
+
+
+            
+        }
         public void initBackUpApp()
         {
             var applicationPath2 = @"C:\Program Files\Scientific Software\ATLASti.23\SSD.ATLASti.Backup.exe";
@@ -89,14 +109,14 @@ namespace Test_Automation_Core.Tests
 
         }
 
-        /**
-        [OneTimeTearDown]
+        
+       // [OneTimeTearDown]
         public static void ClassCleanup()
         {
 
             _driver.Quit();
         }
-        **/
+
 
 
 
@@ -213,18 +233,19 @@ Assert.IsTrue(switchResult);
         }
         **/
 
-        /**
+        
         [Test]
 
         public async Task TestMethod2()
         {
-            string downloadUrl = @"https://cdn.atlasti.com/win/nightly/23-C4E24425-7597-4DB4-BEAC-4C2CFBBB7A7C/develop/Atlasti_Nightly_develop.exe";
+            string downloadUrl = @"https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030&workload=dotnet-dotnetwebcloud&passive=false#dotnet";
             string major = "23";
             string downloadPath = @"C:\Users\yassinemahfoudh\Downloads";
             SystemActions systemActions = new SystemActions();
-           await systemActions.DownloadAtlasAsync(downloadUrl,downloadPath);
+            await systemActions.DownloadFileAsync(downloadUrl);
 
 
+            /**
             //get the most recently downloaded file from Download Path
             var directory = new DirectoryInfo(downloadPath);
             var myFile = directory.GetFiles()
@@ -236,24 +257,45 @@ Assert.IsTrue(switchResult);
             //Set the installer Path and start installation 
             string installerPath = downloadPath + "\\" + installerFileName;
 
-            InstallerActions installer = new InstallerActions(_driver);
-           bool installState = installer.InstallATLASti(downloadPath, major);
-
-            Assert.IsTrue(installState);
+            **/
         }
-        **/
+        
 
+        /**
 
         [Test]
 
         public void TestMethod2()
         {
+            //Install ATLAS.ti
+            
+            var majorVersion = "23";
 
-            Process.Start("Control Panel\\Programs\\Programs and Features\\ATLAS.ti 23");
+              string installerPath = @"C:\Users\yassinemahfoudh\Downloads\Atlasti_Nightly_develop.exe";
+              ClassInitialize(installerPath);
+              InstallerActions installerActions = new InstallerActions(_driver);
+
+              installerActions.InstallATLASti(installerPath, "23");
+
+            _driver.Quit();
+
+            //Uninstall ATLAS.ti
+            InitializeWindowsDriver();
+
+            string appName = @"Control Panel\Programs\Programs and Features\ATLAS.ti 23";
+            SystemActions systemActions = new SystemActions(_driver);
+
+
+            systemActions.UninstallApp(appName);
+            
+
+            
 
         }
+        **/
+       
 
 
 
-        }
+    }
 }
