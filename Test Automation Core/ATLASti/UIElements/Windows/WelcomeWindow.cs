@@ -196,26 +196,28 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
                 return false;
             }
         }
-        public bool IsCrashReportDisplayed(string crashReportAccessibilityId, string crashReportName)
-        {
-            try
-            {
-                var crashReportDialog = driver.FindElementByAccessibilityId(crashReportAccessibilityId);
+    
 
-                if (crashReportDialog != null && crashReportDialog.Displayed && crashReportDialog.Text.Contains(crashReportName))
+
+        public bool HasAtlasCrashed()
+        {
+            // Go through all window handles
+            foreach (var handle in driver.WindowHandles)
+            {
+                // Switch to the current window
+                driver.SwitchTo().Window(handle);
+
+                // Check if the window's title is "ATLAS.ti Problem"
+                if (driver.Title == "ATLAS.ti Problem")
                 {
+                    // If so, return true
                     return true;
                 }
+            }
 
-                return false;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
+            // If no window with the title "ATLAS.ti Problem" was found, return false
+            return false;
         }
-
-
 
 
     }
