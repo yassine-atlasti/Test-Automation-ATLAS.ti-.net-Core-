@@ -93,7 +93,7 @@ namespace Test_Automation_Core.OS.Windows
 
          **/
 
-        public async Task DownloadFileAsync(string url, string fileName, int maxRetries = 5)
+        public async Task DownloadFileAsync(string url, string fileName, int maxRetries = 3)
         {
             // Create HttpClient to send HTTP requests
             using var httpClient = new HttpClient();

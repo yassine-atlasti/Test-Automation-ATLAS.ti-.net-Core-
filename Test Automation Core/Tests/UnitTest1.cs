@@ -24,7 +24,9 @@ namespace Test_Automation_Core.Tests
         private static WindowsDriver<WindowsElement> _driver;
         private static WindowsDriver<WindowsElement> driver2;
 
-      // [OneTimeSetUp]
+        // [OneTimeSetUp]
+
+        /**
         public static void ClassInitialize(string appPath)
         {
             //string applicationPath = @"C:\Program Files\Scientific Software\ATLASti.23\Atlasti23.exe";
@@ -70,7 +72,7 @@ namespace Test_Automation_Core.Tests
                 // If the application is already running, attach to the first instance
                 process = processes[0];
             }
-            **/
+            
             // Now initialize the WindowsDriver
             AppiumOptions appOptions = new AppiumOptions();
             appOptions.AddAdditionalCapability("app", applicationPath);
@@ -82,6 +84,30 @@ namespace Test_Automation_Core.Tests
             _driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appOptions);
 
         }
+    **/
+
+        public void ClassInitialize(string appPath, string windowName)
+        {
+            var applicationPath2 = appPath;
+            var appOptions2 = new AppiumOptions();
+            appOptions2.AddAdditionalCapability("app", applicationPath2);
+            appOptions2.AddAdditionalCapability("deviceName", "WindowsPC");
+
+            _driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appOptions2);
+
+            // Adding a wait time for the application to fully load before the test runs
+            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(30)); // wait for 30 seconds
+            try
+            {
+                // Try to find the window with a specific name. Once this is successful, it indicates the application has loaded.
+                wait.Until(drv => drv.WindowHandles.Any(handle => drv.SwitchTo().Window(handle).Title == windowName));
+            }
+            catch (WebDriverTimeoutException)
+            {
+                throw new Exception("Failed to open application within the specified time limit.");
+            }
+        }
+
 
         public void InitializeWindowsDriver()
         {
@@ -244,8 +270,9 @@ Assert.IsTrue(switchResult);
             string fileName = "Atlasti_Nightly_develop.exe";
             SystemActions systemActions = new SystemActions();
             // await systemActions.DownloadFileAsync(downloadUrl, fileName);
-            string installerPath= downloadPath + "\\" + fileName;
-            ClassInitialize(installerPath);
+            string installerPath = downloadPath + "\\" + fileName;
+            string windowName = "Setup - ATLAS.ti " + major;
+            ClassInitialize(installerPath, windowName);
             InstallerActions installer= new InstallerActions(_driver);
             installer.InstallATLASti(installerPath, major);
         }
