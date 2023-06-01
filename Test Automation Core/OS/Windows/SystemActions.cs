@@ -12,6 +12,8 @@ using Test_Automation_Core.Installer;
 using TextCopy;
 using NUnit.Framework.Internal;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Net.Sockets;
+using System.Net.Http.Headers;
 
 namespace Test_Automation_Core.OS.Windows
 {
@@ -25,50 +27,162 @@ namespace Test_Automation_Core.OS.Windows
 
         public SystemActions(WindowsDriver<WindowsElement> driver) { this.driver = driver; }
 
-        //This method fails to copy the download file to the destination path " System.UnauthorizedAccessException : Access to the path 'C:\Users\yassinemahfoudh\Desktop\Test1' "
+        private const int MaxRetries = 5;
 
-        public async Task DownloadFileAsync(string url, string fileName)
+        /**
+         public async Task DownloadFileAsync(string url, string fileName, int maxRetries = 5)
+         {
+             using var httpClient = new HttpClient();
+             var downloadFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads\\";
+             var filePath = Path.Combine(downloadFolder, fileName);
+
+             // If the file already exists, delete it before starting the download.
+             if (File.Exists(filePath))
+             {
+                 File.Delete(filePath);
+             }
+
+             int retryCount = 0;
+             while (retryCount <= maxRetries)
+             {
+                 try
+                 {
+                     long totalBytes = File.Exists(filePath) ? new FileInfo(filePath).Length : 0;
+
+                     using var request = new HttpRequestMessage { RequestUri = new Uri(url), Method = HttpMethod.Get };
+                     if (totalBytes > 0)
+                     {
+                         request.Headers.Range = new RangeHeaderValue(totalBytes, null);
+                     }
+
+                     using var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+                     response.EnsureSuccessStatusCode();
+
+                     using var fileStream = new FileStream(filePath, FileMode.Append, FileAccess.Write, FileShare.None);
+                     using var contentStream = await response.Content.ReadAsStreamAsync();
+
+                     var buffer = new byte[8192];
+                     var bytesRead = 0;
+                     while ((bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                     {
+                         fileStream.Write(buffer, 0, bytesRead);
+                         totalBytes += bytesRead;
+                     }
+
+                     Console.WriteLine($"File downloaded to {filePath}");
+                     break;
+                 }
+                 catch (Exception ex) when (ex is HttpRequestException || (ex is IOException && ex.InnerException is SocketException))
+                 {
+                     if (++retryCount > maxRetries)
+                     {
+                         Console.WriteLine($"Failed to download file after {maxRetries} attempts. Error: {ex.Message}");
+                         throw;
+                     }
+                     var delay = TimeSpan.FromSeconds(Math.Pow(2, retryCount)) + TimeSpan.FromMilliseconds(new Random().Next(0, 1000));
+                     Console.WriteLine($"Download failed, retrying in {delay.TotalSeconds} seconds... ({retryCount} of {maxRetries} retries)");
+                     await Task.Delay(delay);
+                 }
+                 catch (Exception ex)
+                 {
+                     // Handle other exceptions as necessary here...
+                     throw;
+                 }
+             }
+         }
+
+         **/
+
+        public async Task DownloadFileAsync(string url, string fileName, int maxRetries = 5)
         {
-            // 1. Create HttpClient.
-            var httpClient = new HttpClient();
+            // Create HttpClient to send HTTP requests
+            using var httpClient = new HttpClient();
 
-            // 2. Send a GET request to the provided url.
-            using var response = await httpClient.GetAsync(url);
-
-            // 3. Ensure the request was successful.
-            response.EnsureSuccessStatusCode();
-
-            // 4. Try to get the name of the file from the ContentDisposition header.
-
-            // 5. If the file name wasn't provided in the response headers, try to extract it from the URL.
-            if (string.IsNullOrEmpty(fileName))
-            {
-                fileName = Path.GetFileName(new Uri(url).AbsolutePath);
-            }
-
-            // 6. If the file name still wasn't provided, throw an exception.
-            if (string.IsNullOrEmpty(fileName))
-            {
-                throw new InvalidOperationException("The file name could not be determined.");
-            }
-
-            // 7. Get the path to the Downloads folder.
+            // Get the path of the downloads folder
             var downloadFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads\\";
 
-            // 8. Combine the Downloads folder path and file name to form the full file path.
+            // Create the full file path
             var filePath = Path.Combine(downloadFolder, fileName);
 
-            // 9. If the file already exists in the Downloads folder, delete it.
+            // If the file already exists, delete it before starting the download.
             if (File.Exists(filePath))
             {
                 File.Delete(filePath);
             }
 
-            // 10. Create a new file and write the response content into it.
-            using var fileStream = File.Create(filePath);
-            await response.Content.CopyToAsync(fileStream);
+            // Initialize retry counter
+            int retryCount = 0;
 
-            Console.WriteLine($"File downloaded to {filePath}");
+            // Retry loop starts here
+            while (retryCount <= maxRetries)
+            {
+                try
+                {
+                    // Determine the total bytes received to know if we're resuming a download or starting fresh
+                    long totalBytes = File.Exists(filePath) ? new FileInfo(filePath).Length : 0;
+
+                    // Prepare the HTTP request message
+                    using var request = new HttpRequestMessage { RequestUri = new Uri(url), Method = HttpMethod.Get };
+
+                    // If we have received some bytes, set the 'Range' header so server sends from where it left off
+                    if (totalBytes > 0)
+                    {
+                        request.Headers.Range = new RangeHeaderValue(totalBytes, null);
+                    }
+
+                    // Send the HTTP request and get the response
+                    using var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+
+                    // Ensure we got a successful status code in response
+                    response.EnsureSuccessStatusCode();
+
+                    // Create or open the file for writing at the end of the file
+                    using var fileStream = new FileStream(filePath, FileMode.Append, FileAccess.Write, FileShare.None);
+
+                    // Get the stream of the content of the response
+                    using var contentStream = await response.Content.ReadAsStreamAsync();
+
+                    // Prepare buffer to hold data read from the stream
+                    var buffer = new byte[8192];
+                    var bytesRead = 0;
+
+                    // Read from stream and write to file stream
+                    while ((bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                    {
+                        fileStream.Write(buffer, 0, bytesRead);
+                        totalBytes += bytesRead;
+                    }
+
+                    // Log the successful download
+                    Console.WriteLine($"File downloaded to {filePath}");
+
+                    // Successfully downloaded, break out of the retry loop
+                    break;
+                }
+                catch (Exception ex) when (ex is HttpRequestException || (ex is IOException && ex.InnerException is SocketException))
+                {
+                    // If maximum retries exceeded, throw exception
+                    if (++retryCount > maxRetries)
+                    {
+                        Console.WriteLine($"Failed to download file after {maxRetries} attempts. Error: {ex.Message}");
+                        throw;
+                    }
+
+                    // Calculate exponential back-off with jitter delay
+                    var delay = TimeSpan.FromSeconds(Math.Pow(2, retryCount)) + TimeSpan.FromMilliseconds(new Random().Next(0, 1000));
+
+                    // Log the retry attempt
+                    Console.WriteLine($"Download failed, retrying in {delay.TotalSeconds} seconds... ({retryCount} of {maxRetries} retries)");
+
+                    // Wait before next retry attempt
+                    await Task.Delay(delay);
+                }
+                catch (Exception ex)
+                {
+                    // Handle other exceptions as necessary here...
+                    throw;
+                }
+            }
         }
 
 

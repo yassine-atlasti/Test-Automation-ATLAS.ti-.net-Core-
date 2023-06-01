@@ -238,26 +238,16 @@ Assert.IsTrue(switchResult);
 
         public async Task TestMethod2()
         {
-            string downloadUrl = @"https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030&workload=dotnet-dotnetwebcloud&passive=false#dotnet";
+            string downloadUrl = @"https://cdn.atlasti.com/win/nightly/23-C4E24425-7597-4DB4-BEAC-4C2CFBBB7A7C/develop/Atlasti_Nightly_develop.exe";
             string major = "23";
             string downloadPath = @"C:\Users\yassinemahfoudh\Downloads";
+            string fileName = "Atlasti_Nightly_develop.exe";
             SystemActions systemActions = new SystemActions();
-            await systemActions.DownloadFileAsync(downloadUrl, "VisualStudioSetup.exe");
-
-
-            /**
-            //get the most recently downloaded file from Download Path
-            var directory = new DirectoryInfo(downloadPath);
-            var myFile = directory.GetFiles()
-                         .OrderByDescending(f => f.LastWriteTime)
-                         .First();
-            string installerFileName = myFile.Name;
-
-
-            //Set the installer Path and start installation 
-            string installerPath = downloadPath + "\\" + installerFileName;
-
-            **/
+            // await systemActions.DownloadFileAsync(downloadUrl, fileName);
+            string installerPath= downloadPath + "\\" + fileName;
+            ClassInitialize(installerPath);
+            InstallerActions installer= new InstallerActions(_driver);
+            installer.InstallATLASti(installerPath, major);
         }
         
 
