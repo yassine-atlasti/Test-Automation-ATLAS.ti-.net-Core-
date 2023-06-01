@@ -11,6 +11,8 @@ using Test_Automation_Core.UIElements.AtlasWindows;
 using System.Xml.Linq;
 using Test_Automation_Core.OS.Windows;
 using Test_Automation_Core.ATLAS.ti.UIElements.Dialogs;
+using System.Diagnostics;
+using TextCopy;
 
 namespace Test_Automation_Core.UIElements.WelcomeWindow
 {
@@ -128,7 +130,15 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
         {
             WindowsElement searchField = driver.FindElementByAccessibilityId("SearchControl");
             searchField.Clear();
-            searchField.SendKeys(projectName);
+
+            ClipboardService.SetText(projectName);
+
+            // Create a new Actions object
+           // OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+
+            Thread.Sleep(1000);
+
+            searchField.SendKeys(Keys.Control+"v");
         }
         public void ClearSearch()
         {
@@ -196,26 +206,52 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
                 return false;
             }
         }
-    
 
 
-        public bool HasAtlasCrashed()
+
+
+        public bool HasAtlasCrashed(TimeSpan timeout)
         {
-            // Go through all window handles
-            foreach (var handle in driver.WindowHandles)
-            {
-                // Switch to the current window
-                driver.SwitchTo().Window(handle);
+            var watch = Stopwatch.StartNew();
+            bool atlasWindowExists = false;
 
-                // Check if the window's title is "ATLAS.ti Problem"
-                if (driver.Title == "ATLAS.ti Problem")
+            while (watch.Elapsed < timeout)
+            {
+                // Reset the flag
+                atlasWindowExists = false;
+
+                // Go through all window handles
+                foreach (var handle in driver.WindowHandles)
                 {
-                    // If so, return true
-                    return true;
+                    // Switch to the current window
+                    driver.SwitchTo().Window(handle);
+
+                    // Check if the window's title is "ATLAS.ti"
+                    if (driver.Title == "ATLAS.ti")
+                    {
+                        // ATLAS.ti window exists
+                        atlasWindowExists = true;
+                    }
+
+                    // Check if the window's title is "ATLAS.ti Problem"
+                    if (driver.Title == "ATLAS.ti Problem")
+                    {
+                        // If so, return true (there has been a crash)
+                        return true;
+                    }
                 }
+
+                // If the ATLAS.ti window exists but no crash window has been found, exit the loop
+                if (atlasWindowExists)
+                {
+                    break;
+                }
+
+                // Wait for a short period before checking again
+                Thread.Sleep(500);
             }
 
-            // If no window with the title "ATLAS.ti Problem" was found, return false
+            // If no window with the title "ATLAS.ti Problem" was found within the timeout, return false
             return false;
         }
 

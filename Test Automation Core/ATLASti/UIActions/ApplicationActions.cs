@@ -381,6 +381,19 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
         }
 
 
+        public void RaiseException()
+        {
+            // Open the project window's app menu
+            var appMenu = _app.GetProjectWindow().getAppMenu();
+
+            // Click on 'Developer' to get the HelpRibbon
+            var developerRibbon = appMenu.ClickDeveloper();
+
+            developerRibbon.RaiseAtlasException();
+
+           
+
+        }
 
 
     }

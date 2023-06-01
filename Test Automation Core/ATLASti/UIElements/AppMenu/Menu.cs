@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Test_Automation_Core.ATLAS.ti.UIElements.AppMenu.File;
+using Test_Automation_Core.ATLASti.UIElements.AppMenu.Ribbons;
 using Test_Automation_Core.UIElements.AppMenu.Ribbons;
 
 namespace Test_Automation_Core.ATLAS.ti.UIElements.AppMenu
@@ -69,7 +70,11 @@ namespace Test_Automation_Core.ATLAS.ti.UIElements.AppMenu
             _driver.FindElementByName("Ribbon").FindElementByName("Help").Click();
             return new HelpRibbon(_driver);
         }
-
+        public DeveloperRibbon ClickDeveloper()
+        {
+            _driver.FindElementByName("Ribbon").FindElementByName("Developer").Click();
+            return new DeveloperRibbon(_driver);
+        }
 
     }
 }
