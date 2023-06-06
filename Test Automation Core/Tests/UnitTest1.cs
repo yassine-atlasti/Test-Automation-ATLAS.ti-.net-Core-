@@ -258,43 +258,52 @@ Assert.IsTrue(switchResult);
         
         }
         **/
-        /**
+        
                 
                 [Test]
 
-                public async Task TestMethod2()
+                public async Task UpdateNightly()
                 {
-                    string downloadUrl = @"https://cdn.atlasti.com/win/nightly/23-C4E24425-7597-4DB4-BEAC-4C2CFBBB7A7C/develop/Atlasti_Nightly_develop.exe";
+            //Uninstall ATLAS.ti
+            InitializeWindowsDriver();
+
+            string appName = @"Control Panel\Programs\Programs and Features\ATLAS.ti 23";
+            SystemActions systemActions = new SystemActions(_driver);
+
+
+            systemActions.UninstallApp(appName);
+
+            //Download 
+            string downloadUrl = @"https://cdn.atlasti.com/win/nightly/23-C4E24425-7597-4DB4-BEAC-4C2CFBBB7A7C/develop/Atlasti_Nightly_develop.exe";
                     string major = "23";
                     string downloadPath = @"C:\Users\yassinemahfoudh\Downloads";
                     string fileName = "Atlasti_Nightly_develop.exe";
-                    SystemActions systemActions = new SystemActions();
-                    // await systemActions.DownloadFileAsync(downloadUrl, fileName);
-                    string installerPath = downloadPath + "\\" + fileName;
+
+            await systemActions.DownloadFileAsync(downloadUrl, fileName);
+
+            _driver.Quit();
+
+            //Add code to Close all File Explorer Windows 
+
+
+
+            //Install
+            string installerPath = downloadPath + "\\" + fileName;
                     string windowName = "Setup - ATLAS.ti " + major;
                     ClassInitialize(installerPath, windowName);
                     InstallerActions installer= new InstallerActions(_driver);
                     installer.InstallATLASti(installerPath, major);
                 }
                 
-                **/
+                
+
         /**
 
         [Test]
 
         public void TestMethod2()
         {
-            //Install ATLAS.ti
-            
-            var majorVersion = "23";
 
-              string installerPath = @"C:\Users\yassinemahfoudh\Downloads\Atlasti_Nightly_develop.exe";
-              ClassInitialize(installerPath);
-              InstallerActions installerActions = new InstallerActions(_driver);
-
-              installerActions.InstallATLASti(installerPath, "23");
-
-            _driver.Quit();
 
             //Uninstall ATLAS.ti
             InitializeWindowsDriver();
@@ -304,13 +313,28 @@ Assert.IsTrue(switchResult);
 
 
             systemActions.UninstallApp(appName);
-            
+
+
+            //Install ATLAS.ti
+
+            var majorVersion = "23";
+
+
+              string installerPath = @"C:\Users\yassinemahfoudh\Downloads\Atlasti_Nightly_develop.exe";
+              ClassInitialize(installerPath);
+              InstallerActions installerActions = new InstallerActions(_driver);
+
+              installerActions.InstallATLASti(installerPath, "23");
+
+            _driver.Quit();
 
             
 
-        }
-        **/
+            
 
+        }**/
+        
+        /**
         [Test]
 
         public void TestMethod2()
@@ -333,7 +357,7 @@ Assert.IsTrue(switchResult);
             Assert.IsTrue(crashState);
 
         }
-
+        **/
 
     }
 }

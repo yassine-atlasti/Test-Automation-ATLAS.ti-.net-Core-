@@ -29,70 +29,7 @@ namespace Test_Automation_Core.OS.Windows
 
         private const int MaxRetries = 5;
 
-        /**
-         public async Task DownloadFileAsync(string url, string fileName, int maxRetries = 5)
-         {
-             using var httpClient = new HttpClient();
-             var downloadFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads\\";
-             var filePath = Path.Combine(downloadFolder, fileName);
-
-             // If the file already exists, delete it before starting the download.
-             if (File.Exists(filePath))
-             {
-                 File.Delete(filePath);
-             }
-
-             int retryCount = 0;
-             while (retryCount <= maxRetries)
-             {
-                 try
-                 {
-                     long totalBytes = File.Exists(filePath) ? new FileInfo(filePath).Length : 0;
-
-                     using var request = new HttpRequestMessage { RequestUri = new Uri(url), Method = HttpMethod.Get };
-                     if (totalBytes > 0)
-                     {
-                         request.Headers.Range = new RangeHeaderValue(totalBytes, null);
-                     }
-
-                     using var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
-                     response.EnsureSuccessStatusCode();
-
-                     using var fileStream = new FileStream(filePath, FileMode.Append, FileAccess.Write, FileShare.None);
-                     using var contentStream = await response.Content.ReadAsStreamAsync();
-
-                     var buffer = new byte[8192];
-                     var bytesRead = 0;
-                     while ((bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
-                     {
-                         fileStream.Write(buffer, 0, bytesRead);
-                         totalBytes += bytesRead;
-                     }
-
-                     Console.WriteLine($"File downloaded to {filePath}");
-                     break;
-                 }
-                 catch (Exception ex) when (ex is HttpRequestException || (ex is IOException && ex.InnerException is SocketException))
-                 {
-                     if (++retryCount > maxRetries)
-                     {
-                         Console.WriteLine($"Failed to download file after {maxRetries} attempts. Error: {ex.Message}");
-                         throw;
-                     }
-                     var delay = TimeSpan.FromSeconds(Math.Pow(2, retryCount)) + TimeSpan.FromMilliseconds(new Random().Next(0, 1000));
-                     Console.WriteLine($"Download failed, retrying in {delay.TotalSeconds} seconds... ({retryCount} of {maxRetries} retries)");
-                     await Task.Delay(delay);
-                 }
-                 catch (Exception ex)
-                 {
-                     // Handle other exceptions as necessary here...
-                     throw;
-                 }
-             }
-         }
-
-         **/
-
+        
         public async Task DownloadFileAsync(string url, string fileName, int maxRetries = 3)
         {
             // Create HttpClient to send HTTP requests
@@ -216,6 +153,8 @@ namespace Test_Automation_Core.OS.Windows
             Thread.Sleep(1000);
 
 
+            SetFocusToFileExplorer();
+
             // Use CTRL+L to focus on the address bar, then paste the clipboard content 
             action.KeyDown(Keys.Control).SendKeys("l").KeyUp(Keys.Control).SendKeys(Keys.Control + "v").KeyUp(Keys.Control).SendKeys(Keys.Enter).Perform();
 
@@ -227,6 +166,21 @@ namespace Test_Automation_Core.OS.Windows
 
 
         }
+        public void SetFocusToFileExplorer()
+        {
+            
+
+            // Locate the File Explorer window using the appropriate locator
+            WindowsElement fileExplorerWindow = driver.FindElementByClassName("CabinetWClass"); // Example locator for File Explorer
+
+            // Get the window handle of the File Explorer window
+            string fileExplorerWindowHandle = fileExplorerWindow.GetAttribute("NativeWindowHandle");
+
+            // Switch the focus to the File Explorer window
+            driver.SwitchTo().Window(fileExplorerWindowHandle);
+        }
+
+
 
         //This requires Viusal Studio to run as an admin, find another way to uninstall it , an msi file should make more sense ,or use UI (See InstallerActions.cs)
         public void UninstallAtlas(string majorVersion)
