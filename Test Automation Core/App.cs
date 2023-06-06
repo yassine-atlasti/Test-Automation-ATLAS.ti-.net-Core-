@@ -14,7 +14,8 @@ using Test_Automation_Core.UIElements.AtlasWindows;
 using Test_Automation_Core.OS.Windows;
 using Test_Automation_Core.UIElements.Dialogs;
 using Test_Automation_Core.UIElements.Wizards;
-
+using System.Diagnostics;
+using OpenQA.Selenium.Appium;
 
 namespace Test_Automation_Core
 {
@@ -106,7 +107,7 @@ namespace Test_Automation_Core
         }
 
 
-        // other methods to get other windows...
+       
     }
 
 }

@@ -232,10 +232,13 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
                         // ATLAS.ti window exists
                         atlasWindowExists = true;
                     }
+                     Task.Delay(2000);
 
                     // Check if the window's title is "ATLAS.ti Problem"
                     if (driver.Title == "ATLAS.ti Problem")
                     {
+
+                         
                         // If so, return true (there has been a crash)
                         return true;
                     }

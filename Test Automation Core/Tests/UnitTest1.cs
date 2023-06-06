@@ -15,6 +15,7 @@ using Test_Automation_Core.Installer;
 using OpenQA.Selenium.Appium.Enums;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Test_Automation_Core.ATLAS.ti.UIActions;
+using Test_Automation_Core.ATLAS.ti.UIElements.Dialogs;
 
 namespace Test_Automation_Core.Tests
 {
@@ -23,120 +24,26 @@ namespace Test_Automation_Core.Tests
     {
         private static WindowsDriver<WindowsElement> _driver;
         private static WindowsDriver<WindowsElement> driver2;
-
+        SystemActions systemActions = new SystemActions();
         // [OneTimeSetUp]
 
+
         /**
-        public static void ClassInitialize(string appPath)
-        {
-            //string applicationPath = @"C:\Program Files\Scientific Software\ATLASti.23\Atlasti23.exe";
-            string applicationPath = appPath;
-            /**
-            string applicationName = Path.GetFileNameWithoutExtension(applicationPath);
+           public void initBackUpApp()
+           {
+               var applicationPath2 = @"C:\Program Files\Scientific Software\ATLASti.23\SSD.ATLASti.Backup.exe";
+               var appOptions2 = new AppiumOptions();
+               appOptions2.AddAdditionalCapability("app", applicationPath2);
+               appOptions2.AddAdditionalCapability("deviceName", "WindowsPC");
 
-            
-            // Check if the ATLAS.ti application is already running
-            Process[] processes = Process.GetProcessesByName(applicationName);
+                driver2 = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4725"), appOptions2);
+               // Perform automation for the second application
 
-            Process process;
-            if (processes.Length == 0)
-            {
-                // If the application is not running, start it
-                var processStartInfo = new ProcessStartInfo
-                {
-                    FileName = applicationPath,
-                    UseShellExecute = true,
-                    WindowStyle = ProcessWindowStyle.Normal
-                };
-
-                process = Process.Start(processStartInfo);
-
-                // Wait for application to open
-                int maxWaitTimeInMilliseconds = 30000;
-                int intervalInMilliseconds = 500;
-                int elapsedWaitTimeInMilliseconds = 0;
-                while (elapsedWaitTimeInMilliseconds < maxWaitTimeInMilliseconds)
-                {
-                    processes = Process.GetProcessesByName(applicationName);
-                    if (processes.Length > 0)
-                    {
-                        process = processes[0];
-                        break;
-                    }
-                    System.Threading.Thread.Sleep(intervalInMilliseconds);
-                    elapsedWaitTimeInMilliseconds += intervalInMilliseconds;
-                }
-            }
-            else
-            {
-                // If the application is already running, attach to the first instance
-                process = processes[0];
-            }
-            
-            // Now initialize the WindowsDriver
-            AppiumOptions appOptions = new AppiumOptions();
-            appOptions.AddAdditionalCapability("app", applicationPath);
-            appOptions.AddAdditionalCapability("deviceName", "WindowsPC");
-
-            // Set the command timeout to a higher value
-            appOptions.AddAdditionalCapability("newCommandTimeout", 30000);  // Timeout in seconds
-
-            _driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appOptions);
-
-        }
-    **/
-
-        public void ClassInitialize(string appPath, string windowName)
-        {
-            var applicationPath2 = appPath;
-            var appOptions2 = new AppiumOptions();
-            appOptions2.AddAdditionalCapability("app", applicationPath2);
-            appOptions2.AddAdditionalCapability("deviceName", "WindowsPC");
-
-            _driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appOptions2);
-
-            // Adding a wait time for the application to fully load before the test runs
-            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(30)); // wait for 30 seconds
-            try
-            {
-                // Try to find the window with a specific name. Once this is successful, it indicates the application has loaded.
-                wait.Until(drv => drv.WindowHandles.Any(handle => drv.SwitchTo().Window(handle).Title == windowName));
-            }
-            catch (WebDriverTimeoutException)
-            {
-                throw new Exception("Failed to open application within the specified time limit.");
-            }
-        }
+           }
+        **/
 
 
-        public void InitializeWindowsDriver()
-        {
-
-            // Set the desired capabilities for the application
-            AppiumOptions options = new AppiumOptions();
-            options.AddAdditionalCapability("app", "Root");
-            options.AddAdditionalCapability("deviceName", "WindowsPC");
-
-             _driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), options);
-
-
-
-            
-        }
-        public void initBackUpApp()
-        {
-            var applicationPath2 = @"C:\Program Files\Scientific Software\ATLASti.23\SSD.ATLASti.Backup.exe";
-            var appOptions2 = new AppiumOptions();
-            appOptions2.AddAdditionalCapability("app", applicationPath2);
-            appOptions2.AddAdditionalCapability("deviceName", "WindowsPC");
-
-             driver2 = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4725"), appOptions2);
-            // Perform automation for the second application
-
-        }
-
-        
-       // [OneTimeTearDown]
+        // [OneTimeTearDown]
         public static void ClassCleanup()
         {
 
@@ -259,6 +166,7 @@ Assert.IsTrue(switchResult);
         }
         **/
         
+        /**
                 
                 [Test]
 
@@ -295,7 +203,7 @@ Assert.IsTrue(switchResult);
                     installer.InstallATLASti(installerPath, major);
                 }
                 
-                
+                **/
 
         /**
 
@@ -334,21 +242,30 @@ Assert.IsTrue(switchResult);
 
         }**/
         
-        /**
+        
         [Test]
 
         public void TestMethod2()
         {
             string appPath = @"C:\Program Files\Scientific Software\ATLASti.23\Atlasti23.exe";
 
-            ClassInitialize(appPath, "ATLAS.ti");
+
+            _driver = systemActions.ClassInitialize(appPath);
+
+
+
             App appControl = new App(_driver);
             ApplicationActions appActions = new ApplicationActions(appControl);
             appActions.OpenProject("C&H II + hierarchy");
            appActions.RaiseException();
 
+            // Wait for 20 second before trying again
+            Thread.Sleep(20000);
 
-            ClassInitialize(appPath, "ATLAS.ti");
+
+            _driver = systemActions.ClassInitialize(appPath);
+
+
             appControl = new App(_driver);
             appActions = new ApplicationActions(appControl);
             var welcomeWindow = appControl.GetWelcomeControl();
@@ -356,8 +273,14 @@ Assert.IsTrue(switchResult);
             bool crashState = welcomeWindow.HasAtlasCrashed(TimeSpan.FromSeconds(60));
             Assert.IsTrue(crashState);
 
+
+            CrashReportDialog crashReportDialog = new CrashReportDialog(_driver);
+            crashReportDialog.EnterEmail("yassine.mahfoudh@atlasti.com");
+            crashReportDialog.EnterProblemDescription("QA Test Ignore");
+            crashReportDialog.ClickSendErrorButton();
+
         }
-        **/
+        
 
     }
 }

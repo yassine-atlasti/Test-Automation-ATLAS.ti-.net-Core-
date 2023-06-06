@@ -4,6 +4,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Support.UI;
+using TextCopy;
 
 namespace Test_Automation_Core.ATLAS.ti.UIElements.Dialogs
 
@@ -22,8 +23,17 @@ namespace Test_Automation_Core.ATLAS.ti.UIElements.Dialogs
         public void EnterProblemDescription(string problemDescription)
         {
             WindowsElement problemDescriptionTextField = driver.FindElementByAccessibilityId("DescriptionTextField");
+
             problemDescriptionTextField.Click();
-            problemDescriptionTextField.SendKeys(problemDescription);
+           
+            ClipboardService.SetText(problemDescription);
+
+            // Create a new Actions object
+            OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+
+            Thread.Sleep(1000);
+
+            action.SendKeys(Keys.Control + "v").KeyUp(Keys.Control).Perform();
         }
 
         public void EnterEmail(string email)
@@ -31,7 +41,15 @@ namespace Test_Automation_Core.ATLAS.ti.UIElements.Dialogs
             WindowsElement emailTextField = driver.FindElementByAccessibilityId("EmailTextField");
             emailTextField.Click();
             emailTextField.Clear();
-            emailTextField.SendKeys(email);
+
+            ClipboardService.SetText(email);
+
+            // Create a new Actions object
+            OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+
+            Thread.Sleep(1000);
+
+            action.SendKeys(Keys.Control + "v").KeyUp(Keys.Control).Perform();
         }
 
         public void ClickSendErrorButton()

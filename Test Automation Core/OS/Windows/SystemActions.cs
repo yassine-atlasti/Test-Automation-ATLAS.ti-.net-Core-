@@ -14,6 +14,7 @@ using NUnit.Framework.Internal;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Net.Sockets;
 using System.Net.Http.Headers;
+using OpenQA.Selenium.Appium;
 
 namespace Test_Automation_Core.OS.Windows
 {
@@ -22,14 +23,100 @@ namespace Test_Automation_Core.OS.Windows
     public class SystemActions
     {
 
-        WindowsDriver<WindowsElement> driver;
+       public WindowsDriver<WindowsElement> driver;
         public SystemActions() { }
 
-        public SystemActions(WindowsDriver<WindowsElement> driver) { this.driver = driver; }
 
         private const int MaxRetries = 5;
 
-        
+
+        public WindowsDriver<WindowsElement> ClassInitialize(string appPath)
+        {
+            string applicationPath = appPath;
+
+            //If the driver should not be assigned to Root Window of the OS then do following
+
+            if (appPath != "Root") { 
+
+            string applicationName = Path.GetFileNameWithoutExtension(applicationPath);
+
+
+            // Check if the application is already running
+            Process[] processes = Process.GetProcessesByName(applicationName);
+
+            Process process;
+            if (processes.Length == 0)
+            {
+                // If the application is not running, start it
+                var processStartInfo = new ProcessStartInfo
+                {
+                    FileName = applicationPath,
+                    UseShellExecute = true,
+                    WindowStyle = ProcessWindowStyle.Normal
+                };
+
+                process = Process.Start(processStartInfo);
+
+                // Wait for application to open
+                int maxWaitTimeInMilliseconds = 30000;
+                int intervalInMilliseconds = 500;
+                int elapsedWaitTimeInMilliseconds = 0;
+                while (elapsedWaitTimeInMilliseconds < maxWaitTimeInMilliseconds)
+                {
+                    processes = Process.GetProcessesByName(applicationName);
+                    if (processes.Length > 0)
+                    {
+                        process = processes[0];
+                        break;
+                    }
+                    System.Threading.Thread.Sleep(intervalInMilliseconds);
+                    elapsedWaitTimeInMilliseconds += intervalInMilliseconds;
+                }
+            }
+            else
+            {
+                // If the application is already running, attach to the first instance
+                process = processes[0];
+            }
+
+
+            }
+            // Now initialize the WindowsDriver
+            AppiumOptions appOptions = new AppiumOptions();
+            appOptions.AddAdditionalCapability("app", applicationPath);
+            appOptions.AddAdditionalCapability("deviceName", "WindowsPC");
+
+
+
+            WindowsDriver<WindowsElement> driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appOptions);
+             return driver;
+
+        }
+
+
+
+
+
+
+        /**
+        public void InitializeWindowsDriver()
+        {
+
+            // Set the desired capabilities for the application
+            AppiumOptions options = new AppiumOptions();
+            options.AddAdditionalCapability("app", "Root");
+            options.AddAdditionalCapability("deviceName", "WindowsPC");
+
+            driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), options);
+
+
+
+
+        }
+
+        **/
+
+
         public async Task DownloadFileAsync(string url, string fileName, int maxRetries = 3)
         {
             // Create HttpClient to send HTTP requests
@@ -338,6 +425,8 @@ namespace Test_Automation_Core.OS.Windows
             window.SendKeys(Keys.Alt + "F4");
           
         }
+
+        
 
 
 
