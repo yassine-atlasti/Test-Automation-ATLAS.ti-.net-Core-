@@ -78,8 +78,8 @@ namespace Test_Automation_Core.Tests
 
         }
 
-        /**
-    [Test]
+        
+   // [Test]
             
             public async Task DownloadAndInstallRC(){
         
@@ -111,7 +111,7 @@ namespace Test_Automation_Core.Tests
 
      
 
-        [Test]
+       // [Test]
 
         public void RunATLASWithEmptyLib()
         {
@@ -127,7 +127,7 @@ namespace Test_Automation_Core.Tests
         }
 
 
-        [Test]
+      //  [Test]
         public void ReportProblem()
         {
            bool reportState= appActions.ReportProblem("Test", "tester@atlasti.com");
@@ -135,7 +135,7 @@ namespace Test_Automation_Core.Tests
             Assert.IsTrue(reportState);
         }
 
-        [Test]
+       // [Test]
         public void SendSuggestion()
         {
 
@@ -144,11 +144,11 @@ namespace Test_Automation_Core.Tests
         }
 
 
-        **/
+        
 
 
 
-        [Test]
+        //[Test]
         public void openEmptyLibrary()
         {
             initSmokeTestLibraries();

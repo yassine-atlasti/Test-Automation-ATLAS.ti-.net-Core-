@@ -23,12 +23,16 @@ namespace Test_Automation_Core.Tests
     public class NUnitTestClass
     {
         private static WindowsDriver<WindowsElement> _driver;
-        private static WindowsDriver<WindowsElement> driver2;
+        App appControl;
+        ApplicationActions appActions;
+        WelcomeWindow welcomeWindow;
+        string major = "23";
+
         SystemActions systemActions = new SystemActions();
         // [OneTimeSetUp]
 
 
-        /**
+        
            public void initBackUpApp()
            {
                var applicationPath2 = @"C:\Program Files\Scientific Software\ATLASti.23\SSD.ATLASti.Backup.exe";
@@ -36,11 +40,22 @@ namespace Test_Automation_Core.Tests
                appOptions2.AddAdditionalCapability("app", applicationPath2);
                appOptions2.AddAdditionalCapability("deviceName", "WindowsPC");
 
-                driver2 = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4725"), appOptions2);
+                _driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4725"), appOptions2);
                // Perform automation for the second application
 
            }
-        **/
+
+        public void initATLAS()
+        {
+            string appPath = @"C:\Program Files\Scientific Software\ATLASti." + this.major + @"\Atlasti" + this.major + ".exe";
+
+            _driver = systemActions.ClassInitialize(appPath);
+            appControl = new App(_driver);
+            appActions = new ApplicationActions(appControl);
+            welcomeWindow = appControl.GetWelcomeControl();
+
+
+        }
 
 
         // [OneTimeTearDown]
@@ -55,9 +70,9 @@ namespace Test_Automation_Core.Tests
 
 
 
-        /**
+        
         //Testing SendSuggestion Action
-        [Test]
+       // [Test]
         public void TestMethod1()
         {
             App appControl = new App(_driver);
@@ -65,14 +80,14 @@ namespace Test_Automation_Core.Tests
             appActions.ReportProblem("Test", "tester@atlasti.com");
 
         }
-        **/
+        
 
 
-        /**
+        
      
 
         //Testing SwitchLibrary Action
-        [Test]
+      //  [Test]
         public void TestMethod2()
         {
             App appControl = new App(_driver);
@@ -91,20 +106,21 @@ Assert.IsTrue(switchResult);
         public bool ValidateLibSwitch()
         { 
             //Reinitialize WinAppDriver after ATLAS.ti restarts
-            ClassInitialize();
+           // systemActions.ClassInitialize();
+
             App appControl2 = new App(_driver);
             ApplicationActions appActions2 = new ApplicationActions(appControl2);
             bool switchResult = appActions2.ValidateLibSwitch();
             return switchResult;
         }
-        **/
+        
 
         //Test 2
 
-        /**
+        
 
-        [Test]
-        public void TestMethod2()
+       // [Test]
+        public void TestMethod3()
         {
             App appControl = new App(_driver);
             ApplicationActions appActions = new ApplicationActions(appControl);
@@ -115,12 +131,12 @@ Assert.IsTrue(switchResult);
 
         }
 
-        **/
-
-        /**
         
-        [Test]
-        public void TestMethod2()
+
+        
+        
+       // [Test]
+        public void TestMethod4()
         {
             App appControl = new App(_driver);
             ApplicationActions appActions = new ApplicationActions(appControl);
@@ -132,11 +148,11 @@ Assert.IsTrue(switchResult);
             Assert.IsTrue(exportResult);
 
         }
-        **/
+        
 
-        /**
-        [Test]
-        public void TestMethod2()
+        
+        //[Test]
+        public void TestMetho5()
         {
             App appControl = new App(_driver);
             ApplicationActions appActions = new ApplicationActions(appControl);
@@ -149,11 +165,11 @@ Assert.IsTrue(switchResult);
 
             Assert.IsTrue(actual);
 
-        }**/
-        /**
+        }
+        
 
-        [Test]
-        public void TestMethod2()
+        //[Test]
+        public void TestMethod6()
         {
             string folderPath = "C:\\Users\\yassinemahfoudh\\Desktop\\Test1";
             string zipFile = @"\\Mac\Home\Library\CloudStorage\OneDrive-ATLAS.tiScientificSoftwareDevelopmentGmbH\Testing stuff\Test Data\Smoke Tests data\Win\Smoke Test Libraries\SmokeTestLibraryWin(Yanik).zip";
@@ -164,22 +180,25 @@ Assert.IsTrue(switchResult);
         
         
         }
-        **/
         
-        /**
+        
+        
                 
                 [Test]
 
                 public async Task UpdateNightly()
                 {
+            
             //Uninstall ATLAS.ti
-            InitializeWindowsDriver();
+
+           _driver= systemActions.ClassInitialize("Root");
+            systemActions = new SystemActions(_driver);
 
             string appName = @"Control Panel\Programs\Programs and Features\ATLAS.ti 23";
-            SystemActions systemActions = new SystemActions(_driver);
 
 
             systemActions.UninstallApp(appName);
+
 
             //Download 
             string downloadUrl = @"https://cdn.atlasti.com/win/nightly/23-C4E24425-7597-4DB4-BEAC-4C2CFBBB7A7C/develop/Atlasti_Nightly_develop.exe";
@@ -189,64 +208,31 @@ Assert.IsTrue(switchResult);
 
             await systemActions.DownloadFileAsync(downloadUrl, fileName);
 
+
+            // Close all File Explorer Windows and quit Root driver
+            systemActions.CloseAllFileExplorerWindows();
             _driver.Quit();
 
-            //Add code to Close all File Explorer Windows 
-
-
-
+            
             //Install
             string installerPath = downloadPath + "\\" + fileName;
                     string windowName = "Setup - ATLAS.ti " + major;
-                    ClassInitialize(installerPath, windowName);
+                  _driver=  systemActions.ClassInitialize(installerPath);
                     InstallerActions installer= new InstallerActions(_driver);
                     installer.InstallATLASti(installerPath, major);
                 }
                 
-                **/
+                
 
-        /**
+        
 
-        [Test]
-
-        public void TestMethod2()
-        {
-
-
-            //Uninstall ATLAS.ti
-            InitializeWindowsDriver();
-
-            string appName = @"Control Panel\Programs\Programs and Features\ATLAS.ti 23";
-            SystemActions systemActions = new SystemActions(_driver);
-
-
-            systemActions.UninstallApp(appName);
-
-
-            //Install ATLAS.ti
-
-            var majorVersion = "23";
-
-
-              string installerPath = @"C:\Users\yassinemahfoudh\Downloads\Atlasti_Nightly_develop.exe";
-              ClassInitialize(installerPath);
-              InstallerActions installerActions = new InstallerActions(_driver);
-
-              installerActions.InstallATLASti(installerPath, "23");
-
-            _driver.Quit();
-
-            
-
-            
-
-        }**/
+      
         
         
-        /**
-        [Test]
+        
+       // [Test]
 
-        public void TestMethod2()
+        public void TestMethod7()
         {
             string appPath = @"C:\Program Files\Scientific Software\ATLASti.23\Atlasti23.exe";
 
@@ -282,6 +268,6 @@ Assert.IsTrue(switchResult);
 
         }
         
-        **/
+        
     }
 }

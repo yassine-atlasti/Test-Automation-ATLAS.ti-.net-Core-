@@ -26,6 +26,10 @@ namespace Test_Automation_Core.OS.Windows
        public WindowsDriver<WindowsElement> driver;
         public SystemActions() { }
 
+        public SystemActions(WindowsDriver<WindowsElement> driver)
+        {
+            this.driver = driver;
+        }
 
         private const int MaxRetries = 5;
 
@@ -40,6 +44,26 @@ namespace Test_Automation_Core.OS.Windows
 
             string applicationName = Path.GetFileNameWithoutExtension(applicationPath);
 
+                OpenApp(applicationPath, applicationName);
+
+     
+            }
+            // Now initialize the WindowsDriver
+            AppiumOptions appOptions = new AppiumOptions();
+            appOptions.AddAdditionalCapability("app", applicationPath);
+            appOptions.AddAdditionalCapability("deviceName", "WindowsPC");
+
+
+
+            WindowsDriver<WindowsElement> driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appOptions);
+             return driver;
+
+        }
+
+       
+
+        public void OpenApp(string applicationPath,string applicationName)
+        {
 
             // Check if the application is already running
             Process[] processes = Process.GetProcessesByName(applicationName);
@@ -78,25 +102,7 @@ namespace Test_Automation_Core.OS.Windows
                 // If the application is already running, attach to the first instance
                 process = processes[0];
             }
-
-
-            }
-            // Now initialize the WindowsDriver
-            AppiumOptions appOptions = new AppiumOptions();
-            appOptions.AddAdditionalCapability("app", applicationPath);
-            appOptions.AddAdditionalCapability("deviceName", "WindowsPC");
-
-
-
-            WindowsDriver<WindowsElement> driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appOptions);
-             return driver;
-
         }
-
-
-
-
-
 
         /**
         public void InitializeWindowsDriver()
@@ -237,7 +243,7 @@ namespace Test_Automation_Core.OS.Windows
             action.Perform();
 
 
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
 
 
             SetFocusToFileExplorer();
@@ -260,14 +266,21 @@ namespace Test_Automation_Core.OS.Windows
             // Locate the File Explorer window using the appropriate locator
             WindowsElement fileExplorerWindow = driver.FindElementByClassName("CabinetWClass"); // Example locator for File Explorer
 
-            // Get the window handle of the File Explorer window
-            string fileExplorerWindowHandle = fileExplorerWindow.GetAttribute("NativeWindowHandle");
-
-            // Switch the focus to the File Explorer window
-            driver.SwitchTo().Window(fileExplorerWindowHandle);
+            fileExplorerWindow.Click();
         }
 
+        public void CloseAllFileExplorerWindows()
+        {
+            // Locate all File Explorer windows using the appropriate locator
+            IReadOnlyCollection<WindowsElement> fileExplorerWindows = driver.FindElementsByClassName("CabinetWClass"); // Example locator for File Explorer
 
+            // Iterate through the File Explorer windows and close them
+            foreach (var fileExplorerWindow in fileExplorerWindows)
+            {
+                fileExplorerWindow.Click();
+                fileExplorerWindow.SendKeys(Keys.Alt + "F4");
+            }
+        }
 
         //This requires Viusal Studio to run as an admin, find another way to uninstall it , an msi file should make more sense ,or use UI (See InstallerActions.cs)
         public void UninstallAtlas(string majorVersion)
