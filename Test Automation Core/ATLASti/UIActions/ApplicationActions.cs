@@ -313,6 +313,9 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
             // Once confirmation dialog is found, confirm the dialog
             reportProblemDialog.CloseConfirmationDialog();
 
+            // Send the ESC key press to the active window
+            _app.getDriver().Keyboard.SendKeys(Keys.Escape);
+
             return reportState;
 
         }
@@ -355,6 +358,8 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
             // Once confirmation dialog is found, confirm the dialog
             suggestionDialog.CloseConfirmationDialog();
 
+            // Send the ESC key press to the active window
+            _app.getDriver().Keyboard.SendKeys(Keys.Escape);
             return reportState;
         }
 

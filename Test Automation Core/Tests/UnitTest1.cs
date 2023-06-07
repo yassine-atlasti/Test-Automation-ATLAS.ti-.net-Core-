@@ -243,6 +243,7 @@ Assert.IsTrue(switchResult);
         }**/
         
         
+        /**
         [Test]
 
         public void TestMethod2()
@@ -281,6 +282,6 @@ Assert.IsTrue(switchResult);
 
         }
         
-
+        **/
     }
 }

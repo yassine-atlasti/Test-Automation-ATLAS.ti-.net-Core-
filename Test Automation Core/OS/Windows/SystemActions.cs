@@ -301,8 +301,23 @@ namespace Test_Automation_Core.OS.Windows
 
         public void ExtractZip(string zipPath, string extractPath)
         {
-            ZipFile.ExtractToDirectory(zipPath, extractPath);
+            try
+            {
+                ZipFile.ExtractToDirectory(zipPath, extractPath);
+
+            }
+            catch (IOException ex)
+            {
+                // Handle the IOException
+                Console.WriteLine($"An IOException occurred: {ex.Message}");
+                // Perform error handling or other necessary actions
+                // ...
+            }
+
+
+
         }
+
 
         //Empty Bin
 
