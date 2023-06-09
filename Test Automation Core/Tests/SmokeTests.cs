@@ -19,6 +19,9 @@ using Test_Automation_Core.ATLAS.ti.UIElements.Dialogs;
 using NUnit.Framework.Internal;
 using Test_Automation_Core.BackUpApp;
 using System.Drawing;
+using Test_Automation_Core.Data.SmokeTestData;
+using Test_Automation_Core.Data.OneDrive.Libraries;
+using Test_Automation_Core.Data.SUT;
 
 namespace Test_Automation_Core.Tests
 {
@@ -35,40 +38,26 @@ namespace Test_Automation_Core.Tests
         ApplicationActions appActions;
         WelcomeWindow welcomeWindow;
 
-        //Variables needs to be saved in an external csv or excel file
-        string major = "23";
-        string vut = "23.2.0";
-        string library1;
-        string library2;
-        string library3;
-        string smokeTestFolder;
-
+        
         //BackUpApp
         BackUpActions backUpActions;
 
         //Should maybe go to SmokeTest Data
-        public void initSmokeTestLibraries()
+        public void initSmokeTest()
         {
-             smokeTestFolder = "SmokeTest_" + vut;
+            //Add Method that automatically updates AtlastiVariables (need to be implemented)
 
-            systemActions.CreateFolder(smokeTestFolder);
+            //Create Smoke Test Folder
 
+            systemActions.CreateFolder(SmokeTestVariables.smokeTestFolder);
 
-            string smokeTestFolderPath = "C:\\Users\\yassinemahfoudh\\Desktop\\"+smokeTestFolder;
+            //Extract Libraries
 
-            string emptyA22Library = @"\\Mac\Home\Library\CloudStorage\OneDrive-ATLAS.tiScientificSoftwareDevelopmentGmbH\Testing stuff\Test Data\Smoke Tests data\Win\Smoke Test Libraries\emptyWinA22library.zip";
-            string libraryYanik = @"\\Mac\Home\Library\CloudStorage\OneDrive-ATLAS.tiScientificSoftwareDevelopmentGmbH\Testing stuff\Test Data\Smoke Tests data\Win\Smoke Test Libraries\SmokeTestLibraryWin(Yanik).zip";
-            string libraryCH = @"\\Mac\Home\Library\CloudStorage\OneDrive-ATLAS.tiScientificSoftwareDevelopmentGmbH\Testing stuff\Test Data\Smoke Tests data\Win\Smoke Test Libraries\Win-SmokeTestLibraryContainingC&H+hierarchy.zip";
-         
+            systemActions.ExtractZip(SmokeTestLibraries.library1, SmokeTestVariables.smokeTestFolderPath);
 
-            systemActions.ExtractZip(emptyA22Library, smokeTestFolderPath);
-            library1 = smokeTestFolderPath + @"\emptyWinA22library";
+            systemActions.ExtractZip(SmokeTestLibraries.library2, SmokeTestVariables.smokeTestFolderPath);
 
-            systemActions.ExtractZip(libraryYanik, smokeTestFolderPath);
-            library2 = smokeTestFolderPath + @"\ATLASti.8";
-
-            systemActions.ExtractZip(libraryCH, smokeTestFolderPath);
-            library3 = smokeTestFolderPath + @"\Win-SmokeTestLibraryContainingC&H+hierarchy\ATLASti.22";
+            systemActions.ExtractZip(SmokeTestLibraries.library3, SmokeTestVariables.smokeTestFolderPath);
 
            
 
@@ -78,9 +67,8 @@ namespace Test_Automation_Core.Tests
         
         public void initATLAS()
         {
-            string appPath = @"C:\Program Files\Scientific Software\ATLASti." + this.major + @"\Atlasti" + this.major + ".exe";
 
-            _driver = systemActions.ClassInitialize(appPath);
+            _driver = systemActions.ClassInitialize(AtlasVariables.appPath);
             systemActions= new SystemActions(_driver);
             appControl= new App(_driver);
         appActions = new ApplicationActions(appControl);
@@ -89,10 +77,9 @@ namespace Test_Automation_Core.Tests
 
         }
 
-        public void initBackUpApp()
+        public  void initBackUpApp()
         {
-            var applicationPath2 = @"C:\Program Files\Scientific Software\ATLASti.23\SSD.ATLASti.Backup.exe";
-           _driver= systemActions.ClassInitialize(applicationPath2);
+           _driver= systemActions.ClassInitialize(AtlasVariables.backUpPath);
             systemActions = new SystemActions(_driver);
             backUpActions = new BackUpActions(_driver);
 
@@ -108,9 +95,9 @@ namespace Test_Automation_Core.Tests
             
 
             //Download 
-            string downloadUrl = @"https://cdn.atlasti.com/win/" + this.major +  "/Atlasti_" + this.vut + ".exe" ;
+            string downloadUrl = @"https://cdn.atlasti.com/win/" + AtlasVariables.winVUT +  "/Atlasti_" + AtlasVariables.winVUT + ".exe" ;
             string downloadPath = @"C:\Users\yassinemahfoudh\Downloads";
-            string fileName = "Atlasti_"+this.vut +".exe";
+            string fileName = "Atlasti_"+AtlasVariables.winVUT +".exe";
 
             await systemActions.DownloadFileAsync(downloadUrl, fileName);
 
@@ -120,12 +107,12 @@ namespace Test_Automation_Core.Tests
 
             //Install
             string installerPath = downloadPath + "\\" + fileName;
-            string windowName = "Setup - ATLAS.ti " + major;
+            string windowName = "Setup - ATLAS.ti " + AtlasVariables.major;
 
             _driver = systemActions.ClassInitialize(installerPath);
 
             InstallerActions installer = new InstallerActions(_driver);
-            installer.InstallATLASti(installerPath, major);
+            installer.InstallATLASti(installerPath, AtlasVariables.major);
         }
 
      
@@ -170,10 +157,11 @@ namespace Test_Automation_Core.Tests
         //[Test]
         public void openEmptyLibrary()
         {
-            initSmokeTestLibraries();
+            initSmokeTest();
             initATLAS();
 
-            appActions.SwitchLibrary(library2);
+            //Open ATLAS.ti with empty A22 Library
+            appActions.SwitchLibrary(SmokeTestVariables.library1Extracted);
 
             // Wait for 20 second for Library Switch
             Thread.Sleep(20000);
@@ -187,21 +175,19 @@ namespace Test_Automation_Core.Tests
 
         }
 
-        [Test]
+       // [Test]
         public void TestBackUp()
         { 
-            //Variables need to be stored in an excel or csv file
-            string backUp = vut + "_BackUp_" + System.DateTime.Now.Second.ToString();
-            string projectName = "C&H II + hierarchy2";
+            string backUp = AtlasVariables.winVUT + "_BackUp_" + System.DateTime.Now.Second.ToString();
 
             initATLAS();
-             // _driver.Quit();
+
               initBackUpApp();
 
               bool warningTrue = backUpActions.CheckWarning();
               Assert.IsTrue(warningTrue);
              
-              systemActions.KillProcessByName("Atlasti" + major);
+              systemActions.KillProcessByName("Atlasti" + AtlasVariables.major);
               systemActions.KillProcessByName("SSD.ATLASti.Backup");
 
               initBackUpApp();
@@ -212,13 +198,13 @@ namespace Test_Automation_Core.Tests
               }
 
               
-              bool backUpState=backUpActions.CreateBackUp("C:\\Users\\yassinemahfoudh\\Desktop\\SmokeTest_" + vut,backUp );
+              bool backUpState=backUpActions.CreateBackUp("C:\\Users\\yassinemahfoudh\\Desktop\\SmokeTest_" + AtlasVariables.winVUT,backUp );
              Assert.IsTrue(backUpState);
               systemActions.KillProcessByName("SSD.ATLASti.Backup");
               
             initATLAS();
-            appActions.DeleteProject(projectName);
-            systemActions.KillProcessByName("Atlasti" + major);
+            appActions.DeleteProject(SmokeTestVariables.smokeTestproject);
+            systemActions.KillProcessByName("Atlasti" + AtlasVariables.major);
             
 
             initBackUpApp();
@@ -227,7 +213,7 @@ namespace Test_Automation_Core.Tests
             systemActions.KillProcessByName("SSD.ATLASti.Backup");
 
             initATLAS();
-            bool projectRestored = appActions.OpenProject(projectName);
+            bool projectRestored = appActions.OpenProject(SmokeTestVariables.smokeTestproject);
             Assert.IsTrue(projectRestored);
 
 

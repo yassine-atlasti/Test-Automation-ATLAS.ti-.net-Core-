@@ -454,8 +454,14 @@ namespace Test_Automation_Core.OS.Windows
           
         }
 
-        
 
+
+        //Search the file in Folder and return the file path
+        public static string getFilePath(string folder, string fileName)
+        {
+
+            return Path.Combine(folder, fileName);
+        }
 
 
     }

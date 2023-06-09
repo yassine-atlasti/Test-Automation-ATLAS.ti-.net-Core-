@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\SmokeTestData\" />
     <Folder Include="ATLASti\UIElements\Wizards\Images\" />
   </ItemGroup>
 
