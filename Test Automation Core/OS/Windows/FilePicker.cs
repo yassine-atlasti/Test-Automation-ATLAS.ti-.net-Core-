@@ -40,7 +40,8 @@ namespace Test_Automation_Core.OS.Windows
 
             Thread.Sleep(1000);
 
-            // If the address bar is automatically selected, then paste the clipboard content 
+            action.SendKeys(Keys.Alt + "n").KeyUp(Keys.Alt).Perform();
+
             action.SendKeys(Keys.Control + "v").KeyUp(Keys.Control).Perform();
 
         }

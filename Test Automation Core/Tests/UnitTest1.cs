@@ -184,7 +184,7 @@ Assert.IsTrue(switchResult);
         
         
                 
-                [Test]
+              //  [Test]
 
                 public async Task UpdateNightly()
                 {

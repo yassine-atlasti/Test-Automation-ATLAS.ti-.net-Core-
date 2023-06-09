@@ -277,6 +277,33 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
 
             return closeState;
         }
+
+        public void DeleteProject(string projectName) {
+
+            var welcomeWindow = _app.GetWelcomeControl();
+            var projectWindow = _app.GetProjectWindow();
+
+            if (welcomeWindow.IsWelcomeWindowDisplayed() == false)
+            {
+                CloseProject();
+
+            }
+
+            welcomeWindow.SelectProjectContextMenuOption(projectName, "Delete");
+            //Confirm Delete in Dialog
+            _app.getDriver().FindElementByTagName("Button").FindElementByName("Delete").Click();
+            
+            //Wait 2 second to ensure that the project is deleted
+            Thread.Sleep(2000);
+
+            //Check if project is deleted
+
+
+        }
+
+
+
+
         public bool ReportProblem(string description, string email)
         {
             ReportProblemDialog reportProblemDialog;

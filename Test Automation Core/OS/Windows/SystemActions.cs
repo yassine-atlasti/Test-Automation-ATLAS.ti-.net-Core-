@@ -40,7 +40,7 @@ namespace Test_Automation_Core.OS.Windows
 
             //If the driver should not be assigned to Root Window of the OS then do following
 
-            if (appPath != "Root") { 
+            if (appPath == @"C:\Program Files\Scientific Software\ATLASti." + 23 + @"\Atlasti" + 23 + ".exe"  ) { 
 
             string applicationName = Path.GetFileNameWithoutExtension(applicationPath);
 

@@ -147,9 +147,19 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
         }
         public void RightClickProject(string projectName)
         {
-            //to implement
+            SearchProject(projectName);
 
-           
+            var projectList = driver.FindElementByTagName("List");
+
+            var project = projectList.FindElementByName(projectName);
+
+            // Create an Actions object
+            OpenQA.Selenium.Interactions.Actions actions = new OpenQA.Selenium.Interactions.Actions(driver);
+
+            // Double click the element
+            actions.ContextClick(project).Perform();
+
+
 
         }
 
@@ -158,13 +168,8 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
 
         public void SelectProjectContextMenuOption(string projectName, string menuOption)
         {
-            SearchProject(projectName);
-
             RightClickProject(projectName);
-
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Name(menuOption)));
-
+            Thread.Sleep(1000);
             driver.FindElementByName(menuOption).Click();
         }
         // Add methods to handle the resulting actions or dialogs from the context-menu options as needed.

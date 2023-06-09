@@ -17,29 +17,39 @@ using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Test_Automation_Core.ATLAS.ti.UIActions;
 using Test_Automation_Core.ATLAS.ti.UIElements.Dialogs;
 using NUnit.Framework.Internal;
+using Test_Automation_Core.BackUpApp;
+using System.Drawing;
 
 namespace Test_Automation_Core.Tests
 {
     [TestFixture]
     public class SmokeTestClass
     {
+        //General
         private static WindowsDriver<WindowsElement> _driver;
-        SystemActions systemActions = new SystemActions();
+        SystemActions systemActions=new SystemActions();
+
+
+        //ATLAS.ti
         App appControl;
         ApplicationActions appActions;
         WelcomeWindow welcomeWindow;
+
+        //Variables needs to be saved in an external csv or excel file
         string major = "23";
         string vut = "23.2.0";
         string library1;
         string library2;
         string library3;
+        string smokeTestFolder;
 
-
+        //BackUpApp
+        BackUpActions backUpActions;
 
         //Should maybe go to SmokeTest Data
         public void initSmokeTestLibraries()
         {
-            string smokeTestFolder = "SmokeTest_" + vut;
+             smokeTestFolder = "SmokeTest_" + vut;
 
             systemActions.CreateFolder(smokeTestFolder);
 
@@ -66,11 +76,12 @@ namespace Test_Automation_Core.Tests
         }
 
         
-        public void initRC()
+        public void initATLAS()
         {
             string appPath = @"C:\Program Files\Scientific Software\ATLASti." + this.major + @"\Atlasti" + this.major + ".exe";
 
             _driver = systemActions.ClassInitialize(appPath);
+            systemActions= new SystemActions(_driver);
             appControl= new App(_driver);
         appActions = new ApplicationActions(appControl);
         welcomeWindow = appControl.GetWelcomeControl();
@@ -78,10 +89,18 @@ namespace Test_Automation_Core.Tests
 
         }
 
-        
-   // [Test]
-            
-            public async Task DownloadAndInstallRC(){
+        public void initBackUpApp()
+        {
+            var applicationPath2 = @"C:\Program Files\Scientific Software\ATLASti.23\SSD.ATLASti.Backup.exe";
+           _driver= systemActions.ClassInitialize(applicationPath2);
+            systemActions = new SystemActions(_driver);
+            backUpActions = new BackUpActions(_driver);
+
+
+        }
+        // [Test]
+
+        public async Task DownloadAndInstallRC(){
         
 
           _driver=  systemActions.ClassInitialize("Root");
@@ -115,7 +134,7 @@ namespace Test_Automation_Core.Tests
 
         public void RunATLASWithEmptyLib()
         {
-           initRC();
+           initATLAS();
 
             bool crashState = welcomeWindow.HasAtlasCrashed(TimeSpan.FromSeconds(60));
          
@@ -152,14 +171,14 @@ namespace Test_Automation_Core.Tests
         public void openEmptyLibrary()
         {
             initSmokeTestLibraries();
-            initRC();
+            initATLAS();
 
             appActions.SwitchLibrary(library2);
 
             // Wait for 20 second for Library Switch
             Thread.Sleep(20000);
 
-            initRC();
+            initATLAS();
 
             bool crashState = welcomeWindow.HasAtlasCrashed(TimeSpan.FromSeconds(60));
 
@@ -167,6 +186,58 @@ namespace Test_Automation_Core.Tests
 
 
         }
+
+        [Test]
+        public void TestBackUp()
+        { 
+            //Variables need to be stored in an excel or csv file
+            string backUp = vut + "_BackUp_" + System.DateTime.Now.Second.ToString();
+            string projectName = "C&H II + hierarchy2";
+
+            initATLAS();
+             // _driver.Quit();
+              initBackUpApp();
+
+              bool warningTrue = backUpActions.CheckWarning();
+              Assert.IsTrue(warningTrue);
+             
+              systemActions.KillProcessByName("Atlasti" + major);
+              systemActions.KillProcessByName("SSD.ATLASti.Backup");
+
+              initBackUpApp();
+
+              if(backUpActions.CheckWarning()) {
+                  Thread.Sleep(2000);
+
+              }
+
+              
+              bool backUpState=backUpActions.CreateBackUp("C:\\Users\\yassinemahfoudh\\Desktop\\SmokeTest_" + vut,backUp );
+             Assert.IsTrue(backUpState);
+              systemActions.KillProcessByName("SSD.ATLASti.Backup");
+              
+            initATLAS();
+            appActions.DeleteProject(projectName);
+            systemActions.KillProcessByName("Atlasti" + major);
+            
+
+            initBackUpApp();
+            bool restoreState=backUpActions.RestoreLibrary(backUp);
+            Assert.IsTrue(restoreState);
+            systemActions.KillProcessByName("SSD.ATLASti.Backup");
+
+            initATLAS();
+            bool projectRestored = appActions.OpenProject(projectName);
+            Assert.IsTrue(projectRestored);
+
+
+        }
+
+
+
+
+
+
 
 
     }
