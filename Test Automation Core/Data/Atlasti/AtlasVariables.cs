@@ -10,22 +10,22 @@ namespace Test_Automation_Core.Data.SUT
     {
        
 
-        public  static readonly string major = "23";
+        public  static string major = "23";
 
-       public static readonly string winVUT = "23.2.0";
-        public static readonly string macVUT = "";
+       public static  string winVUT = "23.2.0";
+        public static string macVUT = "";
 
-        public static readonly string winProduction = "";
-        public static readonly string  macProduction = "";
-
-
-        public static readonly string winPreviousMajor = "";
-        public static readonly string macPreviousMajor = "";
+        public static  string winProduction = "";
+        public static  string  macProduction = "";
 
 
-       public  static readonly string appPath = @"C:\Program Files\Scientific Software\ATLASti." + major + @"\Atlasti" + major + ".exe";
+        public static string winPreviousMajor = "";
+        public static string macPreviousMajor = "";
 
-        public static readonly string backUpPath = @"C:\Program Files\Scientific Software\ATLASti." + major + @"\SSD.ATLASti.Backup.exe";
+
+       public  static   string appPath = @"C:\Program Files\Scientific Software\ATLASti." + major + @"\Atlasti" + major + ".exe";
+
+        public static  string backUpPath = @"C:\Program Files\Scientific Software\ATLASti." + major + @"\SSD.ATLASti.Backup.exe";
 
 
        
