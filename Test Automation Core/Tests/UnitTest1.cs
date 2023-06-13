@@ -188,7 +188,7 @@ Assert.IsTrue(switchResult);
 
                 public async Task UpdateNightly()
                {
-            /**
+            
             //Uninstall ATLAS.ti
 
            _driver= systemActions.ClassInitialize("Root");
@@ -198,7 +198,7 @@ Assert.IsTrue(switchResult);
 
 
             systemActions.UninstallApp(appName);
-         **/
+         
 
             //Download 
             string downloadUrl = @"https://cdn.atlasti.com/win/nightly/23-C4E24425-7597-4DB4-BEAC-4C2CFBBB7A7C/develop/Atlasti_Nightly_develop.exe";
@@ -206,12 +206,12 @@ Assert.IsTrue(switchResult);
                     string downloadPath = @"C:\Users\yassinemahfoudh\Downloads";
                     string fileName = "Atlasti_Nightly_develop.exe";
 
-            /**     await systemActions.DownloadFileAsync(downloadUrl, fileName);
+                 await systemActions.DownloadFileAsync(downloadUrl, fileName);
 
 
                  // Close all File Explorer Windows and quit Root driver
                  systemActions.CloseAllFileExplorerWindows();
-                 _driver.Quit();**/
+                 _driver.Quit();
 
             //Install
             string installerPath = downloadPath + "\\" + fileName;
