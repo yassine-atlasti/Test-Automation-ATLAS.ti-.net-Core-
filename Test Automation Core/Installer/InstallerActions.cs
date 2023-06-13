@@ -32,10 +32,12 @@ namespace Test_Automation_Core.Installer
 
             if (installerState) {
                 //Add 1 second sleep between each page change in the Installer Wizard
+                string windowName = $"Setup - ATLAS.ti {majorVersion}";
+                 var window = driver.FindElementByTagName("Window").FindElementByName(windowName);
 
-                var window = driver.FindElementByTagName("Window").FindElementByName($"Setup - ATLAS.ti {majorVersion}");
+             
 
-            window.FindElementByName("Next").Click();
+                window.FindElementByName("Next").Click();
                 
                 Thread.Sleep(1000);
 

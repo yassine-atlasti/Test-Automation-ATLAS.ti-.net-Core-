@@ -24,7 +24,7 @@ namespace Test_Automation_Core.Data.SmokeTestData
 
         //Libraries  Names used for Smoke Tests
         public static readonly string library1="emptyWinA22library";
-        public static readonly string library2 = "SmokeTestLibraryWin(Yanik)";
+        public static readonly string library2 = "Atlasti8";
         public static readonly string library3 = "Win-SmokeTestLibraryContainingC&H+hierarchy";
 
 

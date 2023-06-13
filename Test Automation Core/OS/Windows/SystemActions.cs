@@ -15,6 +15,9 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Net.Sockets;
 using System.Net.Http.Headers;
 using OpenQA.Selenium.Appium;
+using Test_Automation_Core.Data.SUT;
+using Microsoft.VisualStudio.TestPlatform.TestHost;
+using static System.Net.WebRequestMethods;
 
 namespace Test_Automation_Core.OS.Windows
 {
@@ -135,9 +138,9 @@ namespace Test_Automation_Core.OS.Windows
             var filePath = Path.Combine(downloadFolder, fileName);
 
             // If the file already exists, delete it before starting the download.
-            if (File.Exists(filePath))
+            if (System.IO.File.Exists(filePath))
             {
-                File.Delete(filePath);
+                System.IO.File.Delete(filePath);
             }
 
             // Initialize retry counter
@@ -149,7 +152,7 @@ namespace Test_Automation_Core.OS.Windows
                 try
                 {
                     // Determine the total bytes received to know if we're resuming a download or starting fresh
-                    long totalBytes = File.Exists(filePath) ? new FileInfo(filePath).Length : 0;
+                    long totalBytes = System.IO.File.Exists(filePath) ? new FileInfo(filePath).Length : 0;
 
                     // Prepare the HTTP request message
                     using var request = new HttpRequestMessage { RequestUri = new Uri(url), Method = HttpMethod.Get };
@@ -220,44 +223,56 @@ namespace Test_Automation_Core.OS.Windows
 
         public void UninstallApp( string uninstallPath)
         {
-
-            ClipboardService.SetText(uninstallPath);
-            System.Threading.Thread.Sleep(1000);
-
-
-            // Launch the 'Add or Remove Programs' window
-
-            // Create an instance of Actions class
-            var action = new OpenQA.Selenium.Interactions.Actions(driver);
-
-            // Press Win key
-            action.KeyDown(Keys.Meta);
-
-            // Press R key
-            action.SendKeys("e");
-
-            // Release Win key
-            action.KeyUp(Keys.Meta);
-
-            // Perform the action
-            action.Perform();
+            if (Directory.Exists(AtlasVariables.installationPath))
+            {
+                ClipboardService.SetText(uninstallPath);
+                System.Threading.Thread.Sleep(1000);
 
 
-            Thread.Sleep(2000);
+                // Launch the 'Add or Remove Programs' window
+
+                // Create an instance of Actions class
+                var action = new OpenQA.Selenium.Interactions.Actions(driver);
+
+                // Press Win key
+                action.KeyDown(Keys.Meta);
+
+                // Press E key
+                action.SendKeys("e");
+
+                // Release Win key
+                action.KeyUp(Keys.Meta);
+
+                // Perform the action
+                action.Perform();
 
 
-            SetFocusToFileExplorer();
-
-            // Use CTRL+L to focus on the address bar, then paste the clipboard content 
-            action.KeyDown(Keys.Control).SendKeys("l").KeyUp(Keys.Control).SendKeys(Keys.Control + "v").KeyUp(Keys.Control).SendKeys(Keys.Enter).Perform();
-
-            //Wait for app to uninstall
-            Thread.Sleep(90000);
+                Thread.Sleep(2000);
 
 
+                SetFocusToFileExplorer();
+
+                // Use CTRL+L to focus on the address bar, then paste the clipboard content 
+                action.KeyDown(Keys.Control).SendKeys("l").KeyUp(Keys.Control).SendKeys(Keys.Control + "v").KeyUp(Keys.Control).SendKeys(Keys.Enter).Perform();
+
+                //Wait for app to uninstall
+                Thread.Sleep(90000);
+            }
 
 
 
+
+
+
+        }
+
+        public void MinimizeAllWindows(WindowsDriver<WindowsElement> driver)
+        {
+            // Create an instance of the Actions class
+            var actions = new OpenQA.Selenium.Interactions.Actions(driver);
+
+            // Press the Windows key + D key combination
+            actions.KeyDown(Keys.Meta).SendKeys("d").KeyUp(Keys.Meta).Perform();
         }
         public void SetFocusToFileExplorer()
         {

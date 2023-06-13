@@ -10,7 +10,7 @@ namespace Test_Automation_Core.Data.SUT
     {
        
 
-        public  static string major = "23";
+        public static string major = "23";
 
        public static  string winVUT = "23.2.0";
         public static string macVUT = "";
@@ -21,7 +21,7 @@ namespace Test_Automation_Core.Data.SUT
 
         public static string winPreviousMajor = "";
         public static string macPreviousMajor = "";
-
+        public static string installationPath = @"C:\Program Files\Scientific Software\ATLASti." + major;
 
        public  static   string appPath = @"C:\Program Files\Scientific Software\ATLASti." + major + @"\Atlasti" + major + ".exe";
 
@@ -30,6 +30,9 @@ namespace Test_Automation_Core.Data.SUT
 
        
 
-
+         AtlasVariables() {
+            //update
+            //major = "";
+            }
     }
 }

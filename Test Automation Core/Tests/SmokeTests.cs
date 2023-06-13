@@ -65,7 +65,7 @@ namespace Test_Automation_Core.Tests
         }
 
         
-        public void initATLAS()
+        public  void initATLAS()
         {
 
             _driver = systemActions.ClassInitialize(AtlasVariables.appPath);
