@@ -27,7 +27,18 @@ namespace Test_Automation_Core.UIElements.Dialogs
 
             var projectBox = driver.FindElementByAccessibilityId("NewProjectNameBox");
             projectBox.Clear();
-            projectBox.SendKeys(projectName);
+
+
+            projectBox.Click();
+
+            ClipboardService.SetText(projectName);
+
+            // Create a new Actions object
+            OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+
+            Thread.Sleep(1000);
+
+            action.SendKeys(Keys.Control + "v").KeyUp(Keys.Control).Perform();
         }
 
 

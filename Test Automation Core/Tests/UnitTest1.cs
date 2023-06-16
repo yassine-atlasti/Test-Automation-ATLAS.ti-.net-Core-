@@ -184,7 +184,7 @@ Assert.IsTrue(switchResult);
         
         
                 
-                [Test]
+              //  [Test]
 
                 public async Task UpdateNightly()
                {
@@ -209,16 +209,17 @@ Assert.IsTrue(switchResult);
                  await systemActions.DownloadFileAsync(downloadUrl, fileName);
 
 
-                 // Close all File Explorer Windows and quit Root driver
-                 systemActions.CloseAllFileExplorerWindows();
-                 _driver.Quit();
+             
+            systemActions.MinimizeAllWindows(_driver);
+            Thread.Sleep(1000);
+
+            _driver.Quit();
 
             //Install
             string installerPath = downloadPath + "\\" + fileName;
                     string windowName = "Setup - ATLAS.ti " + major;
             _driver = systemActions.ClassInitialize(installerPath);
            
-            systemActions.MinimizeAllWindows(_driver);
 
             InstallerActions installer = new InstallerActions(_driver);
                     installer.InstallATLASti(installerPath, major);

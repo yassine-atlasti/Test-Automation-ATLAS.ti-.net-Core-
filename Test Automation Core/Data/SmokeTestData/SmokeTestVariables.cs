@@ -10,6 +10,8 @@ namespace Test_Automation_Core.Data.SmokeTestData
     public  class SmokeTestVariables
     {
         //OS Versions Used for Smoke Tests
+        public static readonly string actualOS = "Windows 11";
+
         public static readonly string actualWinOS = "Windows 11";
         public static readonly string previousWinOS = "Windows 10";
 

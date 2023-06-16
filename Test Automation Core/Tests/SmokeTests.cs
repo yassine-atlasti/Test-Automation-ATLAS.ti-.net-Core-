@@ -22,6 +22,7 @@ using System.Drawing;
 using Test_Automation_Core.Data.SmokeTestData;
 using Test_Automation_Core.Data.OneDrive.Libraries;
 using Test_Automation_Core.Data.SUT;
+using Test_Automation_Core.Data.OneDrive.Projects;
 
 namespace Test_Automation_Core.Tests
 {
@@ -64,7 +65,7 @@ namespace Test_Automation_Core.Tests
 
         }
 
-        
+        [OneTimeSetUp]
         public  void initATLAS()
         {
 
@@ -175,40 +176,41 @@ namespace Test_Automation_Core.Tests
 
         }
 
-       // [Test]
+        // [Test]
         public void TestBackUp()
-        { 
+        {
             string backUp = AtlasVariables.winVUT + "_BackUp_" + System.DateTime.Now.Second.ToString();
 
             initATLAS();
 
-              initBackUpApp();
+            initBackUpApp();
 
-              bool warningTrue = backUpActions.CheckWarning();
-              Assert.IsTrue(warningTrue);
-             
-              systemActions.KillProcessByName("Atlasti" + AtlasVariables.major);
-              systemActions.KillProcessByName("SSD.ATLASti.Backup");
+            bool warningTrue = backUpActions.CheckWarning();
+            Assert.IsTrue(warningTrue);
 
-              initBackUpApp();
+            systemActions.KillProcessByName("Atlasti" + AtlasVariables.major);
+            systemActions.KillProcessByName("SSD.ATLASti.Backup");
 
-              if(backUpActions.CheckWarning()) {
-                  Thread.Sleep(2000);
+            initBackUpApp();
 
-              }
+            if (backUpActions.CheckWarning())
+            {
+                Thread.Sleep(2000);
 
-              
-              bool backUpState=backUpActions.CreateBackUp("C:\\Users\\yassinemahfoudh\\Desktop\\SmokeTest_" + AtlasVariables.winVUT,backUp );
-             Assert.IsTrue(backUpState);
-              systemActions.KillProcessByName("SSD.ATLASti.Backup");
-              
+            }
+
+
+            bool backUpState = backUpActions.CreateBackUp("C:\\Users\\yassinemahfoudh\\Desktop\\SmokeTest_" + AtlasVariables.winVUT, backUp);
+            Assert.IsTrue(backUpState);
+            systemActions.KillProcessByName("SSD.ATLASti.Backup");
+
             initATLAS();
             appActions.DeleteProject(SmokeTestVariables.smokeTestproject);
             systemActions.KillProcessByName("Atlasti" + AtlasVariables.major);
-            
+
 
             initBackUpApp();
-            bool restoreState=backUpActions.RestoreLibrary(backUp);
+            bool restoreState = backUpActions.RestoreLibrary(backUp);
             Assert.IsTrue(restoreState);
             systemActions.KillProcessByName("SSD.ATLASti.Backup");
 
@@ -218,13 +220,112 @@ namespace Test_Automation_Core.Tests
 
 
         }
+       // [Test]
+        public void exportVUT()
+        {
+           
+            //Atlproj export
+
+           bool atlProjExportState= appActions.ExportProject(CHProjects.CHWinVUTProjectsFolder, "Atlproj", SmokeTestVariables.smokeTestproject);
+            Assert.IsTrue(atlProjExportState);
+            //QDPX export
+         
+          bool qdpxExportState= appActions.ExportProject(CHProjects.CHWinVUTProjectsFolder, "QDPX", SmokeTestVariables.smokeTestproject);
+            Assert.IsTrue(qdpxExportState);
+        }
+
+       
+
+        [Test]
+        public async Task deleteVUT()
+        {
+            await appActions.CloseProjectAsync();
+
+
+            //Delete VUT
+
+            appActions.DeleteProject(SmokeTestVariables.smokeTestproject);
+
+            //It's actually not working after closing a project. Delete works actually only when project is closed=>Invesitagte
+
+        }
+
+        public void importVUT()
+        {
+
+            //Atlproj import
+
+          bool atlprojImportState=  appActions.ImportProject(CHProjects.CHWinVUTProjectsFolder, "AtlProj", CHProjects.winVUTAtlProj.Replace(" ", ""));
+            Assert.IsTrue(atlprojImportState);
+
+            //QDPX Import
+            bool qdpxImportState= appActions.ImportProject(CHProjects.CHWinVUTProjectsFolder, "QDPX", CHProjects.winVUTQDPX.Replace(" ", ""));
+            Assert.IsTrue(qdpxImportState);
+
+        }
+        public void importWinProd()
+        {
+            //Atlproj import
+
+            bool atlprojImportState = appActions.ImportProject(CHProjects.CHProjectsFolder, "AtlProj", CHProjects.WinProductionAtlProj.Replace(" ", ""));
+            Assert.IsTrue(atlprojImportState);
+
+            //QDPX Import
+            bool qdpxImportState = appActions.ImportProject(CHProjects.CHProjectsFolder, "QDPX", CHProjects.WinProductionQDPX.Replace(" ", ""));
+            Assert.IsTrue(qdpxImportState);
+
+
+        }
+        public void importMacProd()
+        {
+            
+            //Atlproj import
+
+            bool atlprojImportState = appActions.ImportProject(CHProjects.CHProjectsFolder, "AtlProj", CHProjects.MacProductionAtlProj.Replace(" ", ""));
+            Assert.IsTrue(atlprojImportState);
+
+            //QDPX Import
+            bool qdpxImportState = appActions.ImportProject(CHProjects.CHProjectsFolder, "QDPX", CHProjects.MacProductionQDPX.Replace(" ", ""));
+            Assert.IsTrue(qdpxImportState);
 
 
 
+        }
 
+        public void importWinPreviousMajor()
+            {
+            appControl = new App(_driver);
+            appActions = new ApplicationActions(appControl);
+            //Atlproj import
+
+            bool atlprojImportState = appActions.ImportProject(CHProjects.CHProjectsFolder, "AtlProj", CHProjects.WinPreviousAtlProj.Replace(" ", ""));
+            Assert.IsTrue(atlprojImportState);
+
+            //QDPX Import
+            bool qdpxImportState = appActions.ImportProject(CHProjects.CHProjectsFolder, "QDPX", CHProjects.WinPreviousQDPX.Replace(" ", ""));
+            Assert.IsTrue(qdpxImportState);
+
+
+
+        }
+
+        public void importMacPreviousMajor()
+        {
+            //Atlproj import
+
+            bool atlprojImportState = appActions.ImportProject(CHProjects.CHProjectsFolder, "AtlProj", CHProjects.MacPreviousAtlProj.Replace(" ", ""));
+            Assert.IsTrue(atlprojImportState);
+
+            //QDPX Import
+            bool qdpxImportState = appActions.ImportProject(CHProjects.CHProjectsFolder, "QDPX", CHProjects.MacPreviousQDPX.Replace(" ", ""));
+            Assert.IsTrue(qdpxImportState);
+
+
+
+        }
 
 
 
 
     }
-}
+            }

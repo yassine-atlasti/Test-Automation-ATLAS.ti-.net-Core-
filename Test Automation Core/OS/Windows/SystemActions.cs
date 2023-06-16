@@ -257,6 +257,10 @@ namespace Test_Automation_Core.OS.Windows
 
                 //Wait for app to uninstall
                 Thread.Sleep(90000);
+
+              
+
+                
             }
 
 

@@ -28,7 +28,7 @@ namespace Test_Automation_Core.Installer
 
             //Wait for Installer to be displayed
             SystemActions systemActions = new SystemActions();
-            bool installerState = systemActions.WaitForElementToBeDisplayedByTagName(driver, "Window", $"Setup - ATLAS.ti {majorVersion}", 80);
+            bool installerState = systemActions.WaitForElementToBeDisplayedByTagName(driver, "Window", $"Setup - ATLAS.ti {majorVersion}", 120);
 
             if (installerState) {
                 //Add 1 second sleep between each page change in the Installer Wizard

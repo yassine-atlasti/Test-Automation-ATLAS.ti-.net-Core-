@@ -15,9 +15,9 @@ namespace Test_Automation_Core.Data.OneDrive.Projects
         //Path of the C&H All Versions folder in OneDrive
 
         public static readonly string CHProjectsFolder = OneDriveConfig.testingStuffPath + @"\Test Data\Projects\C&H all versions";
-        
+        public static readonly string CHWinVUTProjectsFolder = CHProjectsFolder +@"\Win\VUT";
 
-      
+
 
         //Actual and Previous CH Projects exported from Windows
 
@@ -37,10 +37,15 @@ namespace Test_Automation_Core.Data.OneDrive.Projects
 
         public static readonly string MacPreviousAtlProj = AtlasVariables.macPreviousMajor + "-" + SmokeTestVariables.previousMacOS + "-" + SmokeTestVariables.smokeTestproject + ".atlproj" + AtlasVariables.winPreviousMajor;
         public static readonly string MacPreviousQDPX = AtlasVariables.macPreviousMajor + "-" + SmokeTestVariables.previousMacOS + "-" + SmokeTestVariables.smokeTestproject + ".QDPX";
-            
 
-        
-       
+
+        //C&H Exported from actual VUT
+        public static readonly string winVUTAtlProj = AtlasVariables.winVUT + "-" + SmokeTestVariables.actualOS + "-" + SmokeTestVariables.smokeTestproject + ".atlproj" + AtlasVariables.major;
+        public static readonly string winVUTQDPX = AtlasVariables.winVUT + "-" + SmokeTestVariables.actualOS + "-" + SmokeTestVariables.smokeTestproject + ".QDPX";
+
+        //Remove Spaces from file name
+
+
         //Get the projects path by using the getfilePath method in SystemActions
 
 

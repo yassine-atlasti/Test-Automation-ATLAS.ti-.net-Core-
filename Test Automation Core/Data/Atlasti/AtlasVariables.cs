@@ -12,15 +12,15 @@ namespace Test_Automation_Core.Data.SUT
 
         public static string major = "23";
 
-       public static  string winVUT = "23.2.0";
+       public static  string winVUT = "23.2.26825";
         public static string macVUT = "";
 
-        public static  string winProduction = "";
-        public static  string  macProduction = "";
+        public static  string winProduction = "23.1.1";
+        public static  string  macProduction = "23.1.0-4207";
 
 
-        public static string winPreviousMajor = "";
-        public static string macPreviousMajor = "";
+        public static string winPreviousMajor = "22.2.5";
+        public static string macPreviousMajor = "22.2.3-3738";
         public static string installationPath = @"C:\Program Files\Scientific Software\ATLASti." + major;
 
        public  static   string appPath = @"C:\Program Files\Scientific Software\ATLASti." + major + @"\Atlasti" + major + ".exe";

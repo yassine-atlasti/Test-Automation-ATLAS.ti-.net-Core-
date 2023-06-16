@@ -10,6 +10,8 @@ using Test_Automation_Core.ATLAS.ti.UIElements.AppMenu.File;
 using Test_Automation_Core.ATLAS.ti.UIElements.Dialogs;
 using Test_Automation_Core.OS.Windows;
 using Test_Automation_Core.UIElements.AppMenu.File;
+using Test_Automation_Core.Data.SmokeTestData;
+using Test_Automation_Core.Data.SUT;
 
 namespace Test_Automation_Core.ATLAS.ti.UIActions
 {
@@ -31,8 +33,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
 
             if (!welcomeControlWindow.IsWelcomeWindowDisplayed())
             {
-                CloseProject();
-                Thread.Sleep(5000);
+                CloseProjectAsync();
             }
 
             // Assume that each method performs the action that its name suggests
@@ -119,7 +120,14 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
             // Add a delay of 2 seconds
             Thread.Sleep(2000); // Delay in milliseconds
 
-            filePickerDialog.EnterFilePath(filePath);
+           // filePickerDialog.EnterFilePath(filePath);
+            string fileName = AtlasVariables.winVUT + "-" + SmokeTestVariables.actualOS + "-" + projectName;
+            //Remove Spaces from file name
+            fileName = fileName.Replace(" ", "");
+           
+            Thread.Sleep(2000);
+
+            filePickerDialog.EnterFileName(filePath+ "\\"+fileName);
             filePickerDialog.ClickSaveButton();
 
             //handle QDPX Export Results
@@ -145,6 +153,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
 
                 SystemActions systemActions = new SystemActions();
                 exportState = systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "TabItem", "Home", 30);
+                
 
 
             }
@@ -168,7 +177,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
 
             if (!welcomeWindow.IsWelcomeWindowDisplayed())
             {
-                CloseProject();
+                CloseProjectAsync();
             }
 
 
@@ -243,7 +252,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
 
             if (welcomeWindow.IsWelcomeWindowDisplayed() == false)
             {
-                CloseProject();
+                CloseProjectAsync();
 
             }
             // Open project
@@ -260,34 +269,30 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
 
 
 
-        public bool CloseProject()
+        public async Task CloseProjectAsync()
         {
             var welcomeWindow = _app.GetWelcomeControl();
             var projectWindow = _app.GetProjectWindow();
             var appMenu = projectWindow.getAppMenu();
-            var fileTab = appMenu.ClickFile();
+           
+            if(!welcomeWindow.IsWelcomeWindowDisplayed()) {
+                // Assume that each method performs the action that its name suggests
+                var fileTab = appMenu.ClickFile();
+                fileTab.ClickClose();
+                
+                // You can add more actions or checks here, such as validating that the project was closed correctly
+                SystemActions systemActions = new SystemActions();
+                string windowName = "ATLAS.ti";
+                systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "Window", windowName, 20);
+            }
+           
 
-            // Assume that each method performs the action that its name suggests
-            fileTab.ClickClose();
-
-            // You can add more actions or checks here, such as validating that the project was closed correctly
-            SystemActions systemActions = new SystemActions();
-            string windowName = "ATLAS.ti";
-            bool closeState = systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "Window", windowName, 20);
-
-            return closeState;
         }
 
-        public void DeleteProject(string projectName) {
+        public async Task DeleteProject(string projectName) {
 
             var welcomeWindow = _app.GetWelcomeControl();
             var projectWindow = _app.GetProjectWindow();
-
-            if (welcomeWindow.IsWelcomeWindowDisplayed() == false)
-            {
-                CloseProject();
-
-            }
 
             welcomeWindow.SelectProjectContextMenuOption(projectName, "Delete");
             //Confirm Delete in Dialog
