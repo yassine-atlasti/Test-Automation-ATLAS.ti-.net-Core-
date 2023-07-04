@@ -93,7 +93,7 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
             
 
             SearchProject(projectName);
-
+            Thread.Sleep(500);
             var projectList = driver.FindElementByTagName("List");
 
             var project= projectList.FindElementByName(projectName);

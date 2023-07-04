@@ -38,15 +38,25 @@ namespace Test_Automation_Core.OS.Windows
             // Create a new Actions object
             OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
 
-            Thread.Sleep(1000);
 
-            action.SendKeys(Keys.Alt + "n").KeyUp(Keys.Alt).Perform();
+            // Press and hold the Alt key
+            action.KeyDown(Keys.Alt);
 
+            // Send the "n" key
+            action.SendKeys("n");
+
+            // Release the Alt key
+            action.KeyUp(Keys.Alt);
+
+            // Perform the action to send the Alt+N shortcut
+            action.Perform();
+
+            // Paste the clipboard content
             action.SendKeys(Keys.Control + "v").KeyUp(Keys.Control).Perform();
 
         }
 
-
+        
 
         public void ClickOpenButton()
         {

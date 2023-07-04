@@ -96,7 +96,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
 
             // Assume that each method performs the action that its name suggests
             var fileTab = appMenu.ClickFile();
-
+            Thread.Sleep(500);
             ExportControl exportControl = fileTab.ClickExport();
             string exportTypeLower = exportType.ToLower();
             FilePicker filePickerDialog;
@@ -108,7 +108,8 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
 
             }
             else if (exportTypeLower == "atlproj")
-            {
+            {  //unselect doesn't work!
+                //exportControl.UnselectCheckBox();
                 filePickerDialog = exportControl.ClickProjectBundleButton("TransferBundleTab");
             }
             else
@@ -186,13 +187,19 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
             optionsWindow.ClickApplicationPreferences();
             optionsWindow.ClickSwitchLibraryButton();
 
-            // In the Switch Library Wizard, click the 'Next' button
-            switchLibraryWizard.ClickNextButton();
-            //Select open an existing library option
-            switchLibraryWizard.SelectOption("Open an existing library");
+            Thread.Sleep(500);
 
             // In the Switch Library Wizard, click the 'Next' button
             switchLibraryWizard.ClickNextButton();
+            Thread.Sleep(500);
+
+            //Select open an existing library option
+            switchLibraryWizard.SelectOption("Open an existing library");
+            Thread.Sleep(500);
+
+            // In the Switch Library Wizard, click the 'Next' button
+            switchLibraryWizard.ClickNextButton();
+            Thread.Sleep(500);
 
             //If the current library is not the Default Library, the user should select "Choose Library Location
             string uiElement = "Choose Library Location";
@@ -202,16 +209,20 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
                 switchLibraryWizard.SelectOption(uiElement);
 
             }
+            Thread.Sleep(500);
 
             // Open the File Picker dialog, enter the path of the new library and click 'Select Folder'
             var filePickerDialog = switchLibraryWizard.OpenFilePicker();
 
             filePickerDialog.EnterFilePath(libraryPath);
+            Thread.Sleep(500);
 
             filePickerDialog.ClickSelectFolderButton();
+            Thread.Sleep(500);
 
             // Back in the Switch Library Wizard, click the 'Next' button
             switchLibraryWizard.ClickNextButton();
+            Thread.Sleep(500);
 
             // Confirm the switch by clicking the 'Finish' button
             switchLibraryWizard.ClickFinishButton();
@@ -340,7 +351,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
 
             SystemActions systemActions = new SystemActions();
 
-            bool reportState = systemActions.WaitForElementToBeDisplayedByName(_app.getDriver(), "The problem report was not successfully sent", 30);
+            bool reportState = systemActions.WaitForElementToBeDisplayedByName(_app.getDriver(), "Problem Report Sent", 30);
 
             // Once confirmation dialog is found, confirm the dialog
             reportProblemDialog.CloseConfirmationDialog();

@@ -23,6 +23,7 @@ using Test_Automation_Core.Data.SmokeTestData;
 using Test_Automation_Core.Data.OneDrive.Libraries;
 using Test_Automation_Core.Data.SUT;
 using Test_Automation_Core.Data.OneDrive.Projects;
+using Test_Automation_Core.UIElements.AppMenu.File;
 
 namespace Test_Automation_Core.Tests
 {
@@ -68,6 +69,7 @@ namespace Test_Automation_Core.Tests
         [OneTimeSetUp]
         public  void initATLAS()
         {
+            initSmokeTest();
 
             _driver = systemActions.ClassInitialize(AtlasVariables.appPath);
             systemActions= new SystemActions(_driver);
@@ -86,43 +88,13 @@ namespace Test_Automation_Core.Tests
 
 
         }
-        // [Test]
-
-        public async Task DownloadAndInstallRC(){
-        
-
-          _driver=  systemActions.ClassInitialize("Root");
-
-            
-
-            //Download 
-            string downloadUrl = @"https://cdn.atlasti.com/win/" + AtlasVariables.winVUT +  "/Atlasti_" + AtlasVariables.winVUT + ".exe" ;
-            string downloadPath = @"C:\Users\yassinemahfoudh\Downloads";
-            string fileName = "Atlasti_"+AtlasVariables.winVUT +".exe";
-
-            await systemActions.DownloadFileAsync(downloadUrl, fileName);
-
-
-            _driver.Quit();
-
-
-            //Install
-            string installerPath = downloadPath + "\\" + fileName;
-            string windowName = "Setup - ATLAS.ti " + AtlasVariables.major;
-
-            _driver = systemActions.ClassInitialize(installerPath);
-
-            InstallerActions installer = new InstallerActions(_driver);
-            installer.InstallATLASti(installerPath, AtlasVariables.major);
-        }
-
+       
      
 
        // [Test]
 
         public void RunATLASWithEmptyLib()
         {
-           initATLAS();
 
             bool crashState = welcomeWindow.HasAtlasCrashed(TimeSpan.FromSeconds(60));
          
@@ -132,33 +104,9 @@ namespace Test_Automation_Core.Tests
            
 
         }
-
-
-      //  [Test]
-        public void ReportProblem()
-        {
-           bool reportState= appActions.ReportProblem("Test", "tester@atlasti.com");
-
-            Assert.IsTrue(reportState);
-        }
-
-       // [Test]
-        public void SendSuggestion()
-        {
-
-            bool suggestionState = appActions.SendSuggestion("Test", "tester@atlasti.com");
-            Assert.IsTrue(suggestionState);
-        }
-
-
-        
-
-
-
         //[Test]
         public void openEmptyLibrary()
         {
-            initSmokeTest();
             initATLAS();
 
             //Open ATLAS.ti with empty A22 Library
@@ -176,7 +124,69 @@ namespace Test_Automation_Core.Tests
 
         }
 
-        // [Test]
+         // [Test]
+        public void ReportProblem()
+        {
+           bool reportState= appActions.ReportProblem("Test", "tester@atlasti.com");
+
+            Assert.IsTrue(reportState);
+        }
+
+        //[Test]
+        public void SendSuggestion()
+        {
+
+            bool suggestionState = appActions.SendSuggestion("Test", "tester@atlasti.com");
+            Assert.IsTrue(suggestionState);
+        }
+
+
+
+       // [Test]
+
+        public void openYanikLibrary()
+        {
+            initATLAS();
+
+            //Open ATLAS.ti with empty A22 Library
+            appActions.SwitchLibrary(SmokeTestVariables.library2Extracted);
+
+            // Wait for 20 second for Library Switch
+            Thread.Sleep(20000);
+
+            initATLAS();
+
+            bool crashState = welcomeWindow.HasAtlasCrashed(TimeSpan.FromSeconds(60));
+
+            Assert.IsFalse(crashState);
+
+
+        }
+
+         //[Test]
+
+        public void openLibraryCH()
+        {
+            initATLAS();
+
+            //Open ATLAS.ti with empty A22 Library
+            appActions.SwitchLibrary(SmokeTestVariables.library3Extracted);
+
+            // Wait for 20 second for Library Switch
+            Thread.Sleep(20000);
+
+            initATLAS();
+
+            bool crashState = welcomeWindow.HasAtlasCrashed(TimeSpan.FromSeconds(60));
+
+            Assert.IsFalse(crashState);
+
+
+        }
+
+
+
+        //[Test]
         public void TestBackUp()
         {
             string backUp = AtlasVariables.winVUT + "_BackUp_" + System.DateTime.Now.Second.ToString();
@@ -234,9 +244,7 @@ namespace Test_Automation_Core.Tests
             Assert.IsTrue(qdpxExportState);
         }
 
-       
-
-        [Test]
+        //  [Test]
         public async Task deleteVUT()
         {
             await appActions.CloseProjectAsync();
@@ -263,6 +271,7 @@ namespace Test_Automation_Core.Tests
             Assert.IsTrue(qdpxImportState);
 
         }
+       [Test]
         public void importWinProd()
         {
             //Atlproj import
@@ -276,6 +285,7 @@ namespace Test_Automation_Core.Tests
 
 
         }
+        [Test]
         public void importMacProd()
         {
             
@@ -308,7 +318,7 @@ namespace Test_Automation_Core.Tests
 
 
         }
-
+        [Test]
         public void importMacPreviousMajor()
         {
             //Atlproj import

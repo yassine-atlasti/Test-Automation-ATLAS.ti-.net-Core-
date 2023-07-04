@@ -184,9 +184,9 @@ Assert.IsTrue(switchResult);
         
         
                 
-              //  [Test]
+             //  [Test]
 
-                public async Task UpdateNightly()
+                public async Task UpdateRC()
                {
             
             //Uninstall ATLAS.ti
@@ -201,10 +201,10 @@ Assert.IsTrue(switchResult);
          
 
             //Download 
-            string downloadUrl = @"https://cdn.atlasti.com/win/nightly/23-C4E24425-7597-4DB4-BEAC-4C2CFBBB7A7C/develop/Atlasti_Nightly_develop.exe";
+            string downloadUrl = @"https://cdn.atlasti.com/win/23/Atlasti_23.2.1.26982.exe";
                     string major = "23";
                     string downloadPath = @"C:\Users\yassinemahfoudh\Downloads";
-                    string fileName = "Atlasti_Nightly_develop.exe";
+                    string fileName = "Atlasti_23.2.1.26982.exe";
 
                  await systemActions.DownloadFileAsync(downloadUrl, fileName);
 
@@ -224,16 +224,54 @@ Assert.IsTrue(switchResult);
             InstallerActions installer = new InstallerActions(_driver);
                     installer.InstallATLASti(installerPath, major);
                 }
-                
-                
 
-        
-
-      
-        
-        
-        
        // [Test]
+        public async Task UpdateNightly()
+        {
+
+            //Uninstall ATLAS.ti
+
+            _driver = systemActions.ClassInitialize("Root");
+            systemActions = new SystemActions(_driver);
+
+            string appName = @"Control Panel\Programs\Programs and Features\ATLAS.ti 23";
+
+
+            systemActions.UninstallApp(appName);
+
+
+            //Download 
+            string downloadUrl = @"https://cdn.atlasti.com/win/nightly/23-C4E24425-7597-4DB4-BEAC-4C2CFBBB7A7C/develop/Atlasti_Nightly_develop.exe";
+            string major = "23";
+            string downloadPath = @"C:\Users\yassinemahfoudh\Downloads";
+            string fileName = "Atlasti_Nightly_develop.exe";
+
+            await systemActions.DownloadFileAsync(downloadUrl, fileName);
+
+
+
+            systemActions.MinimizeAllWindows(_driver);
+            Thread.Sleep(1000);
+
+            _driver.Quit();
+
+            //Install
+            string installerPath = downloadPath + "\\" + fileName;
+            string windowName = "Setup - ATLAS.ti " + major;
+            _driver = systemActions.ClassInitialize(installerPath);
+
+
+            InstallerActions installer = new InstallerActions(_driver);
+            installer.InstallATLASti(installerPath, major);
+        }
+
+
+
+
+
+
+
+        // [Test]
 
         public void TestMethod7()
         {

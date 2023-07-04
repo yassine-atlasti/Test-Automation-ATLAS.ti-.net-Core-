@@ -56,6 +56,17 @@ namespace Test_Automation_Core.UIElements.AppMenu.File
             button.Click();
             return new FilePicker(_driver);
         }
+
+        public void UnselectCheckBox()
+        {
+
+            var checkbox = _driver.FindElementByTagName("TabItem").FindElementByName("System.Windows.Controls.TabItem Header: Content:").FindElementByTagName("CheckBox");
+
+            if (checkbox.Selected)
+            {
+                checkbox.Click();
+            }
+        }
         // ... add other methods for other controls within the ExportControl.
     }
 

@@ -57,14 +57,18 @@ namespace Test_Automation_Core.UIElements.Wizards
         {
             try
             {
-               
                 driver.FindElementByName(uiElement);
-                return true;  
+                return true;
             }
             catch (NoSuchElementException)
             {
-                return false; 
+                return false;
+            }
+            catch (WebDriverException)
+            {
+                return false;
             }
         }
+
     }
 }
