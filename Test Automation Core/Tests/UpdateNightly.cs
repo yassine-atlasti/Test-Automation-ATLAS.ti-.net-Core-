@@ -51,7 +51,7 @@ namespace Test_Automation_Core.Tests
 
 
 
-            systemActions.UninstallApp(AtlasVariables.installationPath);
+            systemActions.UninstallApp(AtlasVariables.uninstallPath);
             
 
             //Download 

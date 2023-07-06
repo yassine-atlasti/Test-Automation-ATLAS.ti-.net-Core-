@@ -12,7 +12,7 @@ namespace Test_Automation_Core.Data.SUT
 
         public static string major = "23";
 
-       public static  string winVUT = "23.2.2.27230";
+       public static  string winVUT = "23.2.2.27321";
         public static string macVUT = "";
 
         public static  string winProduction = "23.1.1";
@@ -27,8 +27,8 @@ namespace Test_Automation_Core.Data.SUT
 
         public static  string backUpPath = @"C:\Program Files\Scientific Software\ATLASti." + major + @"\SSD.ATLASti.Backup.exe";
 
+        public static string uninstallPath=@"Control Panel\Programs\Programs and Features\ATLAS.ti " + major;
 
-       
 
          AtlasVariables() {
             //update

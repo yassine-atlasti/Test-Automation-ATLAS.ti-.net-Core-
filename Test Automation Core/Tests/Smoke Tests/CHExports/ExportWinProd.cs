@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test_Automation_Core.Tests.Smoke_Tests
+namespace Test_Automation_Core.Tests.Smoke_Tests.Exports
 {
-    internal class ImportProject
+    internal class ExportWinProd
     {
     }
 }

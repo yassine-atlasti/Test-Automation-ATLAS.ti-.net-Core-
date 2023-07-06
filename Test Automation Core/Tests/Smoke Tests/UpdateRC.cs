@@ -36,7 +36,7 @@ namespace Test_Automation_Core.Tests.Smoke_Tests
 
 
 
-            systemActions.UninstallApp(AtlasVariables.installationPath);
+            systemActions.UninstallApp(AtlasVariables.uninstallPath);
             //Download 
             string downloadUrl = @"https://cdn.atlasti.com/win/" + AtlasVariables.major + "/Atlasti_" + AtlasVariables.winVUT + ".exe";
             string downloadPath = @"C:\Users\yassinemahfoudh\Downloads";

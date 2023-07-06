@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Test_Automation_Core.Tests.Smoke_Tests
 {
-    internal class SwitchLibrary
+    internal class ReportProblem
     {
     }
 }

@@ -24,6 +24,7 @@ using Test_Automation_Core.Data.OneDrive.Libraries;
 using Test_Automation_Core.Data.SUT;
 using Test_Automation_Core.Data.OneDrive.Projects;
 using Test_Automation_Core.UIElements.AppMenu.File;
+using Test_Automation_Core.Tests.Smoke_Tests;
 
 namespace Test_Automation_Core.Tests
 {
@@ -37,37 +38,32 @@ namespace Test_Automation_Core.Tests
 
         //ATLAS.ti
         App appControl;
-        ApplicationActions appActions;
+         ApplicationActions appActions;
         WelcomeWindow welcomeWindow;
 
         
         //BackUpApp
         BackUpActions backUpActions;
+        public ApplicationActions GetAppActions()
+        {
+            return appActions;
+   }
+        public BackUpActions GetBackUpActions() { 
+            return backUpActions;
+        }
+        public WelcomeWindow GetWelcomeWindow() { return welcomeWindow;}
+        public SystemActions GetSystemActions() { return systemActions; }
 
         //Should maybe go to SmokeTest Data
         public void initSmokeTest()
         {
-            //Add Method that automatically updates AtlastiVariables (need to be implemented)
-
-            //Create Smoke Test Folder
-
-            systemActions.CreateFolder(SmokeTestVariables.smokeTestFolder);
-
-            //Extract Libraries
-
-            systemActions.ExtractZip(SmokeTestLibraries.library1, SmokeTestVariables.smokeTestFolderPath);
-
-            systemActions.ExtractZip(SmokeTestLibraries.library2, SmokeTestVariables.smokeTestFolderPath);
-
-            systemActions.ExtractZip(SmokeTestLibraries.library3, SmokeTestVariables.smokeTestFolderPath);
-
-           
+            ExtractLibraries.extractSmokeTestLibs();
 
 
         }
 
         [OneTimeSetUp]
-        public  void initATLAS()
+        public void initATLAS()
         {
             initSmokeTest();
 
@@ -142,135 +138,7 @@ namespace Test_Automation_Core.Tests
 
 
 
-       // [Test]
-
-        public void openYanikLibrary()
-        {
-            initATLAS();
-
-            //Open ATLAS.ti with empty A22 Library
-            appActions.SwitchLibrary(SmokeTestVariables.library2Extracted);
-
-            // Wait for 20 second for Library Switch
-            Thread.Sleep(20000);
-
-            initATLAS();
-
-            bool crashState = welcomeWindow.HasAtlasCrashed(TimeSpan.FromSeconds(60));
-
-            Assert.IsFalse(crashState);
-
-
-        }
-
-         //[Test]
-
-        public void openLibraryCH()
-        {
-            initATLAS();
-
-            //Open ATLAS.ti with empty A22 Library
-            appActions.SwitchLibrary(SmokeTestVariables.library3Extracted);
-
-            // Wait for 20 second for Library Switch
-            Thread.Sleep(20000);
-
-            initATLAS();
-
-            bool crashState = welcomeWindow.HasAtlasCrashed(TimeSpan.FromSeconds(60));
-
-            Assert.IsFalse(crashState);
-
-
-        }
-
-
-
-        //[Test]
-        public void TestBackUp()
-        {
-            string backUp = AtlasVariables.winVUT + "_BackUp_" + System.DateTime.Now.Second.ToString();
-
-            initATLAS();
-
-            initBackUpApp();
-
-            bool warningTrue = backUpActions.CheckWarning();
-            Assert.IsTrue(warningTrue);
-
-            systemActions.KillProcessByName("Atlasti" + AtlasVariables.major);
-            systemActions.KillProcessByName("SSD.ATLASti.Backup");
-
-            initBackUpApp();
-
-            if (backUpActions.CheckWarning())
-            {
-                Thread.Sleep(2000);
-
-            }
-
-
-            bool backUpState = backUpActions.CreateBackUp("C:\\Users\\yassinemahfoudh\\Desktop\\SmokeTest_" + AtlasVariables.winVUT, backUp);
-            Assert.IsTrue(backUpState);
-            systemActions.KillProcessByName("SSD.ATLASti.Backup");
-
-            initATLAS();
-            appActions.DeleteProject(SmokeTestVariables.smokeTestproject);
-            systemActions.KillProcessByName("Atlasti" + AtlasVariables.major);
-
-
-            initBackUpApp();
-            bool restoreState = backUpActions.RestoreLibrary(backUp);
-            Assert.IsTrue(restoreState);
-            systemActions.KillProcessByName("SSD.ATLASti.Backup");
-
-            initATLAS();
-            bool projectRestored = appActions.OpenProject(SmokeTestVariables.smokeTestproject);
-            Assert.IsTrue(projectRestored);
-
-
-        }
-       // [Test]
-        public void exportVUT()
-        {
-           
-            //Atlproj export
-
-           bool atlProjExportState= appActions.ExportProject(CHProjects.CHWinVUTProjectsFolder, "Atlproj", SmokeTestVariables.smokeTestproject);
-            Assert.IsTrue(atlProjExportState);
-            //QDPX export
-         
-          bool qdpxExportState= appActions.ExportProject(CHProjects.CHWinVUTProjectsFolder, "QDPX", SmokeTestVariables.smokeTestproject);
-            Assert.IsTrue(qdpxExportState);
-        }
-
-        //  [Test]
-        public async Task deleteVUT()
-        {
-            await appActions.CloseProjectAsync();
-
-
-            //Delete VUT
-
-            appActions.DeleteProject(SmokeTestVariables.smokeTestproject);
-
-            //It's actually not working after closing a project. Delete works actually only when project is closed=>Invesitagte
-
-        }
-
-        public void importVUT()
-        {
-
-            //Atlproj import
-
-          bool atlprojImportState=  appActions.ImportProject(CHProjects.CHWinVUTProjectsFolder, "AtlProj", CHProjects.winVUTAtlProj.Replace(" ", ""));
-            Assert.IsTrue(atlprojImportState);
-
-            //QDPX Import
-            bool qdpxImportState= appActions.ImportProject(CHProjects.CHWinVUTProjectsFolder, "QDPX", CHProjects.winVUTQDPX.Replace(" ", ""));
-            Assert.IsTrue(qdpxImportState);
-
-        }
+       
        [Test]
         public void importWinProd()
         {
