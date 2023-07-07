@@ -93,17 +93,23 @@ namespace Test_Automation_Core.UIElements.Dialogs
                 // If the button is found and is displayed, return true
                 return mediaFolderButton.Displayed;
             }
-            catch (NoSuchElementException)
+            catch (NoSuchElementException )
             {
                 // If the button is not found, it is not visible, so return false
                 return false;
             }
+              catch (OpenQA.Selenium.WebDriverException )
+            {
+                // If the button is not found, it is not visible, so return false
+                return false;
+            }
+
+            }
+
+
+
+
+
+
         }
-
-        
-
-
-
-
-    }
 }

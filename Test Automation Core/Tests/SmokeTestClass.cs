@@ -65,13 +65,14 @@ namespace Test_Automation_Core.Tests
         [OneTimeSetUp]
         public void initATLAS()
         {
-            initSmokeTest();
+            //initSmokeTest();
 
             _driver = systemActions.ClassInitialize(AtlasVariables.appPath);
             systemActions= new SystemActions(_driver);
             appControl= new App(_driver);
         appActions = new ApplicationActions(appControl);
         welcomeWindow = appControl.GetWelcomeControl();
+            _driver.Manage().Window.Maximize();
 
 
         }

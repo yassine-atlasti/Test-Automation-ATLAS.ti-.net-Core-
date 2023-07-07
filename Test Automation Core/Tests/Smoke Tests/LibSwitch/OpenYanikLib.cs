@@ -15,6 +15,7 @@ namespace Test_Automation_Core.Tests.Smoke_Tests.LibSwitch
 
         public void openLibraryYanik()
         {
+            smokeTestClass.initSmokeTest();
             smokeTestClass.initATLAS();
 
             //Open ATLAS.ti with empty A22 Library

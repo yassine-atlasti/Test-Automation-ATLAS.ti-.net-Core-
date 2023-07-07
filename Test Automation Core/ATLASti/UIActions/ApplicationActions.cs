@@ -35,6 +35,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
             {
                 CloseProjectAsync();
             }
+            Thread.Sleep(4000);
 
             // Assume that each method performs the action that its name suggests
             welcomeControlWindow.ClickImportProjectButton();
@@ -294,7 +295,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
                 // You can add more actions or checks here, such as validating that the project was closed correctly
                 SystemActions systemActions = new SystemActions();
                 string windowName = "ATLAS.ti";
-                systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "Window", windowName, 20);
+                systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "Name", "Your Projects", 30);
             }
            
 
