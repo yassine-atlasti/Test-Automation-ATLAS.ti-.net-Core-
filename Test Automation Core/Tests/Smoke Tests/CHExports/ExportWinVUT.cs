@@ -8,21 +8,21 @@ using Test_Automation_Core.Data.SmokeTestData;
 
 namespace Test_Automation_Core.Tests.Smoke_Tests.Exports
 {
-    public class ExportWinProd
+    public class ExportWinVUT
     {
-        SmokeTestClass smokeTestClass = new SmokeTestClass();
-
+        SmokeTestClass smokeTestClass= new SmokeTestClass();
+       
         [Test]
         public void exportAtlProj()
         {
             smokeTestClass.initATLAS();
             //Atlproj export
 
-            bool atlProjExportState = smokeTestClass.GetAppActions().ExportProject(SmokeTestVariables.smokeTestFolderPath, "Atlproj", CHProjects.WinProductionAtlProj.Replace(" ", ""));
+            bool atlProjExportState = smokeTestClass.GetAppActions().ExportProject(CHProjects.CHWinVUTProjectsFolder, "Atlproj", CHProjects.winVUTAtlProj.Replace(" ", ""));
             Assert.IsTrue(atlProjExportState);
             smokeTestClass.GetAppActions().CloseProjectAsync();
 
-
+          
         }
         [Test]
         public void exportQDPX()
@@ -30,7 +30,7 @@ namespace Test_Automation_Core.Tests.Smoke_Tests.Exports
             smokeTestClass.initATLAS();
             //QDPX export
 
-            bool qdpxExportState = smokeTestClass.GetAppActions().ExportProject(SmokeTestVariables.smokeTestFolderPath, "QDPX", CHProjects.WinProductionQDPX.Replace(" ", ""));
+            bool qdpxExportState = smokeTestClass.GetAppActions().ExportProject(CHProjects.CHWinVUTProjectsFolder, "QDPX", CHProjects.winVUTQDPX.Replace(" ", ""));
             Assert.IsTrue(qdpxExportState);
             smokeTestClass.GetAppActions().CloseProjectAsync();
 

@@ -43,7 +43,8 @@ namespace Test_Automation_Core.Tests
         [Test]
         public async Task Update()
         {
-            
+          
+
             //Uninstall ATLAS.ti
 
             _driver = systemActions.ClassInitialize("Root");

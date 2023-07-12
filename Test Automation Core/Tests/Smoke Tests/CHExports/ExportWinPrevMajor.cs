@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Test_Automation_Core.Data.OneDrive.Projects;
 using Test_Automation_Core.Data.SmokeTestData;
 
-namespace Test_Automation_Core.Tests.Smoke_Tests.Exports
+namespace Test_Automation_Core.Tests.Smoke_Tests.CHExports
 {
-    public class ExportWinProd
+    public class ExportWinPrevMajor
     {
         SmokeTestClass smokeTestClass = new SmokeTestClass();
 
@@ -18,7 +18,7 @@ namespace Test_Automation_Core.Tests.Smoke_Tests.Exports
             smokeTestClass.initATLAS();
             //Atlproj export
 
-            bool atlProjExportState = smokeTestClass.GetAppActions().ExportProject(SmokeTestVariables.smokeTestFolderPath, "Atlproj", CHProjects.WinProductionAtlProj.Replace(" ", ""));
+            bool atlProjExportState = smokeTestClass.GetAppActions().ExportProject(SmokeTestVariables.smokeTestFolderPath, "Atlproj", CHProjects.WinPreviousAtlProj.Replace(" ", ""));
             Assert.IsTrue(atlProjExportState);
             smokeTestClass.GetAppActions().CloseProjectAsync();
 
@@ -30,7 +30,7 @@ namespace Test_Automation_Core.Tests.Smoke_Tests.Exports
             smokeTestClass.initATLAS();
             //QDPX export
 
-            bool qdpxExportState = smokeTestClass.GetAppActions().ExportProject(SmokeTestVariables.smokeTestFolderPath, "QDPX", CHProjects.WinProductionQDPX.Replace(" ", ""));
+            bool qdpxExportState = smokeTestClass.GetAppActions().ExportProject(SmokeTestVariables.smokeTestFolderPath, "QDPX", CHProjects.WinPreviousQDPX.Replace(" ", ""));
             Assert.IsTrue(qdpxExportState);
             smokeTestClass.GetAppActions().CloseProjectAsync();
 

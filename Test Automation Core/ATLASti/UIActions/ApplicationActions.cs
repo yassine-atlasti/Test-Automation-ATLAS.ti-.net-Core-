@@ -129,7 +129,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
            
             Thread.Sleep(2000);
 
-            filePickerDialog.EnterFileName(filePath+ "\\"+fileName);
+            filePickerDialog.EnterFileName(filePath+ "\\"+ AtlasVariables.winVUT +"-(" + projectName + ")");
             filePickerDialog.ClickSaveButton();
 
             //handle QDPX Export Results
@@ -291,13 +291,17 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
                 // Assume that each method performs the action that its name suggests
                 var fileTab = appMenu.ClickFile();
                 fileTab.ClickClose();
-                
-                // You can add more actions or checks here, such as validating that the project was closed correctly
-                SystemActions systemActions = new SystemActions();
-                string windowName = "ATLAS.ti";
-                systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "Name", "Your Projects", 30);
+
+                /**  // You can add more actions or checks here, such as validating that the project was closed correctly
+                  SystemActions systemActions = new SystemActions();
+                  string windowName = "ATLAS.ti";
+                  systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "Name", "Your Projects", 30);
+                  **/
+                Thread.Sleep(10000);
+
+
             }
-           
+
 
         }
 

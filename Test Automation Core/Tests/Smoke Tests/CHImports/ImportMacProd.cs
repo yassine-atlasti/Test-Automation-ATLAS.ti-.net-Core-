@@ -11,8 +11,10 @@ namespace Test_Automation_Core.Tests.Smoke_Tests.CHImports
     {
         SmokeTestClass smokeTestClass = new SmokeTestClass();
         [Test]
-        public void importWinProd()
+        public void ImportAtlProj()
+
         {
+
             smokeTestClass.initATLAS();
 
             //Atlproj import
@@ -20,10 +22,20 @@ namespace Test_Automation_Core.Tests.Smoke_Tests.CHImports
             bool atlprojImportState = smokeTestClass.GetAppActions().ImportProject(CHProjects.CHMacProdProjectsFolder, "AtlProj", CHProjects.MacProductionAtlProj.Replace(" ", ""));
             Assert.IsTrue(atlprojImportState);
 
+            smokeTestClass.GetAppActions().CloseProjectAsync();
+
+
+        }
+        [Test]
+        public void ImportQDPX()
+        {
+            smokeTestClass.initATLAS();
+
 
             //QDPX Import
             bool qdpxImportState = smokeTestClass.GetAppActions().ImportProject(CHProjects.CHMacProdProjectsFolder, "QDPX", CHProjects.MacProductionQDPX.Replace(" ", ""));
             Assert.IsTrue(qdpxImportState);
+            smokeTestClass.GetAppActions().CloseProjectAsync();
 
         }
     }
