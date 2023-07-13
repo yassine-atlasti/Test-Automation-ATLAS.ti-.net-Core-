@@ -12,27 +12,26 @@ namespace Test_Automation_Core.Tests.Smoke_Tests.Support
     public class CrashTest
     {
         SmokeTestClass smokeTestClass = new SmokeTestClass();
-     //  [Test, Order(1)]
+       [Test, Order(1)]
         public void RaiseException()
         {
             smokeTestClass.initATLAS();
             smokeTestClass.GetAppActions().OpenProject(SmokeTestVariables.smokeTestproject);
              smokeTestClass.GetAppActions().RaiseException();
-            Thread.Sleep(15000);
+            Thread.Sleep(20000);
         }
         [Test, Order(2)]
         public void CrashReportVisible() {
 
             smokeTestClass.initATLAS();
-             bool crashReportVisible=  smokeTestClass.GetSystemActions().WaitForElementToBeDisplayedByTagName(smokeTestClass.GetDriver(),
-"Window", "ATLAS.ti Problem",3);
 
-           
+            bool crashState= smokeTestClass.GetWelcomeWindow().HasAtlasCrashed(TimeSpan.FromSeconds(5));
 
-            Assert.IsTrue(crashReportVisible);
+
+            Assert.IsTrue(crashState);
 
         }
-      //  [Test, Order(3)]
+       [Test, Order(3)]
         public void SendCrashReport()
         {
             smokeTestClass.initATLAS();

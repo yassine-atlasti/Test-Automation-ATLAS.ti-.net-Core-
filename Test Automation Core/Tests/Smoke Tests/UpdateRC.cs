@@ -19,7 +19,7 @@ namespace Test_Automation_Core.Tests.Smoke_Tests
         SystemActions systemActions = new SystemActions();
 
 
-        
+         
 
         [Test]
 
@@ -34,28 +34,28 @@ namespace Test_Automation_Core.Tests.Smoke_Tests
 
             systemActions = new SystemActions(_driver);
 
-
+            // systemActions.MinimizeAllWindows(_driver);
 
             systemActions.UninstallApp(AtlasVariables.uninstallPath);
+            
             //Download 
             string downloadUrl = @"https://cdn.atlasti.com/win/" + AtlasVariables.major + "/Atlasti_" + AtlasVariables.winVUT + ".exe";
-            string downloadPath = @"C:\Users\yassinemahfoudh\Downloads";
-            string fileName = "Atlasti_" + AtlasVariables.winVUT + ".exe";
-            systemActions.MinimizeAllWindows(_driver);
 
-            await systemActions.DownloadFileAsync(downloadUrl, fileName);
+            await systemActions.DownloadFileAsync(downloadUrl, AtlasVariables.fileNameRC);
 
             _driver.Quit();
+            
 
 
             //Install
-            string installerPath = downloadPath + "\\" + fileName;
             string windowName = "Setup - ATLAS.ti " + AtlasVariables.major;
 
-            _driver = systemActions.ClassInitialize(installerPath);
+            _driver = systemActions.ClassInitialize(AtlasVariables.installerPathRC);
+
+         
 
             InstallerActions installer = new InstallerActions(_driver);
-            installer.InstallATLASti(installerPath, AtlasVariables.major);
+            installer.InstallATLASti(AtlasVariables.installerPathRC, AtlasVariables.major);
         }
 
     }

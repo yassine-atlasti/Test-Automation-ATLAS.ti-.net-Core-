@@ -44,12 +44,18 @@ namespace Test_Automation_Core.OS.Windows
 
             //If the driver should not be assigned to Root Window of the OS then do following
 
-            if (appPath.EndsWith(".exe") && appPath!=AtlasVariables.backUpPath) { 
+            if (appPath==AtlasVariables.appPath) { 
 
 
                 OpenApp(applicationPath, applicationName);
-
      
+            }
+            if (appPath == AtlasVariables.installerPathRC || appPath==AtlasVariables.installerPathNightly)
+            {
+                //It's a temorary solution
+                OpenApp(applicationPath, applicationName);
+                KillProcessByName(applicationName);
+
             }
             // Now initialize the WindowsDriver
             AppiumOptions appOptions = new AppiumOptions();
@@ -126,7 +132,7 @@ namespace Test_Automation_Core.OS.Windows
         **/
 
 
-        public async Task DownloadFileAsync(string url, string fileName, int maxRetries = 3)
+        public async Task DownloadFileAsync(string url, string fileName, int maxRetries = 10)
         {
             // Create HttpClient to send HTTP requests
             using var httpClient = new HttpClient();
