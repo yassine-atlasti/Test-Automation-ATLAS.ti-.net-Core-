@@ -262,7 +262,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
             var welcomeWindow = _app.GetWelcomeControl();
             var projectWindow = _app.GetProjectWindow();
 
-            if (welcomeWindow.IsWelcomeWindowDisplayed() == false)
+            if (!welcomeWindow.IsWelcomeWindowDisplayed() )
             {
                 CloseProjectAsync();
 
@@ -421,7 +421,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
 
             // Open the live chat dialog
             var liveChatDialog = helpRibbon.OpenLiveChatDialog();
-
+            
             //  Start the chat and enter the chat text 
             liveChatDialog.StartChat();
 
@@ -434,7 +434,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
         }
 
 
-        public void RaiseException()
+        public bool RaiseException()
         {
             // Open the project window's app menu
             var appMenu = _app.GetProjectWindow().getAppMenu();
@@ -443,11 +443,20 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
             var developerRibbon = appMenu.ClickDeveloper();
 
             developerRibbon.RaiseAtlasException();
-
+            return true;
            
 
         }
+        public void SendCrashReport(string email, string description)
+        {
+            CrashReportDialog reportCrashDialog = new CrashReportDialog(_app.getDriver());
 
+            reportCrashDialog.EnterCrashDescription(description);
+            reportCrashDialog.EnterEmail(email);
+            reportCrashDialog.ClickSendErrorButton();
+
+
+        }
 
     }
 }

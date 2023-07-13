@@ -304,7 +304,7 @@ Assert.IsTrue(switchResult);
 
             CrashReportDialog crashReportDialog = new CrashReportDialog(_driver);
             crashReportDialog.EnterEmail("yassine.mahfoudh@atlasti.com");
-            crashReportDialog.EnterProblemDescription("QA Test Ignore");
+            crashReportDialog.EnterCrashDescription("QA Test Ignore");
             crashReportDialog.ClickSendErrorButton();
 
         }

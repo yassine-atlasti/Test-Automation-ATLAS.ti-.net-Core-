@@ -18,11 +18,13 @@ namespace Test_Automation_Core.ATLAS.ti.UIElements.Dialogs
             this.driver = driver;
         }
 
-        // Add methods for interacting with Report Problem Dialog elements as needed
+        // Add methods for interacting with Report Crash Dialog elements as needed
 
-        public void EnterProblemDescription(string problemDescription)
+        public void EnterCrashDescription(string problemDescription)
         {
-            WindowsElement problemDescriptionTextField = driver.FindElementByAccessibilityId("DescriptionTextField");
+           var CrashDialogElement = driver.FindElementByTagName("Window").FindElementByName("ATLAS.ti Problem");
+
+            var problemDescriptionTextField = CrashDialogElement.FindElementByAccessibilityId("DescriptionTextField");
 
             problemDescriptionTextField.Click();
            
@@ -38,7 +40,9 @@ namespace Test_Automation_Core.ATLAS.ti.UIElements.Dialogs
 
         public void EnterEmail(string email)
         {
-            WindowsElement emailTextField = driver.FindElementByAccessibilityId("EmailTextField");
+            var CrashDialogElement = driver.FindElementByTagName("Window").FindElementByName("ATLAS.ti Problem");
+
+            var emailTextField = CrashDialogElement.FindElementByAccessibilityId("EmailTextField");
             emailTextField.Click();
             emailTextField.Clear();
 
@@ -54,20 +58,12 @@ namespace Test_Automation_Core.ATLAS.ti.UIElements.Dialogs
 
         public void ClickSendErrorButton()
         {
-            driver.FindElementByName("Send Error Report").Click();
+            var CrashDialogElement = driver.FindElementByTagName("Window").FindElementByName("ATLAS.ti Problem");
+
+            CrashDialogElement.FindElementByName("Send Error Report").Click();
         }
 
-        public void ClickCancelButton()
-        {
-            driver.FindElementByName("Don't Send").Click();
-        }
-
-        public void CloseConfirmationDialog()
-        {
-
-            driver.FindElementByName("OK\\").Click();
-
-        }
+       
 
         
 

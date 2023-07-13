@@ -40,12 +40,12 @@ namespace Test_Automation_Core.OS.Windows
         public WindowsDriver<WindowsElement> ClassInitialize(string appPath)
         {
             string applicationPath = appPath;
+            string applicationName = Path.GetFileNameWithoutExtension(applicationPath);
 
             //If the driver should not be assigned to Root Window of the OS then do following
 
             if (appPath.EndsWith(".exe") && appPath!=AtlasVariables.backUpPath) { 
 
-            string applicationName = Path.GetFileNameWithoutExtension(applicationPath);
 
                 OpenApp(applicationPath, applicationName);
 
@@ -53,9 +53,8 @@ namespace Test_Automation_Core.OS.Windows
             }
             // Now initialize the WindowsDriver
             AppiumOptions appOptions = new AppiumOptions();
-            appOptions.AddAdditionalCapability("app", applicationPath);
-            appOptions.AddAdditionalCapability("deviceName", "WindowsPC");
-
+             appOptions.AddAdditionalCapability("app", applicationPath);
+             appOptions.AddAdditionalCapability("deviceName", "WindowsPC");
 
 
             WindowsDriver<WindowsElement> driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appOptions);
@@ -65,7 +64,7 @@ namespace Test_Automation_Core.OS.Windows
 
        
 
-        public void OpenApp(string applicationPath,string applicationName)
+        public int OpenApp(string applicationPath,string applicationName)
         {
 
             // Check if the application is already running
@@ -105,6 +104,7 @@ namespace Test_Automation_Core.OS.Windows
                 // If the application is already running, attach to the first instance
                 process = processes[0];
             }
+           return process.Id;
         }
 
         /**
@@ -419,6 +419,7 @@ namespace Test_Automation_Core.OS.Windows
         }
         public bool WaitForElementToBeDisplayedByTagName(WindowsDriver<WindowsElement> driver, string tagName, string name, int timeoutInSeconds)
         {
+            bool state = false;
             for (int i = 0; i < timeoutInSeconds; i++)
             {
                 try
@@ -427,7 +428,10 @@ namespace Test_Automation_Core.OS.Windows
 
                     if (element.Displayed)
                     {
-                        return true;
+                        state = true;
+                        break;
+
+
                     }
 
                 }
@@ -440,7 +444,7 @@ namespace Test_Automation_Core.OS.Windows
                 Thread.Sleep(1000);
             }
 
-            return false; // element was not found within the time limit
+            return state; 
         }
 
 

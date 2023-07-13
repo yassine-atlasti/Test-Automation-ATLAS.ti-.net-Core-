@@ -54,6 +54,7 @@ namespace Test_Automation_Core.Tests
         public WelcomeWindow GetWelcomeWindow() { return welcomeWindow;}
         public SystemActions GetSystemActions() { return systemActions; }
 
+        public WindowsDriver<WindowsElement> GetDriver() { return _driver; }
         //Should maybe go to SmokeTest Data
         public void initSmokeTest()
         {
@@ -72,8 +73,16 @@ namespace Test_Automation_Core.Tests
             appControl= new App(_driver);
         appActions = new ApplicationActions(appControl);
         welcomeWindow = appControl.GetWelcomeControl();
-            _driver.Manage().Window.Maximize();
 
+            try
+            {
+                _driver.Manage().Window.Maximize();
+            }
+            catch (System.InvalidOperationException ex)
+            {
+                // Log or display a message indicating that maximizing the window is not supported
+                Console.WriteLine("Window maximize is not supported in the current context: " + ex.Message);
+            }
 
         }
 
@@ -82,13 +91,14 @@ namespace Test_Automation_Core.Tests
            _driver= systemActions.ClassInitialize(AtlasVariables.backUpPath);
             systemActions = new SystemActions(_driver);
             backUpActions = new BackUpActions(_driver);
+            _driver.Manage().Window.Maximize();
 
 
         }
-       
-     
 
-       
+
+
+
 
 
 
