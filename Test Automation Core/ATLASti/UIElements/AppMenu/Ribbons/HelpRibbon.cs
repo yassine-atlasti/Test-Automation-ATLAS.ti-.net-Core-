@@ -27,8 +27,8 @@ namespace Test_Automation_Core.UIElements.AppMenu.Ribbons
             _driver.FindElementByName("Report Problem").Click();
             // Wait for a unique element in the Report Problem Dialog to appear.
             // Replace "UniqueElementInReportProblemDialog" with an actual unique element name or locator.
-            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Name("UniqueElementInReportProblemDialog")));
+           /** var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Name("UniqueElementInReportProblemDialog")));**/
             return new ReportProblemDialog(_driver);
         }
         // Add methods here for interacting with elements under 'Help'...

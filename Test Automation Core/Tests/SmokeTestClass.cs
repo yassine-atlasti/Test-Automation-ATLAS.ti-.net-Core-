@@ -91,7 +91,6 @@ namespace Test_Automation_Core.Tests
            _driver= systemActions.ClassInitialize(AtlasVariables.backUpPath);
             systemActions = new SystemActions(_driver);
             backUpActions = new BackUpActions(_driver);
-            _driver.Manage().Window.Maximize();
 
 
         }

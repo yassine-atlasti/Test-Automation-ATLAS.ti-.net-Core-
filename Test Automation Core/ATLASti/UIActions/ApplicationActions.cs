@@ -76,7 +76,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
 
 
 
-        public bool ExportProject(string filePath, string exportType, string projectName)
+        public bool ExportProject(string filePath, string exportType, string projectName, string fileName="")
         {
             var welcomeWindow = _app.GetWelcomeControl();
 
@@ -109,7 +109,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
             }
             else if (exportTypeLower == "atlproj")
             {  //unselect doesn't work!
-                //exportControl.UnselectCheckBox();
+               //exportControl.UnselectCheckBox();
                 filePickerDialog = exportControl.ClickProjectBundleButton("TransferBundleTab");
             }
             else
@@ -119,16 +119,15 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
 
 
             // Add a delay of 2 seconds
-            Thread.Sleep(2000); // Delay in milliseconds
+            Thread.Sleep(3000); // Delay in milliseconds
 
            // filePickerDialog.EnterFilePath(filePath);
-            string fileName = AtlasVariables.winVUT + "-" + SmokeTestVariables.actualOS + "-" + projectName;
             //Remove Spaces from file name
-            fileName = fileName.Replace(" ", "");
+            fileName = AtlasVariables.winVUT + "-" + SmokeTestVariables.actualOS + "-" + SmokeTestVariables.smokeTestproject;
            
             Thread.Sleep(2000);
 
-            filePickerDialog.EnterFileName(filePath+ "\\"+ AtlasVariables.winVUT +"-(" + projectName + ")");
+            filePickerDialog.EnterFileName(filePath+ "\\"+ fileName.Replace(" ", ""));
             filePickerDialog.ClickSaveButton();
 
             //handle QDPX Export Results

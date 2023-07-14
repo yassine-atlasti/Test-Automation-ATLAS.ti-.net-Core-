@@ -59,14 +59,13 @@ namespace Test_Automation_Core.UIElements.AppMenu.File
 
         public void UnselectCheckBox()
         {
+            var selectAllCheckbox = _driver.FindElementsByName("CheckIcon").First();
+            selectAllCheckbox.Click();
 
-            var checkbox = _driver.FindElementByTagName("TabItem").FindElementByName("System.Windows.Controls.TabItem Header: Content:").FindElementByTagName("CheckBox");
-
-            if (checkbox.Selected)
-            {
-                checkbox.Click();
-            }
+           
         }
+
+
         // ... add other methods for other controls within the ExportControl.
     }
 

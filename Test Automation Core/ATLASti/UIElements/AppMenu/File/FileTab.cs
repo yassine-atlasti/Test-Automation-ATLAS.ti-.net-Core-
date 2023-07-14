@@ -35,7 +35,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIElements.AppMenu.File
             var exportButton = _driver.FindElementByName("Export");
             exportButton.Click();
             return new ExportControl(_driver);
-        }
+        }                
 
         public void ClickClose()
         {
