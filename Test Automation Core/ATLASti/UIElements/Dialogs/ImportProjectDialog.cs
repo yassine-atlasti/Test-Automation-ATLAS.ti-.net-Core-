@@ -75,7 +75,7 @@ namespace Test_Automation_Core.UIElements.Dialogs
         public FilePicker ClickBrowseMediaFolderButton()
         {
             // Find the BrowseMediaFolderButton and click it
-            var mediaFolderButton = driver.FindElementByName("File Picker Button");
+            var mediaFolderButton = driver.FindElementByAccessibilityId("ContentIcon");
             mediaFolderButton.Click();
 
             // Return a new FilePickerDialog object, assuming that clicking the button opens this dialog

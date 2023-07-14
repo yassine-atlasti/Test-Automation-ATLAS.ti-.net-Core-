@@ -16,7 +16,7 @@ namespace Test_Automation_Core.Data.SmokeTestData
         public static readonly string previousWinOS = "Windows 10";
 
         public static readonly string actualMacOS = "Mac 13.1";
-        public static readonly string previousMacOS = "Mac 13.1";
+        public static readonly string previousMacOS = "Mac 10.15.7";
 
         //Smoke Test Folder Path 
 

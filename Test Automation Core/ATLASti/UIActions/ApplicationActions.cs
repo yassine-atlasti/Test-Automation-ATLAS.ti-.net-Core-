@@ -24,7 +24,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
             _app = app;
         }
 
-        public bool ImportProject(string filePath, string importType, string projectName)
+        public bool ImportProject(string filePath, string importType, string projectName, string mediaFolder="")
         {
             var welcomeControlWindow = _app.GetWelcomeControl();
             var filePickerDialog = _app.GetFilePickerDialog();
@@ -40,22 +40,21 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
             // Assume that each method performs the action that its name suggests
             welcomeControlWindow.ClickImportProjectButton();
             Thread.Sleep(2000);
-            filePickerDialog.EnterFileName(filePath+ "\\"+projectName);
+            filePickerDialog.EnterFileName(filePath+ @"\"+projectName);
 
             filePickerDialog.ClickOpenButton();
 
             //Wait 5 seconds for Import dialog to appear
-            Thread.Sleep(3000);
+            Thread.Sleep(5000);
 
             // If import type is QDPX and the MediaFolderButton is visible, handle the media folder selection
             if (importType == "QDPX" && importProjectDialog.IsMediaFolderButtonVisible())
             {
                 // Assume media folder is in the same directory as the QDPX file
-                string mediaFolderPath = Path.GetDirectoryName(filePath);
 
                 importProjectDialog.ClickBrowseMediaFolderButton();
-                filePickerDialog.EnterFilePath(mediaFolderPath);
-                filePickerDialog.ClickOpenButton();
+                filePickerDialog.EnterFilePath(mediaFolder);
+                filePickerDialog.ClickSelectFolderButton();
 
             }
 

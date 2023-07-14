@@ -22,34 +22,35 @@ namespace Test_Automation_Core.Data.OneDrive.Projects
         public static readonly string CHWinProdProjectsFolder = CHProjectsFolder + @"\Win\current Win Release";
         public static readonly string CHMacProdProjectsFolder = CHProjectsFolder + @"\Mac\current Mac Release";
 
-
-        public static readonly string CHWinPrevMajorProjectsFolder = CHProjectsFolder + @"\Win\A"+AtlasVariables.minor;
+        public static readonly string CHWinPrevMajorProjectsFolder = CHProjectsFolder + @"\Win\A"+AtlasVariables.minor + @"\" +AtlasVariables.winPreviousMajor;
         public static readonly string CHMacPrevMajorProjectsFolder = CHProjectsFolder + @"\Mac\A"+AtlasVariables.minor;
-
+        public static readonly string CHMacPrevMajorQDPXProjectsFolder = CHProjectsFolder + @"\Mac\A" + AtlasVariables.minor+ @"\" + "REFI QDA";
+        
         //Actual and Previous CH Projects exported from Windows
 
 
         public static readonly string WinProductionAtlProj = AtlasVariables.winProduction + "-" + SmokeTestVariables.actualWinOS + "-" + SmokeTestVariables.smokeTestproject + ".atlproj" + AtlasVariables.major;
         public static readonly string WinProductionQDPX = AtlasVariables.winProduction + "-" + SmokeTestVariables.actualWinOS + "-" + SmokeTestVariables.smokeTestproject + ".QDPX";
 
-
-        public static readonly string WinPreviousAtlProj = AtlasVariables.winPreviousMajor + "-" + SmokeTestVariables.previousWinOS + "-" + SmokeTestVariables.smokeTestproject + ".atlproj" + AtlasVariables.minor;
-        public static readonly string WinPreviousQDPX = AtlasVariables.winPreviousMajor + "-" + SmokeTestVariables.previousWinOS + "-" + SmokeTestVariables.smokeTestproject + ".QDPX";
-
+        public static readonly string WinPrevious = AtlasVariables.winPreviousMajor + "-" + SmokeTestVariables.previousWinOS + "-" + SmokeTestVariables.smokeTestproject;
+        public static readonly string WinPreviousAtlProj = WinPrevious + ".atlproj" + AtlasVariables.minor;
+        public static readonly string WinPreviousQDPX = WinPrevious + ".QDPX";
+        public static readonly string WinPreviousFolderMedia = CHWinPrevMajorProjectsFolder + @"\" + AtlasVariables.winPreviousMajor + " Media";
 
 
         //Actual and Previous CH Projects exported from Mac
         public static readonly string MacProductionAtlProj = AtlasVariables.macProduction + "-" + SmokeTestVariables.actualMacOS + "-" + SmokeTestVariables.smokeTestproject + ".atlproj" + AtlasVariables.major;
         public static readonly string MacProductionQDPX = AtlasVariables.macProduction + "-" + SmokeTestVariables.actualMacOS + "-" + SmokeTestVariables.smokeTestproject + ".QDPX";
 
-        public static readonly string MacPreviousAtlProj = AtlasVariables.macPreviousMajor + "-" + SmokeTestVariables.previousMacOS + "-" + SmokeTestVariables.smokeTestproject + ".atlproj"+ AtlasVariables.minor;
-        public static readonly string MacPreviousQDPX = AtlasVariables.macPreviousMajor + "-" + SmokeTestVariables.previousMacOS + "-" + SmokeTestVariables.smokeTestproject + ".QDPX";
+        public static readonly string MacPrevious = AtlasVariables.macPreviousMajor + " - " + SmokeTestVariables.previousMacOS + " - " + SmokeTestVariables.smokeTestproject;
+        public static readonly string MacPreviousAtlProj = MacPrevious + ".atlproj"+ AtlasVariables.minor;
+        public static readonly string MacPreviousQDPX =MacPrevious + ".QDPX";
+        public static readonly string MacPreviousFolderMedia= CHMacPrevMajorQDPXProjectsFolder + @"\" + MacPrevious + " Media";
 
 
         //C&H Exported from actual VUT
         public static readonly string winVUTAtlProj = AtlasVariables.winVUT + "-" + SmokeTestVariables.actualOS + "-" + SmokeTestVariables.smokeTestproject + ".atlproj" + AtlasVariables.major;
         public static readonly string winVUTQDPX = AtlasVariables.winVUT + "-" + SmokeTestVariables.actualOS + "-" + SmokeTestVariables.smokeTestproject + ".QDPX";
-
         //Remove Spaces from file name
 
 

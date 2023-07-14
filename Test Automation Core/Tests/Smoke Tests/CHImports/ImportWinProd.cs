@@ -10,7 +10,7 @@ namespace Test_Automation_Core.Tests.Smoke_Tests.CHImports
     public class ImportWinProd
     {
         SmokeTestClass smokeTestClass = new SmokeTestClass();
-        [Test]
+        [Test, Order(1)]
         public void ImportAtlProj()
         {
 
@@ -26,7 +26,7 @@ namespace Test_Automation_Core.Tests.Smoke_Tests.CHImports
           
 
         }
-        [Test]
+        [Test, Order(2)]
         public void ImportQDPX()
         {
             smokeTestClass.initATLAS();

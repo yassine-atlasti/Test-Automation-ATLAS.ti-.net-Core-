@@ -10,7 +10,7 @@ namespace Test_Automation_Core.Tests.Smoke_Tests.Importe
     public class ImportWinVUT
     {
         SmokeTestClass smokeTestClass = new SmokeTestClass();
-        [Test]
+        [Test, Order(1)]
         public void ImportAtlProj()
         {
 
@@ -27,7 +27,7 @@ namespace Test_Automation_Core.Tests.Smoke_Tests.Importe
 
         }
 
-        [Test]
+        [Test, Order(2)]
         public void ImportQDPX()
         {
 

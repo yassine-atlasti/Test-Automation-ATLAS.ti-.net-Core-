@@ -20,7 +20,7 @@ namespace Test_Automation_Core.Data.SUT
         public static  string  macProduction = "23.2.0-4305";
 
 
-        public static string winPreviousMajor = "22.2.5";
+        public static string winPreviousMajor = "22.2.5(20221031.1).01";
         public static string macPreviousMajor = "22.2.3-3738";
         public static string installationPath = @"C:\Program Files\Scientific Software\ATLASti." + major;
 

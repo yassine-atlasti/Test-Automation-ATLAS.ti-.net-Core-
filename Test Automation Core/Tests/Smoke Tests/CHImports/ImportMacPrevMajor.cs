@@ -11,7 +11,7 @@ namespace Test_Automation_Core.Tests.Smoke_Tests.Importe
     public class ImportMacPrevMajor
     {
         SmokeTestClass smokeTestClass = new SmokeTestClass();
-        [Test]
+        [Test, Order(1)]
         public void ImportAtlProj()
         {
 
@@ -30,13 +30,13 @@ namespace Test_Automation_Core.Tests.Smoke_Tests.Importe
             
 
         }
-        [Test]
+        [Test, Order(2)]
         public void ImportQDPX()
         {
             smokeTestClass.initATLAS();
 
             //QDPX Import
-            bool qdpxImportState = smokeTestClass.GetAppActions().ImportProject(CHProjects.CHMacPrevMajorProjectsFolder, "QDPX", CHProjects.MacPreviousQDPX.Replace(" ", ""));
+            bool qdpxImportState = smokeTestClass.GetAppActions().ImportProject(CHProjects.CHMacPrevMajorQDPXProjectsFolder, "QDPX", CHProjects.MacPreviousQDPX.Replace(" ", ""), CHProjects.MacPreviousFolderMedia);
             Assert.IsTrue(qdpxImportState);
 
             smokeTestClass.GetAppActions().CloseProjectAsync();
