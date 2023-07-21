@@ -435,6 +435,7 @@ namespace Test_Automation_Core.OS.Windows
                     if (element.Displayed)
                     {
                         state = true;
+                        element.Click();
                         break;
 
 

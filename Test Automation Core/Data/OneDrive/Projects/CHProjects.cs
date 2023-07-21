@@ -20,7 +20,7 @@ namespace Test_Automation_Core.Data.OneDrive.Projects
         public static readonly string CHMacVUTProjectsFolder = CHProjectsFolder +@"\Mac\VUT";
       
         public static readonly string CHWinProdProjectsFolder = CHProjectsFolder + @"\Win\current Win Release";
-        public static readonly string CHMacProdProjectsFolder = CHProjectsFolder + @"\Mac\current Mac Release";
+        public static readonly string CHMacProdProjectsFolder = CHProjectsFolder + @"\Mac\current Mac Release\"+AtlasVariables.macProduction;
 
         public static readonly string CHWinPrevMajorProjectsFolder = CHProjectsFolder + @"\Win\A"+AtlasVariables.minor + @"\" +AtlasVariables.winPreviousMajor;
         public static readonly string CHMacPrevMajorProjectsFolder = CHProjectsFolder + @"\Mac\A"+AtlasVariables.minor;

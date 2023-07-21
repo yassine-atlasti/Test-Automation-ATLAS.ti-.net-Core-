@@ -43,42 +43,36 @@ namespace Test_Automation_Core.Tests
         [Test]
         public async Task Update()
         {
-          
+
+            _driver = systemActions.ClassInitialize("Root");
+
 
             //Uninstall ATLAS.ti
 
-            _driver = systemActions.ClassInitialize("Root");
             systemActions = new SystemActions(_driver);
 
-
+            // systemActions.MinimizeAllWindows(_driver);
 
             systemActions.UninstallApp(AtlasVariables.uninstallPath);
-            
 
             //Download 
             string downloadUrl = @"https://cdn.atlasti.com/win/nightly/23-C4E24425-7597-4DB4-BEAC-4C2CFBBB7A7C/develop/Atlasti_Nightly_develop.exe";
-            string major = "23";
-            string downloadPath = @"C:\Users\yassinemahfoudh\Downloads";
-            string fileName = "Atlasti_Nightly_develop.exe";
 
-            systemActions.MinimizeAllWindows(_driver);
-
-            await systemActions.DownloadFileAsync(downloadUrl, fileName);
-
-
-
-           
+            await systemActions.DownloadFileAsync(downloadUrl, AtlasVariables.fileNameNightly);
 
             _driver.Quit();
-            
+
+
+
             //Install
-            string installerPath = downloadPath + "\\" + fileName;
-            string windowName = "Setup - ATLAS.ti " + major;
-            _driver = systemActions.ClassInitialize(installerPath);
+            string windowName = "Setup - ATLAS.ti " + AtlasVariables.major;
+
+            _driver = systemActions.ClassInitialize(AtlasVariables.installerPathNightly);
+
 
 
             InstallerActions installer = new InstallerActions(_driver);
-            installer.InstallATLASti(installerPath, major);
+            installer.InstallATLASti(AtlasVariables.installerPathNightly, AtlasVariables.major);
         }
     }
 }

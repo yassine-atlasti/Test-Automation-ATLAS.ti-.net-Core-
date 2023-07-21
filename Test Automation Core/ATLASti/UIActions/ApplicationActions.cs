@@ -273,6 +273,10 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
             string windowName = projectName + " - ATLAS.ti";
             bool openState = systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "Window", windowName, 35);
 
+            //Check if project recovery dialog appears , if yes click it
+            systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "Button", "OK", 1);
+           
+
             return openState;
         }
 
@@ -411,6 +415,11 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
 
         public void LiveChat(string chatText)
         {
+            if (_app.GetWelcomeControl().IsWelcomeWindowDisplayed())
+            {
+                OpenProject(SmokeTestVariables.smokeTestproject);
+            }
+
             // Open the project window's app menu
             var appMenu = _app.GetProjectWindow().getAppMenu();
 
@@ -447,10 +456,11 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
         }
         public void SendCrashReport(string email, string description)
         {
+           
             CrashReportDialog reportCrashDialog = new CrashReportDialog(_app.getDriver());
-
-            reportCrashDialog.EnterCrashDescription(description);
             reportCrashDialog.EnterEmail(email);
+            reportCrashDialog.EnterCrashDescription(description);
+            
             reportCrashDialog.ClickSendErrorButton();
 
 

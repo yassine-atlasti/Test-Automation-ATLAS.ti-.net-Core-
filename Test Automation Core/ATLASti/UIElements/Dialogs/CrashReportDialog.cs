@@ -20,11 +20,14 @@ namespace Test_Automation_Core.ATLAS.ti.UIElements.Dialogs
 
         // Add methods for interacting with Report Crash Dialog elements as needed
 
+
+      
         public void EnterCrashDescription(string problemDescription)
         {
            var CrashDialogElement = driver.FindElementByTagName("Window").FindElementByName("ATLAS.ti Problem");
 
-            var problemDescriptionTextField = CrashDialogElement.FindElementByAccessibilityId("DescriptionTextField");
+
+                var problemDescriptionTextField = CrashDialogElement.FindElementByAccessibilityId("DescriptionTextField");
 
             problemDescriptionTextField.Click();
            

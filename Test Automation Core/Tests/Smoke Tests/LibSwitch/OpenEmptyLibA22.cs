@@ -13,7 +13,7 @@ namespace Test_Automation_Core.Tests.Smoke_Tests.LibSwitch
 
         [Test]
 
-        public void openLibraryYanik()
+        public void openEmptyLibA22()
         {
             smokeTestClass.initSmokeTest();
             smokeTestClass.initATLAS();

@@ -29,9 +29,11 @@ namespace Test_Automation_Core.Data.SUT
         public static  string backUpPath = @"C:\Program Files\Scientific Software\ATLASti." + major + @"\SSD.ATLASti.Backup.exe";
 
         public static string fileNameRC =  "Atlasti_" + AtlasVariables.winVUT + ".exe";
+        public static string fileNameNightly = "Atlasti_Nightly_develop.exe";
 
         public static string installerPathRC = @"C:\Users\yassinemahfoudh\Downloads\"+ fileNameRC;
        public static string installerPathNightly = @"C:\Users\yassinemahfoudh\Downloads\Atlasti_Nightly_develop.exe";
+
         public static string uninstallPath=@"Control Panel\Programs\Programs and Features\ATLAS.ti " + major;
 
 
