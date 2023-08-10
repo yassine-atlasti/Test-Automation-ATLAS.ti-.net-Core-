@@ -85,7 +85,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
 
             //check if welcome Window is displayed or another project is actually open, if yes open the project that should be exported
 
-            if (welcomeWindow.IsWelcomeWindowDisplayed() || !projectWindow.IsProjectOpen(projectName))
+            if ( !projectWindow.IsProjectOpen(projectName))
             {
                 OpenProject(projectName);
 
@@ -96,7 +96,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
 
             // Assume that each method performs the action that its name suggests
             var fileTab = appMenu.ClickFile();
-            Thread.Sleep(500);
+            Thread.Sleep(1000);
             ExportControl exportControl = fileTab.ClickExport();
             string exportTypeLower = exportType.ToLower();
             FilePicker filePickerDialog;

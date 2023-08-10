@@ -16,9 +16,9 @@ namespace Test_Automation_Core.Tests.Smoke_Tests.Support
         public void RaiseException()
         {
             smokeTestClass.initATLAS();
-            smokeTestClass.GetAppActions().OpenProject(SmokeTestVariables.smokeTestproject);
+           // smokeTestClass.GetAppActions().OpenProject(SmokeTestVariables.smokeTestproject);
              smokeTestClass.GetAppActions().RaiseException();
-            Thread.Sleep(20000);
+            Thread.Sleep(25000);
         }
         [Test, Order(2)]
         public void CrashReportVisible() {
@@ -34,6 +34,7 @@ namespace Test_Automation_Core.Tests.Smoke_Tests.Support
        [Test, Order(3)]
         public void SendCrashReport()
         {
+            smokeTestClass.initATLAS();
 
             smokeTestClass.GetAppActions().SendCrashReport("tester@atlasti.com", "QA Test, please Ignore");
 

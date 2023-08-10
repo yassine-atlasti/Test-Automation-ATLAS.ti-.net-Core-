@@ -10,7 +10,6 @@ namespace Test_Automation_Core.Tests.Smoke_Tests
     internal class DeleteCH
     {
         SmokeTestClass smokeTestClass = new SmokeTestClass();
-
         [Test]
         public async Task deleteCHProject()
         {
