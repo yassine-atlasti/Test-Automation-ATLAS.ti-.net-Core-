@@ -27,13 +27,13 @@ namespace Test_Automation_Core.Tests
         ApplicationActions appActions;
         WelcomeWindow welcomeWindow;
         string major = "23";
-
         SystemActions systemActions = new SystemActions();
+
         // [OneTimeSetUp]
 
 
-        
-           public void initBackUpApp()
+
+        public void initBackUpApp()
            {
                var applicationPath2 = @"C:\Program Files\Scientific Software\ATLASti.23\SSD.ATLASti.Backup.exe";
                var appOptions2 = new AppiumOptions();
@@ -65,14 +65,33 @@ namespace Test_Automation_Core.Tests
             _driver.Quit();
         }
 
+        [Test]
+        public static void GetAllFilenames()
+        {
+
+           
+            
+
+            try
+            {
+                string[] filenames = SystemActions.GetFilenamesInDirectoryByType(@"\\Mac\Home\Library\CloudStorage\OneDrive-ATLAS.tiScientificSoftwareDevelopmentGmbH\Testing stuff\Test Data\Projects\C&H all versions\Mac\A22","atlproj22"); // Change the path to your directory
+                foreach (var filename in filenames)
+                {
+                    Console.WriteLine(filename);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
 
 
 
 
 
-        
         //Testing SendSuggestion Action
-       // [Test]
+        // [Test]
         public void TestMethod1()
         {
             App appControl = new App(_driver);

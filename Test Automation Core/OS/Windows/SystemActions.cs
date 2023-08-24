@@ -50,13 +50,7 @@ namespace Test_Automation_Core.OS.Windows
                 OpenApp(applicationPath, applicationName);
      
             }
-            if (appPath == AtlasVariables.installerPathRC || appPath==AtlasVariables.installerPathNightly)
-            {
-                //It's a temorary solution
-                OpenApp(applicationPath, applicationName);
-                KillProcessByName(applicationName);
-
-            }
+     
             // Now initialize the WindowsDriver
             AppiumOptions appOptions = new AppiumOptions();
              appOptions.AddAdditionalCapability("app", applicationPath);
@@ -495,6 +489,37 @@ namespace Test_Automation_Core.OS.Windows
             return Path.Combine(folder, fileName);
         }
 
+
+        public static string[] GetAllFilenamesInDirectory(string directoryPath)
+        {
+            if (!Directory.Exists(directoryPath))
+            {
+                throw new DirectoryNotFoundException($"The directory {directoryPath} does not exist.");
+            }
+
+            return Directory.GetFiles(directoryPath);
+        }
+        public static string[] GetFilenamesInDirectoryByType(string directoryPath, string fileType)
+        {
+            if (!Directory.Exists(directoryPath))
+            {
+                throw new DirectoryNotFoundException($"The directory {directoryPath} does not exist.");
+            }
+
+            // Ensure fileType starts with a dot for consistency
+            if (!fileType.StartsWith("."))
+            {
+                fileType = "." + fileType;
+            }
+
+            // Fetching full paths and converting them to just filenames
+            string[] fullPaths = Directory.GetFiles(directoryPath, $"*{fileType}");
+            for (int i = 0; i < fullPaths.Length; i++)
+            {
+                fullPaths[i] = Path.GetFileName(fullPaths[i]);
+            }
+            return fullPaths;
+        }
 
     }
 
