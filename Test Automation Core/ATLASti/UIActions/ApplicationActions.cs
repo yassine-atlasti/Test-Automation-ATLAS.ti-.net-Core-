@@ -12,6 +12,8 @@ using Test_Automation_Core.OS.Windows;
 using Test_Automation_Core.UIElements.AppMenu.File;
 using Test_Automation_Core.Data.SmokeTestData;
 using Test_Automation_Core.Data.SUT;
+using Test_Automation_Core.ATLASti.UIElements.Dialogs;
+using OpenQA.Selenium.Interactions;
 
 namespace Test_Automation_Core.ATLAS.ti.UIActions
 {
@@ -30,7 +32,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
             var filePickerDialog = _app.GetFilePickerDialog();
             var importProjectDialog = _app.GetImportProjectDialog();
             var atlasProjectWindow = _app.GetProjectWindow();
-
+            bool importState;
             if (!welcomeControlWindow.IsWelcomeWindowDisplayed())
             {
                 CloseProjectAsync();
@@ -46,6 +48,12 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
 
             //Wait 5 seconds for Import dialog to appear
             Thread.Sleep(5000);
+
+            importState = importProjectDialog.IsProjectLoaded();
+
+
+           
+            if(importState) { 
 
             // If import type is QDPX and the MediaFolderButton is visible, handle the media folder selection
             if (importType == "QDPX" && importProjectDialog.IsMediaFolderButtonVisible())
@@ -66,10 +74,16 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
 
 
             // You can add more actions or checks here, such as validating that the project was imported correctly
+          
+            // if (!CheckForImportProjectErrors())  => continue;
 
             SystemActions systemActions = new SystemActions();
             string windowName = projectName + " - ATLAS.ti";
-            bool importState = systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "Window", windowName, 35);
+             importState = systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "Window", windowName, 35);
+
+                 } 
+             
+           
 
             return importState;
         }
@@ -466,5 +480,53 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
 
         }
 
+        
+
+
+      
+  
+
+public void CloseErrorDialog()
+    {
+        try
+        {
+                // If "OK" not found, try to find and click the "Cancel" button
+                var cancelButton = _app.getDriver().FindElementByName("Cancel");
+                cancelButton.Click();
+            }
+        catch (NoSuchElementException)
+        {
+            try
+            {
+                
+                    // Try to find and click the "OK" button
+                    var okButton = _app.getDriver().FindElementByName("OK");
+                    okButton.Click();
+                }
+            catch (NoSuchElementException ex)
+            {
+                Console.WriteLine("Neither 'OK' nor 'Cancel' button found: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error while trying to click 'Cancel' button: " + ex.Message);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error while trying to click 'OK' button: " + ex.Message);
+        }
+    }
+
+
+        public void CloseATLAS(string windowName="ATLAS.ti")
+        {
+            // Find the window by its name
+            var window = _app.getDriver().FindElementByTagName("Window").FindElementByName(windowName);
+
+
+            window.SendKeys(Keys.Alt + "F4");
+
+        }
     }
 }

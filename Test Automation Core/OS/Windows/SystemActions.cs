@@ -18,6 +18,7 @@ using OpenQA.Selenium.Appium;
 using Test_Automation_Core.Data.SUT;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
 using static System.Net.WebRequestMethods;
+using OpenQA.Selenium.Interactions;
 
 namespace Test_Automation_Core.OS.Windows
 {
@@ -58,7 +59,8 @@ namespace Test_Automation_Core.OS.Windows
 
 
             WindowsDriver<WindowsElement> driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appOptions);
-             return driver;
+
+            return driver;
 
         }
 
@@ -449,7 +451,7 @@ namespace Test_Automation_Core.OS.Windows
         }
 
 
-        public void KillProcessByName(string processName)
+        public static void KillProcessByName(string processName)
         {
             // Get all processes with the exact name
             Process[] processes = Process.GetProcessesByName(processName);
@@ -513,13 +515,23 @@ namespace Test_Automation_Core.OS.Windows
             }
 
             // Fetching full paths and converting them to just filenames
-            string[] fullPaths = Directory.GetFiles(directoryPath, $"*{fileType}");
+            string[] fullPaths = Directory.GetFiles(directoryPath, $"*{fileType}*");
             for (int i = 0; i < fullPaths.Length; i++)
             {
                 fullPaths[i] = Path.GetFileName(fullPaths[i]);
             }
             return fullPaths;
         }
+
+        // Helper method to take a screenshot
+        public static void TakeScreenshot(WindowsDriver<WindowsElement> driver,string logFolderPath, string screenshotFileName)
+        {
+            Screenshot screenshot = driver.GetScreenshot();
+
+            string screenshotPath = Path.Combine(logFolderPath, screenshotFileName);
+            screenshot.SaveAsFile(screenshotPath, ScreenshotImageFormat.Png);
+        }
+       
 
     }
 

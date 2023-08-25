@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Test_Automation_Core.UIElements.AtlasWindows;
 using TextCopy;
 using Test_Automation_Core.OS.Windows;
+using OpenQA.Selenium.Interactions;
 
 namespace Test_Automation_Core.UIElements.Dialogs
 {
@@ -106,10 +107,32 @@ namespace Test_Automation_Core.UIElements.Dialogs
 
             }
 
+        public bool IsProjectLoaded()
+        {
+           
+            try
+            {
+                // Try to find the MediaFolderButton
+                var isProjectNameFieldVisible = driver.FindElementByAccessibilityId("NewProjectNameBox");
 
-
-
-
+                // If the button is found and is displayed, return true
+                return isProjectNameFieldVisible.Displayed;
+            }
+            catch (NoSuchElementException)
+            {
+                // If the button is not found, it is not visible, so return false
+                return false;
+            }
+            catch (OpenQA.Selenium.WebDriverException)
+            {
+                // If the button is not found, it is not visible, so return false
+                return false;
+            }
 
         }
+
+        
+        
+
+    }
 }
