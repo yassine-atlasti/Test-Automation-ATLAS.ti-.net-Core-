@@ -66,7 +66,6 @@ namespace Test_Automation_Core.Tests
         [OneTimeSetUp]
         public void initATLAS()
         {
-            //initSmokeTest();
 
             _driver = systemActions.ClassInitialize(AtlasVariables.appPath);
             systemActions= new SystemActions(_driver);

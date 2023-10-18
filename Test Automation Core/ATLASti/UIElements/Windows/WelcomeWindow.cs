@@ -50,12 +50,12 @@ namespace Test_Automation_Core.UIElements.WelcomeWindow
             WindowsElement parentControl = driver.FindElementByAccessibilityId("TheWelcomeControl");
 
             // Find all image elements within the control
-            var images = parentControl.FindElementsByTagName("Image").Take(4).ToArray();
+            var images = parentControl.FindElementsByTagName("Image").Take(5).ToArray();
 
            
             
                 // Click the third image (0-based index, so index 3 is the fourth image)
-                images[3].Click();
+                images[4].Click();
             
         }
 

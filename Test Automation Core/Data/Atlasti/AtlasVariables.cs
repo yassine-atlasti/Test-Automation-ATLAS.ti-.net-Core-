@@ -13,10 +13,10 @@ namespace Test_Automation_Core.Data.SUT
         public static string major = "23";
         public static string minor = "22";
 
-        public static  string winVUT = "23.2.3.27778"; 
+        public static  string winVUT = "23.3.2.28723"; 
         public static string macVUT = "";
 
-        public static  string winProduction = "23.2.2.27458";
+        public static  string winProduction = "23.2.3.27778";
         public static  string  macProduction = "23.2.1-4325";
 
 

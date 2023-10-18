@@ -20,7 +20,7 @@ namespace Test_Automation_Core.Tests.SpecialTests
     [TestFixture]
     public class ImportAllProjects
     {
-        string projectsFilePath = "Z:\\Desktop\\New folder";
+        string projectsFilePath = "\\\\Mac\\Home\\Library\\CloudStorage\\OneDrive-ATLAS.tiScientificSoftwareDevelopmentGmbH\\Testing stuff\\Test Data\\Projects\\Projects for Check Lists";
 
 
         SmokeTestClass smokeTestClass = new SmokeTestClass();
@@ -77,8 +77,10 @@ namespace Test_Automation_Core.Tests.SpecialTests
 
                     // Atlproj import
                     bool atlprojImportState = smokeTestClass.GetAppActions().ImportProject(projectsFilePath, "AtlProj", fileName);
+               
+                var timeStamp = DateTime.Now.ToString("yyyyMMddHHmmss");
 
-                    if (atlprojImportState)
+                if (atlprojImportState)
                     {
                         // Move successful imports to the "Successful" subfolder
                         string sourcePath = Path.Combine(projectsFilePath, fileName);
@@ -89,7 +91,9 @@ namespace Test_Automation_Core.Tests.SpecialTests
                     }  
                 
                   if(atlprojImportState==false)  {
-                    SystemActions.TakeScreenshot(smokeTestClass.GetDriver(), logFolderPath, $"screenshot_{DateTime.Now:yyyyMMddHHmmss}.png");
+                    
+
+                    SystemActions.TakeScreenshot(smokeTestClass.GetDriver(), logFolderPath, $"screenshot_{timeStamp}.png");
 
                     //Kill ATLAS to avoid System.IO.IOException while moving project to failed folder
                     SystemActions.KillProcessByName("Atlasti" + AtlasVariables.major);
@@ -106,7 +110,7 @@ namespace Test_Automation_Core.Tests.SpecialTests
                         
                         
 
-                        LogUnsuccessfulProject(fileName, "Importing project failed.");
+                        LogUnsuccessfulProject(fileName, "Importing project failed." );
 
 
                     //re-start ATLAS.ti
@@ -118,7 +122,7 @@ namespace Test_Automation_Core.Tests.SpecialTests
 
                 // Perform assertions to verify the result of importing
                 // You can use NUnit's assertions here
-                Assert.IsTrue(atlprojImportState, $"Importing project {fileName} failed.");
+                Assert.IsTrue(atlprojImportState, $"Importing project {fileName} failed. ");
                 
                 
             }
