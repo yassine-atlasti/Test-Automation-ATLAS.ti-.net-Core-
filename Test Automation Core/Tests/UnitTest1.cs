@@ -327,7 +327,20 @@ Assert.IsTrue(switchResult);
             crashReportDialog.ClickSendErrorButton();
 
         }
+
+        [Test]
+        public void TestMethod8()
+        {
+            ProgramFindFileName.Main();
+
+        }
+
+
+
         
         
     }
+
+
+
 }

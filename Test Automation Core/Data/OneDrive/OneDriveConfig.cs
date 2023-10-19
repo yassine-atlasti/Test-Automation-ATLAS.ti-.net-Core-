@@ -10,7 +10,7 @@ namespace Test_Automation_Core.Data.OneDrive
     {
 
 
-        public const string testingStuffPath = @"\\Mac\Home\Library\CloudStorage\OneDrive-ATLAS.tiScientificSoftwareDevelopmentGmbH\Testing stuff";
+        public const string testingStuffPath = @"C:\Users\yassine.mahfoudh\OneDrive - ATLAS.ti Scientific Software Development GmbH\Testing stuff";
 
 
 
