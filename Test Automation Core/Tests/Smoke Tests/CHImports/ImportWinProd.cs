@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Test_Automation_Core.Data.OneDrive.Projects;
+using Test_Automation_Core.Data.SUT;
+using Test_Automation_Core.OS.Windows;
 
 namespace Test_Automation_Core.Tests.Smoke_Tests.CHImports
 {
@@ -16,9 +18,11 @@ namespace Test_Automation_Core.Tests.Smoke_Tests.CHImports
 
             smokeTestClass.initATLAS();
 
-            //Atlproj import
+           string WinProductionAtlProjPath = SystemActions.FindFilesByPartialName(CHProjects.CHWinProdProjectsFolder, AtlasVariables.winProduction, ".atlproj" + AtlasVariables.major, out bool isFound );
 
-            bool atlprojImportState = smokeTestClass.GetAppActions().ImportProject(CHProjects.CHWinProdProjectsFolder, "AtlProj", CHProjects.WinProductionAtlProj.Replace(" ", ""));
+        //Atlproj import
+
+        bool atlprojImportState = smokeTestClass.GetAppActions().ImportProject(WinProductionAtlProjPath, "AtlProj", CHProjects.WinProductionAtlProj.Replace(" ", ""));
             Assert.IsTrue(atlprojImportState);
 
             smokeTestClass.GetAppActions().CloseProjectAsync();
@@ -32,7 +36,7 @@ namespace Test_Automation_Core.Tests.Smoke_Tests.CHImports
             smokeTestClass.initATLAS();
 
             //QDPX Import
-            bool qdpxImportState = smokeTestClass.GetAppActions().ImportProject(CHProjects.CHWinProdProjectsFolder, "QDPX", CHProjects.WinProductionQDPX.Replace(" ", ""));
+            bool qdpxImportState = smokeTestClass.GetAppActions().ImportProject(CHProjects.WinProductionQDPXPath, "QDPX", CHProjects.WinProductionQDPX.Replace(" ", ""));
             Assert.IsTrue(qdpxImportState);
             smokeTestClass.GetAppActions().CloseProjectAsync();
 

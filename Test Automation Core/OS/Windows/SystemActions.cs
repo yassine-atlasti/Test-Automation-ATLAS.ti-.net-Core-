@@ -523,6 +523,42 @@ namespace Test_Automation_Core.OS.Windows
             return fullPaths;
         }
 
+
+        // Locate a file within a folder by using its file path, extension, and a substring of its name.
+        // This provides a flexible way to find files without being sensitive to naming conventions.
+        public static string FindFilesByPartialName(string directoryPath, string partialFileName, string fileExtension, out bool isFound)
+        {
+            isFound = false;
+
+            if (Directory.Exists(directoryPath))
+            {
+                string searchPattern = "*" + fileExtension;
+                string[] files = Directory.GetFiles(directoryPath, searchPattern);
+
+                foreach (string file in files)
+                {
+                    if (Path.GetFileName(file).Contains(partialFileName))
+                    {
+                        isFound = true;
+                        return file; // Return the found file
+                    }
+                }
+
+                // If not found, look in the subdirectories
+                string[] subDirectories = Directory.GetDirectories(directoryPath);
+                foreach (string subDirectory in subDirectories)
+                {
+                    string foundFile = FindFilesByPartialName(subDirectory, partialFileName, fileExtension, out isFound);
+                    if (isFound)
+                    {
+                        return foundFile; // Return the found file from the subdirectory
+                    }
+                }
+            }
+
+            return null; // Return null if not found
+        }
+
         // Helper method to take a screenshot
         public static void TakeScreenshot(WindowsDriver<WindowsElement> driver,string logFolderPath, string screenshotFileName)
         {

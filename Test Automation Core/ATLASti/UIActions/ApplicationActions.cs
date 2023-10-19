@@ -42,7 +42,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
             // Assume that each method performs the action that its name suggests
             welcomeControlWindow.ClickImportProjectButton();
             Thread.Sleep(2000);
-            filePickerDialog.EnterFileName(filePath+ @"\"+projectName);
+            filePickerDialog.EnterFileName(filePath);
 
             filePickerDialog.ClickOpenButton();
 

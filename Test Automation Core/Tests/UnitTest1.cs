@@ -331,7 +331,7 @@ Assert.IsTrue(switchResult);
         [Test]
         public void TestMethod8()
         {
-            ProgramFindFileName.Main();
+            ProgramFindFileName.go();
 
         }
 

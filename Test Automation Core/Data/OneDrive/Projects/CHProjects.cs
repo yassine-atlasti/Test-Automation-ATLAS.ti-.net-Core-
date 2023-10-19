@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Test_Automation_Core.Data.SmokeTestData;
 using Test_Automation_Core.Data.SUT;
+using Test_Automation_Core.OS.Windows;
 
 namespace Test_Automation_Core.Data.OneDrive.Projects
 {
@@ -25,12 +26,14 @@ namespace Test_Automation_Core.Data.OneDrive.Projects
         public static readonly string CHWinPrevMajorProjectsFolder = CHProjectsFolder + @"\Win\A"+AtlasVariables.minor + @"\" +AtlasVariables.winPreviousMajor;
         public static readonly string CHMacPrevMajorProjectsFolder = CHProjectsFolder + @"\Mac\A"+AtlasVariables.minor;
         public static readonly string CHMacPrevMajorQDPXProjectsFolder = CHProjectsFolder + @"\Mac\A" + AtlasVariables.minor+ @"\" + "REFI QDA";
-        
+
         //Actual and Previous CH Projects exported from Windows
 
-
+        //public static readonly string WinProductionAtlProjPath = SystemActions.FindFilesByPartialName(CHWinProdProjectsFolder, AtlasVariables.winProduction, ".atlproj" + AtlasVariables.major);
         public static readonly string WinProductionAtlProj = AtlasVariables.winProduction + "-" + SmokeTestVariables.actualWinOS + "-" + SmokeTestVariables.smokeTestproject + ".atlproj" + AtlasVariables.major;
+        public static readonly string WinProductionQDPXPath = SystemActions.FindFilesByPartialName(CHWinProdProjectsFolder, AtlasVariables.winProduction, ".QDPX" + AtlasVariables.major, out bool isFound);
         public static readonly string WinProductionQDPX = AtlasVariables.winProduction + "-" + SmokeTestVariables.actualWinOS + "-" + SmokeTestVariables.smokeTestproject + ".QDPX";
+
 
         public static readonly string WinPrevious = AtlasVariables.winPreviousMajor + "-" + SmokeTestVariables.previousWinOS + "-" + SmokeTestVariables.smokeTestproject;
         public static readonly string WinPreviousAtlProj = WinPrevious + ".atlproj" + AtlasVariables.minor;
