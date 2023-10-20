@@ -124,7 +124,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
             }
             else if (exportTypeLower == "atlproj")
             {  //unselect doesn't work!
-               //exportControl.UnselectCheckBox();
+              // exportControl.UnselectCheckBox();
                 filePickerDialog = exportControl.ClickProjectBundleButton("TransferBundleTab");
             }
             else
@@ -138,12 +138,17 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
 
            // filePickerDialog.EnterFilePath(filePath);
             //Remove Spaces from file name
-            fileName = AtlasVariables.winVUT + "-" + SmokeTestVariables.actualOS + "-" + SmokeTestVariables.smokeTestproject;
            
             Thread.Sleep(2000);
+            if (fileName == "")
+            {
+                filePickerDialog.EnterFileName(filePath + "\\" + projectName);
+                
+            }
+            else { filePickerDialog.EnterFileName(filePath + "\\" + fileName); }
 
-            filePickerDialog.EnterFileName(filePath+ "\\"+ fileName.Replace(" ", ""));
             filePickerDialog.ClickSaveButton();
+
 
             //handle QDPX Export Results
             // You can add more actions or checks here, such as validating that the project was exported correctly
@@ -309,6 +314,7 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
                 var fileTab = appMenu.ClickFile();
                 fileTab.ClickClose();
 
+
                 /**  // You can add more actions or checks here, such as validating that the project was closed correctly
                   SystemActions systemActions = new SystemActions();
                   string windowName = "ATLAS.ti";
@@ -473,7 +479,9 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
         {
            
             CrashReportDialog reportCrashDialog = new CrashReportDialog(_app.getDriver());
-            reportCrashDialog.EnterEmail(email);
+            reportCrashDialog.moveDialogToForeground();
+
+                reportCrashDialog.EnterEmail(email);
             reportCrashDialog.EnterCrashDescription(description);
             
             reportCrashDialog.ClickSendErrorButton();

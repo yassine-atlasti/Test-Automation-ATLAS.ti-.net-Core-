@@ -22,11 +22,11 @@ namespace Test_Automation_Core.Tests.Smoke_Tests
 
             //Create Smoke Test Folder
 
-            systemActions.CreateFolder(SmokeTestVariables.smokeTestFolder);
+            systemActions.CreateFolder(SmokeTestVariables.smokeTestFolderPath);
 
             //Extract Libraries
 
-            systemActions.ExtractZip(SmokeTestLibraries.library1, SmokeTestVariables.smokeTestFolderPath);
+           systemActions.ExtractZip(SmokeTestLibraries.library1, SmokeTestVariables.smokeTestFolderPath);
 
             systemActions.ExtractZip(SmokeTestLibraries.library2, SmokeTestVariables.smokeTestFolderPath);
 

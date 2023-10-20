@@ -59,8 +59,19 @@ namespace Test_Automation_Core.UIElements.AppMenu.File
 
         public void UnselectCheckBox()
         {
-            var selectAllCheckbox = _driver.FindElementsByName("CheckIcon").First();
-            selectAllCheckbox.Click();
+            
+
+            // Navigate through the UI tree
+            WindowsElement ribbon = _driver.FindElementByName("Ribbon");
+            WindowsElement menu = (WindowsElement)ribbon.FindElementByName("PART_RibbonBackstage");
+            WindowsElement tabListItem = (WindowsElement)menu.FindElementByName("Export");
+            WindowsElement customElement = (WindowsElement)tabListItem.FindElementByAccessibilityId("TheExportControl");
+            WindowsElement tabControl = (WindowsElement)customElement.FindElementByClassName("TabControl");
+            WindowsElement tabItem = (WindowsElement)tabControl.FindElementByName("System.Windows.Controls.TabItem Header: Content:");
+            WindowsElement dataGrid = (WindowsElement)tabItem.FindElementByClassName("ListView");
+            WindowsElement headerRow = (WindowsElement)dataGrid.FindElementByClassName("GridViewHeaderRowPresenter");
+            WindowsElement columnDefinition =   (WindowsElement)headerRow.FindElementByName("ColumnDefinition #Selection");
+            columnDefinition.Click();
 
            
         }

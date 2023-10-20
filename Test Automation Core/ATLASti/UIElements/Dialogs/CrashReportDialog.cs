@@ -17,11 +17,12 @@ namespace Test_Automation_Core.ATLAS.ti.UIElements.Dialogs
         {
             this.driver = driver;
         }
+       
 
         // Add methods for interacting with Report Crash Dialog elements as needed
 
 
-      
+
         public void EnterCrashDescription(string problemDescription)
         {
            var CrashDialogElement = driver.FindElementByTagName("Window").FindElementByName("ATLAS.ti Problem");
@@ -66,7 +67,10 @@ namespace Test_Automation_Core.ATLAS.ti.UIElements.Dialogs
             CrashDialogElement.FindElementByName("Send Error Report").Click();
         }
 
-       
+       public void moveDialogToForeground()
+        {
+           // driver.ActivateApp("15260");
+        }
 
         
 

@@ -20,8 +20,7 @@ namespace Test_Automation_Core.Tests.SpecialTests
     [TestFixture]
     public class ImportAllProjects
     {
-        string projectsFilePath = "\\\\Mac\\Home\\Library\\CloudStorage\\OneDrive-ATLAS.tiScientificSoftwareDevelopmentGmbH\\Testing stuff\\Test Data\\Projects\\Projects for Check Lists";
-
+        string projectsFilePath = "C:\\Test Data\\Projects";
 
         SmokeTestClass smokeTestClass = new SmokeTestClass();
         
@@ -76,7 +75,7 @@ namespace Test_Automation_Core.Tests.SpecialTests
                     smokeTestClass.initATLAS();
 
                     // Atlproj import
-                    bool atlprojImportState = smokeTestClass.GetAppActions().ImportProject(projectsFilePath, "AtlProj", fileName);
+                    bool atlprojImportState = smokeTestClass.GetAppActions().ImportProject(projectsFilePath+"\\"+fileName, "AtlProj");
                
                 var timeStamp = DateTime.Now.ToString("yyyyMMddHHmmss");
 
