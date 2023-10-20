@@ -26,13 +26,14 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
             _app = app;
         }
 
-        public bool ImportProject(string filePath, string importType, string projectName, string mediaFolder="")
+        public bool ImportProject(string filePath, string importType, string mediaFolder="")
         {
             var welcomeControlWindow = _app.GetWelcomeControl();
             var filePickerDialog = _app.GetFilePickerDialog();
             var importProjectDialog = _app.GetImportProjectDialog();
             var atlasProjectWindow = _app.GetProjectWindow();
             bool importState;
+            string projectName=Path.GetFileName(filePath);
             if (!welcomeControlWindow.IsWelcomeWindowDisplayed())
             {
                 CloseProjectAsync();
@@ -66,8 +67,8 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
 
             }
 
-            // Set project name
-            importProjectDialog.EnterProjectName(projectName);
+                // Set project name
+                importProjectDialog.EnterProjectName(projectName);
 
             importProjectDialog.ClickImportButton();
 

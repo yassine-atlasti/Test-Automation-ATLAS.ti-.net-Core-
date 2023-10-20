@@ -39,7 +39,7 @@ namespace Test_Automation_Core.Tests.Smoke_Tests
             systemActions.UninstallApp(AtlasVariables.uninstallPath);
             
             //Download 
-            string downloadUrl = @"https://cdn.atlasti.com/win/" + AtlasVariables.major + "/Atlasti_" + AtlasVariables.winVUT + ".exe";
+            string downloadUrl = @"https://cdn.atlasti.com/win/" + AtlasVariables.actualMajor + "/Atlasti_" + AtlasVariables.winVUT + ".exe";
 
             await systemActions.DownloadFileAsync(downloadUrl, AtlasVariables.fileNameRC);
 
@@ -48,14 +48,14 @@ namespace Test_Automation_Core.Tests.Smoke_Tests
 
 
             //Install
-            string windowName = "Setup - ATLAS.ti " + AtlasVariables.major;
+            string windowName = "Setup - ATLAS.ti " + AtlasVariables.actualMajor;
 
             _driver = systemActions.ClassInitialize(AtlasVariables.installerPathRC);
 
          
 
             InstallerActions installer = new InstallerActions(_driver);
-            installer.InstallATLASti(AtlasVariables.installerPathRC, AtlasVariables.major);
+            installer.InstallATLASti(AtlasVariables.installerPathRC, AtlasVariables.actualMajor);
         }
 
     }

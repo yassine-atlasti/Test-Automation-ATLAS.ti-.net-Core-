@@ -96,7 +96,7 @@ namespace Test_Automation_Core.Tests.SpecialTests
                     SystemActions.TakeScreenshot(smokeTestClass.GetDriver(), logFolderPath, $"screenshot_{timeStamp}.png");
 
                     //Kill ATLAS to avoid System.IO.IOException while moving project to failed folder
-                    SystemActions.KillProcessByName("Atlasti" + AtlasVariables.major);
+                    SystemActions.KillProcessByName("Atlasti" + AtlasVariables.actualMajor);
 
                     Thread.Sleep(3000);
 

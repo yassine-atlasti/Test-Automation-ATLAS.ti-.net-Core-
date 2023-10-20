@@ -20,7 +20,7 @@ namespace Test_Automation_Core.Tests.Smoke_Tests.Importe
 
             //Atlproj import
 
-            bool atlprojImportState = smokeTestClass.GetAppActions().ImportProject(CHProjects.CHMacPrevMajorProjectsFolder, "AtlProj", CHProjects.MacPreviousAtlProj.Replace(" ", ""));
+            bool atlprojImportState = smokeTestClass.GetAppActions().ImportProject(CHProjects.MacPreviousAtlProjPath, "AtlProj");
             Assert.IsTrue(atlprojImportState);
 
             //Close Project
@@ -36,7 +36,7 @@ namespace Test_Automation_Core.Tests.Smoke_Tests.Importe
             smokeTestClass.initATLAS();
 
             //QDPX Import
-            bool qdpxImportState = smokeTestClass.GetAppActions().ImportProject(CHProjects.CHMacPrevMajorQDPXProjectsFolder, "QDPX", CHProjects.MacPreviousQDPX.Replace(" ", ""), CHProjects.MacPreviousFolderMedia);
+            bool qdpxImportState = smokeTestClass.GetAppActions().ImportProject(CHProjects.MacPreviousQDPXPath, "QDPX", CHProjects.MacPreviousFolderMedia);
             Assert.IsTrue(qdpxImportState);
 
             smokeTestClass.GetAppActions().CloseProjectAsync();

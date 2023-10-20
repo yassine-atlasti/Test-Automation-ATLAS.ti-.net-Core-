@@ -225,7 +225,7 @@ namespace Test_Automation_Core.OS.Windows
 
         public void UninstallApp( string uninstallPath)
         {
-            KillProcessByName("Atlasti" + AtlasVariables.major);
+            KillProcessByName("Atlasti" + AtlasVariables.actualMajor);
 
             if (Directory.Exists(AtlasVariables.installationPath))
             {

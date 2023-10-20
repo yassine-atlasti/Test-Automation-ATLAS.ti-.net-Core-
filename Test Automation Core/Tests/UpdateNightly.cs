@@ -68,13 +68,13 @@ namespace Test_Automation_Core.Tests
 
 
             //Install
-            string windowName = "Setup - ATLAS.ti " + AtlasVariables.major;
+            string windowName = "Setup - ATLAS.ti " + AtlasVariables.actualMajor;
 
             _driver = systemActions.ClassInitialize(AtlasVariables.installerPathNightly);
 
 
             InstallerActions installer = new InstallerActions(_driver);
-            installer.InstallATLASti(AtlasVariables.installerPathNightly, AtlasVariables.major);
+            installer.InstallATLASti(AtlasVariables.installerPathNightly, AtlasVariables.actualMajor);
         }
     }
 }
