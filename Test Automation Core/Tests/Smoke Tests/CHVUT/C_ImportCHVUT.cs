@@ -7,10 +7,9 @@ using Test_Automation_Core.Data.OneDrive.Projects;
 
 namespace Test_Automation_Core.Tests.Smoke_Tests.Importe
 {
-    public class ImportWinVUT
+    public class C_ImportCHVUT
     {
         SmokeTestClass smokeTestClass = new SmokeTestClass();
-        [Test, Order(1)]
         public void ImportAtlProj()
         {
 

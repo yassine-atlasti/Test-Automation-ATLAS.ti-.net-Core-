@@ -7,10 +7,10 @@ using Test_Automation_Core.Data.SmokeTestData;
 
 namespace Test_Automation_Core.Tests.Smoke_Tests
 {
-    internal class DeleteCH
+
+    public class B_DeleteCH
     {
         SmokeTestClass smokeTestClass = new SmokeTestClass();
-        [Test]
         public async Task deleteCHProject()
         {
             smokeTestClass.initATLAS();

@@ -9,13 +9,13 @@ using Test_Automation_Core.Data.SUT;
 
 namespace Test_Automation_Core.Tests.Smoke_Tests.Exports
 {
-    public class ExportWinVUT
+    
+    public class A_ExportCHVUT
     {
         SmokeTestClass smokeTestClass= new SmokeTestClass();
         string fileName = AtlasVariables.winVUT + "-" + SmokeTestVariables.actualOS + "-" + SmokeTestVariables.smokeTestproject;
 
 
-        [Test]
         public void exportAtlProj()
         {
             smokeTestClass.initATLAS();
