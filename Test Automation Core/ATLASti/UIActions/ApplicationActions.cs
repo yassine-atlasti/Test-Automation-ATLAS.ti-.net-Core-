@@ -312,6 +312,9 @@ namespace Test_Automation_Core.ATLAS.ti.UIActions
             if(!welcomeWindow.IsWelcomeWindowDisplayed()) {
                 // Assume that each method performs the action that its name suggests
                 var fileTab = appMenu.ClickFile();
+                Thread.Sleep(500);
+                fileTab.ClickSave();
+                Thread.Sleep(500);
                 fileTab.ClickClose();
 
 
@@ -532,7 +535,7 @@ public void CloseErrorDialog()
         {
             // Find the window by its name
             var window = _app.getDriver().FindElementByTagName("Window").FindElementByName(windowName);
-
+            window.SendKeys(Keys.Control + "s");
 
             window.SendKeys(Keys.Alt + "F4");
 

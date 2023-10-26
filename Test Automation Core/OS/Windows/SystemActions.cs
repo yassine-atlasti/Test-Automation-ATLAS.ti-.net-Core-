@@ -19,6 +19,7 @@ using Test_Automation_Core.Data.SUT;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
 using static System.Net.WebRequestMethods;
 using OpenQA.Selenium.Interactions;
+using Microsoft.Win32;
 
 namespace Test_Automation_Core.OS.Windows
 {
@@ -462,6 +463,7 @@ namespace Test_Automation_Core.OS.Windows
                 {
                     process.Kill(); // Forcefully terminate the process
                     process.WaitForExit(); // Optionally wait for the process to exit
+           
                 }
                 catch (Exception e)
                 {
@@ -567,7 +569,29 @@ namespace Test_Automation_Core.OS.Windows
             string screenshotPath = Path.Combine(logFolderPath, screenshotFileName);
             screenshot.SaveAsFile(screenshotPath, ScreenshotImageFormat.Png);
         }
-       
+
+        public static string GetOneDrivePath()
+        {
+            string oneDrivePath = null;
+
+            // For consumer accounts, the path is usually in the following registry key
+            oneDrivePath = (string)Registry.GetValue(
+                @"HKEY_CURRENT_USER\Software\Microsoft\OneDrive",
+                "UserFolder",
+                null);
+
+            // For business accounts, you might need to look at another location
+            if (string.IsNullOrEmpty(oneDrivePath))
+            {
+                oneDrivePath = (string)Registry.GetValue(
+                    @"HKEY_CURRENT_USER\Software\Microsoft\OneDrive\Accounts\Business1",
+                    "UserFolder",
+                    null);
+            }
+
+            return oneDrivePath;
+        }
+
 
     }
 

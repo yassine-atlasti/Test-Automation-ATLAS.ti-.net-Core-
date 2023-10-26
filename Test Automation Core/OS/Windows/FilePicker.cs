@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System.Net;
 using TextCopy;
@@ -54,7 +55,9 @@ namespace Test_Automation_Core.OS.Windows
             action.SendKeys(Keys.Alt+"n").KeyUp(Keys.Alt).Perform();
 
             // Paste the clipboard content
-            action.SendKeys(Keys.Control + "v").KeyUp(Keys.Control).Perform();
+              action.SendKeys(Keys.Control + "v").KeyUp(Keys.Control).Perform();
+          
+
 
         }
 

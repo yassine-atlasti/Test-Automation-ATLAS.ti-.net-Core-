@@ -93,7 +93,7 @@ namespace Test_Automation_Core.Tests
 
 
         }
-
+        public void closeDriver() { _driver.Close(); }
 
 
 

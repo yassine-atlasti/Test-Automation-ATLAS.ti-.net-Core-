@@ -328,13 +328,25 @@ Assert.IsTrue(switchResult);
 
         }
 
-        
-        
+        [Test]
+        public void TestMethod8() {
+            string oneDrivePath = SystemActions.GetOneDrivePath();
+            if (string.IsNullOrEmpty(oneDrivePath))
+            {
+                Console.WriteLine("OneDrive path not found.");
+            }
+            else
+            {
+                Console.WriteLine($"OneDrive is located at: {oneDrivePath}");
+            }
+        }
 
 
 
-        
-        
+
+
+
+
     }
 
 

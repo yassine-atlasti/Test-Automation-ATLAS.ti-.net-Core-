@@ -21,7 +21,7 @@ namespace Test_Automation_Core.Data.SmokeTestData
         //Smoke Test Folder Path 
 
         public static readonly string  smokeTestFolder = "SmokeTest_" + AtlasVariables.winVUT;
-      public static readonly string smokeTestFolderPath = "C:\\Users\\yassine.mahfoudh\\Desktop\\" + smokeTestFolder;
+      public static readonly string smokeTestFolderPath = @"C:\Users\yassinemahfoudh\Desktop" + smokeTestFolder;
 
 
         //Libraries  Names used for Smoke Tests

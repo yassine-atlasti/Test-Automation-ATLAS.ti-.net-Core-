@@ -13,11 +13,11 @@ namespace Test_Automation_Core.Data.SUT
         public static string actualMajor = "23";
         public static string previousMajor = "22";
 
-        public static  string winVUT = "23.3.2.28723"; 
+        public static  string winVUT = "23.3.3"; 
         public static string macVUT = "";
 
-        public static  string winProduction = "23.2.3.27778";
-        public static  string  macProduction = "23.2.1-4325";
+        public static  string winProduction = "23.3.3";
+        public static  string  macProduction = "23.3.0-28730";
 
 
         public static string winPreviousMajor = "22.2.5(20221031.1).01";
