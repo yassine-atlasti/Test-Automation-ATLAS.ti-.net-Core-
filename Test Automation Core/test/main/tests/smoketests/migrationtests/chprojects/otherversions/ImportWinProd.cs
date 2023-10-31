@@ -1,7 +1,7 @@
 ﻿using Test_Automation_Core.test.main.tests;
 using Test_Automation_Core.test.resources.test;
 
-namespace Test_Automation_Core.test.main.tests.smoketests.migrationtests.chprojects.otherversions
+namespace Test_Automation_Core.test.main.tests
 {
     [TestFixture]
     public class ImportWinProd

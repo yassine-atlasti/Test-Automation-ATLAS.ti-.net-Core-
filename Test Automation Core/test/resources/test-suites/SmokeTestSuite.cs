@@ -6,7 +6,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
     public class SmokeTestSuite
     {
         string testAssemblyPath = "TestAutomationFramework.dll";
-        string targetNameSpace = "Test_Automation_Core.test.main.tests.smoketests";
+        string targetNameSpace = "Test_Automation_Core.test.main.tests";
 
         [Test, Order(1)]
         public void Test1()

@@ -58,6 +58,7 @@ namespace Test_Automation_Core.test.main.tests
 
             try
             {
+                welcomeWindow.ClearSearch();
                 _driver.Manage().Window.Maximize();
             }
             catch (InvalidOperationException ex)

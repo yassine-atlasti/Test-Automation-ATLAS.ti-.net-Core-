@@ -3,7 +3,7 @@ using Test_Automation_Core.test.main.tests;
 using Test_Automation_Core.test.resources.test;
 using Test_Automation_Core.test.utilities.util;
 
-namespace Test_Automation_Core.test.main.tests.specialtests
+namespace Test_Automation_Core.test.main.tests
 {
     [TestFixture]
     public class ImportAllProjects

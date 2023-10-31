@@ -1,8 +1,7 @@
 ﻿using Test_Automation_Core.test.main.tests;
 using Test_Automation_Core.test.resources.test;
 using Test_Automation_Core.test.utilities.util;
-namespace Test_Automation_Core.test.main.tests.smoketests.backuptests
-{
+namespace Test_Automation_Core.test.main.tests;
 
     public class Test2
     {
@@ -39,4 +38,4 @@ namespace Test_Automation_Core.test.main.tests.smoketests.backuptests
         }
 
     }
-}
+
