@@ -304,7 +304,7 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
             {
                 // Assume that each method performs the action that its name suggests
                 var fileTab = appMenu.ClickFile();
-                Thread.Sleep(500);
+                Thread.Sleep(1000);
                 fileTab.ClickSave();
                 Thread.Sleep(500);
                 fileTab.ClickClose();
