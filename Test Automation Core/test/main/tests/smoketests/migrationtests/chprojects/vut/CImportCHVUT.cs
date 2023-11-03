@@ -3,20 +3,18 @@ using Test_Automation_Core.test.resources.test;
 
 namespace Test_Automation_Core.test.main.tests
 {
-    public class CImportCHVUT
+    public class CImportCHVUT:InitTests
     {
-        InitTests smokeTestClass = new InitTests();
         public void ImportAtlProj()
         {
 
-            smokeTestClass.initATLAS();
 
 
             //Atlproj import
 
-            bool atlprojImportState = smokeTestClass.GetAppActions().ImportProject(CHProjects.winVUTAtlProjPath, "AtlProj");
+            bool atlprojImportState = GetAppActions().ImportProject(CHProjects.winVUTAtlProjPath, "AtlProj");
             Assert.IsTrue(atlprojImportState);
-            smokeTestClass.GetAppActions().CloseProjectAsync();
+            GetAppActions().CloseProjectAsync();
 
 
 
@@ -26,12 +24,11 @@ namespace Test_Automation_Core.test.main.tests
         public void ImportQDPX()
         {
 
-            smokeTestClass.initATLAS();
 
             //QDPX Import
-            bool qdpxImportState = smokeTestClass.GetAppActions().ImportProject(CHProjects.winVUTQDPXPath, "QDPX");
+            bool qdpxImportState = GetAppActions().ImportProject(CHProjects.winVUTQDPXPath, "QDPX");
             Assert.IsTrue(qdpxImportState);
-            smokeTestClass.GetAppActions().CloseProjectAsync();
+            GetAppActions().CloseProjectAsync();
 
         }
     }

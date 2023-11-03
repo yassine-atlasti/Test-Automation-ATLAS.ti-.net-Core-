@@ -3,7 +3,7 @@ using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.test.main.tests.smoketests
 {
-    public class SmokeTestSuite
+    public class SmokeTestSuite 
     {
         string testAssemblyPath = "TestAutomationFramework.dll";
         string targetNameSpace = "Test_Automation_Core.test.main.tests";

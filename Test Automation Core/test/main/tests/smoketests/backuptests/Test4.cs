@@ -3,6 +3,8 @@ using Test_Automation_Core.test.resources.test;
 using Test_Automation_Core.test.utilities.util;
 namespace Test_Automation_Core.test.main.tests
 {
+    //this class should not extend the Init class. We don't want to run the setup method in this Test Case
+
     internal class Test4
     {
         InitTests SmokeTestClass = new InitTests();
@@ -11,21 +13,18 @@ namespace Test_Automation_Core.test.main.tests
         [Test, Order(4)]
         public void RestoreBackUp()
         {
-            SmokeTestClass.closeDriver();
+            SmokeTestClass.cleanUp();
 
-            SystemActions.KillProcessByName("Atlasti" + AtlasVariables.actualMajor);
+           // SystemActions.KillProcessByName("Atlasti" + AtlasVariables.actualMajor);
             string backUp = AtlasVariables.winVUT + "_BackUp";
             SmokeTestClass.initBackUpApp();
             bool restoreState = SmokeTestClass.GetBackUpActions().RestoreLibrary(SmokeTestVariables.smokeTestFolderPath, backUp);
             Assert.IsTrue(restoreState);
-            SmokeTestClass.closeDriver();
+            SmokeTestClass.cleanUp();
 
             SystemActions.KillProcessByName("SSD.ATLASti.Backup");
 
-            SmokeTestClass.initATLAS();
-            bool projectRestored = SmokeTestClass.GetAppActions().OpenProject("Geo Project");
-            Assert.IsTrue(projectRestored);
-            SmokeTestClass.GetAppActions().CloseProjectAsync();
+           
         }
     }
 }

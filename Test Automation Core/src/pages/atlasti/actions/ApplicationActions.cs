@@ -102,8 +102,9 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
             // Assume that each method performs the action that its name suggests
             var fileTab = appMenu.ClickFile();
-            Thread.Sleep(1000);
+            Thread.Sleep(1500);
             ExportControl exportControl = fileTab.ClickExport();
+            Thread.Sleep(1500);
             string exportTypeLower = exportType.ToLower();
             FilePicker filePickerDialog;
 
@@ -250,6 +251,8 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
             return switchLibState;
             **/
 
+            // Wait for 20 second for Library Switch
+            Thread.Sleep(20000);
         }
 
         public bool ValidateLibSwitch()
@@ -467,6 +470,8 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
             var developerRibbon = appMenu.ClickDeveloper();
 
             developerRibbon.RaiseAtlasException();
+            Thread.Sleep(25000);
+
             return true;
 
 

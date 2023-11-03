@@ -42,7 +42,7 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.appmenu.file
 
 
             // Locate the TabItem by name
-            var tabItem = _driver.FindElementByAccessibilityId(tabType).FindElementByTagName("Button");
+             var tabItem = _driver.FindElementByAccessibilityId(tabType).FindElementByTagName("Button");
 
             // Find the button within the TabItem
             var button = tabItem.FindElementByName("Project Bundle");

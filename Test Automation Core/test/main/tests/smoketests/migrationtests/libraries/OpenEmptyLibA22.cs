@@ -3,31 +3,26 @@ using Test_Automation_Core.test.resources.test;
 
 namespace Test_Automation_Core.test.main.tests
 {
-    public class OpenEmptyLibA22
+    public class OpenEmptyLibA22:InitTests
     {
-        InitTests smokeTestClass = new InitTests();
         [Category("OpenEmptyLibA22")]
 
+        
+
         [Test]
-
-        public void openEmptyLibA22()
+        public void OpenEmptyLib()
         {
-            smokeTestClass.initSmokeTest();
-            smokeTestClass.initATLAS();
-
             //Open ATLAS.ti with empty A22 Library
-            smokeTestClass.GetAppActions().SwitchLibrary(SmokeTestVariables.library1Extracted);
+            GetAppActions().SwitchLibrary(SmokeTestVariables.library1Extracted);
 
-            // Wait for 20 second for Library Switch
-            Thread.Sleep(20000);
+            //We need to change the driver because the application will restart after library switch
+            initATLAS();
 
-            smokeTestClass.initATLAS();
-
-            bool crashState = smokeTestClass.GetWelcomeWindow().HasAtlasCrashed(TimeSpan.FromSeconds(60));
+            bool crashState = GetWelcomeWindow().HasAtlasCrashed(TimeSpan.FromSeconds(60));
 
             Assert.IsFalse(crashState);
 
-
         }
+
     }
 }

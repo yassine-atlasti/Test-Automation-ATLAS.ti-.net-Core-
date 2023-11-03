@@ -3,6 +3,8 @@ using Test_Automation_Core.test.resources.test;
 using Test_Automation_Core.test.utilities.util;
 namespace Test_Automation_Core.test.main.tests;
 
+
+//this class should not extend the Init class. We don't want to run the setup method in this Test Case
     public class Test2
     {
 
@@ -13,7 +15,6 @@ namespace Test_Automation_Core.test.main.tests;
 
         public void CreateBackUp()
         {
-            SystemActions.KillProcessByName("Atlasti" + AtlasVariables.actualMajor);
 
             SmokeTestClass.initBackUpApp();
             string backUp = AtlasVariables.winVUT + "_BackUp";
@@ -28,7 +29,7 @@ namespace Test_Automation_Core.test.main.tests;
 
             bool backUpState = SmokeTestClass.GetBackUpActions().CreateBackUp(SmokeTestVariables.smokeTestFolderPath, backUp);
             Assert.IsTrue(backUpState);
-            SmokeTestClass.closeDriver();
+            SmokeTestClass.cleanUp();
 
             SystemActions.KillProcessByName("SSD.ATLASti.Backup");
             SmokeTestClass.initATLAS();

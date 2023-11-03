@@ -3,23 +3,20 @@ using Test_Automation_Core.test.resources.test;
 
 namespace Test_Automation_Core.test.main.tests
 {
-    public class ImportMacPrevMajor
+    public class ImportMacPrevMajor:InitTests
     {
-        InitTests smokeTestClass = new InitTests();
         [Test, Order(1), Category("otherversions")]
         public void ImportAtlProj()
         {
 
-            smokeTestClass.initATLAS();
 
 
             //Atlproj import
 
-            bool atlprojImportState = smokeTestClass.GetAppActions().ImportProject(CHProjects.MacPreviousAtlProjPath, "AtlProj");
+            bool atlprojImportState = GetAppActions().ImportProject(CHProjects.MacPreviousAtlProjPath, "AtlProj");
             Assert.IsTrue(atlprojImportState);
 
-            //Close Project
-            smokeTestClass.GetAppActions().CloseProjectAsync();
+            
 
 
 
@@ -28,13 +25,11 @@ namespace Test_Automation_Core.test.main.tests
         [Test, Order(2), Category("otherversions")]
         public void ImportQDPX()
         {
-            smokeTestClass.initATLAS();
 
             //QDPX Import
-            bool qdpxImportState = smokeTestClass.GetAppActions().ImportProject(CHProjects.MacPreviousQDPXPath, "QDPX", CHProjects.MacPreviousFolderMedia);
+            bool qdpxImportState = GetAppActions().ImportProject(CHProjects.MacPreviousQDPXPath, "QDPX", CHProjects.MacPreviousFolderMedia);
             Assert.IsTrue(qdpxImportState);
 
-            smokeTestClass.GetAppActions().CloseProjectAsync();
 
         }
     }

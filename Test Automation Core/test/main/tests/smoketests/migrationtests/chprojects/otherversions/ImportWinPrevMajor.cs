@@ -3,20 +3,17 @@ using Test_Automation_Core.test.resources.test;
 
 namespace Test_Automation_Core.test.main.tests
 {
-    public class ImportWinPrevMajor
+    public class ImportWinPrevMajor:InitTests
     {
-        InitTests smokeTestClass = new InitTests();
         [Test, Order(1), Category("otherversions")]
         public void ImportAtlProj()
         {
 
-            smokeTestClass.initATLAS();
 
             //Atlproj import
 
-            bool atlprojImportState = smokeTestClass.GetAppActions().ImportProject(CHProjects.WinPreviousAtlProjPath, "AtlProj");
+            bool atlprojImportState = GetAppActions().ImportProject(CHProjects.WinPreviousAtlProjPath, "AtlProj");
             Assert.IsTrue(atlprojImportState);
-            smokeTestClass.GetAppActions().CloseProjectAsync();
 
 
         }
@@ -24,12 +21,10 @@ namespace Test_Automation_Core.test.main.tests
         [Test, Order(2), Category("otherversions")]
         public void ImportQDPX()
         {
-            smokeTestClass.initATLAS();
 
             //QDPX Import
-            bool qdpxImportState = smokeTestClass.GetAppActions().ImportProject(CHProjects.WinPreviousQDPXPath, "QDPX", CHProjects.WinPreviousFolderMedia);
+            bool qdpxImportState = GetAppActions().ImportProject(CHProjects.WinPreviousQDPXPath, "QDPX", CHProjects.WinPreviousFolderMedia);
             Assert.IsTrue(qdpxImportState);
-            smokeTestClass.GetAppActions().CloseProjectAsync();
 
         }
 

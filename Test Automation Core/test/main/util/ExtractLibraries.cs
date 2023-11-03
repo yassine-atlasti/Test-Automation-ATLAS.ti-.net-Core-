@@ -3,11 +3,10 @@ using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.test.main.util
 {
-    internal class ExtractLibraries
+    public class ExtractLibraries
     {
 
-        [Test]
-        public static void extractSmokeTestLibs()
+        public static async Task extractSmokeTestLibs()
         {
             SystemActions systemActions = new SystemActions();
 

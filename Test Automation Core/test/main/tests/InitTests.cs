@@ -39,16 +39,19 @@ namespace Test_Automation_Core.test.main.tests
 
         public WindowsDriver<WindowsElement> GetDriver() { return _driver; }
         //Should maybe go to SmokeTest Data
-        public void initSmokeTest()
+       
+        public async Task initSmokeTest()
         {
-            ExtractLibraries.extractSmokeTestLibs();
+            await ExtractLibraries.extractSmokeTestLibs();
 
 
         }
 
-        [OneTimeSetUp]
-        public void initATLAS()
+        [SetUp]
+        public async Task initATLAS()
         {
+          await  initSmokeTest();
+
 
             _driver = systemActions.ClassInitialize(AtlasVariables.appPath);
             systemActions = new SystemActions(_driver);
@@ -77,7 +80,12 @@ namespace Test_Automation_Core.test.main.tests
 
 
         }
-        public void closeDriver() { _driver.Close(); }
+       [TearDown]
+        public void cleanUp() {
+
+            _driver.Close();
+            SystemActions.KillProcessByName("Atlasti" + AtlasVariables.actualMajor);
+        }
 
 
 

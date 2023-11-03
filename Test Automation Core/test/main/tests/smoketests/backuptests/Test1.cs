@@ -4,9 +4,8 @@ using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.test.main.tests
 {
-    public class Test1
+    public class Test1:InitTests
     {
-        InitTests SmokeTestClass = new InitTests();
 
         [Category("backuptests")]
 
@@ -16,15 +15,12 @@ namespace Test_Automation_Core.test.main.tests
             //Test 1 
             string backUp = AtlasVariables.winVUT + "_BackUp";
 
-            SmokeTestClass.initATLAS();
 
-            SmokeTestClass.initBackUpApp();
+            initBackUpApp();
 
-            bool warningTrue = SmokeTestClass.GetBackUpActions().CheckWarning();
+            bool warningTrue = GetBackUpActions().CheckWarning();
             Assert.IsTrue(warningTrue);
 
-            SmokeTestClass.closeDriver();
-            SystemActions.KillProcessByName("Atlasti" + AtlasVariables.actualMajor);
             SystemActions.KillProcessByName("SSD.ATLASti.Backup");
         }
     }

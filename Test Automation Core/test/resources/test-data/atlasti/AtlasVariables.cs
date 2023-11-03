@@ -7,7 +7,7 @@
         public static string actualMajor = "23";
         public static string previousMajor = "22";
 
-        public static string winVUT = "23.3.3";
+        public static string winVUT = "23.3.4";
         public static string macVUT = "";
 
         public static string winProduction = "23.3.3";
