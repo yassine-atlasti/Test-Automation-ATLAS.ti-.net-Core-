@@ -113,8 +113,7 @@ path.
 ## Test Reports
 
 ### Accessing and Understanding Reports
-- Generated in `bin`, containing detailed test execution information.
-
+-To be implemented
 ## Troubleshooting
 
 ### Common Issues and Solutions
