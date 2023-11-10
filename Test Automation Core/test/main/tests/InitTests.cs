@@ -6,6 +6,7 @@ using Test_Automation_Core.src.pages.atlasti.ui.windows;
 using Test_Automation_Core.src.pages.backup;
 using Test_Automation_Core.test.main.util;
 using Test_Automation_Core.test.resources.test;
+using Test_Automation_Core.test.resources.test_data.winappdriver;
 using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.test.main.tests
@@ -40,7 +41,7 @@ namespace Test_Automation_Core.test.main.tests
         public WindowsDriver<WindowsElement> GetDriver() { return _driver; }
         //Should maybe go to SmokeTest Data
        
-        public async Task initSmokeTest()
+        public static async Task initSmokeTest()
         {
             await ExtractLibraries.extractSmokeTestLibs();
 
@@ -48,10 +49,9 @@ namespace Test_Automation_Core.test.main.tests
         }
 
         [SetUp]
-        public async Task initATLAS()
-        {
-          await  initSmokeTest();
+        public void initATLAS()
 
+        {
 
             _driver = systemActions.ClassInitialize(AtlasVariables.appPath);
             systemActions = new SystemActions(_driver);
@@ -74,6 +74,7 @@ namespace Test_Automation_Core.test.main.tests
 
         public void initBackUpApp()
         {
+
             _driver = systemActions.ClassInitialize(AtlasVariables.backUpPath);
             systemActions = new SystemActions(_driver);
             backUpActions = new BackUpActions(_driver);
@@ -85,6 +86,10 @@ namespace Test_Automation_Core.test.main.tests
 
             _driver.Close();
             SystemActions.KillProcessByName("Atlasti" + AtlasVariables.actualMajor);
+            SystemActions.KillProcessByName("SSD.ATLASti.Backup");
+            SystemActions.KillProcessByName("WinAppDriver");
+
+
         }
 
 

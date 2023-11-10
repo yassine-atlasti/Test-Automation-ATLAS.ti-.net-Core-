@@ -10,10 +10,9 @@ namespace Test_Automation_Core.test.main.tests
         InitTests SmokeTestClass = new InitTests();
         [Category("backuptests")]
 
-        [Test, Order(4)]
+        [Test,Order(1)]
         public void RestoreBackUp()
         {
-            SmokeTestClass.cleanUp();
 
            // SystemActions.KillProcessByName("Atlasti" + AtlasVariables.actualMajor);
             string backUp = AtlasVariables.winVUT + "_BackUp";
@@ -22,9 +21,19 @@ namespace Test_Automation_Core.test.main.tests
             Assert.IsTrue(restoreState);
             SmokeTestClass.cleanUp();
 
-            SystemActions.KillProcessByName("SSD.ATLASti.Backup");
 
            
+        }
+
+        [Category("backuptests")]
+
+        [Test,Order(2)]
+        public void OpenRestoredProject()
+        {
+            SmokeTestClass.initATLAS();
+            bool projectRestored = SmokeTestClass.GetAppActions().OpenProject("Geo Project");
+            Assert.IsTrue(projectRestored);
+            SmokeTestClass.cleanUp();
         }
     }
 }

@@ -10,7 +10,9 @@ using System.Net.Http.Headers;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using Test_Automation_Core.test.resources.test;
+using Test_Automation_Core.test.resources.test_data.winappdriver;
 using TextCopy;
+using System.Diagnostics;
 
 namespace Test_Automation_Core.test.utilities.util
 {
@@ -30,10 +32,33 @@ namespace Test_Automation_Core.test.utilities.util
         private const int MaxRetries = 5;
 
 
+        private void StartWinAppDriver()
+        {
+            var startInfo = new ProcessStartInfo
+            {
+                FileName = WinAppDriverVar.winAppDriverPath, // Replace with the correct path
+                WindowStyle = ProcessWindowStyle.Hidden, // Hide the window
+                CreateNoWindow = true // Do not create a window
+            };
+
+            // Check if the application is already running
+            Process[] processes = Process.GetProcessesByName(WinAppDriverVar.winAppDriverAppName);
+
+            if (processes.Length == 0)
+            {
+                Process.Start(startInfo);
+                Thread.Sleep(2000);
+
+            }
+        }
+
         public WindowsDriver<WindowsElement> ClassInitialize(string appPath)
         {
+           
             string applicationPath = appPath;
             string applicationName = Path.GetFileNameWithoutExtension(applicationPath);
+
+            StartWinAppDriver();
 
             //If the driver should not be assigned to Root Window of the OS then do following
 

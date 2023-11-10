@@ -274,11 +274,7 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
             var welcomeWindow = _app.GetWelcomeControl();
             var projectWindow = _app.GetProjectWindow();
 
-            if (!welcomeWindow.IsWelcomeWindowDisplayed())
-            {
-                CloseProjectAsync();
-
-            }
+           
             // Open project
             welcomeWindow.OpenProject(projectName);
             // You can add more actions or checks here, such as validating that the project was imported correctly
@@ -326,15 +322,17 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
         }
 
-        public async Task DeleteProject(string projectName)
+        public void DeleteProject(string projectName)
         {
 
             var welcomeWindow = _app.GetWelcomeControl();
             var projectWindow = _app.GetProjectWindow();
 
             welcomeWindow.SelectProjectContextMenuOption(projectName, "Delete");
+           
+            Thread.Sleep(1000);
             //Confirm Delete in Dialog
-            _app.getDriver().FindElementByTagName("Button").FindElementByName("Delete").Click();
+            _app.getDriver().FindElementByTagName("Button").FindElementByName("Delete").SendKeys(Keys.Enter);
 
             //Wait 2 second to ensure that the project is deleted
             Thread.Sleep(2000);

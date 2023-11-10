@@ -11,7 +11,7 @@ namespace Test_Automation_Core.test.main.tests;
         InitTests SmokeTestClass = new InitTests();
         [Category("backuptests")]
 
-        [Test, Order(2)]
+        [Test]
 
         public void CreateBackUp()
         {
@@ -29,14 +29,13 @@ namespace Test_Automation_Core.test.main.tests;
 
             bool backUpState = SmokeTestClass.GetBackUpActions().CreateBackUp(SmokeTestVariables.smokeTestFolderPath, backUp);
             Assert.IsTrue(backUpState);
-            SmokeTestClass.cleanUp();
-
-            SystemActions.KillProcessByName("SSD.ATLASti.Backup");
-            SmokeTestClass.initATLAS();
+        SmokeTestClass.cleanUp();
 
 
 
-        }
+
 
     }
+
+}
 

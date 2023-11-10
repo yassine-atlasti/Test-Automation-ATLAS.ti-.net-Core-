@@ -9,19 +9,24 @@ namespace Test_Automation_Core.test.main.tests
 
         [Category("backuptests")]
 
-        [Test, Order(1)]
+       
+        
+        
+        
+        
+        
+        
+        [Test]
         public void CheckWarning()
         {
             //Test 1 
             string backUp = AtlasVariables.winVUT + "_BackUp";
-
 
             initBackUpApp();
 
             bool warningTrue = GetBackUpActions().CheckWarning();
             Assert.IsTrue(warningTrue);
 
-            SystemActions.KillProcessByName("SSD.ATLASti.Backup");
         }
     }
 }

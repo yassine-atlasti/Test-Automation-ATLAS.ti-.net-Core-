@@ -6,11 +6,10 @@ namespace Test_Automation_Core.test.main.tests
     {
         [Category("backuptests")]
 
-        [Test, Order(3)]
-        public async Task deleteProject()
+        [Test]
+        public void deleteProject()
         {
 
-            await GetAppActions().CloseProjectAsync();
 
 
             //Delete VUT
