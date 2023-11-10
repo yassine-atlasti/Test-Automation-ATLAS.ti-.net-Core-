@@ -12,10 +12,10 @@ namespace Test_Automation_Core.test.resources.test
         public static readonly string CHWinVUTProjectsFolder = CHProjectsFolder + @"\Win\VUT";
         public static readonly string CHMacVUTProjectsFolder = CHProjectsFolder + @"\Mac\VUT";
 
-        public static readonly string CHWinProdProjectsFolder = CHProjectsFolder + @"\Win\current Win Release A"+AtlasVariables.actualMajor;
+        public static readonly string CHWinProdProjectsFolder = CHProjectsFolder + @"\Win\current Windows Release A"+AtlasVariables.actualMajor;
         public static readonly string CHMacProdProjectsFolder = CHProjectsFolder + @"\Mac\current Mac Release A"+AtlasVariables.actualMajor;
 
-        public static readonly string CHWinPrevMajorProjectsFolder = CHProjectsFolder + @"\Win\A" + AtlasVariables.previousMajor ;
+        public static readonly string CHWinPrevMajorProjectsFolder = CHProjectsFolder + @"\Win\current Windows Release A" + AtlasVariables.previousMajor ;
         public static readonly string CHMacPrevMajorProjectsFolder = CHProjectsFolder + @"\Mac\current Mac Release A" + AtlasVariables.previousMajor;
         public static readonly string CHMacPrevMajorQDPXProjectsFolder = CHProjectsFolder + @"\Mac\A" + AtlasVariables.previousMajor + @"\" + "REFI QDA";
 

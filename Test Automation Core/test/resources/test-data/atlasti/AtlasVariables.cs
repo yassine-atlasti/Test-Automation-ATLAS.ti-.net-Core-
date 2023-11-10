@@ -10,11 +10,11 @@
         public static string winVUT = "23.3.4";
         public static string macVUT = "";
 
-        public static string winProduction = "23.3.3";
+        public static string winProduction = "23.3.4";
         public static string macProduction = "23.3.0-28730";
 
 
-        public static string winPreviousMajor = "22.2.5(20221031.1).01";
+        public static string winPreviousMajor = "22.2.5";
         public static string macPreviousMajor = "22.2.3-3738";
         public static string installationPath = @"C:\Program Files\Scientific Software\ATLASti." + actualMajor;
 
