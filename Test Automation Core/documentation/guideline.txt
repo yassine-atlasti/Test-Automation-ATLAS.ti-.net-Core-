@@ -1,0 +1,139 @@
+# ATLAS.ti Test Automation Framework Usage Guideline with WinAppDriver
+
+## Introduction
+Welcome to the ATLAS.ti Test Automation Framework, designed to automate smoke testing using WinAppDriver. 
+This document will guide you through the installation, configuration, and usage of the framework.
+
+## Getting Started
+
+### System Requirements
+- Windows 10/11.
+- ATLAS.ti (compatible version).
+- .NET Core 
+- WinAppDriver.
+
+### Installation and Setup
+1. **Install ATLAS.ti:** Ensure ATLAS.ti is installed on your system.
+2. **Install .NET Core SDK:** Download from [Microsoft's official website](https://dotnet.microsoft.com/download).
+3. **Set Up WinAppDriver:** Install WinAppDriver from its [GitHub repository](https://github.com/microsoft/WinAppDriver).
+4. **Clone the Framework Repository:** Run the following command from the directory where you want to clone the repository:
+   ```bash
+   git clone https://github.com/yassine-atlasti/Test-Automation-ATLAS.ti-.net-Core-.git
+   ```
+5. **Start WinAppDriver:** Launch WinAppDriver from its installation directory, 
+usually at `C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe`.
+
+## Framework Overview
+
+### Architecture
+Utilizes the Page Object Model (POM) for organizing UI interaction scripts, enhancing maintainability.
+
+### Project Structure
+- **`src` Directory:** Contains page implementation.
+  - `pages`: POM scripts for ATLAS.ti UI components.
+- **`test` Directory:** Test cases, suites, data, and configurations.
+  - `resources`: Test data and configurations.
+  - `main`: Main test scripts and utilities.
+
+- **`bin` and `obj` Directories:** Build outputs and .NET managed directories.
+
+## Writing Test Cases
+
+### Structure and Implementation
+- Test cases are organized under `test/main/tests`.
+- Use the Arrange-Act-Assert pattern for clarity.
+
+### Data Management
+- Manage test data in `test/resources/test-data`.
+
+### Overview
+Test data management is critical for ensuring the accuracy and reliability of automated smoke tests. 
+The framework uses various data files located in the `test-data` directory, each serving a specific purpose 
+in the testing process.
+
+### Directory Structure and Key Files
+
+#### `onedrive` Folder
+- **`OneDriveConfig.cs`**: Configure the OneDrive path of the testing system here. 
+This is crucial for accessing test projects and libraries stored on OneDrive.
+
+#### `onedrive/projects`
+- **`CHProjects.cs`**: Contains file paths for the projects used in smoke tests. Make sure these paths point to the correct project files before running tests.
+
+#### `onedrive/libraries`
+- **`SmokeTestLibraries.cs`**: Defines the paths for smoke test libraries. 
+Verify and update these paths as needed to ensure tests run with the correct library versions.
+
+#### `smoketestdata`
+- **`SmokeTestVariables.cs`**: This file contains variables specific to smoke tests, like the current Windows OS version. 
+Review and update these variables to reflect the current testing environment.
+
+#### `winappdriver`
+- **`WinAppDriverVar.cs`**: Specifies the file path of `winappdriver.exe`.
+Ensure this path is correctly set to the WinAppDriver executable.
+
+#### `atlasti`
+- **`AtlasVariables.cs`**: Critical for specifying versions of ATLAS.ti under test, including Windows and Mac production 
+versions, previous major versions, and the version under test. Update these before each smoke test to align with
+the version being tested.
+
+### Updating Test Data
+
+1. **Before Each Test Run:**
+   - Ensure all paths in `OneDriveConfig.cs`, `CHProjects.cs`, and `SmokeTestLibraries.cs` accurately reflect
+   the current locations of test files.
+   - Verify `WinAppDriverVar.cs` points to the correct `winappdriver.exe`.
+
+2. **Before Each Smoke Test:**
+   - In `SmokeTestVariables.cs`, check and update the OS version and other relevant variables.
+   - Crucially update `AtlasVariables.cs` with the latest ATLAS.ti version information. 
+   This includes updating the Windows version under test version, the Windows production version, Mac production version, 
+   and previous major versions.
+    .
+
+### Best Practices
+
+- **Regular Checks:** Frequently review and update test data files to ensure they reflect the current testing requirements.
+- **Version Control:** Use version control (e.g., Git) to track changes in test data files, making it easier to revert
+to previous configurations if needed.
+- **Documentation:** Keep inline documentation in the `.cs` files up to date, explaining the purpose of each variable and 
+path.
+
+---
+
+### Assertions
+- Use NUnit assertions to validate test results.
+
+## Executing Tests
+
+### Running Tests
+- Use Visual Studio's Test Explorer or `dotnet test` for execution.
+- For specific suites: `dotnet test --filter TestCategory=YourCategory`.
+
+## Test Reports
+
+### Accessing and Understanding Reports
+- Generated in `bin`, containing detailed test execution information.
+
+## Troubleshooting
+
+### Common Issues and Solutions
+- Documented within the repository or a dedicated troubleshooting guide.
+
+### Support
+- Use GitHub Issues for queries or directly contact the project maintainers.
+
+## Best Practices
+
+### Coding Standards
+- Follow C# and POM best practices.
+- Keep code well-commented and formatted.
+
+### Framework Maintenance
+- Regularly update scripts and configurations to reflect ATLAS.ti changes.
+
+---
+
+This guideline aims to provide a clear understanding of the ATLAS.ti Test Automation Framework.
+It’s designed to assist testers in efficiently using the framework powered by WinAppDriver for automated testing. 
+Adapt and expand this guideline to meet the evolving requirements of your testing processes and ATLAS.ti updates.
