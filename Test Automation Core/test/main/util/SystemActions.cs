@@ -13,6 +13,7 @@ using Test_Automation_Core.test.resources.test;
 using Test_Automation_Core.test.resources.test_data.winappdriver;
 using TextCopy;
 using System.Diagnostics;
+using System.Management;
 
 namespace Test_Automation_Core.test.utilities.util
 {
@@ -224,12 +225,23 @@ namespace Test_Automation_Core.test.utilities.util
 
 
 
-        public void UninstallApp(string uninstallPath)
+        public void UninstallAtlas()
         {
             KillProcessByName("Atlasti" + AtlasVariables.actualMajor);
 
             if (Directory.Exists(AtlasVariables.installationPath))
             {
+                List<string> foundPrograms = FindProgram("ATLAS.ti " + AtlasVariables.actualMajor);
+                string firstProgram="";
+                if (foundPrograms.Count > 0)
+                {
+                     firstProgram = foundPrograms[0];
+                    Console.WriteLine("First program found: " + firstProgram);
+                }
+              
+
+                string uninstallPath = AtlasVariables.uninstallPathDirectory + "\\" + firstProgram;
+
                 ClipboardService.SetText(uninstallPath);
                 Thread.Sleep(1000);
 
@@ -264,16 +276,19 @@ namespace Test_Automation_Core.test.utilities.util
                 Thread.Sleep(90000);
 
 
-
-
             }
 
 
 
+            // MinimizeAllWindows(driver);
+            KillProcessByName("Setup - ATLAS.ti " + AtlasVariables.actualMajor + " (32 bit)");
 
+            KillProcessByName("explorer");
 
 
         }
+
+
 
         public void MinimizeAllWindows(WindowsDriver<WindowsElement> driver)
         {
@@ -445,6 +460,8 @@ namespace Test_Automation_Core.test.utilities.util
             {
                 try
                 {
+                   
+
                     process.Kill(); // Forcefully terminate the process
                     process.WaitForExit(); // Optionally wait for the process to exit
 
@@ -560,6 +577,35 @@ namespace Test_Automation_Core.test.utilities.util
             }
 
             return oneDrivePath;
+        }
+
+
+
+
+
+        public static List<string> FindProgram(string programName)
+        {
+            List<string> programNames = new List<string>();
+
+            try
+            {
+                // Query to fetch installed programs
+                string wmiQuery = "SELECT * FROM Win32_Product WHERE Name LIKE '%" + programName + "%'";
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher(wmiQuery);
+                ManagementObjectCollection results = searcher.Get();
+
+                // Add the found programs to the list
+                foreach (ManagementObject result in results)
+                {
+                    programNames.Add(result["Name"].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+            }
+
+            return programNames;
         }
 
 
