@@ -20,7 +20,7 @@ namespace Test_Automation_Core.test.main.tests
         public void CheckWarning()
         {
             //Test 1 
-            string backUp = AtlasVariables.winVUT + "_BackUp";
+            string backUp = AtlasVariables.InstalledVersion + "_BackUp";
 
             initBackUpApp();
 

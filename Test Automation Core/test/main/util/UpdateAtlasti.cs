@@ -9,7 +9,7 @@ using Test_Automation_Core.test.utilities.util;
 namespace Test_Automation_Core.test.main.util
 {
     [TestFixture]
-
+    [Category("UpdateATLAS")]
     public class UpdateAtlasti
     {
        
@@ -17,8 +17,8 @@ namespace Test_Automation_Core.test.main.util
         SystemActions systemActions = new SystemActions();
 
 
-        //specify branch before running tests : dev or rc
-        public string branch="dev";
+        //default branch is dev
+        public static string branch="dev";
 
 
 
@@ -26,8 +26,10 @@ namespace Test_Automation_Core.test.main.util
         private string fileName;
         private string downloadUrl;
 
-        [OneTimeSetUp] public void SetUp()
+        [OneTimeSetUp]
+        public void SetUp()
         {
+
             if(String.Equals("dev",branch, StringComparison.OrdinalIgnoreCase))
             {
                 installerPath = AtlasVariables.installerPathNightly;

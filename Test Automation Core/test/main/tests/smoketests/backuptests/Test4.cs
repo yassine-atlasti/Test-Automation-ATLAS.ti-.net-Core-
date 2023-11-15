@@ -15,7 +15,7 @@ namespace Test_Automation_Core.test.main.tests
         {
 
            // SystemActions.KillProcessByName("Atlasti" + AtlasVariables.actualMajor);
-            string backUp = AtlasVariables.winVUT + "_BackUp";
+            string backUp = AtlasVariables.InstalledVersion + "_BackUp";
             SmokeTestClass.initBackUpApp();
             bool restoreState = SmokeTestClass.GetBackUpActions().RestoreLibrary(SmokeTestVariables.smokeTestFolderPath, backUp);
             Assert.IsTrue(restoreState);

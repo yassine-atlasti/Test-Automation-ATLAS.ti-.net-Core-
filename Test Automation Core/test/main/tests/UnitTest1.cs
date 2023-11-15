@@ -2,6 +2,7 @@ using OpenQA.Selenium.Appium.Windows;
 using Test_Automation_Core.src;
 using Test_Automation_Core.src.pages.atlasti.actions;
 using Test_Automation_Core.src.pages.atlasti.ui.windows;
+using Test_Automation_Core.test.resources.test;
 using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.test.main.tests
@@ -18,10 +19,11 @@ namespace Test_Automation_Core.test.main.tests
 
 
 
-        [Test]
+       // [Test]
         public void test()
         {
-            TestRunner.RunTestByCategory("TestAutomationFramework.dll", "Test_Automation_Core.test.resources.test", "backuptests");
+            string vut = AtlasVariables.InstalledVersion;
+            string result = vut;
         }
 
 

@@ -1,4 +1,7 @@
-﻿namespace Test_Automation_Core.test.resources.test
+﻿using System.Diagnostics;
+using Test_Automation_Core.test.utilities.util;
+
+namespace Test_Automation_Core.test.resources.test
 {
     public class AtlasVariables
     {
@@ -7,8 +10,10 @@
         public static string actualMajor = "23";
         public static string previousMajor = "22";
 
-        public static string winVUT = "23.3.4";
+        public static string InstalledVersion { get => SystemActions.GetCurrentInstalledVersion() ; }
         public static string macVUT = "";
+
+        public static string winRC = "";
 
         public static string winProduction = "23.3.4";
         public static string macProduction = "23.3.0-28730";
@@ -17,7 +22,7 @@
         public static string winPreviousMajor = "22.2.5";
         public static string macPreviousMajor = "22.2.3-3738";
         public static string installationPath = @"C:\Program Files\Scientific Software\ATLASti." + actualMajor;
-
+        public static string atlasVersionTextFile = installationPath + "\\" + "ATLAS.ti.txt";
         public static string appPath = @"C:\Program Files\Scientific Software\ATLASti." + actualMajor + @"\Atlasti" + actualMajor + ".exe";
 
         public static string backUpPath = @"C:\Program Files\Scientific Software\ATLASti." + actualMajor + @"\SSD.ATLASti.Backup.exe";

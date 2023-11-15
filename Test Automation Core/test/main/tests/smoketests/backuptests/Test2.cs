@@ -17,7 +17,7 @@ namespace Test_Automation_Core.test.main.tests;
         {
 
             SmokeTestClass.initBackUpApp();
-            string backUp = AtlasVariables.winVUT + "_BackUp";
+            string backUp = AtlasVariables.InstalledVersion + "_BackUp";
 
             if (SmokeTestClass.GetBackUpActions().CheckWarning())
             {

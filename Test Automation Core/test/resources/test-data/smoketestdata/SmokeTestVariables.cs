@@ -15,7 +15,7 @@ namespace Test_Automation_Core.test.resources.test
 
         //Smoke Test Folder Path 
 
-        public static readonly string smokeTestFolder = "SmokeTest_" + AtlasVariables.winVUT;
+        public static readonly string smokeTestFolder = "SmokeTest_" + AtlasVariables.InstalledVersion;
         public static readonly string smokeTestFolderPath = SystemActions.GetDesktopPath()+"\\" + smokeTestFolder;
 
 

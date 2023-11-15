@@ -1,4 +1,5 @@
-﻿using Test_Automation_Core.test.resources.test;
+﻿using Test_Automation_Core.test.main.util;
+using Test_Automation_Core.test.resources.test;
 using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.test.main.tests.smoketests
@@ -7,9 +8,25 @@ namespace Test_Automation_Core.test.main.tests.smoketests
     {
         string testAssemblyPath = "TestAutomationFramework.dll";
         string targetNameSpace = "Test_Automation_Core.test.main.tests";
+        string targetNameSpaceUtil = "Test_Automation_Core.test.main.util";
 
 
-       [Test, Order(1)]
+
+        [SetUp]
+        public void downloadRC()
+        {
+            if (AtlasVariables.winRC != AtlasVariables.InstalledVersion)
+            {
+                UpdateAtlasti.branch = "rc";
+                TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLAS");
+
+            }
+
+
+
+        }
+
+        [Test, Order(1)]
         public  void initTestData()
         {
           InitTests.initSmokeTest();

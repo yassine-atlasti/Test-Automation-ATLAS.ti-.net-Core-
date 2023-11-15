@@ -14,6 +14,7 @@ using Test_Automation_Core.test.resources.test_data.winappdriver;
 using TextCopy;
 using System.Diagnostics;
 using System.Management;
+using System.Text.RegularExpressions;
 
 namespace Test_Automation_Core.test.utilities.util
 {
@@ -55,7 +56,7 @@ namespace Test_Automation_Core.test.utilities.util
 
         public WindowsDriver<WindowsElement> ClassInitialize(string appPath)
         {
-           
+
             string applicationPath = appPath;
             string applicationName = Path.GetFileNameWithoutExtension(applicationPath);
 
@@ -232,13 +233,13 @@ namespace Test_Automation_Core.test.utilities.util
             if (Directory.Exists(AtlasVariables.installationPath))
             {
                 List<string> foundPrograms = FindProgram("ATLAS.ti " + AtlasVariables.actualMajor);
-                string firstProgram="";
+                string firstProgram = "";
                 if (foundPrograms.Count > 0)
                 {
-                     firstProgram = foundPrograms[0];
+                    firstProgram = foundPrograms[0];
                     Console.WriteLine("First program found: " + firstProgram);
                 }
-              
+
 
                 string uninstallPath = AtlasVariables.uninstallPathDirectory + "\\" + firstProgram;
 
@@ -460,7 +461,7 @@ namespace Test_Automation_Core.test.utilities.util
             {
                 try
                 {
-                   
+
 
                     process.Kill(); // Forcefully terminate the process
                     process.WaitForExit(); // Optionally wait for the process to exit
@@ -609,11 +610,53 @@ namespace Test_Automation_Core.test.utilities.util
         }
 
 
-    }
 
+public static string GetCurrentInstalledVersion()
+    {
+        // Check if the directory exists
+        if (!Directory.Exists(AtlasVariables.installationPath))
+        {
+            Console.WriteLine("Installation path does not exist.");
+            return ""; // Return empty string as the directory does not exist
+        }
+
+        try
+        {
+            string versionFilePath = Path.Combine(AtlasVariables.installationPath, "ATLAS.ti.txt");
+
+            if (!File.Exists(versionFilePath))
+            {
+
+                Console.WriteLine("Version file does not exist.");
+                return ""; // Return empty string as the file does not exist
+            }
+
+            string content = File.ReadAllText(versionFilePath);
+            // This regex matches a version number pattern like "23.3.28949.2"
+            Match match = Regex.Match(content, @"\d+(\.\d+)+");
+
+            if (match.Success)
+            {
+
+                    return match.Value; // Return the matched version string
+            }
+            else
+            {
+
+                    Console.WriteLine("No version number found in the file.");
+            }
+        }
+        catch (Exception ex)
+        {
+
+                Console.WriteLine("Error reading version file: " + ex.Message);
+        }
+
+        return ""; // Return empty string if unable to read version or other issues
+    }
 }
 
 
 
 
-
+}
