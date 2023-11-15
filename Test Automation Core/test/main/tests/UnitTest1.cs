@@ -19,11 +19,10 @@ namespace Test_Automation_Core.test.main.tests
 
 
 
-       // [Test]
+        [Test]
         public void test()
         {
-            string vut = AtlasVariables.InstalledVersion;
-            string result = vut;
+
         }
 
 

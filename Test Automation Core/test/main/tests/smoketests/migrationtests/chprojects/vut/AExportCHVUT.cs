@@ -7,7 +7,7 @@ namespace Test_Automation_Core.test.main.tests
 
     public class AExportCHVUT:InitTests
     {
-        string fileName = AtlasVariables.InstalledVersion + "-" + SmokeTestVariables.actualOS + "-" + SmokeTestVariables.smokeTestproject;
+        string fileName = AtlasVariables.InstalledVersion + "-" + SmokeTestVariables.actualWinOS + "-" + SmokeTestVariables.smokeTestproject;
 
         [Test, Order(1), Category("vut")]
 

@@ -11,16 +11,18 @@ This document will guide you through the installation, configuration, and usage 
 - ATLAS.ti (compatible version).
 - .NET Core 
 - WinAppDriver.
+- Git
 
 ### Installation and Setup
 1. **Install ATLAS.ti:** Ensure ATLAS.ti is installed on your system.
 2. **Install .NET Core SDK:** Download from [Microsoft's official website](https://dotnet.microsoft.com/download).
 3. **Set Up WinAppDriver:** Install WinAppDriver from its [GitHub repository](https://github.com/microsoft/WinAppDriver).
-4. **Clone the Framework Repository:** Run the following command from the directory where you want to clone the repository:
+4. **Install Git on your machine**
+5. **Clone the Framework Repository:** Run the following command from the directory where you want to clone the repository:
    ```bash
    git clone https://github.com/yassine-atlasti/Test-Automation-ATLAS.ti-.net-Core-.git
    ```
-5. **Start WinAppDriver:** Launch WinAppDriver from its installation directory, 
+6. **Start WinAppDriver:** Launch WinAppDriver from its installation directory, 
 usually at `C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe`.
 
 ## Framework Overview
@@ -54,7 +56,8 @@ in the testing process.
 ### Directory Structure and Key Files
 
 #### `onedrive` Folder
-- **`OneDriveConfig.cs`**: Configure the OneDrive path of the testing system here. 
+- **`OneDriveConfig.cs`**: Configure the OneDrive path of the testing system here. It's actually done automatically, 
+but you can set it manually.
 This is crucial for accessing test projects and libraries stored on OneDrive.
 
 #### `onedrive/projects`
@@ -82,12 +85,12 @@ the version being tested.
 1. **Before Each Test Run:**
    - Ensure all paths in `OneDriveConfig.cs`, `CHProjects.cs`, and `SmokeTestLibraries.cs` accurately reflect
    the current locations of test files.
-   - Verify `WinAppDriverVar.cs` points to the correct `winappdriver.exe`.
+   - Verify variable inside `winappdriver/WinAppDriverVar.cs` points to the correct `winappdriver.exe`.
 
 2. **Before Each Smoke Test:**
-   - In `SmokeTestVariables.cs`, check and update the OS version and other relevant variables.
+   - In `SmokeTestVariables.cs`, check and update relevant variables.
    - Crucially update `AtlasVariables.cs` with the latest ATLAS.ti version information. 
-   This includes updating the Windows version under test version, the Windows production version, Mac production version, 
+   This includes updating the Windows RC Version, the Windows production version, Mac production version, 
    and previous major versions.
     .
 
@@ -117,10 +120,9 @@ path.
 ## Troubleshooting
 
 ### Common Issues and Solutions
-- Documented within the repository or a dedicated troubleshooting guide.
 
 ### Support
-- Use GitHub Issues for queries or directly contact the project maintainers.
+- directly contact the project maintainers.
 
 ## Best Practices
 

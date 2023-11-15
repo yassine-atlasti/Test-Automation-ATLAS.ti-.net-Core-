@@ -654,9 +654,38 @@ public static string GetCurrentInstalledVersion()
 
         return ""; // Return empty string if unable to read version or other issues
     }
+
+        public static string GetOperatingSystemVersion()
+        {
+            var os = Environment.OSVersion;
+            var version = os.Version;
+
+            // Windows version numbers: https://docs.microsoft.com/en-us/windows/win32/sysinfo/operating-system-version
+            // Note: These version numbers are subject to change and might not always match the actual OS name due to OS version number reporting changes in newer Windows versions.
+            if (os.Platform == PlatformID.Win32NT)
+            {
+                if (version.Major == 10)
+                {
+                    if (version.Build < 22000)
+                    {
+                        return "Windows 10";
+                    }
+                    else
+                    {
+                        return "Windows 11";
+                    }
+                }
+            }
+
+            // Return a generic OS version string if not Windows 10 or 11
+            return os.VersionString;
+        }
+
+       
+    }
 }
 
 
 
 
-}
+

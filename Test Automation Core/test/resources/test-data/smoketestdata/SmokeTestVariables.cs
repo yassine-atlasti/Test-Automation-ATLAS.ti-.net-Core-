@@ -5,13 +5,9 @@ namespace Test_Automation_Core.test.resources.test
     public class SmokeTestVariables
     {
         //OS Versions Used for Smoke Tests
-        public static readonly string actualOS = "Windows 11";
+        public static  string actualWinOS { get => SystemActions.GetOperatingSystemVersion(); }
 
-        public static readonly string actualWinOS = "Windows 11";
-        public static readonly string previousWinOS = "Windows 10";
 
-        public static readonly string actualMacOS = "Mac 14.0";
-        public static readonly string previousMacOS = "Mac 10.15.7";
 
         //Smoke Test Folder Path 
 
@@ -35,7 +31,6 @@ namespace Test_Automation_Core.test.resources.test
 
         public static readonly string smokeTestproject = "C&H II + hierarchy";
 
-        //Back Up Name
 
 
     }
