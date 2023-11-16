@@ -27,7 +27,7 @@ This document will guide you through the installation, configuration, and usage 
    ```
 7. **Start WinAppDriver:** Launch WinAppDriver from its installation directory, 
 usually at `C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe`. 
-Go to WinAppDriverVar.cs and adjust the path if needed
+Go to WinAppDriverConfig.cs and adjust the path if needed
 
 ## Framework Overview
 
