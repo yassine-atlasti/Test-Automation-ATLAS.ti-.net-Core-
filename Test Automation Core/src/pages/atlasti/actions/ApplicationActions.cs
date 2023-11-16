@@ -24,11 +24,7 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
             var atlasProjectWindow = _app.GetProjectWindow();
             bool importState;
             string projectName = Path.GetFileName(filePath);
-            if (!welcomeControlWindow.IsWelcomeWindowDisplayed())
-            {
-                CloseProjectAsync();
-            }
-            Thread.Sleep(4000);
+           
 
             // Assume that each method performs the action that its name suggests
             welcomeControlWindow.ClickImportProjectButton();

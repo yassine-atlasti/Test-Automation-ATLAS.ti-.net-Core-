@@ -25,8 +25,8 @@ namespace Test_Automation_Core.test.resources.test
         public static readonly string WinProductionQDPXPath = SystemActions.FindFilesByPartialName(CHWinProdProjectsFolder, AtlasVariables.winProduction, ".qdpx", out bool isFound);
 
         //Previous Major CH Projects exported from Windows
-        public static readonly string WinPreviousAtlProjPath = SystemActions.FindFilesByPartialName(CHWinPrevMajorProjectsFolder, AtlasVariables.winPreviousMajor, ".atlproj" + AtlasVariables.previousMajor, out bool isFound);
-        public static readonly string WinPreviousQDPXPath = SystemActions.FindFilesByPartialName(CHWinPrevMajorProjectsFolder, AtlasVariables.winPreviousMajor, ".qdpx", out bool isFound);
+        public static readonly string WinPreviousAtlProjPath = SystemActions.FindFilesByPartialName(CHWinPrevMajorProjectsFolder,  SmokeTestVariables.smokeTestproject, ".atlproj" + AtlasVariables.previousMajor, out bool isFound);
+        public static readonly string WinPreviousQDPXPath = SystemActions.FindFilesByPartialName(CHWinPrevMajorProjectsFolder, SmokeTestVariables.smokeTestproject, ".qdpx", out bool isFound);
         public static readonly string WinPreviousFolderMedia = CHWinPrevMajorProjectsFolder + @"\" + Path.GetFileNameWithoutExtension(WinPreviousQDPXPath) + " Media";
 
 

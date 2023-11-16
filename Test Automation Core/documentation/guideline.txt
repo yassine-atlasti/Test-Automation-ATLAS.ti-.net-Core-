@@ -106,7 +106,7 @@ the version being tested.
 ### Updating Test Data
 
 1. **After Each Change in the Structure of the used OneDrive Folders:**
-   - Ensure all paths in `OneDriveConfig.cs`, `CHProjects.cs`, and `SmokeTestLibraries.cs` accurately reflect
+   - Ensure all paths in  `CHProjects.cs`, and `SmokeTestLibraries.cs` accurately reflect
    the current locations of test files. 
    If something is wrong in the file paths, you will get an error when running the corresponding tests.
 
