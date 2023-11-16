@@ -77,11 +77,10 @@ Keep the Folders needed for tests always in your Device :
 
 
 #### `onedrive/projects`
-- **`CHProjects.cs`**: Contains file paths for the projects used in smoke tests. Make sure these paths point to the correct project files before running tests.
+- **`CHProjects.cs`**: Contains file paths for the projects used in smoke tests.
 
 #### `onedrive/libraries`
 - **`SmokeTestLibraries.cs`**: Defines the paths for smoke test libraries. 
-Verify and update these paths as needed to ensure tests run with the correct library versions.
 
 #### `smoketestdata`
 - **`SmokeTestVariables.cs`**: This file contains variables specific to smoke tests, like the current Windows OS version. 
@@ -89,7 +88,7 @@ Review and update these variables to reflect the current testing environment.
 
 #### `winappdriver`
 - **`WinAppDriverVar.cs`**: Specifies the file path of `winappdriver.exe`.
-Ensure this path is correctly set to the WinAppDriver executable.
+Ensure this path is correctly set to the WinAppDriverVar.cs executable.
 
 #### `atlasti`
 - **`AtlasVariables.cs`**: Critical for specifying versions of ATLAS.ti under test, including Windows and Mac production 
@@ -98,10 +97,10 @@ the version being tested.
 
 ### Updating Test Data
 
-1. **Before Each Test Run:**
+1. **After Each Change in the Structure of the used OneDrive Folders:**
    - Ensure all paths in `OneDriveConfig.cs`, `CHProjects.cs`, and `SmokeTestLibraries.cs` accurately reflect
    the current locations of test files.
-   - Verify variable inside `winappdriver/WinAppDriverVar.cs` points to the correct `winappdriver.exe`.
+   - Verify that your OneDrive is up to date
 
 2. **Before Each Smoke Test:**
    - In `SmokeTestVariables.cs`, check and update relevant variables.
