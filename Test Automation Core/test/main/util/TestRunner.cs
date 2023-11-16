@@ -1,8 +1,9 @@
 ﻿using NUnit.Engine;
+using System.Xml;
 
 public class TestRunner
 {
-    public static void RunTestByCategory(string testAssemblyPath, string targetNamespace, string folderName)
+    public static bool RunTestByCategory(string testAssemblyPath, string targetNamespace, string folderName)
     {
         // Initialize the test engine
         var testEngine = TestEngineActivator.CreateInstance();
@@ -24,7 +25,24 @@ public class TestRunner
 
         // Output results to the console
         Console.WriteLine($"Test Results: {result}");
+        //
+        bool res = AssertTestRun(result); ;
+            return res; 
     }
 
+    public static bool AssertTestRun(XmlNode result)
+    {
+        // Assuming result is an XmlNode, parse it to find the fail count
+        var failedCountNode = result.SelectSingleNode("//test-suite/@failed");
+        int failedCount = 0;
+        if (failedCountNode != null && int.TryParse(failedCountNode.Value, out failedCount) && failedCount > 0)
+        {
+            Console.WriteLine($"Tests failed: {failedCount}");
+            return false; // There are failed tests
+        }
+
+        Console.WriteLine("All tests passed.");
+        return true; // No failed tests
+    }
 }
 

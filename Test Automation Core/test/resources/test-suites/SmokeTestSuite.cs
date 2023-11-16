@@ -15,13 +15,15 @@ namespace Test_Automation_Core.test.main.tests.smoketests
        // [OneTimeSetUp]
         public void downloadRC()
         {
+            bool success =true;
             if (AtlasVariables.winRC != AtlasVariables.InstalledVersion)
             {
                 UpdateAtlasti.branch = "rc";
-                TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLAS");
+                success= TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLAS");
 
             }
 
+            Assert.IsTrue(success);
 
 
         }
@@ -39,16 +41,17 @@ namespace Test_Automation_Core.test.main.tests.smoketests
           [Test, Order(2)]
         public void Test1()
         {
-            TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpace, "OpenEmptyLibA22");
+          bool success=  TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpace, "OpenEmptyLibA22");
 
-
+            Assert.IsTrue(success);
         }
 
        
         [Test, Order(3)]
         public void Test3()
         {
-            TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpace, "OpenYanikLib");
+           bool success = TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpace, "OpenYanikLib");
+            Assert.IsTrue(success);
 
         }
 
@@ -56,7 +59,8 @@ namespace Test_Automation_Core.test.main.tests.smoketests
         public void Test4()
 
         {
-            TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpace, "backuptests");
+          bool success=  TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpace, "backuptests");
+            Assert.IsTrue(success);
 
 
         }
@@ -64,7 +68,9 @@ namespace Test_Automation_Core.test.main.tests.smoketests
         [Test, Order(5)]
         public void Test5()
         {
-            TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpace, "OpenLibCH");
+           bool success= TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpace, "OpenLibCH");
+
+            Assert.IsTrue(success);
 
 
 
@@ -74,19 +80,19 @@ namespace Test_Automation_Core.test.main.tests.smoketests
        // [Test, Order(5)]
         public void Test6()
         {
-            TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpace, "vut");
+           bool success= TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpace, "vut");
 
 
-
+        Assert.IsTrue(success);
 
         }
 
         [Test, Order(6)]
         public void Test7()
         {
-            TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpace, "otherversions");
+           bool success= TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpace, "otherversions");
 
-
+            Assert.IsTrue(success);
 
 
         }

@@ -1,4 +1,5 @@
-﻿using Test_Automation_Core.test.main.tests;
+﻿using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.EventHandlers;
+using Test_Automation_Core.test.main.tests;
 using Test_Automation_Core.test.resources.test;
 
 namespace Test_Automation_Core.test.main.tests
@@ -19,7 +20,6 @@ namespace Test_Automation_Core.test.main.tests
             initATLAS();
 
             bool crashState = GetWelcomeWindow().HasAtlasCrashed(TimeSpan.FromSeconds(60));
-
             Assert.IsFalse(crashState);
 
         }
