@@ -41,7 +41,7 @@ Utilizes the Page Object Model (POM) for organizing UI interaction scripts, enha
   - `resources`: Test data and configurations.
   - `main`: Main test scripts and utilities.
 
-- **`bin` and `obj` Directories:** Build outputs and .NET managed directories.
+- **`bin` and `obj` Directories:** Build outputs and .NET managed directories. (Not under version control)
 
 ## Writing Test Cases
 
@@ -100,7 +100,7 @@ the version being tested.
 1. **After Each Change in the Structure of the used OneDrive Folders:**
    - Ensure all paths in `OneDriveConfig.cs`, `CHProjects.cs`, and `SmokeTestLibraries.cs` accurately reflect
    the current locations of test files.
-   - Verify that your OneDrive is up to date
+   - Verify that your OneDrive sync is up to date
 
 2. **Before Each Smoke Test:**
    - In `SmokeTestVariables.cs`, check and update relevant variables.
