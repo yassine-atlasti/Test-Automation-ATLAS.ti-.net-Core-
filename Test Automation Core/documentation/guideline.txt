@@ -61,13 +61,13 @@ in the testing process.
 
 #### `onedrive` Folder
 - **`OneDriveConfig.cs`**: Configure the OneDrive path of the testing system here. It's actually done automatically, 
-but you can set it manually.
+but if your OneDrive is running on another machine and you're using volume mapping set the path manually.
 This is crucial for accessing test projects and libraries stored on OneDrive.
 Note:
-Make Sure your OneDrive Testing Stuff is up to date, before starting Tests which requires Data like CH Projects , 
-or Smoke Test Libraries. 
+Before starting Tests which requires Data (like CH Projects , 
+or Smoke Test Libraries) make Sure your OneDrive Testing Stuff is up to date, 
 
-Keep the Folders needed for tests always in your Device :
+To avoid the download of data during test runs, keep the Folders needed for tests always on your local OneDrive :
 
 \Testing stuff\Test Data\Smoke Tests data\Win\Smoke Test Libraries
 \Testing stuff\Test Data\Projects\C&H all versions\Win\current Windows Release A23
@@ -99,7 +99,9 @@ the version being tested.
 
 1. **After Each Change in the Structure of the used OneDrive Folders:**
    - Ensure all paths in `OneDriveConfig.cs`, `CHProjects.cs`, and `SmokeTestLibraries.cs` accurately reflect
-   the current locations of test files.
+   the current locations of test files. 
+   If something is wrong in the file paths, you will get an error when running the corresponding tests.
+
    - Verify that your OneDrive sync is up to date
 
 2. **Before Each Smoke Test:**
