@@ -64,7 +64,7 @@ in the testing process.
 
 This folder contains classes with variables related to the running machine , such as OneDrive Path, WinAppDriver Path. 
 We could add this Folder in the .gitignore 
-- **'AtlastiConfig.cs'**: Sepcifes the installation Path of ATLAS.ti
+- **'AtlastiConfig.cs'**: Sepcifies the installation Path of ATLAS.ti
 - **`WinAppDriverConfig.cs`**: Specifies the file path of `winappdriver.exe`.
 Ensure this path is correctly set to the WinAppDriverVar.cs executable.
 
