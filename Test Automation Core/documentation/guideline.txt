@@ -49,6 +49,7 @@ Utilizes the Page Object Model (POM) for organizing UI interaction scripts, enha
 - Test cases are organized under `test/main/tests`.
 - Use the Arrange-Act-Assert pattern for clarity.
 
+### 
 ### Data Management
 - Manage test data in `test/resources/test-data`.
 
@@ -59,15 +60,25 @@ in the testing process.
 
 ### Directory Structure and Key Files
 
-#### `onedrive` Folder
+#### 'local-config' Folder
+
+This folder contains classes with variables related to the running machine , such as OneDrive Path, WinAppDriver Path. 
+We could add this Folder in the .gitignore 
+
+- **`WinAppDriverVar.cs`**: Specifies the file path of `winappdriver.exe`.
+Ensure this path is correctly set to the WinAppDriverVar.cs executable.
+
 - **`OneDriveConfig.cs`**: Configure the OneDrive path of the testing system here. It's actually done automatically, 
 but if your OneDrive is running on another machine and you're using volume mapping set the path manually.
 This is crucial for accessing test projects and libraries stored on OneDrive.
+
+#### `onedrive` Folder
+
 Note:
 Before starting Tests which requires Data (like CH Projects , 
 or Smoke Test Libraries) make Sure your OneDrive Testing Stuff is up to date, 
 
-To avoid the download of data during test runs, keep the Folders needed for tests always on your local OneDrive :
+To avoid downloading data during test runs, keep the Folders needed for tests always on your local OneDrive :
 
 \Testing stuff\Test Data\Smoke Tests data\Win\Smoke Test Libraries
 \Testing stuff\Test Data\Projects\C&H all versions\Win\current Windows Release A23
@@ -86,9 +97,6 @@ To avoid the download of data during test runs, keep the Folders needed for test
 - **`SmokeTestVariables.cs`**: This file contains variables specific to smoke tests, like the current Windows OS version. 
 Review and update these variables to reflect the current testing environment.
 
-#### `winappdriver`
-- **`WinAppDriverVar.cs`**: Specifies the file path of `winappdriver.exe`.
-Ensure this path is correctly set to the WinAppDriverVar.cs executable.
 
 #### `atlasti`
 - **`AtlasVariables.cs`**: Critical for specifying versions of ATLAS.ti under test, including Windows and Mac production 
@@ -151,6 +159,8 @@ path.
 ### Framework Maintenance
 - Regularly update scripts and configurations to reflect ATLAS.ti changes.
 
+### Areas of improvments 
+- We need to keep variables w
 ---
 
 This guideline aims to provide a clear understanding of the ATLAS.ti Test Automation Framework.

@@ -38,13 +38,13 @@ namespace Test_Automation_Core.test.utilities.util
         {
             var startInfo = new ProcessStartInfo
             {
-                FileName = WinAppDriverVar.winAppDriverPath, // Replace with the correct path
+                FileName = WinAppDriverConfig.winAppDriverPath, // Replace with the correct path
                 WindowStyle = ProcessWindowStyle.Hidden, // Hide the window
                 CreateNoWindow = true // Do not create a window
             };
 
             // Check if the application is already running
-            Process[] processes = Process.GetProcessesByName(WinAppDriverVar.winAppDriverAppName);
+            Process[] processes = Process.GetProcessesByName(WinAppDriverConfig.winAppDriverAppName);
 
             if (processes.Length == 0)
             {

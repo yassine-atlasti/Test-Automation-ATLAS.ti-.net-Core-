@@ -7,7 +7,7 @@ using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.test.resources.test_data.winappdriver
 {
-    public class WinAppDriverVar
+    public class WinAppDriverConfig
     {
 
         public static String winAppDriverPath = @"C:\Program Files\Windows Application Driver\WinAppDriver.exe";
