@@ -136,11 +136,9 @@ namespace Test_Automation_Core.test.utilities.util
             // Create HttpClient to send HTTP requests
             using var httpClient = new HttpClient();
 
-            // Get the path of the downloads folder
-            var downloadFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads\\";
 
             // Create the full file path
-            var filePath = Path.Combine(downloadFolder, fileName);
+            var filePath = Path.Combine(AtlasVariables.downloadPath, fileName);
 
             // If the file already exists, delete it before starting the download.
             if (System.IO.File.Exists(filePath))
@@ -681,7 +679,12 @@ public static string GetCurrentInstalledVersion()
             return os.VersionString;
         }
 
-       
+        public static string GetDownloadsFolderPath()
+        {
+            return Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+        }
+        
+
     }
 }
 
