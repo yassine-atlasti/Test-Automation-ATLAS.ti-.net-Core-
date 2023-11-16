@@ -65,7 +65,7 @@ in the testing process.
 This folder contains classes with variables related to the running machine , such as OneDrive Path, WinAppDriver Path. 
 We could add this Folder in the .gitignore 
 
-- **`WinAppDriverVar.cs`**: Specifies the file path of `winappdriver.exe`.
+- **`WinAppDriverConfig.cs`**: Specifies the file path of `winappdriver.exe`.
 Ensure this path is correctly set to the WinAppDriverVar.cs executable.
 
 - **`OneDriveConfig.cs`**: Configure the OneDrive path of the testing system here. It's actually done automatically, 
