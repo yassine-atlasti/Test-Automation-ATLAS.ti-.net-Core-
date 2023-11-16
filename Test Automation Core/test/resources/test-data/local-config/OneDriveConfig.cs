@@ -8,7 +8,7 @@ namespace Test_Automation_Core.test.resources.test
         //Get the one drive path automatically 
         public static string testingStuffPath = SystemActions.GetOneDrivePath() + "\\Testing stuff";
 
-        //Set the one drive path manually
+        //Set the one drive path manually and convert the line above to a comment
          //public static string testingStuffPath =  @"\\Mac\Home\Library\CloudStorage\OneDrive-ATLAS.tiScientificSoftwareDevelopmentGmbH\Testing stuff";
 
 
