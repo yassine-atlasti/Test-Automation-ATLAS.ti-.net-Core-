@@ -12,18 +12,22 @@ This document will guide you through the installation, configuration, and usage 
 - .NET Core 
 - WinAppDriver.
 - Git
+- Visual Studio
+- One Drive (for test data in Testing Stuff)
 
 ### Installation and Setup
 1. **Install ATLAS.ti:** Ensure ATLAS.ti is installed on your system.
-2. **Install .NET Core SDK:** Download from [Microsoft's official website](https://dotnet.microsoft.com/download).
-3. **Set Up WinAppDriver:** Install WinAppDriver from its [GitHub repository](https://github.com/microsoft/WinAppDriver).
-4. **Install Git on your machine**
-5. **Clone the Framework Repository:** Run the following command from the directory where you want to clone the repository:
+2. ** Install Visual Studio
+3. **Install .NET Core SDK:** 
+4. **Set Up WinAppDriver:** Install WinAppDriver from its [GitHub repository](https://github.com/microsoft/WinAppDriver).
+5. **Install Git on your machine**
+6. **Clone the Framework Repository:** Run the following command from the directory where you want to clone the repository:
    ```bash
    git clone https://github.com/yassine-atlasti/Test-Automation-ATLAS.ti-.net-Core-.git
    ```
-6. **Start WinAppDriver:** Launch WinAppDriver from its installation directory, 
-usually at `C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe`.
+7. **Start WinAppDriver:** Launch WinAppDriver from its installation directory, 
+usually at `C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe`. 
+Go to WinAppDriverVar.cs and adjust the path if needed
 
 ## Framework Overview
 
@@ -59,6 +63,18 @@ in the testing process.
 - **`OneDriveConfig.cs`**: Configure the OneDrive path of the testing system here. It's actually done automatically, 
 but you can set it manually.
 This is crucial for accessing test projects and libraries stored on OneDrive.
+Note:
+Make Sure your OneDrive Testing Stuff is up to date, before starting Tests which requires Data like CH Projects , 
+or Smoke Test Libraries. 
+
+Keep the Folders needed for tests always in your Device :
+
+\Testing stuff\Test Data\Smoke Tests data\Win\Smoke Test Libraries
+\Testing stuff\Test Data\Projects\C&H all versions\Win\current Windows Release A23
+\Testing stuff\Test Data\Projects\C&H all versions\Win\current Windows Release A22
+\Testing stuff\Test Data\Projects\C&H all versions\Mac\current Mac Release A22
+\Testing stuff\Test Data\Projects\C&H all versions\Mac\current Mac Release A23
+
 
 #### `onedrive/projects`
 - **`CHProjects.cs`**: Contains file paths for the projects used in smoke tests. Make sure these paths point to the correct project files before running tests.
@@ -112,6 +128,7 @@ path.
 ### Running Tests
 - Use Visual Studio's Test Explorer or `dotnet test` for execution.
 - For specific suites: `dotnet test --filter TestCategory=YourCategory`.
+- For example to run the smoke Test Suite, you need to find SmokeTestSuite.cs class, right-click it and click on run tests.
 
 ## Test Reports
 

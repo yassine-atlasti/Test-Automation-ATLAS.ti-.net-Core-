@@ -12,7 +12,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
 
 
 
-        [OneTimeSetUp]
+       // [OneTimeSetUp]
         public void downloadRC()
         {
             if (AtlasVariables.winRC != AtlasVariables.InstalledVersion)
