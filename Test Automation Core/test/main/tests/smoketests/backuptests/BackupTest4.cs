@@ -1,11 +1,13 @@
-﻿using Test_Automation_Core.test.main.tests;
+﻿using NUnit.Framework.Interfaces;
+using OpenQA.Selenium.Appium.Windows;
+using Test_Automation_Core.test.main.tests;
 using Test_Automation_Core.test.resources.test;
 using Test_Automation_Core.test.utilities.util;
 namespace Test_Automation_Core.test.main.tests
 {
     //this class should not extend the Init class. We don't want to run the setup method in this Test Case
 
-    internal class Test4
+    internal class BackupTest4
     {
         InitTests SmokeTestClass = new InitTests();
         [Category("backuptests")]
@@ -19,7 +21,6 @@ namespace Test_Automation_Core.test.main.tests
             SmokeTestClass.initBackUpApp();
             bool restoreState = SmokeTestClass.GetBackUpActions().RestoreLibrary(SmokeTestVariables.smokeTestFolderPath, backUp);
             Assert.IsTrue(restoreState);
-            SmokeTestClass.cleanUp();
 
 
            
@@ -33,7 +34,16 @@ namespace Test_Automation_Core.test.main.tests
             SmokeTestClass.initATLAS();
             bool projectRestored = SmokeTestClass.GetAppActions().OpenProject("Geo Project");
             Assert.IsTrue(projectRestored);
+        }
+
+
+
+        [TearDown]
+        public void cleanUp()
+        {
+
             SmokeTestClass.cleanUp();
+
         }
     }
 }

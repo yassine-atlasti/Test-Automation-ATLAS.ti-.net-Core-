@@ -16,6 +16,11 @@ namespace Test_Automation_Core.test.main.util
             //Create Smoke Test Folder
 
             systemActions.CreateFolder(SmokeTestVariables.smokeTestFolderPath);
+            systemActions.CreateFolder(SmokeTestVariables.smokeTestFolderPath + "\\Screenshots");
+            systemActions.CreateFolder(SmokeTestVariables.smokeTestFolderPath + "\\Screenshots\\Failed");
+            systemActions.CreateFolder(SmokeTestVariables.smokeTestFolderPath + "\\Screenshots\\Succeeded");
+
+
 
             //Extract Libraries
 

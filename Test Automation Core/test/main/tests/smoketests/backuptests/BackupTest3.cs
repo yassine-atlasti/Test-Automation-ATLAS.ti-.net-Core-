@@ -2,7 +2,7 @@
 
 namespace Test_Automation_Core.test.main.tests
 {
-    public class Test3:InitTests
+    public class BackupTest3:InitTests
     {
         [Category("backuptests")]
 

@@ -550,6 +550,7 @@ namespace Test_Automation_Core.test.utilities.util
         // Helper method to take a screenshot
         public static void TakeScreenshot(WindowsDriver<WindowsElement> driver, string logFolderPath, string screenshotFileName)
         {
+
             Screenshot screenshot = driver.GetScreenshot();
 
             string screenshotPath = Path.Combine(logFolderPath, screenshotFileName);

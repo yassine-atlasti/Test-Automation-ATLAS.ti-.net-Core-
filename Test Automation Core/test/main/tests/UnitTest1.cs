@@ -21,7 +21,11 @@ namespace Test_Automation_Core.test.main.tests
 
         [Test]
         public void test()
-        {
+
+            
+        { _driver = systemActions.ClassInitialize("Root");
+
+            SystemActions.TakeScreenshot(_driver, SystemActions.GetDesktopPath(), "test.png");
 
 
         }

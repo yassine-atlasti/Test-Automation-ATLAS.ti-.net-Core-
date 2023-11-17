@@ -1,3 +1,4 @@
+using NUnit.Framework.Interfaces;
 using NUnit.Framework.Internal;
 using OpenQA.Selenium.Appium.Windows;
 using Test_Automation_Core.src;
@@ -83,6 +84,23 @@ namespace Test_Automation_Core.test.main.tests
         }
        [TearDown]
         public void cleanUp() {
+            WindowsDriver<WindowsElement> _rootdriver = systemActions.ClassInitialize("Root");
+
+            var screenShotFileName = TestContext.CurrentContext.Test.ClassName + "-" + TestContext.CurrentContext.Test.Name + DateTime.Now.ToString("HH-mm-ss") + ".png";
+
+            if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
+            {
+                // The test failed
+                SystemActions.TakeScreenshot(_rootdriver, SmokeTestVariables.smokeTestFolderPath + "\\Screenshots\\Failed",screenShotFileName );
+
+            }
+            else if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed)
+            {
+                // The test passed
+                SystemActions.TakeScreenshot(_rootdriver, SmokeTestVariables.smokeTestFolderPath + "\\Screenshots\\Succeeded", screenShotFileName);
+            }
+
+            _rootdriver.Close();
 
             _driver.Close();
             SystemActions.KillProcessByName("Atlasti" + AtlasVariables.actualMajor);

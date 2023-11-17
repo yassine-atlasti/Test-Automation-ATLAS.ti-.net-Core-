@@ -14,6 +14,7 @@ namespace Test_Automation_Core.test.main.tests
             //Atlproj import
 
             bool atlprojImportState = GetAppActions().ImportProject(CHProjects.MacPreviousAtlProjPath, "AtlProj");
+            
             Assert.IsTrue(atlprojImportState);
 
             

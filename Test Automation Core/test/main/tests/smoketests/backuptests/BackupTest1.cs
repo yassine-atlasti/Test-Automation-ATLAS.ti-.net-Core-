@@ -4,7 +4,7 @@ using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.test.main.tests
 {
-    public class Test1:InitTests
+    public class BackupTest1:InitTests
     {
 
         [Category("backuptests")]

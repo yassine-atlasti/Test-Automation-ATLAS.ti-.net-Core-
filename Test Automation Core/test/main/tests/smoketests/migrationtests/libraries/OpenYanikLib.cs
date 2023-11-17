@@ -15,7 +15,7 @@ namespace Test_Automation_Core.test.main.tests
             //Open ATLAS.ti with empty A22 Library
             GetAppActions().SwitchLibrary(SmokeTestVariables.library2Extracted);
 
-
+            Thread.Sleep(3000);
             //We need to change the driver because the application will restart after library switch
             initATLAS();
             
