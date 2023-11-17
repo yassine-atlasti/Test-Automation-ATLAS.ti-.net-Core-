@@ -6,7 +6,7 @@ namespace Test_Automation_Core.test.main.util
     public class ExtractLibraries
     {
 
-        public static async Task extractSmokeTestLibs()
+        public static void  extractSmokeTestLibs()
         {
             SystemActions systemActions = new SystemActions();
 

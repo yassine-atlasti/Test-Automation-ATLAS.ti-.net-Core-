@@ -41,10 +41,10 @@ namespace Test_Automation_Core.test.main.tests
         public WindowsDriver<WindowsElement> GetDriver() { return _driver; }
         //Should maybe go to SmokeTest Data
        
-        public static async Task initSmokeTest()
+        public static void initSmokeTest()
         {
-            await ExtractLibraries.extractSmokeTestLibs();
-
+             ExtractLibraries.extractSmokeTestLibs();
+            Thread.Sleep(5000);
 
         }
 
