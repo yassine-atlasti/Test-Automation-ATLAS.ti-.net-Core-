@@ -35,7 +35,25 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.dialogs
 
             action.SendKeys(Keys.Control + "v").KeyUp(Keys.Control).Perform();
         }
+        public void EnterMobileProjectName(string projectName)
+        {
 
+
+            var projectBox = driver.FindElementByAccessibilityId("TextMobileProjectFilename");
+            projectBox.Clear();
+
+
+            projectBox.Click();
+
+            ClipboardService.SetText(projectName);
+
+            // Create a new Actions object
+            Actions action = new Actions(driver);
+
+            Thread.Sleep(1000);
+
+            action.SendKeys(Keys.Control + "v").KeyUp(Keys.Control).Perform();
+        }
 
 
 
@@ -101,26 +119,33 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.dialogs
 
         }
 
-        public bool IsProjectLoaded()
+        public bool IsProjectLoaded(string importType)
         {
+            if (importType != "AtlCB" && importType!= "mobile")
+            {
+                try
+                {
+                    // Try to find the MediaFolderButton
+                    var isProjectNameFieldVisible = driver.FindElementByAccessibilityId("NewProjectNameBox");
 
-            try
-            {
-                // Try to find the MediaFolderButton
-                var isProjectNameFieldVisible = driver.FindElementByAccessibilityId("NewProjectNameBox");
-
-                // If the button is found and is displayed, return true
-                return isProjectNameFieldVisible.Displayed;
+                    // If the button is found and is displayed, return true
+                    return isProjectNameFieldVisible.Displayed;
+                }
+                catch (NoSuchElementException)
+                {
+                    // If the button is not found, it is not visible, so return false
+                    return false;
+                }
+                catch (WebDriverException)
+                {
+                    // If the button is not found, it is not visible, so return false
+                    return false;
+                }
             }
-            catch (NoSuchElementException)
+            
+            else
             {
-                // If the button is not found, it is not visible, so return false
-                return false;
-            }
-            catch (WebDriverException)
-            {
-                // If the button is not found, it is not visible, so return false
-                return false;
+                return true;
             }
 
         }

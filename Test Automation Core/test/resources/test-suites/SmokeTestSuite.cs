@@ -1,5 +1,6 @@
 ﻿using Test_Automation_Core.test.main.util;
 using Test_Automation_Core.test.resources.test;
+using Test_Automation_Core.test.resources.test_data.releasetestdata;
 using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.test.main.tests.smoketests
@@ -7,7 +8,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
     public class SmokeTestSuite 
     {
         string testAssemblyPath = "TestAutomationFramework.dll";
-        string targetNameSpace = "Test_Automation_Core.test.main.tests";
+        string targetNameSpace = "Test_Automation_Core.test.main.tests.smoketests";
         string targetNameSpaceUtil = "Test_Automation_Core.test.main.util";
 
 
@@ -26,6 +27,11 @@ namespace Test_Automation_Core.test.main.tests.smoketests
             Assert.IsTrue(success);
 
 
+        }
+        [SetUp]
+        public void setUp()
+        {
+            InitTests._testSuiteFolder = SmokeTestVariables.smokeTestFolderPath;
         }
 
         [Test, Order(1)]

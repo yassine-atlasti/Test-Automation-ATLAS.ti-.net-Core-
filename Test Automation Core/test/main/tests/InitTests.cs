@@ -14,10 +14,27 @@ namespace Test_Automation_Core.test.main.tests
 {
     [TestFixture]
     public class InitTests
-    {
-        //General
+    {//General
         private static WindowsDriver<WindowsElement> _driver;
         SystemActions systemActions = new SystemActions();
+        
+        
+        public static string _testSuiteFolder ;
+
+        // Getter method for testSuiteFolder
+        public static string TestSuiteFolder
+        {
+            get
+            {
+                return _testSuiteFolder;
+            }
+            set
+            {
+                // You can add validation or additional logic here if needed
+                _testSuiteFolder = value;
+            }
+        }
+        
 
 
         //ATLAS.ti
@@ -49,11 +66,17 @@ namespace Test_Automation_Core.test.main.tests
 
         }
 
+        public static void initReleaseTest()
+        {
+            ExtractLibraries.extractReleaseTestLibs();
+
+        }
+
         [SetUp]
         public void initATLAS()
 
         {
-            initSmokeTest();
+            //initSmokeTest();
             _driver = systemActions.ClassInitialize(AtlasVariables.appPath);
             systemActions = new SystemActions(_driver);
             appControl = new App(_driver);
@@ -91,13 +114,13 @@ namespace Test_Automation_Core.test.main.tests
             if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
             {
                 // The test failed
-                SystemActions.TakeScreenshot(_rootdriver, SmokeTestVariables.smokeTestFolderPath + "\\Screenshots\\Failed",screenShotFileName );
+                SystemActions.TakeScreenshot(_rootdriver, _testSuiteFolder + "\\Screenshots\\Failed",screenShotFileName );
 
             }
             else if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed)
             {
                 // The test passed
-                SystemActions.TakeScreenshot(_rootdriver, SmokeTestVariables.smokeTestFolderPath + "\\Screenshots\\Succeeded", screenShotFileName);
+                SystemActions.TakeScreenshot(_rootdriver, _testSuiteFolder + "\\Screenshots\\Succeeded", screenShotFileName);
             }
 
             _rootdriver.Close();

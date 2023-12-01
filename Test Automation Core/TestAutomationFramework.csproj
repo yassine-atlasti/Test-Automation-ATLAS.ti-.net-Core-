@@ -30,6 +30,19 @@
 
   <ItemGroup>
     <Folder Include="src\pages\atlasti\ui\wizards\Images\" />
+    <Folder Include="test\main\tests\releasetests\entities\documents\imports\" />
+    <Folder Include="test\main\tests\releasetests\entities\documents\exports\" />
+    <Folder Include="test\main\tests\releasetests\entities\codes\" />
+    <Folder Include="test\main\tests\releasetests\entities\networks\" />
+    <Folder Include="test\main\tests\releasetests\entities\memos\" />
+    <Folder Include="test\main\tests\releasetests\entities\documents\" />
+    <Folder Include="test\main\tests\releasetests\entities\quotations\" />
+    <Folder Include="test\main\tests\releasetests\migrationtests\libraries\" />
+    <Folder Include="test\main\tests\releasetests\migrationtests\projects\merge\" />
+    <Folder Include="test\main\tests\releasetests\migrationtests\projects\exports\" />
+    <Folder Include="test\main\tests\releasetests\reports\exports\" />
+    <Folder Include="test\main\tests\releasetests\reports\imports\" />
+    <Folder Include="test\resources\test-data\onedrive\documents\" />
   </ItemGroup>
 
 </Project>

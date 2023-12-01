@@ -36,7 +36,7 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
             //Wait 5 seconds for Import dialog to appear
             Thread.Sleep(5000);
 
-            importState = importProjectDialog.IsProjectLoaded();
+             importState = importProjectDialog.IsProjectLoaded(importType);
 
 
 
@@ -55,8 +55,8 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
                 }
 
                 // Set project name
-                importProjectDialog.EnterProjectName(projectName);
-
+                if (importType != "AtlCB" && importType != "mobile") { importProjectDialog.EnterProjectName(projectName); }
+               
                 importProjectDialog.ClickImportButton();
 
 
@@ -67,7 +67,14 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
                 SystemActions systemActions = new SystemActions();
                 string windowName = projectName + " - ATLAS.ti";
-                importState = systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "Window", windowName, 35);
+
+                //Don't check for mobile and atlcb project until bug with project names is fixed
+                if (importType != "AtlCB" && importType != "mobile")
+                {
+                    importState = systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "Window", windowName, 35);
+                } else {
+                    //false until bug with project names is fixed (Bug 19708)
+                        importState = false; }
 
             }
 
