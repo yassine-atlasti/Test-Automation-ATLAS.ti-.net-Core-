@@ -19,7 +19,7 @@ namespace Test_Automation_Core.test.main.tests
         SystemActions systemActions = new SystemActions();
         
         
-        public static string _testSuiteFolder ;
+        public static string _testSuiteFolder;
 
         // Getter method for testSuiteFolder
         public static string TestSuiteFolder

@@ -3,7 +3,7 @@ using OpenQA.Selenium.Appium.Windows;
 using Test_Automation_Core.test.main.tests;
 using Test_Automation_Core.test.resources.test;
 using Test_Automation_Core.test.utilities.util;
-namespace Test_Automation_Core.test.main.tests;
+namespace Test_Automation_Core.test.main.tests.smoketests;
 
 
 //this class should not extend the Init class. We don't want to run the setup method in this Test Case

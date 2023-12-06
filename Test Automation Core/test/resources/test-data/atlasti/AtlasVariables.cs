@@ -14,7 +14,7 @@ namespace Test_Automation_Core.test.resources.test
         public static string InstalledVersion { get => SystemActions.GetCurrentInstalledVersion(); }
         public static string macVUT = "";
 
-        public static string winRC = "23.4.29038";
+        public static string winRC = "23.4.0.29162";
 
         public static string winProduction = "23.3.4";
         public static string macProduction = "23.3.0-28730";

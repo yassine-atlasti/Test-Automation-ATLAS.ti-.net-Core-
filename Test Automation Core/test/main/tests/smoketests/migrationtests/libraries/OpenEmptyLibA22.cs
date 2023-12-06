@@ -2,7 +2,7 @@
 using Test_Automation_Core.test.main.tests;
 using Test_Automation_Core.test.resources.test;
 
-namespace Test_Automation_Core.test.main.tests
+namespace Test_Automation_Core.test.main.tests.smoketests
 {
     public class OpenEmptyLibA22:InitTests
     {

@@ -1,6 +1,6 @@
 ﻿using Test_Automation_Core.test.main.tests;
 
-namespace Test_Automation_Core.test.main.tests
+namespace Test_Automation_Core.test.main.tests.smoketests
 {
     public class BackupTest3:InitTests
     {

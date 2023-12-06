@@ -28,7 +28,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
 
 
         }
-        [SetUp]
+      [SetUp]
         public void setUp()
         {
             InitTests._testSuiteFolder = SmokeTestVariables.smokeTestFolderPath;

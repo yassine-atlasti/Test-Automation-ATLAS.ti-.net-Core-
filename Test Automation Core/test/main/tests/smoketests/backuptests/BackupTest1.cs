@@ -2,7 +2,7 @@
 using Test_Automation_Core.test.resources.test;
 using Test_Automation_Core.test.utilities.util;
 
-namespace Test_Automation_Core.test.main.tests
+namespace Test_Automation_Core.test.main.tests.smoketests
 {
     public class BackupTest1:InitTests
     {
