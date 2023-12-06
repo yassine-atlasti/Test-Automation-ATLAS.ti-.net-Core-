@@ -2,32 +2,31 @@
 using Test_Automation_Core.test.resources.test;
 using Test_Automation_Core.test.utilities.util;
 
-namespace Test_Automation_Core.test.main.tests.smoketests
+namespace Test_Automation_Core.test.main.tests.smoketests.backuptests;
+
+public class BackupTest1:InitTests
 {
-    public class BackupTest1:InitTests
+
+    [Category("backuptests")]
+
+   
+    
+    
+    
+    
+    
+    
+    [Test]
+    public void CheckWarning()
     {
+        //Test 1 
+        string backUp = AtlasVariables.InstalledVersion + "_BackUp";
 
-        [Category("backuptests")]
+        initBackUpApp();
 
-       
-        
-        
-        
-        
-        
-        
-        [Test]
-        public void CheckWarning()
-        {
-            //Test 1 
-            string backUp = AtlasVariables.InstalledVersion + "_BackUp";
+        bool warningTrue = GetBackUpActions().CheckWarning();
+        Assert.IsTrue(warningTrue);
 
-            initBackUpApp();
-
-            bool warningTrue = GetBackUpActions().CheckWarning();
-            Assert.IsTrue(warningTrue);
-
-        }
     }
 }
 

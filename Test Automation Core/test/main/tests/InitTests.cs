@@ -107,7 +107,7 @@ namespace Test_Automation_Core.test.main.tests
         }
        [TearDown]
         public void cleanUp() {
-            WindowsDriver<WindowsElement> _rootdriver = systemActions.ClassInitialize("Root");
+          /**  WindowsDriver<WindowsElement> _rootdriver = systemActions.ClassInitialize("Root");
 
             var screenShotFileName = TestContext.CurrentContext.Test.ClassName + "-" + TestContext.CurrentContext.Test.Name + DateTime.Now.ToString("HH-mm-ss") + ".png";
 
@@ -123,7 +123,7 @@ namespace Test_Automation_Core.test.main.tests
                 SystemActions.TakeScreenshot(_rootdriver, _testSuiteFolder + "\\Screenshots\\Succeeded", screenShotFileName);
             }
 
-            _rootdriver.Close();
+            _rootdriver.Close();**/
 
             _driver.Close();
             SystemActions.KillProcessByName("Atlasti" + AtlasVariables.actualMajor);

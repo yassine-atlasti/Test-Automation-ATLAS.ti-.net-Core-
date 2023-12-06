@@ -47,7 +47,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
           [Test, Order(2)]
         public void Test1()
         {
-          bool success=  TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpace, "OpenEmptyLibA22");
+          bool success=  TestRunner.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.smoketests.migrationtests.libraries", "OpenEmptyLibA22");
 
             Assert.IsTrue(success);
         }
@@ -56,7 +56,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
         [Test, Order(3)]
         public void Test3()
         {
-           bool success = TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpace, "OpenYanikLib");
+           bool success = TestRunner.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.smoketests.migrationtests.libraries", "OpenYanikLib");
             Assert.IsTrue(success);
 
         }
@@ -65,7 +65,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
         public void Test4()
 
         {
-          bool success=  TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpace, "backuptests");
+          bool success=  TestRunner.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.smoketests.backuptests", "backuptests");
             Assert.IsTrue(success);
 
 
@@ -74,7 +74,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
         [Test, Order(5)]
         public void Test5()
         {
-           bool success= TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpace, "OpenLibCH");
+           bool success= TestRunner.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.smoketests.migrationtests.libraries", "OpenLibCH");
 
             Assert.IsTrue(success);
 
@@ -86,7 +86,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
        // [Test, Order(5)]
         public void Test6()
         {
-           bool success= TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpace, "vut");
+           bool success= TestRunner.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.smoketests.migrationtests.chprojects.vut", "vut");
 
 
         Assert.IsTrue(success);
@@ -96,7 +96,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
         [Test, Order(6)]
         public void Test7()
         {
-           bool success= TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpace, "otherversions");
+           bool success= TestRunner.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.smoketests.migrationtests.chprojects.otherversions", "otherversions");
 
             Assert.IsTrue(success);
 

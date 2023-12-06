@@ -1,24 +1,23 @@
 ﻿using Test_Automation_Core.test.main.tests;
 
-namespace Test_Automation_Core.test.main.tests.smoketests
+namespace Test_Automation_Core.test.main.tests.smoketests.backuptests;
+
+public class BackupTest3:InitTests
 {
-    public class BackupTest3:InitTests
+    [Category("backuptests")]
+
+    [Test]
+    public void deleteProject()
     {
-        [Category("backuptests")]
-
-        [Test]
-        public void deleteProject()
-        {
 
 
 
-            //Delete VUT
+        //Delete VUT
 
-            GetAppActions().DeleteProject("Geo Project");
+        GetAppActions().DeleteProject("Geo Project");
 
-            //It's actually not working after closing a project. Delete works actually only when project is closed=>Invesitagte
-
-        }
+        //It's actually not working after closing a project. Delete works actually only when project is closed=>Invesitagte
 
     }
+
 }

@@ -1,9 +1,8 @@
 ﻿using Test_Automation_Core.test.main.tests;
 using Test_Automation_Core.test.resources.test;
 
-namespace Test_Automation_Core.test.main.tests.smoketests
+namespace Test_Automation_Core.test.main.tests.smoketests.migrationtests.chprojects.otherversions
 {
-    [TestFixture]
     public class ImportWinProd:InitTests
     {
         [Test, Order(1), Category("otherversions")]
