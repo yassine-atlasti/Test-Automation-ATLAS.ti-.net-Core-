@@ -21,7 +21,6 @@ namespace Test_Automation_Core.test.main.tests.smoketests
             //The export method has problem to locate the Project Bundle Button to do the export.
             bool atlProjExportState = GetAppActions().ExportProject(CHProjects.CHWinVUTProjectsFolder, "Atlproj", SmokeTestVariables.smokeTestproject, fileName);
             Assert.IsTrue(atlProjExportState);
-            GetAppActions().CloseProjectAsync();
 
 
         }
@@ -32,7 +31,6 @@ namespace Test_Automation_Core.test.main.tests.smoketests
 
             bool qdpxExportState = GetAppActions().ExportProject(CHProjects.CHWinVUTProjectsFolder, "QDPX", SmokeTestVariables.smokeTestproject, fileName);
             Assert.IsTrue(qdpxExportState);
-            GetAppActions().CloseProjectAsync();
 
 
         }

@@ -8,7 +8,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests.migrationtests.librari
 
         [Category("OpenLibCH")]
 
-        [Test, Order(2)]
+        [Test]
 
         public void openLibraryCH()
         {

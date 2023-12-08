@@ -7,7 +7,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests.migrationtests.librari
     {
         [Category("OpenYanikLib")]
 
-        [Test,Order(1)]
+        [Test]
 
         public void openLibraryYanik()
         {

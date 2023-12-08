@@ -15,6 +15,10 @@ using TextCopy;
 using System.Diagnostics;
 using System.Management;
 using System.Text.RegularExpressions;
+using System.Globalization;
+
+using System.Windows.Forms;
+
 
 namespace Test_Automation_Core.test.utilities.util
 {
@@ -84,7 +88,7 @@ namespace Test_Automation_Core.test.utilities.util
 
         }
 
-
+       
 
         public int OpenApp(string applicationPath, string applicationName)
         {

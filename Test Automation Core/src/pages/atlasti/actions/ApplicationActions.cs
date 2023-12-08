@@ -92,13 +92,12 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
             var projectWindow = _app.GetProjectWindow();
             var appMenu = projectWindow.getAppMenu();
 
-            //check if welcome Window is displayed or another project is actually open, if yes open the project that should be exported
+            //open the project that should be exported
 
-            if (!projectWindow.IsProjectOpen(projectName))
-            {
+           
                 OpenProject(projectName);
 
-            }
+            
 
 
 
@@ -189,11 +188,6 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
             var optionsWindow = _app.GetOptionsWindow();
             var switchLibraryWizard = _app.GetSwitchLibraryWizard();
 
-
-            if (!welcomeWindow.IsWelcomeWindowDisplayed())
-            {
-                CloseProjectAsync();
-            }
 
 
             // Open the options window and click the 'Switch Library' button

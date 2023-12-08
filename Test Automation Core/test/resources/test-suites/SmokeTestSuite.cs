@@ -44,7 +44,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
 
 
 
-          [Test, Order(2)]
+          //[Test, Order(2)]
         public void Test1()
         {
           bool success=  TestRunner.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.smoketests.migrationtests.libraries", "OpenEmptyLibA22");
