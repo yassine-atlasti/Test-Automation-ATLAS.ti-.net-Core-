@@ -12,7 +12,6 @@ using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.test.main.tests
 {
-    [TestFixture]
     public class InitTests
     {//General
         private static WindowsDriver<WindowsElement> _driver;

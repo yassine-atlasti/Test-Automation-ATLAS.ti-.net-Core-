@@ -1,31 +1,30 @@
 ﻿using Test_Automation_Core.test.main.tests;
 using Test_Automation_Core.test.resources.test;
 
-namespace Test_Automation_Core.test.main.tests.smoketests.migrationtests.libraries
+namespace Test_Automation_Core.test.main.tests.smoketests.migrationtests.libraries;
+
+public class OpenYanikLib:InitTests
 {
-    internal class OpenYanikLib:InitTests
+    
+
+    [Test, Category("OpenYanikLib")]
+
+    public void openLibraryYanik()
     {
-        [Category("OpenYanikLib")]
 
-        [Test]
+        //Open ATLAS.ti with empty A22 Library
+        GetAppActions().SwitchLibrary(SmokeTestVariables.library2Extracted);
 
-        public void openLibraryYanik()
-        {
-
-            //Open ATLAS.ti with empty A22 Library
-            GetAppActions().SwitchLibrary(SmokeTestVariables.library2Extracted);
-
-            Thread.Sleep(3000);
-            //We need to change the driver because the application will restart after library switch
-            initATLAS();
-            
-            bool crashState = GetWelcomeWindow().HasAtlasCrashed(TimeSpan.FromSeconds(60));
-
-            Assert.IsFalse(crashState);
-
-
-        }
-
+        Thread.Sleep(3000);
+        //We need to change the driver because the application will restart after library switch
+        initATLAS();
         
+        bool crashState = GetWelcomeWindow().HasAtlasCrashed(TimeSpan.FromSeconds(60));
+
+        Assert.IsFalse(crashState);
+
+
     }
+
+    
 }
