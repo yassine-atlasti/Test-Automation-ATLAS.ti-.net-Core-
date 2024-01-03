@@ -85,99 +85,74 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
 
 
-        public bool ExportProject(string filePath, string exportType, string projectName, string fileName = "")
+        public enum ExportType
         {
-            var welcomeWindow = _app.GetWelcomeControl();
+            QDPX,
+            ATLPROJ
+        }
+
+        public bool ExportProject(string filePath, ExportType exportType, string projectName, string fileName = "")
+        {
+            const int shortDelay = 1500;
+            const int mediumDelay = 2000;
+            const int longDelay = 3000;
+
+            OpenProject(projectName); // Assume this method exists
 
             var projectWindow = _app.GetProjectWindow();
             var appMenu = projectWindow.getAppMenu();
-
-            //open the project that should be exported
-
-           
-                OpenProject(projectName);
-
-            
-
-
-
-
-            // Assume that each method performs the action that its name suggests
             var fileTab = appMenu.ClickFile();
-            Thread.Sleep(1500);
+            Thread.Sleep(shortDelay); // Consider replacing with a more robust synchronization
+
             ExportControl exportControl = fileTab.ClickExport();
-            Thread.Sleep(1500);
-            string exportTypeLower = exportType.ToLower();
-            FilePicker filePickerDialog;
+            Thread.Sleep(shortDelay); // Consider replacing with a more robust synchronization
 
-            if (exportTypeLower == "qdpx")
-            {
-                exportControl.ClickQDPXProjectBundleTabItem();
-                filePickerDialog = exportControl.ClickProjectBundleButton("QDPXBundleTab");
+            FilePicker filePickerDialog = HandleExportType(exportControl, exportType);
 
-            }
-            else if (exportTypeLower == "atlproj")
-            {  //unselect doesn't work!
-               // exportControl.UnselectCheckBox();
-                filePickerDialog = exportControl.ClickProjectBundleButton("TransferBundleTab");
-            }
-            else
-            {
-                throw new ArgumentException("Invalid export type: " + exportType);
-            }
+            Thread.Sleep(longDelay); // Consider replacing with a more robust synchronization
 
-
-            // Add a delay of 2 seconds
-            Thread.Sleep(3000); // Delay in milliseconds
-
-            // filePickerDialog.EnterFilePath(filePath);
-            //Remove Spaces from file name
-
-            Thread.Sleep(2000);
-            if (fileName == "")
-            {
-                filePickerDialog.EnterFileName(filePath + "\\" + projectName);
-
-            }
-            else { filePickerDialog.EnterFileName(filePath + "\\" + fileName); }
-
+            fileName = string.IsNullOrEmpty(fileName) ? projectName : fileName;
+            filePickerDialog.EnterFileName(Path.Combine(filePath, fileName));
             filePickerDialog.ClickSaveButton();
 
+            Thread.Sleep(mediumDelay); // Consider replacing with a more robust synchronization
 
-            //handle QDPX Export Results
-            // You can add more actions or checks here, such as validating that the project was exported correctly
+            return DetermineExportState(exportType);
+        }
 
-            bool exportState = false;
+        private FilePicker HandleExportType(ExportControl exportControl, ExportType exportType)
+        {
+            switch (exportType)
+            {
+                case ExportType.QDPX:
+                    exportControl.ClickQDPXProjectBundleTabItem();
+                    //Or ExportBackstageTab
+                    return exportControl.ClickProjectBundleButton("ExportBackstageTab");
+                case ExportType.ATLPROJ:
+                    // exportControl.UnselectCheckBox(); // If needed
+                    return exportControl.ClickProjectBundleButton("TheExportControl");
+                default:
+                    throw new ArgumentException($"Invalid export type: {exportType}");
+            }
+        }
 
-            if (exportTypeLower == "qdpx")
+        private bool DetermineExportState(ExportType exportType)
+        {
+            SystemActions systemActions = new SystemActions();
+
+            if (exportType == ExportType.QDPX)
             {
                 var exportResultsDialog = _app.GetExportResultsDialog();
-
-                SystemActions systemActions = new SystemActions();
-
-                //for now , if the QDPX project was successfully exported we will see the Cancel Button of the Export Results. But in Future we should check that there are no errors or crashes 
-
-                exportState = systemActions.WaitForElementToBeDisplayedByName(_app.getDriver(), "Cancel", 30);
+                bool exportState = systemActions.WaitForElementToBeDisplayedByName(_app.getDriver(), "Cancel", 30);
                 exportResultsDialog.CancelQDPXResultsExport();
-
+                return exportState;
             }
-            else if (exportTypeLower == "atlproj")
+            else if (exportType == ExportType.ATLPROJ)
             {
-                //for now , if the project was successfully exported we will see the Home Menu Item. But in Future we should check that there are no errors or crashes 
-
-                SystemActions systemActions = new SystemActions();
-                exportState = systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "TabItem", "Home", 30);
-
-
-
+                return systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "TabItem", "Home", 30);
             }
 
-            return exportState;
-
-
-
-
-
+            return false;
         }
 
 

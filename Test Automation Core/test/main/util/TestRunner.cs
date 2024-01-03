@@ -1,8 +1,18 @@
 ﻿using NUnit.Engine;
 using System.Xml;
+using Test_Automation_Core.test.main.tests;
 
 public class TestRunner
 {
+    public static void InitializeTestRun(string testCategory)
+    {
+        string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+        string uniqueTestRunFolder = Path.Combine(InitTests._testSuiteFolder, $"TestRun_{testCategory}_{timestamp}");
+
+       // Create subdirectories for passed and failed tests
+        Directory.CreateDirectory(Path.Combine(uniqueTestRunFolder, "Passed"));
+        Directory.CreateDirectory(Path.Combine(uniqueTestRunFolder, "Failed"));
+    }
     public static bool RunTestByCategory(string testAssemblyPath, string targetNamespace, string folderName)
     {
         // Initialize the test engine
@@ -26,7 +36,9 @@ public class TestRunner
         // Output results to the console
         Console.WriteLine($"Test Results: {result}");
         //
-        bool res = AssertTestRun(result); ;
+
+
+        bool res = AssertTestRun(result);
             return res; 
     }
 

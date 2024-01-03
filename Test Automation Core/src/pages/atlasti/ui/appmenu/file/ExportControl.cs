@@ -28,7 +28,7 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.appmenu.file
         {
 
             // Locate the TabItem by name
-            var tabItem = _driver.FindElementByAccessibilityId("QDPXBundleTab");
+            var tabItem = _driver.FindElementByAccessibilityId("TheExportControl");
 
             // Find the button within the TabItem
             var button = tabItem.FindElementByName("QDPX Project Bundle");
@@ -42,7 +42,7 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.appmenu.file
 
 
             // Locate the TabItem by name
-             var tabItem = _driver.FindElementByAccessibilityId(tabType).FindElementByTagName("Button");
+            var tabItem = _driver.FindElementByAccessibilityId(tabType).FindElementByTagName("Button");
 
             // Find the button within the TabItem
             var button = tabItem.FindElementByName("Project Bundle");
@@ -55,24 +55,15 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.appmenu.file
         public void UnselectCheckBox()
         {
 
-
-            // Navigate through the UI tree
-            WindowsElement ribbon = _driver.FindElementByName("Ribbon");
-            WindowsElement menu = (WindowsElement)ribbon.FindElementByName("PART_RibbonBackstage");
-            WindowsElement tabListItem = (WindowsElement)menu.FindElementByName("Export");
-            WindowsElement customElement = (WindowsElement)tabListItem.FindElementByAccessibilityId("TheExportControl");
-            WindowsElement tabControl = (WindowsElement)customElement.FindElementByClassName("TabControl");
-            WindowsElement tabItem = (WindowsElement)tabControl.FindElementByName("System.Windows.Controls.TabItem Header: Content:");
-            WindowsElement dataGrid = (WindowsElement)tabItem.FindElementByClassName("ListView");
-            WindowsElement headerRow = (WindowsElement)dataGrid.FindElementByClassName("GridViewHeaderRowPresenter");
-            WindowsElement columnDefinition = (WindowsElement)headerRow.FindElementByName("ColumnDefinition #Selection");
-            columnDefinition.Click();
+            //Replace Locator
+         
+            WindowsElement checkBox = _driver.FindElementByName("CheckBox Locator");
+            checkBox.Click();
 
 
         }
 
 
-        // ... add other methods for other controls within the ExportControl.
     }
 
 }

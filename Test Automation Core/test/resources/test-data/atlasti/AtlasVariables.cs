@@ -16,8 +16,8 @@ namespace Test_Automation_Core.test.resources.test
 
         public static string winRC = "23.4.0.29344";
 
-        public static string winProduction = "23.3.4";
-        public static string macProduction = "23.3.0-28730";
+        public static string winProduction = "23.4.0.29360";
+        public static string macProduction = "23.4.0-29342";
 
 
         public static string winPreviousMajor = "22.2.5";

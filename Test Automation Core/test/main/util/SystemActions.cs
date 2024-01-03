@@ -58,37 +58,61 @@ namespace Test_Automation_Core.test.utilities.util
             }
         }
 
-        public WindowsDriver<WindowsElement> ClassInitialize(string appPath)
+        public WindowsDriver<WindowsElement> ClassInitialize(string appPath, int maxRetryCount = 10)
         {
-
             string applicationPath = appPath;
             string applicationName = Path.GetFileNameWithoutExtension(applicationPath);
+            WindowsDriver<WindowsElement> driver = null;
 
-            StartWinAppDriver();
-
-            //If the driver should not be assigned to Root Window of the OS then do following
+            StartWinAppDriver(); // start the WinAppDriver service
 
             if (appPath == AtlasVariables.appPath)
             {
-
-
                 OpenApp(applicationPath, applicationName);
-
             }
 
-            // Now initialize the WindowsDriver
             AppiumOptions appOptions = new AppiumOptions();
             appOptions.AddAdditionalCapability("app", applicationPath);
             appOptions.AddAdditionalCapability("deviceName", "WindowsPC");
 
+            int attempt = 0;
+            bool isDriverInitialized = false;
 
-            WindowsDriver<WindowsElement> driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appOptions);
+            while (attempt < maxRetryCount && !isDriverInitialized)
+            {
+                try
+                {
+                    driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appOptions);
+
+                    if (driver != null)
+                    {
+                        // Perform a simple operation to check if the driver is responding
+                        if (driver.WindowHandles.Count > 0)
+                        {
+                            isDriverInitialized = true;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception
+                    Console.WriteLine($"Attempt {attempt + 1}: Driver initialization failed. {ex.Message}");
+
+                    // Increment the attempt counter and possibly wait before retrying
+                    attempt++;
+                    Thread.Sleep(2000); // Wait for 2 seconds before retrying
+                }
+            }
+
+            if (!isDriverInitialized)
+            {
+                throw new Exception("Unable to initialize the WindowsDriver after multiple attempts.");
+            }
 
             return driver;
-
         }
 
-       
+
 
         public int OpenApp(string applicationPath, string applicationName)
         {

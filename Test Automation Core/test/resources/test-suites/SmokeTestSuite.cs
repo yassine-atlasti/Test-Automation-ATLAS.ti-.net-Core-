@@ -44,7 +44,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
 
 
 
-          //[Test, Order(2)]
+          [Test, Order(2)]
         public void Test1()
         {
           bool success=  TestRunner.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.smoketests.migrationtests.libraries", "OpenEmptyLibA22");
@@ -84,6 +84,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
         }
 
        // [Test, Order(5)]
+       //Devs need to add Automation IDs to the Export Project Buttons in the ExportControls
         public void Test6()
         {
            bool success= TestRunner.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.smoketests.migrationtests.chprojects.vut", "vut");

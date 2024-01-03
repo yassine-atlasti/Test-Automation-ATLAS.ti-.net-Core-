@@ -1,5 +1,6 @@
 ﻿using Test_Automation_Core.test.main.tests;
 using Test_Automation_Core.test.resources.test;
+using static Test_Automation_Core.src.pages.atlasti.actions.ApplicationActions;
 
 namespace Test_Automation_Core.test.main.tests.smoketests
 {
@@ -19,7 +20,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
             //Atlproj export
 
             //The export method has problem to locate the Project Bundle Button to do the export.
-            bool atlProjExportState = GetAppActions().ExportProject(CHProjects.CHWinVUTProjectsFolder, "Atlproj", SmokeTestVariables.smokeTestproject, fileName);
+            bool atlProjExportState = GetAppActions().ExportProject(CHProjects.CHWinVUTProjectsFolder, ExportType.ATLPROJ, SmokeTestVariables.smokeTestproject, fileName);
             Assert.IsTrue(atlProjExportState);
 
 
@@ -29,7 +30,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
         {
             //QDPX export
 
-            bool qdpxExportState = GetAppActions().ExportProject(CHProjects.CHWinVUTProjectsFolder, "QDPX", SmokeTestVariables.smokeTestproject, fileName);
+            bool qdpxExportState = GetAppActions().ExportProject(CHProjects.CHWinVUTProjectsFolder, ExportType.QDPX, SmokeTestVariables.smokeTestproject, fileName);
             Assert.IsTrue(qdpxExportState);
 
 
