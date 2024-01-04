@@ -79,5 +79,26 @@ namespace Test_Automation_Core.src.pages.windowsos
         {
             driver.FindElementByName("Save").Click();
         }
+
+
+        public void ClickYesIfVisible()
+        {
+            // Try to find the "Yes" element
+            var yesElement = driver.FindElementByName("Yes");
+
+            // Check if the "Yes" element is visible
+            if (yesElement != null && yesElement.Displayed)
+            {
+                // Click the "Yes" button
+                yesElement.Click();
+                Console.WriteLine("Clicked 'Yes' button.");
+            }
+            else
+            {
+                // Log or handle the case where the "Yes" button is not visible
+                Console.WriteLine("'Yes' button is not visible or not found.");
+            }
+        }
+
     }
 }
