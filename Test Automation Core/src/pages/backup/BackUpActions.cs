@@ -17,6 +17,8 @@ namespace Test_Automation_Core.src.pages.backup
 
             Process.Start(appPath);
         }
+
+        //Backup buttons in the BackupApp have no automation ids. So i tried to locate them,by navigating the UI Tree
         public void ClickFirstButtonInChooseActionView()
         {
             // Find the ChooseActionView element

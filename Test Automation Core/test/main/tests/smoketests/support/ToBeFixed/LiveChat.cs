@@ -1,4 +1,4 @@
-﻿namespace Test_Automation_Core.test.main.tests.smoketests.ToBeFixed
+﻿namespace Test_Automation_Core.test.main.tests.smoketests.support.ToBeFixed
 {
     public class LiveChat : InitTests
     {

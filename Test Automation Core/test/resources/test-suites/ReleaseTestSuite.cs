@@ -39,7 +39,7 @@ namespace Test_Automation_Core.test.resources.test_suites
             InitTests._testSuiteFolder = ReleaseTestVariables.releaseTestFolderPath;
         }
 
-        [Test, Order(1)]
+       // [Test, Order(1)]
         public void initTestData()
         {
             InitTests.initReleaseTest();

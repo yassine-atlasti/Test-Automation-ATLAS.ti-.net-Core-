@@ -33,7 +33,8 @@ namespace Test_Automation_Core.test.main.tests
                 _testSuiteFolder = value;
             }
         }
-        
+
+        public static bool TestRunnerEnabled = false;
 
 
         //ATLAS.ti
@@ -71,9 +72,9 @@ namespace Test_Automation_Core.test.main.tests
 
         }
 
+        
         [SetUp]
         public void initATLAS()
-
         {
             initSmokeTest();
             _driver = systemActions.ClassInitialize(AtlasVariables.appPath);
@@ -82,48 +83,78 @@ namespace Test_Automation_Core.test.main.tests
             appActions = new ApplicationActions(appControl);
             welcomeWindow = appControl.GetWelcomeControl();
 
-            try
+            int retryCount = 0;
+            int maxRetries = 5;  // You can adjust the maximum number of retries
+            bool isSuccessful = false;
+
+            while (retryCount < maxRetries && !isSuccessful)
             {
-                welcomeWindow.ClearSearch();
-                _driver.Manage().Window.Maximize();
-            }
-            catch (InvalidOperationException ex)
-            {
-                // Log or display a message indicating that maximizing the window is not supported
-                Console.WriteLine("Window maximize is not supported in the current context: " + ex.Message);
+                try
+                {
+                    welcomeWindow.ClearSearch();
+                   
+                        _driver.Manage().Window.Maximize();
+                   
+                    isSuccessful = true; // If it reaches here, no exception was thrown
+                }
+                catch (InvalidOperationException ex)
+                {
+                    Console.WriteLine("Attempt " + (retryCount + 1) + " failed: " + ex.Message);
+                    retryCount++;
+                    Thread.Sleep(1000);  // Wait for 1 second before retrying. Adjust the delay as needed.
+                }
             }
 
+            if (!isSuccessful)
+            {
+                // Log or throw an exception indicating that all retries have failed.
+                Console.WriteLine("All attempts to interact with the window failed.");
+            }
         }
 
         public void initBackUpApp()
         {
-
             _driver = systemActions.ClassInitialize(AtlasVariables.backUpPath);
             systemActions = new SystemActions(_driver);
             backUpActions = new BackUpActions(_driver);
 
 
         }
-       [TearDown]
-        public void cleanUp() {
-          /**  WindowsDriver<WindowsElement> _rootdriver = systemActions.ClassInitialize("Root");
+        //This saves screenshots in the test suite folder
+        public void saveScreenshot()
+        {
+                WindowsDriver<WindowsElement> _rootdriver = systemActions.ClassInitialize("Root");
 
-            var screenShotFileName = TestContext.CurrentContext.Test.ClassName + "-" + TestContext.CurrentContext.Test.Name + DateTime.Now.ToString("HH-mm-ss") + ".png";
+
+            var screenShotFileName = DateTime.Now.ToString("HH-mm-ss") + TestContext.CurrentContext.Test.Name+".png";
 
             if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
             {
                 // The test failed
-                SystemActions.TakeScreenshot(_rootdriver, _testSuiteFolder + "\\Screenshots\\Failed",screenShotFileName );
+                SystemActions.TakeScreenshot(_rootdriver, TestRunner.failedTestsPath, screenShotFileName);
 
             }
             else if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed)
             {
                 // The test passed
-                SystemActions.TakeScreenshot(_rootdriver, _testSuiteFolder + "\\Screenshots\\Succeeded", screenShotFileName);
+                SystemActions.TakeScreenshot(_rootdriver,TestRunner.passedTestsPath, screenShotFileName);
             }
 
-            _rootdriver.Close();**/
+            _rootdriver.Close();
 
+        }
+
+       [TearDown]
+        public void cleanUp() {
+
+           
+
+            if (TestRunnerEnabled==true)
+            {
+                //We actually only save screenshots when the tests are triggered via the TestRunner, as in the SmokeTestSuite and ReleaseTestSuite
+                saveScreenshot();
+                Thread.Sleep(1000);
+            }
             _driver.Close();
             SystemActions.KillProcessByName("Atlasti" + AtlasVariables.actualMajor);
             SystemActions.KillProcessByName("SSD.ATLASti.Backup");

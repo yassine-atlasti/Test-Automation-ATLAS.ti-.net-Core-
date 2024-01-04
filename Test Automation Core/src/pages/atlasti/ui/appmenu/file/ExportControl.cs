@@ -7,10 +7,15 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.appmenu.file
     {
         private WindowsDriver<WindowsElement> _driver;
 
+
+        // Devs need to automation IDs to the buttons needed for Project Export (Atlproj and QDPX
+
         public ExportControl(WindowsDriver<WindowsElement> driver)
         {
             _driver = driver;
         }
+
+        // Devs need to automation IDs to the buttons needed for Project Export (Atlproj and QDPX
 
         public void ClickProjectBundleTabItem()
         {
@@ -24,9 +29,10 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.appmenu.file
             button.Click();
         }
 
+        // Devs need to automation IDs to the buttons needed for Project Export (Atlproj and QDPX
+
         public void ClickQDPXProjectBundleTabItem()
         {
-
             // Locate the TabItem by name
             var tabItem = _driver.FindElementByAccessibilityId("TheExportControl");
 
@@ -36,6 +42,7 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.appmenu.file
             // Click the button
             button.Click();
         }
+        // Devs need to automation IDs to the buttons needed for Project Export (Atlproj and QDPX
 
         public FilePicker ClickProjectBundleButton(string tabType)
         {
@@ -51,6 +58,8 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.appmenu.file
             button.Click();
             return new FilePicker(_driver);
         }
+
+        // Devs need to automation IDs to the buttons needed for Project Export (Atlproj and QDPX
 
         public void UnselectCheckBox()
         {

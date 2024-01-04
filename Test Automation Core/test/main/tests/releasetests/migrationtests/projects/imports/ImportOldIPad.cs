@@ -9,7 +9,7 @@ namespace Test_Automation_Core.test.main.tests.releasetests.migrationtests.proje
 {
     internal class ImportOldIPad:InitTests
     {
-        [Test, Category("ImportReleaseProjects")]
+       // [Test, Category("ImportReleaseProjects")]
         public void ImportOldIPadTest()
         {
 

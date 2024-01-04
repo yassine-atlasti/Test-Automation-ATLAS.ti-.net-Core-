@@ -9,7 +9,7 @@ namespace Test_Automation_Core.test.main.tests.releasetests.migrationtests.proje
 {
     public class ImportTestProjectA22:InitTests
     {
-        [Test,Category("TestProjectA22")]
+        [Test,Category("ImportReleaseProjects")]
         public void ImportTestProject()
         {
 

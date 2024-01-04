@@ -24,11 +24,31 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
             var atlasProjectWindow = _app.GetProjectWindow();
             bool importState;
             string projectName = Path.GetFileName(filePath);
-           
+
 
             // Assume that each method performs the action that its name suggests
-            welcomeControlWindow.ClickImportProjectButton();
-            Thread.Sleep(2000);
+            int retryCount = 0;
+            int maxRetries = 3;  // Adjust the maximum number of retries as needed
+            bool isSuccessful = false;
+
+            while (retryCount < maxRetries && !isSuccessful)
+            {
+                try
+                {
+                    welcomeControlWindow.ClickImportProjectButton(); // Attempt to click the button
+                    isSuccessful = true; // If it reaches here, no exception was thrown, and the click was successful
+                }
+                catch (Exception ex) // Catch a general exception or a more specific one if you know what to expect
+                {
+                    Console.WriteLine("Attempt " + (retryCount + 1) + " failed: " + ex.Message);
+                    retryCount++;
+                    Thread.Sleep(1000);  // Wait for 1 second before retrying. Adjust the delay as needed.
+                }
+            }
+
+
+            Thread.Sleep(1000);
+
             filePickerDialog.EnterFileName(filePath);
 
             filePickerDialog.ClickOpenButton();
@@ -167,7 +187,11 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
             // Open the options window and click the 'Switch Library' button
             welcomeWindow.ClickOptionsButton();
+            Thread.Sleep(500);
+
             optionsWindow.ClickApplicationPreferences();
+            Thread.Sleep(500);
+
             optionsWindow.ClickSwitchLibraryButton();
 
             Thread.Sleep(500);
