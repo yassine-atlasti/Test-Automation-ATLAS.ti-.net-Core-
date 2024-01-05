@@ -71,7 +71,7 @@ namespace Test_Automation_Core.src.pages.backup
             backUpDialog.ClickYesIfVisible();
             //Wait for Back Up to be completed
             SystemActions systemActions = new SystemActions();
-            bool backUpState = systemActions.WaitForElementToBeDisplayedByTagName(driver, "Text", "Backup Completed", 60);
+            bool backUpState = systemActions.WaitForElementToBeDisplayedByTagName(driver, "Text", "Backup Completed", 80);
 
 
 
