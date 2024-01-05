@@ -89,19 +89,22 @@ namespace Test_Automation_Core.test.main.tests
 
             while (retryCount < maxRetries && !isSuccessful)
             {
-                try
+                try  
                 {
+                // welcomeWindow.CloseNewsIfVisible();
+                   // Thread.Sleep(2000);
+
                     welcomeWindow.ClearSearch();
                    
                         _driver.Manage().Window.Maximize();
                    
                     isSuccessful = true; // If it reaches here, no exception was thrown
                 }
-                catch (InvalidOperationException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine("Attempt " + (retryCount + 1) + " failed: " + ex.Message);
                     retryCount++;
-                    Thread.Sleep(1000);  // Wait for 1 second before retrying. Adjust the delay as needed.
+                    Thread.Sleep(1500);  // Wait for 1 second before retrying. Adjust the delay as needed.
                 }
             }
 

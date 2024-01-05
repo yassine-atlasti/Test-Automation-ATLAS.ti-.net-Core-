@@ -75,10 +75,18 @@ namespace Test_Automation_Core.test.utilities.util
             int attempt = 0;
             bool isDriverInitialized = false;
 
-            if (appPath != "Root")
+
+            if (applicationName == "Root")
             {
-                //OpenApp(applicationPath, applicationName);
-                while (attempt < maxRetryCount && !isDriverInitialized)
+                driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appOptions);
+            }
+            else
+            {
+
+          
+
+            //OpenApp(applicationPath, applicationName);
+            while (attempt < maxRetryCount && !isDriverInitialized)
                 {
                     try
                     {
@@ -109,10 +117,11 @@ namespace Test_Automation_Core.test.utilities.util
                 {
                     throw new Exception("Unable to initialize the WindowsDriver after multiple attempts.");
                 }
-            } else{
-                driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appOptions);
+
             }
-            
+
+
+
 
             return driver;
         }

@@ -256,6 +256,23 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.windows
             return false;
         }
 
+        public void CloseNewsIfVisible()
+        {
+            // Try to find the "News Window" element
+            var newsWindow = driver.FindElementByClassName("NewsFeedWindow");
 
-    }
+            // Check if the "Close" element is visible
+            if (newsWindow != null && newsWindow.Displayed)
+            {
+                // Click the "Close" button
+                newsWindow.FindElementByName("Close").Click();
+                Console.WriteLine("Clicked 'Close' button.");
+            }
+            else
+            {
+                Console.WriteLine("'News Window' button is not visible or not found.");
+            }
+        }
+
+        }
 }
