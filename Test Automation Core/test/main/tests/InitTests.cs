@@ -1,5 +1,6 @@
 using NUnit.Framework.Interfaces;
 using NUnit.Framework.Internal;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
 using Test_Automation_Core.src;
 using Test_Automation_Core.src.pages.atlasti.actions;
@@ -78,6 +79,7 @@ namespace Test_Automation_Core.test.main.tests
         {
             initSmokeTest();
             _driver = systemActions.ClassInitialize(AtlasVariables.appPath);
+            Thread.Sleep(3000);
             systemActions = new SystemActions(_driver);
             appControl = new App(_driver);
             appActions = new ApplicationActions(appControl);
@@ -91,13 +93,14 @@ namespace Test_Automation_Core.test.main.tests
             {
                 try  
                 {
-                // welcomeWindow.CloseNewsIfVisible();
-                   // Thread.Sleep(2000);
 
-                    welcomeWindow.ClearSearch();
-                   
-                        _driver.Manage().Window.Maximize();
-                   
+                 welcomeWindow.MaximizeATLASti();
+                 
+
+                    _driver.FindElementByName("Options Dialog Link");
+
+
+
                     isSuccessful = true; // If it reaches here, no exception was thrown
                 }
                 catch (Exception ex)
@@ -118,6 +121,7 @@ namespace Test_Automation_Core.test.main.tests
         public void initBackUpApp()
         {
             _driver = systemActions.ClassInitialize(AtlasVariables.backUpPath);
+            Thread.Sleep(2000);
             systemActions = new SystemActions(_driver);
             backUpActions = new BackUpActions(_driver);
 

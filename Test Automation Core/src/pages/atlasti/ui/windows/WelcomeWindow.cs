@@ -256,23 +256,23 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.windows
             return false;
         }
 
-        public void CloseNewsIfVisible()
+        public void MaximizeATLASti()
         {
-            // Try to find the "News Window" element
-            var newsWindow = driver.FindElementByClassName("NewsFeedWindow");
-
-            // Check if the "Close" element is visible
-            if (newsWindow != null && newsWindow.Displayed)
+            foreach (var handle in driver.WindowHandles)
             {
-                // Click the "Close" button
-                newsWindow.FindElementByName("Close").Click();
-                Console.WriteLine("Clicked 'Close' button.");
+                // Switch to the current window
+                driver.SwitchTo().Window(handle);
+
+                if (driver.Title == "ATLAS.ti")
+                {
+                    driver.Manage().Window.Maximize();
+                }
+                Task.Delay(2000);
+
+                // Check if the window's title is "ATLAS.ti Problem"
+
             }
-            else
-            {
-                Console.WriteLine("'News Window' button is not visible or not found.");
-            }
-        }
 
         }
+    }
 }

@@ -9,7 +9,7 @@ This document will guide you through the installation, configuration, and usage 
 ### System Requirements
 - Windows 10/11.
 - ATLAS.ti (compatible version).
-- .NET Core 
+- .NET 7 
 - WinAppDriver.
 - Git
 - Visual Studio
@@ -18,7 +18,7 @@ This document will guide you through the installation, configuration, and usage 
 ### Installation and Setup
 1. **Install ATLAS.ti:** Ensure ATLAS.ti is installed on your system. 
 2. ** Install Visual Studio
-3. **Install .NET Core SDK:** 
+3. **Install .NET 7:** 
 4. **Set Up WinAppDriver:** Install WinAppDriver from its [GitHub repository](https://github.com/microsoft/WinAppDriver).
 5. **Install Git on your machine**
 6. **Clone the Framework Repository:** Run the following command from the directory where you want to clone the repository:
