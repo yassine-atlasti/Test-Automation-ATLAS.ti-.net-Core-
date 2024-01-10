@@ -1,0 +1,29 @@
+﻿
+
+
+
+  1)Right-click "TestAutomationFramework" Project in the solution explorer
+  2) Click on Manage NuGet Packages
+  3)Install following packages, one by one:
+
+  "Appium.WebDriver" 
+   
+  "DotNetSeleniumExtras.WaitHelpers"
+    
+  "Microsoft.NET.Test.Sdk"
+   
+  "NUnit"
+   
+  "NUnit.Engine" 
+   
+  "NUnit3TestAdapter"
+    
+  "NUnit.Analyzers" 
+ 
+  "coverlet.collector"
+   
+  "System.Management"
+   
+  "System.Windows.Forms.Ribbon35"
+    
+   "TextCopy" 

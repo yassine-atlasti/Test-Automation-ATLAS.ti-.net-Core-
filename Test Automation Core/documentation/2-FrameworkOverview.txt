@@ -1,0 +1,60 @@
+﻿## Framework Overview
+
+### Architecture
+Utilizes the Page Object Model (POM) for organizing UI interaction scripts, enhancing maintainability.
+
+### Project Structure
+- **`src` Directory:** Contains page implementation.
+  - `pages`: POM scripts for ATLAS.ti UI components.
+- **`test` Directory:** Test cases, suites, data, and configurations.
+  - `resources`: Test data and configurations.
+  - `main`: Main test scripts and utilities.
+
+- **`bin` and `obj` Directories:** Build outputs and .NET managed directories. (Not under version control)
+
+## Writing Test Cases
+
+### Structure and Implementation
+- Unique Test cases are organized under `test\main\tests`.
+- Test suites are organized under 'test\ressources\test-suites
+
+
+---
+
+### Assertions
+- Use NUnit assertions to validate test results.
+
+## Executing Tests
+
+### Running Tests
+- For example to run the smoke Test Suite, you need to find SmokeTestSuite.cs class, right-click it and click on run tests.
+
+
+## Test Reports
+
+### Accessing and Understanding Reports
+-Screenshots are made when the Tests are executed via
+the TestRunner.RunTestByCategory method , as it's the case in the "SmokeTestSuite.cs"
+
+
+
+
+### Support
+- directly contact the project maintainers.
+
+## Best Practices
+
+### Coding Standards
+- Follow C# and POM best practices.
+- Keep code well-commented and formatted.
+
+### Framework Maintenance
+- Regularly update scripts and configurations to reflect ATLAS.ti changes.
+
+### Areas of improvments 
+
+---
+
+This guideline aims to provide a clear understanding of the ATLAS.ti Test Automation Framework.
+It’s designed to assist testers in efficiently using the framework powered by WinAppDriver for automated testing. 
+Adapt and expand this guideline to meet the evolving requirements of your testing processes and ATLAS.ti updates.
