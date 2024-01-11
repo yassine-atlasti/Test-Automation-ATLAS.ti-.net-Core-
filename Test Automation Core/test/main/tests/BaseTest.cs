@@ -129,13 +129,9 @@ namespace Test_Automation_Core.test.main.tests
 
         }
 
-        public void SwitchToWindow(string windowName)
-        {
-           
+       
             
-            
-        }
-
+         
        
         //This saves screenshots in the test suite folder
         public void saveScreenshot()
