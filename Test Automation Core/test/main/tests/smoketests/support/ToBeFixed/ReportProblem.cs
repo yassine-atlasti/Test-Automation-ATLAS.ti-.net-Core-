@@ -2,12 +2,12 @@
 {
     public class ReportProblem
     {
-        InitTests smokeTestClass = new InitTests();
+        BaseTest smokeTestClass = new BaseTest();
 
         [Test]
         public void test()
         {
-            smokeTestClass.initATLAS();
+            smokeTestClass.SetupATLAS();
             bool reportState = smokeTestClass.GetAppActions().ReportProblem("Test", "tester@atlasti.com");
 
             Assert.IsTrue(reportState);

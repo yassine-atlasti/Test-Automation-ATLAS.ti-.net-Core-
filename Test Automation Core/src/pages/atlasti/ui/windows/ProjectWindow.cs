@@ -8,7 +8,8 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.windows
     public class ProjectWindow
     {
         private readonly WindowsDriver<WindowsElement> driver;
-        public ProjectWindow(WindowsDriver<WindowsElement> driver)
+
+         public ProjectWindow(WindowsDriver<WindowsElement> driver)
         {
             this.driver = driver;
         }
@@ -18,6 +19,7 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.windows
             SystemActions systemActions = new SystemActions();
             string windowName = projectName + " - ATLAS.ti";
             bool projectState = systemActions.WaitForElementToBeDisplayedByTagName(driver, "Window", windowName, 2);
+
             return projectState;
         }
 
@@ -50,6 +52,9 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.windows
         }
 
         // Add methods for interacting with Project Window elements as needed
+
+
+
 
 
     }

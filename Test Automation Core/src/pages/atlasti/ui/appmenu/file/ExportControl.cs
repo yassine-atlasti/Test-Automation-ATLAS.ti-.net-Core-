@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium.Appium.Windows;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Appium.Windows;
+using System.Xml.Linq;
 using Test_Automation_Core.src.pages.windowsos;
 
 namespace Test_Automation_Core.src.pages.atlasti.ui.appmenu.file
@@ -33,14 +35,33 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.appmenu.file
 
         public void ClickQDPXProjectBundleTabItem()
         {
-            // Locate the TabItem by name
-            var tabItem = _driver.FindElementByAccessibilityId("TheExportControl");
+            // Locate the TabItem 
+            var control = _driver.FindElementByClassName("TabControl");
+            System.Console.WriteLine(control.Text);
+            var tabItem =   control.FindElementByName("QDPX Project Bundle");
+            System.Console.WriteLine(tabItem.Text);
+            tabItem.Click();
+
+            /**foreach (var element in control)
+            {
+                System.Console.WriteLine(element.Text);
+
+                try
+                {
+                    if (element.Text.Equals("Project Bundle"))
+                    {
+                        // Element with text "x" found, return it
+                        element.Click();
+                    }
+                }
+                catch(Exception e) { }
+            }**/
+
+            //  var test = qdpxTabItem.Contains();
 
             // Find the button within the TabItem
-            var button = tabItem.FindElementByName("QDPX Project Bundle");
 
             // Click the button
-            button.Click();
         }
         // Devs need to automation IDs to the buttons needed for Project Export (Atlproj and QDPX
 
@@ -49,10 +70,9 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.appmenu.file
 
 
             // Locate the TabItem by name
-            var tabItem = _driver.FindElementByAccessibilityId(tabType).FindElementByTagName("Button");
+            var button = _driver.FindElementByAccessibilityId("TransferBundleTab").FindElementByName("Project Bundle");
 
             // Find the button within the TabItem
-            var button = tabItem.FindElementByName("Project Bundle");
 
             // Click the button
             button.Click();
@@ -65,11 +85,16 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.appmenu.file
         {
 
             //Replace Locator
-         
-            WindowsElement checkBox = _driver.FindElementByName("CheckBox Locator");
-            checkBox.Click();
+            try
+            {
+               // var columHeader = _driver.FindElementByClassName("GridViewColumnHeader");
 
+                var checkBox = _driver.FindElementsByTagName("CheckBox");
 
+                //checkBox.SendKeys(Keys.Space);
+            }
+
+            catch(Exception ex) { }
         }
 
 

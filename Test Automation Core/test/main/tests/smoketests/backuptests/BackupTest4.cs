@@ -9,7 +9,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests.backuptests;
 
 public class BackupTest4
 {
-    InitTests SmokeTestClass = new InitTests();
+    BaseTest SmokeTestClass = new BaseTest();
     [Category("backuptests")]
 
     [Test,Order(1)]
@@ -18,7 +18,7 @@ public class BackupTest4
 
        // SystemActions.KillProcessByName("Atlasti" + AtlasVariables.actualMajor);
         string backUp = AtlasVariables.InstalledVersion + "_BackUp";
-        SmokeTestClass.initBackUpApp();
+        SmokeTestClass.SetupBackupApp();
         bool restoreState = SmokeTestClass.GetBackUpActions().RestoreLibrary(SmokeTestVariables.smokeTestFolderPath, backUp);
         Assert.IsTrue(restoreState);
 

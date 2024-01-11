@@ -75,7 +75,10 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
                 }
 
                 // Set project name
-                if (importType != "AtlCB" && importType != "mobile") { importProjectDialog.EnterProjectName(projectName); }
+                if (importType != "AtlCB" && importType != "mobile") { 
+                    importProjectDialog.EnterProjectName(projectName); }
+
+                importProjectDialog.ClickOverWriteIfVisible();
                
                 importProjectDialog.ClickImportButton();
 
@@ -149,7 +152,7 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
                     //Or ExportBackstageTab
                     return exportControl.ClickProjectBundleButton("ExportBackstageTab");
                 case ExportType.ATLPROJ:
-                    // exportControl.UnselectCheckBox(); // If needed
+                     exportControl.UnselectCheckBox(); // If needed
                     return exportControl.ClickProjectBundleButton("TheExportControl");
                 default:
                     throw new ArgumentException($"Invalid export type: {exportType}");
@@ -276,16 +279,36 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
             // You can add more actions or checks here, such as validating that the project was imported correctly
 
             SystemActions systemActions = new SystemActions();
+
+
             string windowName = projectName + " - ATLAS.ti";
             bool openState = systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "Window", windowName, 35);
 
             //Check if project recovery dialog appears , if yes click it
             systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "Button", "OK", 1);
 
-
+            if(openState) { SwitchToProjectWindow(projectName); }
             return openState;
         }
 
+        public void SwitchToProjectWindow(string projectName)
+        {
+          
+
+            foreach (var handle in _app.getDriver().WindowHandles)
+            {
+                if (_app.getDriver().Title == projectName + " - ATLAS.ti")
+                {     // Switch to the current window
+                    _app.getDriver().SwitchTo().Window(handle);
+
+
+
+                }
+
+
+            }
+
+        }
 
 
 

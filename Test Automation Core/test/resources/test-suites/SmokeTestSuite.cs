@@ -31,13 +31,13 @@ namespace Test_Automation_Core.test.main.tests.smoketests
       [SetUp]
         public void setUp()
         {
-            InitTests._testSuiteFolder = SmokeTestVariables.smokeTestFolderPath;
+            BaseTest._testSuiteFolder = SmokeTestVariables.smokeTestFolderPath;
         }
 
         [Test, Order(1)]
         public  void initTestData()
         {
-          InitTests.initSmokeTest();
+          BaseTest.initSmokeTest();
 
         }
 
@@ -104,7 +104,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
 
         }
 
-
+      
 
 
 

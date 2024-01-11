@@ -2,6 +2,7 @@ using NUnit.Framework.Interfaces;
 using NUnit.Framework.Internal;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
+using OpenQA.Selenium.Support.UI;
 using Test_Automation_Core.src;
 using Test_Automation_Core.src.pages.atlasti.actions;
 using Test_Automation_Core.src.pages.atlasti.ui.windows;
@@ -13,7 +14,7 @@ using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.test.main.tests
 {
-    public class InitTests
+    public class BaseTest
     {//General
         private static WindowsDriver<WindowsElement> _driver;
         SystemActions systemActions = new SystemActions();
@@ -75,7 +76,7 @@ namespace Test_Automation_Core.test.main.tests
 
         
         [SetUp]
-        public void initATLAS()
+        public void SetupATLAS()
         {
             initSmokeTest();
             _driver = systemActions.ClassInitialize(AtlasVariables.appPath);
@@ -94,8 +95,8 @@ namespace Test_Automation_Core.test.main.tests
                 try  
                 {
 
-                 welcomeWindow.MaximizeATLASti();
-                 
+                     welcomeWindow.MaximizeATLASti();
+                     
 
                     _driver.FindElementByName("Options Dialog Link");
 
@@ -118,7 +119,7 @@ namespace Test_Automation_Core.test.main.tests
             }
         }
 
-        public void initBackUpApp()
+        public void SetupBackupApp()
         {
             _driver = systemActions.ClassInitialize(AtlasVariables.backUpPath);
             Thread.Sleep(2000);
@@ -127,13 +128,18 @@ namespace Test_Automation_Core.test.main.tests
 
 
         }
+
+       
+            
+         
+       
         //This saves screenshots in the test suite folder
         public void saveScreenshot()
         {
                 WindowsDriver<WindowsElement> _rootdriver = systemActions.ClassInitialize("Root");
 
 
-            var screenShotFileName = DateTime.Now.ToString("HH-mm-ss") + TestContext.CurrentContext.Test.Name+".png";
+            var screenShotFileName = DateTime.Now.ToString("HH-mm-ss") +"-"+ TestContext.CurrentContext.Test.Name+".png";
 
             if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
             {
