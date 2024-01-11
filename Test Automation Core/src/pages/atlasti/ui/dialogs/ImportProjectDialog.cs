@@ -67,6 +67,33 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.dialogs
             driver.FindElementByName("Cancel").Click();
         }
 
+        public void ClickOverWriteIfVisible()
+        {
+            Thread.Sleep(1000);
+            // Try to find the "OverWrite" element
+            try
+            {
+                var Element = driver.FindElementByTagName("CheckBox").FindElementByName("Overwrite existing project");
+
+                
+                
+                    // Click the "OverWrite" checkbox
+                    Element.SendKeys(Keys.Space);
+
+
+
+                    Console.WriteLine("Clicked 'OverWrite' checkbox.");
+                
+
+            }
+            catch(Exception ex)
+            { // Log or handle the case where the "Yes" button is not visible
+                Console.WriteLine("Checkbox is not visible or not found.");
+            }
+            {
+               
+            }
+        }
 
         public ProjectWindow ClickImportAndWaitForProjectWindow(string projectName)
         {
@@ -149,6 +176,9 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.dialogs
             }
 
         }
+
+
+
 
 
 

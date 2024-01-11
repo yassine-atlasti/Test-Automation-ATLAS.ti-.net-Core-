@@ -3,7 +3,7 @@ using Test_Automation_Core.test.resources.test;
 
 namespace Test_Automation_Core.test.main.tests.smoketests.migrationtests.libraries;
 
-public class OpenYanikLib:InitTests
+public class OpenYanikLib:BaseTest
 {
     
 
@@ -17,7 +17,7 @@ public class OpenYanikLib:InitTests
 
         Thread.Sleep(3000);
         //We need to change the driver because the application will restart after library switch
-        initATLAS();
+        SetupATLAS();
         
         bool crashState = GetWelcomeWindow().HasAtlasCrashed(TimeSpan.FromSeconds(60));
 

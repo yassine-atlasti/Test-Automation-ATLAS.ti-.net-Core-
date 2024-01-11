@@ -75,7 +75,10 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
                 }
 
                 // Set project name
-                if (importType != "AtlCB" && importType != "mobile") { importProjectDialog.EnterProjectName(projectName); }
+                if (importType != "AtlCB" && importType != "mobile") { 
+                    importProjectDialog.EnterProjectName(projectName); }
+
+                importProjectDialog.ClickOverWriteIfVisible();
                
                 importProjectDialog.ClickImportButton();
 

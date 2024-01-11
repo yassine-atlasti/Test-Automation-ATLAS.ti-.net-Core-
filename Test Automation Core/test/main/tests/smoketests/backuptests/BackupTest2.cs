@@ -10,7 +10,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests.backuptests;
     public class BackupTest2
     {
 
-        InitTests SmokeTestClass = new InitTests();
+        BaseTest SmokeTestClass = new BaseTest();
         [Category("backuptests")]
 
         [Test]
@@ -18,7 +18,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests.backuptests;
         public void CreateBackUp()
         {
 
-            SmokeTestClass.initBackUpApp();
+            SmokeTestClass.SetupBackupApp();
             string backUp = AtlasVariables.InstalledVersion + "_BackUp";
 
             if (SmokeTestClass.GetBackUpActions().CheckWarning())

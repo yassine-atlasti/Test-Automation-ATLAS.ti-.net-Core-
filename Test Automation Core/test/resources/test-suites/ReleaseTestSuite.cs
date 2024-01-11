@@ -36,13 +36,13 @@ namespace Test_Automation_Core.test.resources.test_suites
         [SetUp]
         public void setUp()
         {
-            InitTests._testSuiteFolder = ReleaseTestVariables.releaseTestFolderPath;
+            BaseTest._testSuiteFolder = ReleaseTestVariables.releaseTestFolderPath;
         }
 
        // [Test, Order(1)]
         public void initTestData()
         {
-            InitTests.initReleaseTest();
+            BaseTest.initReleaseTest();
 
         }
 

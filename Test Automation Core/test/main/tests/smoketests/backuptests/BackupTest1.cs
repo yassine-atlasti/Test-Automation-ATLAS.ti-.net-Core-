@@ -4,7 +4,7 @@ using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.test.main.tests.smoketests.backuptests;
 
-public class BackupTest1:InitTests
+public class BackupTest1:BaseTest
 {
 
     [Category("backuptests")]
@@ -22,7 +22,7 @@ public class BackupTest1:InitTests
         //Test 1 
         string backUp = AtlasVariables.InstalledVersion + "_BackUp";
 
-        initBackUpApp();
+        SetupBackupApp();
 
         bool warningTrue = GetBackUpActions().CheckWarning();
         Assert.IsTrue(warningTrue);

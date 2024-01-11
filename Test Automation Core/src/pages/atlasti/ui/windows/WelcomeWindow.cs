@@ -269,7 +269,6 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.windows
                 }
                 Task.Delay(2000);
 
-                // Check if the window's title is "ATLAS.ti Problem"
 
             }
 

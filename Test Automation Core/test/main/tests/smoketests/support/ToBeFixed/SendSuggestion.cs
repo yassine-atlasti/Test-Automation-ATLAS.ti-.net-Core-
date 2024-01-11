@@ -2,12 +2,12 @@
 {
     public class SendSuggestion
     {
-        InitTests smokeTestClass = new InitTests();
+        BaseTest smokeTestClass = new BaseTest();
 
         [Test]
         public void test()
         {
-            smokeTestClass.initATLAS();
+            smokeTestClass.SetupATLAS();
             bool suggestionState = smokeTestClass.GetAppActions().SendSuggestion("Test", "tester@atlasti.com");
             Assert.IsTrue(suggestionState);
         }

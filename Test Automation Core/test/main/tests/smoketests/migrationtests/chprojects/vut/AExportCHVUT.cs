@@ -6,7 +6,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
 {
 
 
-    public class AExportCHVUT:InitTests
+    public class AExportCHVUT:BaseTest
     {
         string fileName = AtlasVariables.InstalledVersion + "-" + SmokeTestVariables.actualWinOS + "-" + SmokeTestVariables.smokeTestproject;
 

@@ -4,7 +4,7 @@ using Test_Automation_Core.test.resources.test;
 namespace Test_Automation_Core.test.main.tests.smoketests
 {
 
-    public class BDeleteCH:InitTests
+    public class BDeleteCH:BaseTest
     {
         public async Task deleteCHProject()
         {

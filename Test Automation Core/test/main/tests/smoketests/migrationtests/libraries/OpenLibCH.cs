@@ -3,7 +3,7 @@ using Test_Automation_Core.test.resources.test;
 
 namespace Test_Automation_Core.test.main.tests.smoketests.migrationtests.libraries;
 
-public class OpenLibCH : InitTests
+public class OpenLibCH : BaseTest
 {
 
     [Test, Category("OpenLibCH")]
@@ -16,7 +16,7 @@ public class OpenLibCH : InitTests
         GetAppActions().SwitchLibrary(SmokeTestVariables.library3Extracted);
 
         //We need to change the driver because the application will restart after library switch
-        initATLAS(); ;
+        SetupATLAS(); ;
 
         bool crashState = GetWelcomeWindow().HasAtlasCrashed(TimeSpan.FromSeconds(60));
 
