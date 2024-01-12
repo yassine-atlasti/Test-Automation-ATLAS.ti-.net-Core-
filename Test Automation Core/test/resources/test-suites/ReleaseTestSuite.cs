@@ -52,7 +52,7 @@ namespace Test_Automation_Core.test.resources.test_suites
         [Test, Order(2)]
         public void Test1()
         {
-            bool success = TestRunner.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.TestPositiveFeedBack.main.tests.releasetests.migrationtests.projects.imports", "ImportReleaseProjects");
+            bool success = TestRunner.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.releasetests.migrationtests.projects.imports", "ImportReleaseProjects");
 
             Assert.IsTrue(success);
         }
