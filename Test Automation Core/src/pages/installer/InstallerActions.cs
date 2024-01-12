@@ -1,5 +1,8 @@
 ﻿using OpenQA.Selenium.Appium.Windows;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Text;
+using Test_Automation_Core.test.resources.test;
 using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.src.pages.installer
@@ -28,38 +31,39 @@ namespace Test_Automation_Core.src.pages.installer
             if (installerState)
             {
                 //Add 1 second sleep between each page change in the Installer Wizard
-                string windowName = $"Setup - ATLAS.ti {majorVersion}";
-                var window = driver.FindElementByTagName("Window").FindElementByName(windowName);
+               
 
 
 
-                window.FindElementByName("Next").Click();
-
-                Thread.Sleep(1000);
-
-                window.FindElementByTagName("CheckBox").Click();
-                window.FindElementByName("Next").Click();
+                driver.FindElementByName("Next").Click();
 
                 Thread.Sleep(1000);
 
-                window.FindElementByName("Next").Click();
+                driver.FindElementByTagName("CheckBox").Click();
+                driver.FindElementByName("Next").Click();
 
                 Thread.Sleep(1000);
 
-                window.FindElementByName("Install").Click();
+                driver.FindElementByName("Next").Click();
+
+                Thread.Sleep(1000);
+
+                driver.FindElementByName("Install").Click();
 
                 Thread.Sleep(1000);
                 installerState = systemActions.WaitForElementToBeDisplayedByTagName(driver, "CheckBox", "Launch ATLAS.ti", 80);
 
                 // window.FindElementByTagName("CheckBox").Click() ;
 
-                window.FindElementByName("Close").Click();
+                driver.FindElementByName("Close").Click();
 
             }
             else { installerState = false; }
 
             return installerState;
         }
+
+       
 
 
 

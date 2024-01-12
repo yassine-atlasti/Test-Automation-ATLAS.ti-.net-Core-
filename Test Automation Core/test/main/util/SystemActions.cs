@@ -18,7 +18,7 @@ using System.Text.RegularExpressions;
 using System.Globalization;
 
 using System.Windows.Forms;
-
+using System.Text;
 
 namespace Test_Automation_Core.test.utilities.util
 {
@@ -318,11 +318,23 @@ namespace Test_Automation_Core.test.utilities.util
 
 
             }
+            string windowName = "Setup - ATLAS.ti " + AtlasVariables.actualMajor;
+            foreach (var handle in driver.WindowHandles)
+            {
+                // Get the title of the window without switching to it
+                string title = driver.SwitchTo().Window(handle).Title;
 
-
+                // If the title matches, switch to the window and return
+                if (title == windowName)
+                {
+                    driver.SwitchTo().Window(handle);
+                    return;
+                }
+            }
+            driver.FindElementByName("Close").Click();
 
             // MinimizeAllWindows(driver);
-            KillProcessByName("Setup - ATLAS.ti " + AtlasVariables.actualMajor + " (32 bit)");
+            //KillProcessByName("Setup - ATLAS.ti " + AtlasVariables.actualMajor + " (32 bit)");
 
             KillProcessByName("explorer");
 
@@ -726,7 +738,41 @@ public static string GetCurrentInstalledVersion()
         {
             return Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
         }
-        
+
+
+        [DllImport("user32.dll")]
+        private static extern bool EnumWindows(EnumWindowsProc enumProc, IntPtr lParam);
+
+        [DllImport("user32.dll")]
+        private static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
+
+        private const UInt32 WM_CLOSE = 0x0010;
+
+        private delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
+
+        public static void CloseInstallerWindow()
+        {
+            string targetTitle = "Setup - ATLAS.ti " + AtlasVariables.actualMajor;
+
+            EnumWindows((hWnd, lParam) =>
+            {
+                StringBuilder windowText = new StringBuilder(256);
+                GetWindowText(hWnd, windowText, 256);
+
+                string windowTitle = windowText.ToString();
+
+                if (windowTitle.Equals(targetTitle))
+                {
+                    SendMessage(hWnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+                }
+
+                return true; // Continue enumeration
+            }, IntPtr.Zero);
+        }
+
 
     }
 }

@@ -3,6 +3,7 @@ using Test_Automation_Core.src;
 using Test_Automation_Core.src.pages.atlasti.actions;
 using Test_Automation_Core.src.pages.atlasti.ui.windows;
 using Test_Automation_Core.src.pages.installer;
+using Test_Automation_Core.test.main.tests;
 using Test_Automation_Core.test.resources.test;
 using Test_Automation_Core.test.utilities.util;
 
@@ -12,13 +13,13 @@ namespace Test_Automation_Core.test.main.util
     [Category("UpdateATLAS")]
     public class UpdateAtlasti
     {
-       
+
 
         SystemActions systemActions = new SystemActions();
 
 
         //default branch is dev
-        public static string branch="dev";
+        public static string branch = "dev";
 
 
 
@@ -30,12 +31,13 @@ namespace Test_Automation_Core.test.main.util
         public void SetUp()
         {
 
-            if(String.Equals("dev",branch, StringComparison.OrdinalIgnoreCase))
+            if (String.Equals("dev", branch, StringComparison.OrdinalIgnoreCase))
             {
                 installerPath = AtlasVariables.installerPathNightly;
                 fileName = AtlasVariables.fileNameNightly;
                 downloadUrl = AtlasVariables.downloadUrlNightly;
-            } else
+            }
+            else
 
             if (String.Equals("rc", branch, StringComparison.OrdinalIgnoreCase))
             {
@@ -58,10 +60,11 @@ namespace Test_Automation_Core.test.main.util
         public void UninstallATLAS()
         {
 
-             WindowsDriver < WindowsElement> _driver = systemActions.ClassInitialize("Root");
+            WindowsDriver<WindowsElement> _driver = systemActions.ClassInitialize("Root");
 
             systemActions = new SystemActions(_driver);
             systemActions.UninstallAtlas();
+            
             SystemActions.KillProcessByName("WinAppDriver");
 
         }
@@ -72,12 +75,29 @@ namespace Test_Automation_Core.test.main.util
         [Test, Order(3)]
         public void InstallATLAS()
         {
+
             //Install
             string windowName = "Setup - ATLAS.ti " + AtlasVariables.actualMajor;
             WindowsDriver<WindowsElement> _driver = systemActions.ClassInitialize(installerPath);
-            InstallerActions installer = new InstallerActions(_driver);
-            installer.InstallATLASti(installerPath, AtlasVariables.actualMajor);
 
+            foreach (var handle in _driver.WindowHandles)
+            {
+                // Get the title of the window without switching to it
+                string title = _driver.SwitchTo().Window(handle).Title;
+
+                // If the title matches, switch to the window and return
+                if (title == windowName)
+                {
+                    _driver.SwitchTo().Window(handle);
+                    _driver.FindElementByName(windowName).Click();
+                   
+                    InstallerActions installer = new InstallerActions(_driver);
+                    installer.InstallATLASti(installerPath, AtlasVariables.actualMajor);
+
+                    return;
+                }
+            }
+           
         }
 
 

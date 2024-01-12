@@ -8,8 +8,8 @@ namespace Test_Automation_Core.test.main.tests.smoketests
     public class SmokeTestSuite 
     {
         string testAssemblyPath = "TestAutomationFramework.dll";
-        string targetNameSpace = "Test_Automation_Core.TestPositiveFeedBack.main.tests.smoketests";
-        string targetNameSpaceUtil = "Test_Automation_Core.TestPositiveFeedBack.main.util";
+        string targetNameSpace = "Test_Automation_Core.test.main.tests.smoketests";
+        string targetNameSpaceUtil = "Test_Automation_Core.test.main.util";
 
 
 
@@ -103,7 +103,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
         }
 
         [Test, Order(7)]
-        public void OtherCHImportTest()
+        public void OtherCHImportTests()
         {
            bool success= TestRunner.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.migrationtests.chprojects.otherversions", "otherversions");
 
