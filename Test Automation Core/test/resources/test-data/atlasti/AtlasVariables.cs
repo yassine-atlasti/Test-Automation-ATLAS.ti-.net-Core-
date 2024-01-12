@@ -28,7 +28,7 @@ namespace Test_Automation_Core.test.resources.test
         public static string appPath = installationPath + @"\Atlasti" + actualMajor + ".exe";
 
         public static string backUpPath = installationPath + @"\SSD.ATLASti.Backup.exe";
-
+        public static string updaterPath = installationPath + @"\SSD.ATLASti.Updater.exe";
         public static string fileNameRC = "ATLASti.exe";
         public static string fileNameNightly = "ATLASti-Win-DEV.exe";
 

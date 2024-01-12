@@ -7,7 +7,7 @@ public class PythonRunner
     {
         ProcessStartInfo start = new ProcessStartInfo();
         start.FileName = @"C:\Users\yassine.mahfoudh\AppData\Local\Programs\Python\Python311\python.exe";
-        start.Arguments = $@"""C:\Users\yassine.mahfoudh\source\repos\Test Automation Core\Test Automation Core\test\main\util\element_locator.py"" ""{referenceImagePath}""";
+        start.Arguments = $@"""C:\Users\yassine.mahfoudh\source\repos\Test Automation Core\Test Automation Core\TestPositiveFeedBack\main\util\element_locator.py"" ""{referenceImagePath}""";
         start.UseShellExecute = false;
         start.RedirectStandardOutput = true;
 

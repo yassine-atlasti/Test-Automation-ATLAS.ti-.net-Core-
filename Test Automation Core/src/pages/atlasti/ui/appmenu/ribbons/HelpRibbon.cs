@@ -14,25 +14,21 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.appmenu.ribbons
 
 
 
-        public ReportProblemDialog OpenReportProblemDialog()
+        public SystemReport OpenSendSystemReportDialog()
         {
-            _driver.FindElementByName("Report Problem").Click();
-            // Wait for a unique element in the Report Problem Dialog to appear.
-            // Replace "UniqueElementInReportProblemDialog" with an actual unique element name or locator.
-            /** var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
-             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Name("UniqueElementInReportProblemDialog")));**/
-            return new ReportProblemDialog(_driver);
+            _driver.FindElementByAccessibilityId("OnlineResources").Click();
+
+            _driver.FindElementByName("Send System Report").Click();
+
+            return new SystemReport(_driver);
         }
         // Add methods here for interacting with elements under 'Help'...
 
-        public SuggestionDialog OpenSendSuggestionDialog()
+        public FeedBackDialog OpenSendFeedBackDialog()
         {
-            _driver.FindElementByName("Send Suggestion").Click();
-            // Wait for a unique element in the Send Suggestion Dialog to appear.
-            // Replace "UniqueElementInSendSuggestionDialog" with an actual unique element name or locator.
-            /**  var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
-              wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Name("UniqueElementInSendSuggestionDialog")));**/
-            return new SuggestionDialog(_driver);
+            _driver.FindElementByName("Send Feedback").Click();
+           
+            return new FeedBackDialog(_driver);
         }
 
         public LiveChatDialog OpenLiveChatDialog()

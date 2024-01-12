@@ -25,7 +25,7 @@ namespace Test_Automation_Core.test.main.tests
             
         { _driver = systemActions.ClassInitialize("Root");
 
-            SystemActions.TakeScreenshot(_driver, SystemActions.GetDesktopPath(), "test.png");
+            SystemActions.TakeScreenshot(_driver, SystemActions.GetDesktopPath(), "TestPositiveFeedBack.png");
 
 
         }

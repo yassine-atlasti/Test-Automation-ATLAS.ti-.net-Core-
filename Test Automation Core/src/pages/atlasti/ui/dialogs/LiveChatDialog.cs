@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
-
+using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.src.pages.atlasti.ui.dialogs
 {
@@ -8,6 +8,7 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.dialogs
     {
         private WindowsDriver<WindowsElement> _driver;
         private WindowsElement _dialog;
+        SystemActions systemActions = new SystemActions();
 
         public LiveChatDialog(WindowsDriver<WindowsElement> driver)
         {
@@ -17,17 +18,29 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.dialogs
 
         }
 
-        public void EnterChatText(string chatText)
+       
+        public bool StartChat()
         {
-            var chatTextField = _driver.FindElementByName("Write chat message");
-            chatTextField.Clear();
-            chatTextField.SendKeys(chatText + Keys.Enter);
-        }
 
-        public void StartChat()
-        {
-            var startChatButton = _driver.FindElementByName("Chat We’re online right now, talk with our team in real-time");
-            startChatButton.Click();
+            // systemActions.WaitForElementToBeDisplayedByName(_driver, "Chat We’re online right now, talk with our team in real-time", 5);
+
+            //var startChatButton = _driver.FindElementByName("Chat We’re online right now, talk with our team in real-time");
+
+            var liveChatWindow = _driver.FindElementByName("Support – Live Chat");
+                liveChatWindow.SendKeys(Keys.Tab);
+            liveChatWindow.SendKeys(Keys.Tab);
+            liveChatWindow.SendKeys(Keys.Tab);
+            liveChatWindow.SendKeys(Keys.Tab);
+            liveChatWindow.SendKeys(Keys.Tab);
+
+            liveChatWindow.SendKeys(Keys.Enter);
+
+            Thread.Sleep(2000);
+            liveChatWindow.SendKeys("QA Test,Please ignore this!" + Keys.Enter);
+
+           bool res= systemActions.WaitForElementToBeDisplayedByName(_driver, "End Chat", 5);
+
+            return res;
         }
 
         public void EndChat()

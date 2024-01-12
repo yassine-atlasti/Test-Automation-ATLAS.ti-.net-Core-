@@ -64,14 +64,14 @@ namespace Test_Automation_Core.src
             return new CheckForUpdatesDialog(_driver);
         }
 
-        public SuggestionDialog GetSendSuggestionDialog()
+        public FeedBackDialog GetSendSuggestionDialog()
         {
-            return new SuggestionDialog(_driver);
+            return new FeedBackDialog(_driver);
         }
 
-        public ReportProblemDialog GetReportProblemDialog()
+        public SystemReport GetReportProblemDialog()
         {
-            return new ReportProblemDialog(_driver);
+            return new SystemReport(_driver);
         }
 
         public ExportResults GetExportResultsDialog()

@@ -42,6 +42,7 @@
     <Folder Include="test\main\tests\releasetests\migrationtests\projects\exports\" />
     <Folder Include="test\main\tests\releasetests\reports\exports\" />
     <Folder Include="test\main\tests\releasetests\reports\imports\" />
+    <Folder Include="test\main\tests\smoketests\support\ToBeFixed\" />
     <Folder Include="test\resources\test-data\onedrive\documents\" />
   </ItemGroup>
 

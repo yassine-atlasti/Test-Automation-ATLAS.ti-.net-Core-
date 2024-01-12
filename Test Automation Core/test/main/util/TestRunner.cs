@@ -81,7 +81,7 @@ public class TestRunner
     public static bool AssertTestRun(XmlNode result)
     {
         // Assuming result is an XmlNode, parse it to find the fail count
-        var failedCountNode = result.SelectSingleNode("//test-suite/@failed");
+        var failedCountNode = result.SelectSingleNode("//TestPositiveFeedBack-suite/@failed");
         int failedCount = 0;
         if (failedCountNode != null && int.TryParse(failedCountNode.Value, out failedCount) && failedCount > 0)
         {

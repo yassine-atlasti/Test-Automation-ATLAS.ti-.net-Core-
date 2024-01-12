@@ -69,31 +69,32 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.windows
             driver.FindElementByName("Check for Updates").Click();
         }
 
-        public ReportProblemDialog OpenReportProblemDialog()
+        public SystemReport OpenReportProblemDialog()
         {
             ClickReportProblemButton();
             //Could add code to Wait for a unique element in the Report Problem Dialog to appear.
 
-            return new ReportProblemDialog(driver);
+            return new SystemReport(driver);
         }
 
-        public SuggestionDialog OpenSendSuggestionDialog()
+        public FeedBackDialog OpenSendSuggestionDialog()
         {
             ClickSendSuggestionButton();
             // Could add code to Wait for a unique element in the Send Suggestion Dialog to appear.
 
-            return new SuggestionDialog(driver);
+            return new FeedBackDialog(driver);
         }
 
-        public CheckForUpdatesDialog OpenCheckForUpdatesDialog()
+        public bool OpenCheckForUpdatesDialog()
         {
+            bool updateDialog = false;
             ClickCheckForUpdatesButton();
             // Wait for a unique element in the Check for Updates Dialog to appear.
             // Replace "UniqueElementInCheckForUpdatesDialog" with an actual unique element name or locator.
             SystemActions systemActions = new SystemActions();
-            systemActions.WaitForElementToBeDisplayedByTagName(driver, "Text", "UniqueElementInUpdater", 30);
-
-            return new CheckForUpdatesDialog(driver);
+            updateDialog= systemActions.WaitForElementToBeDisplayedByName(driver, "OK", 5);
+             
+            return updateDialog;
 
 
         }

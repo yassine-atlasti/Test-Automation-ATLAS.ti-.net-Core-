@@ -1,23 +1,35 @@
-﻿using OpenQA.Selenium.Appium.Windows;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Appium.Windows;
+using OpenQA.Selenium.Interactions;
+using TextCopy;
 
 namespace Test_Automation_Core.src.pages.atlasti.ui.dialogs
 {
-    public class SuggestionDialog
+    public class FeedBackDialog
     {
         private readonly WindowsDriver<WindowsElement> driver;
 
-        public SuggestionDialog(WindowsDriver<WindowsElement> driver)
+        public FeedBackDialog(WindowsDriver<WindowsElement> driver)
         {
             this.driver = driver;
         }
 
         // Add methods for interacting with Send Suggestion Dialog elements as needed
-        public void EnterSuggestionDescription(string suggestionDescription)
+        public void EnterFeedBack(string suggestionDescription)
         {
             WindowsElement suggestionDescriptionTextField = driver.FindElementByAccessibilityId("FeedbackText");
             suggestionDescriptionTextField.Click();
 
-            suggestionDescriptionTextField.SendKeys(suggestionDescription);
+            ClipboardService.SetText(suggestionDescription);
+
+            // Create a new Actions object
+            Actions action = new Actions(driver);
+
+            
+           
+            // Paste the clipboard content
+            action.SendKeys(Keys.Control + "v").KeyUp(Keys.Control).Perform();
+
         }
 
         public void EnterEmail(string email)
@@ -28,9 +40,9 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.dialogs
             emailTextField.SendKeys(email);
         }
 
-        public void ClickSendSuggestionButton()
+        public void ClickSendButton()
         {
-            driver.FindElementByName("Send Suggestion").Click();
+            driver.FindElementByName("Send").Click();
         }
 
         public void ClickCancelButton()
@@ -42,6 +54,20 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.dialogs
         {
 
             driver.FindElementByName("OK\\").Click();
+
+        }
+
+        public void ClickYes()
+        {
+
+            driver.FindElementByName("Yes").Click();
+
+        }
+
+        public void ClickNo()
+        {
+
+            driver.FindElementByName("No").Click();
 
         }
     }

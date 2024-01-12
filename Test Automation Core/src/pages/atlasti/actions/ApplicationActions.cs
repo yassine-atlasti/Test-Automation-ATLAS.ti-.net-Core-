@@ -2,6 +2,7 @@
 using Test_Automation_Core.src.pages.atlasti.ui.appmenu.file;
 using Test_Automation_Core.src.pages.atlasti.ui.dialogs;
 using Test_Automation_Core.src.pages.windowsos;
+using Test_Automation_Core.test.main.tests;
 using Test_Automation_Core.test.resources.test;
 using Test_Automation_Core.test.utilities.util;
 
@@ -267,8 +268,26 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
         }
 
+        public bool CheckForUpdates()
+        {
+            var welcomeWindow = _app.GetWelcomeControl();
+            var optionsWindow = _app.GetOptionsWindow();
+            var switchLibraryWizard = _app.GetSwitchLibraryWizard();
 
-        public bool OpenProject(string projectName)
+
+
+            // Open the options window and click the 'Switch Library' button
+            welcomeWindow.ClickOptionsButton();
+            Thread.Sleep(500);
+
+            optionsWindow.ClickATLASti();
+            Thread.Sleep(500);
+
+           bool dialog = optionsWindow.OpenCheckForUpdatesDialog();
+
+            return dialog;
+        }
+            public bool OpenProject(string projectName)
         {
             var welcomeWindow = _app.GetWelcomeControl();
             var projectWindow = _app.GetProjectWindow();
@@ -287,29 +306,16 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
             //Check if project recovery dialog appears , if yes click it
             systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "Button", "OK", 1);
 
-            if(openState) { SwitchToProjectWindow(projectName); }
+            if(openState) { BaseTest.SwitchWindow(projectName + " - ATLAS.ti"); }
+
+
+            //Close the project recovery dialog if it appears
+            try { _app.getDriver().FindElementByName("OK").Click(); }
+            catch(Exception e) { }
             return openState;
         }
 
-        public void SwitchToProjectWindow(string projectName)
-        {
-          
-
-            foreach (var handle in _app.getDriver().WindowHandles)
-            {
-                if (_app.getDriver().Title == projectName + " - ATLAS.ti")
-                {     // Switch to the current window
-                    _app.getDriver().SwitchTo().Window(handle);
-
-
-
-                }
-
-
-            }
-
-        }
-
+      
 
 
         public async Task CloseProjectAsync()
@@ -364,30 +370,21 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
 
 
-        public bool ReportProblem(string description, string email)
+        public bool SendSystemReport(string email)
         {
-            ReportProblemDialog reportProblemDialog;
+            SystemReport systemReportDialog;
 
-            if (_app.GetWelcomeControl().IsWelcomeWindowDisplayed())
-            {
-                // Reporting problem from welcome window
-                var optionsWindow = _app.GetWelcomeControl().OpenOptionsWindow();
-                optionsWindow.ClickATLASti();
-
-                reportProblemDialog = optionsWindow.OpenReportProblemDialog();
-            }
-            else
-            {
+           
                 // Reporting problem from project window
                 var appMenu = _app.GetProjectWindow().getAppMenu();
                 var helpRibbon = appMenu.ClickHelp();
 
-                reportProblemDialog = helpRibbon.OpenReportProblemDialog();
-            }
+                systemReportDialog = helpRibbon.OpenSendSystemReportDialog();
+            
 
-            reportProblemDialog.EnterProblemDescription(description);
-            reportProblemDialog.EnterEmail(email);
-            reportProblemDialog.ClickReportProblemButton();
+            
+            systemReportDialog.EnterEmail(email);
+            systemReportDialog.ClickSendButton();
 
             // Waiting for confirmation dialog to appear
 
@@ -395,13 +392,11 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
             SystemActions systemActions = new SystemActions();
 
-            bool reportState = systemActions.WaitForElementToBeDisplayedByName(_app.getDriver(), "Problem Report Sent", 30);
+            bool reportState = systemActions.WaitForElementToBeDisplayedByName(_app.getDriver(), "OK", 60);
 
-            // Once confirmation dialog is found, confirm the dialog
-            reportProblemDialog.CloseConfirmationDialog();
 
             // Send the ESC key press to the active window
-            _app.getDriver().Keyboard.SendKeys(Keys.Escape);
+         //   _app.getDriver().Keyboard.SendKeys(Keys.Escape);
 
             return reportState;
 
@@ -410,53 +405,34 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
 
 
-        public bool SendSuggestion(string description, string email)
+        public bool SendFeedBack(string description, string state)
         {
-            SuggestionDialog suggestionDialog;
-
-            if (_app.GetWelcomeControl().IsWelcomeWindowDisplayed())
-            {
-                // Sending suggestion from welcome window
-                var optionsWindow = _app.GetWelcomeControl().OpenOptionsWindow();
-                optionsWindow.ClickATLASti();
-
-                suggestionDialog = optionsWindow.OpenSendSuggestionDialog();
-            }
-            else
-            {
+            FeedBackDialog suggestionDialog;
+ 
+            
                 // Sending suggestion from project window
                 var appMenu = _app.GetProjectWindow().getAppMenu();
                 var helpRibbon = appMenu.ClickHelp();
 
-                suggestionDialog = helpRibbon.OpenSendSuggestionDialog();
-            }
+                suggestionDialog = helpRibbon.OpenSendFeedBackDialog();
+           
+            if (state == "yes") { suggestionDialog.ClickYes(); }
+            else { suggestionDialog.ClickNo(); }
+            
 
-            suggestionDialog.EnterSuggestionDescription(description);
-            suggestionDialog.EnterEmail(email);
-            suggestionDialog.ClickSendSuggestionButton();
+            suggestionDialog.EnterFeedBack(description);
 
-            // Waiting for confirmation dialog to appear
-
-
-            SystemActions systemActions = new SystemActions();
-            bool reportState = systemActions.WaitForElementToBeDisplayedByName(_app.getDriver(), "Suggestion Sent", 30);
-
-
-            // Once confirmation dialog is found, confirm the dialog
-            suggestionDialog.CloseConfirmationDialog();
-
-            // Send the ESC key press to the active window
-            _app.getDriver().Keyboard.SendKeys(Keys.Escape);
-            return reportState;
+            
+            suggestionDialog.ClickSendButton();
+            Thread.Sleep(4000);
+           
+            return true;
         }
 
-        public void LiveChat(string chatText)
+        public bool LiveChat(string chatText)
         {
-            if (_app.GetWelcomeControl().IsWelcomeWindowDisplayed())
-            {
-                OpenProject(SmokeTestVariables.smokeTestproject);
-            }
 
+            
             // Open the project window's app menu
             var appMenu = _app.GetProjectWindow().getAppMenu();
 
@@ -465,13 +441,17 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
             // Open the live chat dialog
             var liveChatDialog = helpRibbon.OpenLiveChatDialog();
+            Thread.Sleep(7000);
 
+           
+
+            BaseTest.SwitchWindow("Support – Live Chat");
             //  Start the chat and enter the chat text 
-            liveChatDialog.StartChat();
+          return  liveChatDialog.StartChat();
 
-            liveChatDialog.EnterChatText(chatText);
-            liveChatDialog.EndChat();
-            // Additional actions or checks can be added here
+
+
+
 
 
 
@@ -485,7 +465,7 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
             // Click on 'Developer' to get the HelpRibbon
             var developerRibbon = appMenu.ClickDeveloper();
-
+            Thread.Sleep(1000);
             developerRibbon.RaiseAtlasException();
             Thread.Sleep(25000);
 
@@ -493,7 +473,7 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
 
         }
-        public void SendCrashReport(string email, string description)
+        public bool SendCrashReport(string email, string description)
         {
 
             CrashReportDialog reportCrashDialog = new CrashReportDialog(_app.getDriver());
@@ -503,6 +483,7 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
             reportCrashDialog.EnterCrashDescription(description);
 
             reportCrashDialog.ClickSendErrorButton();
+            return true;
 
 
         }

@@ -129,10 +129,33 @@ namespace Test_Automation_Core.test.main.tests
 
         }
 
-       
-            
-         
-       
+        public void SetupUpdater()
+        {
+            _driver = systemActions.ClassInitialize(AtlasVariables.updaterPath);
+            systemActions = new SystemActions(_driver);
+
+        }
+        public static void SwitchWindow(string windowName)
+        {
+            foreach (var handle in _driver.WindowHandles)
+            {
+                // Get the title of the window without switching to it
+                string title = _driver.SwitchTo().Window(handle).Title;
+
+                // If the title matches, switch to the window and return
+                if (title == windowName)
+                {
+                    _driver.SwitchTo().Window(handle);
+                    return;
+                }
+            }
+
+            // Optionally, handle the case where no window with the given name is found
+            throw new InvalidOperationException($"No window with title '{windowName}' found.");
+        }
+
+
+
         //This saves screenshots in the test suite folder
         public void saveScreenshot()
         {
@@ -168,11 +191,11 @@ namespace Test_Automation_Core.test.main.tests
                 saveScreenshot();
                 Thread.Sleep(1000);
             }
-            _driver.Close();
+           // _driver.Close();
             SystemActions.KillProcessByName("Atlasti" + AtlasVariables.actualMajor);
             SystemActions.KillProcessByName("SSD.ATLASti.Backup");
             SystemActions.KillProcessByName("WinAppDriver");
-
+            SystemActions.KillProcessByName("SSD.ATLASti.Updater");
 
         }
 
