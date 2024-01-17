@@ -1,0 +1,27 @@
+﻿1. **Configure local variables related to your environnement :**
+
+#### 'local-config' Folder
+
+This folder contains classes with variables related to the running machine , such as OneDrive Path, WinAppDriver Path. 
+We could add this Folder in the .gitignore 
+- **'AtlastiConfig.cs'**: Sepcifies the installation Path of ATLAS.ti
+- **`WinAppDriverConfig.cs`**: Specifies the file path of `winappdriver.exe`.
+Ensure this path is correctly set to the WinAppDriverVar.cs executable.
+
+- **`OneDriveConfig.cs`**: Configure the OneDrive path of the testing system here. It's actually done automatically, 
+but if your OneDrive is running on another machine and you're using volume mapping set the path manually.
+This is crucial for accessing test projects and libraries stored on OneDrive.
+
+#### `onedrive` Folder
+
+Note:
+Before starting Tests which requires Data (like CH Projects , 
+or Smoke Test Libraries) make Sure your OneDrive Testing Stuff is up to date, 
+
+To avoid downloading data during test runs, keep the Folders needed for tests always on your local OneDrive :
+
+\Testing stuff\Test Data\Smoke Tests data\Win\Smoke Test Libraries
+\Testing stuff\Test Data\Projects\C&H all versions\Win\current Windows Release A23
+\Testing stuff\Test Data\Projects\C&H all versions\Win\current Windows Release A22
+\Testing stuff\Test Data\Projects\C&H all versions\Mac\current Mac Release A22
+\Testing stuff\Test Data\Projects\C&H all versions\Mac\current Mac Release A23

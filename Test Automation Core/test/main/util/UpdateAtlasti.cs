@@ -79,7 +79,7 @@ namespace Test_Automation_Core.test.main.util
             //Install
             string windowName = "Setup - ATLAS.ti " + AtlasVariables.actualMajor;
             WindowsDriver<WindowsElement> _driver = systemActions.ClassInitialize(installerPath);
-
+/**
             foreach (var handle in _driver.WindowHandles)
             {
                 // Get the title of the window without switching to it
@@ -96,7 +96,8 @@ namespace Test_Automation_Core.test.main.util
 
                     return;
                 }
-            }
+            }**/
+
            
         }
 
