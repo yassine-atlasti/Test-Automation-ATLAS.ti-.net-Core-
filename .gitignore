@@ -361,4 +361,10 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Test Automation Core/documentation/.DS_Store
+/.gitignore
+
+/Test Automation Core/.DS_Store
+/.DS_Store
+/Test Automation Core/.DS_Store
 /Test Automation Core/.idea/.gitignore

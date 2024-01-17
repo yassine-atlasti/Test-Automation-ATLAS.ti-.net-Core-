@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium.Appium.Windows;
+using System.Diagnostics;
 using Test_Automation_Core.src;
 using Test_Automation_Core.src.pages.atlasti.actions;
 using Test_Automation_Core.src.pages.atlasti.ui.windows;
@@ -76,29 +77,26 @@ namespace Test_Automation_Core.test.main.util
         public void InstallATLAS()
         {
 
-            //Install
-            string windowName = "Setup - ATLAS.ti " + AtlasVariables.actualMajor;
-            WindowsDriver<WindowsElement> _driver = systemActions.ClassInitialize(installerPath);
-/**
-            foreach (var handle in _driver.WindowHandles)
-            {
-                // Get the title of the window without switching to it
-                string title = _driver.SwitchTo().Window(handle).Title;
+             
+                string installDir = AtlasVariables.installationPath; 
 
-                // If the title matches, switch to the window and return
-                if (title == windowName)
+                ProcessStartInfo processStartInfo = new ProcessStartInfo();
+                processStartInfo.FileName = "msiexec";
+                processStartInfo.Arguments = $"/qb /i \"{installerPath}\" INSTALLDIR=\"{installDir}\"";
+                processStartInfo.UseShellExecute = false;
+
+                try
                 {
-                    _driver.SwitchTo().Window(handle);
-                    _driver.FindElementByName(windowName).Click();
-                   
-                    InstallerActions installer = new InstallerActions(_driver);
-                    installer.InstallATLASti(installerPath, AtlasVariables.actualMajor);
-
-                    return;
+                    Process process = Process.Start(processStartInfo);
+                    process.WaitForExit(); // Wait for the installation process to complete
                 }
-            }**/
+                catch (Exception ex)
+                {
+                    Console.WriteLine("An error occurred: " + ex.Message);
+                }
+            
 
-           
+
         }
 
 
