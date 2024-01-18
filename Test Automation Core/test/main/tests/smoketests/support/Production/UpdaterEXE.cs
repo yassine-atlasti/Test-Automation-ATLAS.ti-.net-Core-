@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Test_Automation_Core.test.main.tests.smoketests.support.Production
 {
-    public class UpdaterMSI
+    public class UpdaterEXE
     {
-        [Test,Order(1), Category("ProdUpdaterMSI")]
-        public void TestSatelliteUpdaterMsi()
+        [Test, Order(1), Category("ProdUpdaterEXE")]
+        public void TestSatelliteUpdaterEXE()
         {
             BaseTestCase test = new BaseTestCase();
 
@@ -22,8 +22,8 @@ namespace Test_Automation_Core.test.main.tests.smoketests.support.Production
 
         }
 
-        [Test, Order(2), Category("ProdUpdaterMSI")]
-        public void TestInternalUpdaterMsi()
+        [Test, Order(2), Category("ProdUpdaterEXE")]
+        public void TestInternalUpdaterEXE()
         {
             BaseTestCase test = new BaseTestCase();
 
@@ -37,7 +37,5 @@ namespace Test_Automation_Core.test.main.tests.smoketests.support.Production
 
         }
 
-
-       
     }
 }

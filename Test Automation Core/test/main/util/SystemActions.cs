@@ -267,64 +267,30 @@ namespace Test_Automation_Core.test.utilities.util
 
 
 
-        public void UninstallAtlas()
+        public static void UninstallAtlas(string installerPath)
         {
-            KillProcessByName("Atlasti" + AtlasVariables.actualMajor);
+            string installDir = AtlasVariables.installationPath;
 
-            if (Directory.Exists(AtlasVariables.installationPath))
+            ProcessStartInfo processStartInfo = new ProcessStartInfo();
+            processStartInfo.FileName = "msiexec";
+            processStartInfo.Arguments = $"/qb /x \"{installerPath}\" INSTALLDIR=\"{installDir}\"";
+            processStartInfo.UseShellExecute = false;
+
+            try
             {
-                List<string> foundPrograms = FindProgram("ATLAS.ti " + AtlasVariables.actualMajor);
-                string firstProgram = "";
-                if (foundPrograms.Count > 0)
-                {
-                    firstProgram = foundPrograms[0];
-                    Console.WriteLine("First program found: " + firstProgram);
-                }
-
-
-                string uninstallPath = AtlasVariables.uninstallPathDirectory + "\\" + firstProgram;
-
-                ClipboardService.SetText(uninstallPath);
-                Thread.Sleep(1000);
-
-
-                // Launch the 'Add or Remove Programs' window
-
-                // Create an instance of Actions class
-                var action = new Actions(driver);
-
-                // Press Win key
-                action.KeyDown(Keys.Meta);
-
-                // Press E key
-                action.SendKeys("e");
-
-                // Release Win key
-                action.KeyUp(Keys.Meta);
-
-                // Perform the action
-                action.Perform();
-
-
-                Thread.Sleep(2000);
-
-
-                SetFocusToFileExplorer();
-
-                // Use CTRL+L to focus on the address bar, then paste the clipboard content 
-                action.KeyDown(Keys.Control).SendKeys("l").KeyUp(Keys.Control).SendKeys(Keys.Control + "v").KeyUp(Keys.Control).SendKeys(Keys.Enter).Perform();
-
-                Thread.Sleep(2000);
-                try { driver.FindElementByName("Yes").Click(); }
-                catch(Exception e) { }
-                //Wait for app to uninstall
-                Thread.Sleep(90000);
-
-
+                Process process = Process.Start(processStartInfo);
+                process.WaitForExit(); // Wait for the installation process to complete
             }
-           
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+            }
+
 
         }
+           
+
+        
 
 
 
@@ -386,7 +352,7 @@ namespace Test_Automation_Core.test.utilities.util
             return Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         }
 
-        public void CreateFolder(string folderName)
+        public static void CreateFolder(string folderName)
         {
             if (!Directory.Exists(folderName))
             {

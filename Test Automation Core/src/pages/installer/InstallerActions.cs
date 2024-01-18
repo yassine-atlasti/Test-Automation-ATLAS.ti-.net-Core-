@@ -20,13 +20,13 @@ namespace Test_Automation_Core.src.pages.installer
         }
 
 
-        public bool InstallATLASti(string installerPath, string majorVersion)
+        public bool InstallATLASti()
         {
 
 
             //Wait for Installer to be displayed
             SystemActions systemActions = new SystemActions();
-            bool installerState = systemActions.WaitForElementToBeDisplayedByTagName(driver, "Window", $"Setup - ATLAS.ti {majorVersion}", 120);
+            bool installerState = systemActions.WaitForElementToBeDisplayedByTagName(driver, "Window", $"Setup - ATLAS.ti {AtlasVariables.actualMajor}", 120);
 
             if (installerState)
             {

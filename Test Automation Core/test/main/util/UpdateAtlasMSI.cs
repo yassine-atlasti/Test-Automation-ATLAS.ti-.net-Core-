@@ -20,37 +20,37 @@ namespace Test_Automation_Core.test.main.util
 
 
         //default branch is dev
-        public static string branch = "dev";
+        public static string branch = "devMSI";
 
 
 
-        private string installerPath;
-        private string fileName;
-        private string downloadUrl;
+        private static string installerPath;
+        private static string fileName;
+        private static string downloadUrl;
 
-        [OneTimeSetUp]
+        [SetUp]
         public void SetUp()
         {
 
             if (String.Equals("devMSI", branch, StringComparison.OrdinalIgnoreCase))
             {
-                installerPath = AtlasVariables.installerPathNightly;
-                fileName = AtlasVariables.fileNameNightly;
+                installerPath = AtlasVariables.installerPathNightlyMSI;
+                fileName = AtlasVariables.fileNameNightlyMSI;
                 downloadUrl = AtlasVariables.downloadUrlNightlyMSI;
             }
             else
 
             if (String.Equals("rcMSI", branch, StringComparison.OrdinalIgnoreCase))
             {
-                installerPath = AtlasVariables.installerPathRC;
-                fileName = AtlasVariables.fileNameRC;
+                installerPath = AtlasVariables.installerPathRCMSI;
+                fileName = AtlasVariables.fileNameRCMSI;
                 downloadUrl = AtlasVariables.downloadUrlRCMSI;
             }
             else
              if (String.Equals("releaseMSI", branch, StringComparison.OrdinalIgnoreCase))
             {
-                installerPath = AtlasVariables.installerPathRC;
-                fileName = AtlasVariables.fileNameRC;
+                installerPath = AtlasVariables.installerPathRCMSI;
+                fileName = AtlasVariables.fileNameRCMSI;
                 downloadUrl = AtlasVariables.downloadURLReleaseMSI;
 
             }
@@ -67,32 +67,10 @@ namespace Test_Automation_Core.test.main.util
             await systemActions.DownloadFileAsync(downloadUrl, fileName);
         }
 
-        [Test, Order(2)]
-        public void UninstallATLAS()
+        [Test, Order(2),Category("UninstallMSI")]
+        public static void UninstallATLAS()
         {
-
-           // WindowsDriver<WindowsElement> _driver = systemActions.ClassInitialize("Root");
-
-            // systemActions = new SystemActions(_driver);
-            //systemActions.UninstallAtlas();
-
-            string installDir = AtlasVariables.installationPath;
-
-            ProcessStartInfo processStartInfo = new ProcessStartInfo();
-            processStartInfo.FileName = "msiexec";
-            processStartInfo.Arguments = $"/qb /x \"{installerPath}\" INSTALLDIR=\"{installDir}\"";
-            processStartInfo.UseShellExecute = false;
-
-            try
-            {
-                Process process = Process.Start(processStartInfo);
-                process.WaitForExit(); // Wait for the installation process to complete
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("An error occurred: " + ex.Message);
-            }
-
+            SystemActions.UninstallAtlas(installerPath);
         }
 
 

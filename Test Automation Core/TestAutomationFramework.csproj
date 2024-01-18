@@ -11,6 +11,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="test\main\tests\smoketests\support\ToBeFixed\**" />
+    <EmbeddedResource Remove="test\main\tests\smoketests\support\ToBeFixed\**" />
+    <None Remove="test\main\tests\smoketests\support\ToBeFixed\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="test\main\tests\smoketests\migrationtests\libraries\OpenEmptyLib.cs" />
   </ItemGroup>
 
@@ -43,7 +49,6 @@
     <Folder Include="test\main\tests\releasetests\migrationtests\projects\exports\" />
     <Folder Include="test\main\tests\releasetests\reports\exports\" />
     <Folder Include="test\main\tests\releasetests\reports\imports\" />
-    <Folder Include="test\main\tests\smoketests\support\ToBeFixed\" />
     <Folder Include="test\resources\test-data\onedrive\documents\" />
   </ItemGroup>
 
