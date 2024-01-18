@@ -19,6 +19,7 @@ using System.Globalization;
 
 using System.Windows.Forms;
 using System.Text;
+using System.Security;
 
 namespace Test_Automation_Core.test.utilities.util
 {
@@ -313,31 +314,15 @@ namespace Test_Automation_Core.test.utilities.util
                 // Use CTRL+L to focus on the address bar, then paste the clipboard content 
                 action.KeyDown(Keys.Control).SendKeys("l").KeyUp(Keys.Control).SendKeys(Keys.Control + "v").KeyUp(Keys.Control).SendKeys(Keys.Enter).Perform();
 
+                Thread.Sleep(2000);
+                try { driver.FindElementByName("Yes").Click(); }
+                catch(Exception e) { }
                 //Wait for app to uninstall
                 Thread.Sleep(90000);
 
 
             }
-            string windowName = "Setup - ATLAS.ti " + AtlasVariables.actualMajor;
-            foreach (var handle in driver.WindowHandles)
-            {
-                // Get the title of the window without switching to it
-                string title = driver.SwitchTo().Window(handle).Title;
-
-                // If the title matches, switch to the window and return
-                if (title == windowName)
-                {
-                    driver.SwitchTo().Window(handle);
-                    return;
-                }
-            }
-            driver.FindElementByName("Close").Click();
-
-            // MinimizeAllWindows(driver);
-            //KillProcessByName("Setup - ATLAS.ti " + AtlasVariables.actualMajor + " (32 bit)");
-
-            KillProcessByName("explorer");
-
+           
 
         }
 
@@ -374,7 +359,28 @@ namespace Test_Automation_Core.test.utilities.util
             }
         }
 
-
+       
+        public static void SetLoadDeveloperModule()
+        {
+            try
+            {
+                using (RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Scientific Software\ATLAS.ti."+ AtlasVariables.actualMajor))
+                {
+                    if (key != null)
+                    {
+                        key.SetValue("LoadDeveloperModule", 0x00000001, RegistryValueKind.DWord);
+                        Console.WriteLine("Registry value set successfully.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+        
+        
+        
         public static string GetDesktopPath()
         {
             return Environment.GetFolderPath(Environment.SpecialFolder.Desktop);

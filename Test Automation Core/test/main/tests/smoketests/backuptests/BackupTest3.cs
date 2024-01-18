@@ -2,7 +2,7 @@
 
 namespace Test_Automation_Core.test.main.tests.smoketests.backuptests;
 
-public class BackupTest3:BaseTest
+public class BackupTest3:BaseTestCase
 {
     [Category("backuptests")]
 

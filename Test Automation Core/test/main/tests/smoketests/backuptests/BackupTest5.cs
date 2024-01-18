@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Test_Automation_Core.test.main.tests.smoketests.backuptests
 {
-    public class BackupTest5:BaseTest
+    public class BackupTest5:BaseTestCase
     {
         [Category("backuptests")]
 

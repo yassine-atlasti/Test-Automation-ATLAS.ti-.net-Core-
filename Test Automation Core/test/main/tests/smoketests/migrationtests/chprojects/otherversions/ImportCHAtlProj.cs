@@ -3,7 +3,7 @@ using Test_Automation_Core.test.resources.test;
 
 namespace Test_Automation_Core.test.main.tests.smoketests.migrationtests.chprojects.otherversions;
 
-public class ImportCHAtlProj:BaseTest
+public class ImportCHAtlProj:BaseTestCase
 {
 
     public static IEnumerable<TestCaseData> AtlProjTestData()

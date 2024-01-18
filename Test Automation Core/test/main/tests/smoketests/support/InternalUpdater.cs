@@ -1,6 +1,6 @@
 ﻿namespace Test_Automation_Core.test.main.tests.smoketests.support
 {
-    public class InternalUpdater : BaseTest
+    public class InternalUpdater : BaseTestCase
     {
 
 

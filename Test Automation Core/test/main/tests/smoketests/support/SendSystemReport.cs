@@ -2,7 +2,7 @@
 
 namespace Test_Automation_Core.test.main.tests.smoketests.support
 {
-    public class SendSystemReport : BaseTest
+    public class SendSystemReport : BaseTestCase
     {
 
         [Test, Category("support")]

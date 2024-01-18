@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="documentation\checklist-mapping\" />
     <Folder Include="src\pages\atlasti\ui\wizards\Images\" />
     <Folder Include="test\main\tests\releasetests\entities\documents\imports\" />
     <Folder Include="test\main\tests\releasetests\entities\documents\exports\" />

@@ -7,7 +7,7 @@ namespace Test_Automation_Core.test.main.tests.specialtests
 
 {
     [TestFixture]
-    public class ImportAllProjects : BaseTest
+    public class ImportAllProjects : BaseTestCase
     {
       public const string projectsFilePath = "C:\\Test Data\\Projects";
 

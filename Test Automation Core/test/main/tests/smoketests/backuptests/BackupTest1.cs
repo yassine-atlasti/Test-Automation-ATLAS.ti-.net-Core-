@@ -4,7 +4,7 @@ using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.test.main.tests.smoketests.backuptests;
 
-public class BackupTest1:BaseTest
+public class BackupTest1:BaseTestCase
 {
 
     [Category("backuptests")]

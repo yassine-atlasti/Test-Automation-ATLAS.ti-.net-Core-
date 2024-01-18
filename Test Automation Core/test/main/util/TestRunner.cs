@@ -18,7 +18,7 @@ public class TestRunner
 
 
         // Construct a unique folder path for the test run
-        string uniqueTestRunFolder = Path.Combine(BaseTest._testSuiteFolder + "\\TestResults", $"TestRun_{testCategory}");
+        string uniqueTestRunFolder = Path.Combine(BaseTestCase._testSuiteFolder + "\\TestResults", $"TestRun_{testCategory}");
 
         if(Directory.Exists(uniqueTestRunFolder))
         {
@@ -50,7 +50,7 @@ public class TestRunner
     public static bool RunTestByCategory(string testAssemblyPath, string targetNamespace, string folderName)
     {
         InitializeTestRun(folderName);
-        BaseTest.TestRunnerEnabled = true;
+        BaseTestCase.TestRunnerEnabled = true;
         // Initialize the test engine
         var testEngine = TestEngineActivator.CreateInstance();
 

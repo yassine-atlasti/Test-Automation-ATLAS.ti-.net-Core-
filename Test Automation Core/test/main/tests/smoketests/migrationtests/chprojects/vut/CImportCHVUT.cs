@@ -3,7 +3,7 @@ using Test_Automation_Core.test.resources.test;
 
 namespace Test_Automation_Core.test.main.tests.smoketests
 {
-    public class CImportCHVUT:BaseTest
+    public class CImportCHVUT:BaseTestCase
     {
         public void ImportAtlProj()
         {

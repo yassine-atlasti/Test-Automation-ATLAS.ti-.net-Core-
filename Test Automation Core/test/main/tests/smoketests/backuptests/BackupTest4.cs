@@ -9,7 +9,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests.backuptests;
 
 public class BackupTest4
 {
-    BaseTest SmokeTestClass = new BaseTest();
+    BaseTestCase SmokeTestClass = new BaseTestCase();
     [Category("backuptests")]
 
     [Test,Order(1)]

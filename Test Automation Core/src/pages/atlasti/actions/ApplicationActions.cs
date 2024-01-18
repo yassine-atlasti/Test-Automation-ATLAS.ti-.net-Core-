@@ -306,7 +306,7 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
             //Check if project recovery dialog appears , if yes click it
             systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "Button", "OK", 1);
 
-            if(openState) { BaseTest.SwitchWindow(projectName + " - ATLAS.ti"); }
+            if(openState) { BaseTestCase.SwitchWindow(projectName + " - ATLAS.ti"); }
 
 
             //Close the project recovery dialog if it appears
@@ -445,7 +445,7 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
            
 
-            BaseTest.SwitchWindow("Support – Live Chat");
+            BaseTestCase.SwitchWindow("Support – Live Chat");
             //  Start the chat and enter the chat text 
           return  liveChatDialog.StartChat();
 

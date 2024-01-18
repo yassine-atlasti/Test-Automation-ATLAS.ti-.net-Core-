@@ -2,7 +2,9 @@ using NUnit.Framework.Interfaces;
 using NUnit.Framework.Internal;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
+using System.Diagnostics;
 using Test_Automation_Core.src;
 using Test_Automation_Core.src.pages.atlasti.actions;
 using Test_Automation_Core.src.pages.atlasti.ui.windows;
@@ -11,10 +13,11 @@ using Test_Automation_Core.test.main.util;
 using Test_Automation_Core.test.resources.test;
 using Test_Automation_Core.test.resources.test_data.winappdriver;
 using Test_Automation_Core.test.utilities.util;
+using TextCopy;
 
 namespace Test_Automation_Core.test.main.tests
 {
-    public class BaseTest
+    public class BaseTestCase
     {//General
         private static WindowsDriver<WindowsElement> _driver;
         SystemActions systemActions = new SystemActions();
@@ -64,9 +67,14 @@ namespace Test_Automation_Core.test.main.tests
         public static void initSmokeTest()
         {
              ExtractLibraries.extractSmokeTestLibs();
-            Thread.Sleep(5000);
+
+            //Enable Debug Mode
+            SystemActions.SetLoadDeveloperModule();
+
 
         }
+
+        
 
         public static void initReleaseTest()
         {

@@ -3,7 +3,7 @@ using Test_Automation_Core.test.resources.test;
 
 namespace Test_Automation_Core.test.main.tests.smoketests.migrationtests.chprojects.otherversions;
 
-public class ImportCHQDPX:BaseTest
+public class ImportCHQDPX:BaseTestCase
 {
 
 

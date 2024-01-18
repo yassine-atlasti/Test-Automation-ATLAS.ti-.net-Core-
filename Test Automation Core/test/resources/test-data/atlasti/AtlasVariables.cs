@@ -42,8 +42,11 @@ namespace Test_Automation_Core.test.resources.test
         public static string uninstallPathDirectory = @"Control Panel\Programs\Programs and Features";
 
 
-        public static string downloadUrlNightly = @"https://releases.atlasti.com/dev-87fa7d2f-b398-4b13-96b5-d0b1a290061f/win/ATLASti-DEV.msi";
-        public static string downloadUrlRC = @"https://releases.atlasti.com/rc-9710692f-a8c8-42a8-9fc4-ace17887b635/win/ATLASti.msi";
+        public static string downloadUrlNightlyMSI = @"https://releases.atlasti.com/dev-87fa7d2f-b398-4b13-96b5-d0b1a290061f/win/ATLASti-DEV.msi";
+        public static string downloadUrlRCMSI = @"https://releases.atlasti.com/rc-9710692f-a8c8-42a8-9fc4-ace17887b635/win/ATLASti.msi";
+
+        public static string downloadURLReleaseEXE = @"https://releases.atlasti.com/win/ATLASti.exe";
+        public static string downloadURLReleaseMSI = @"https://releases.atlasti.com/win/ATLASti.msi";
 
         AtlasVariables()
         {

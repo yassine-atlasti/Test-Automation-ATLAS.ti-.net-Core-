@@ -3,7 +3,7 @@ using Test_Automation_Core.test.resources.test;
 
 namespace Test_Automation_Core.test.main.tests.smoketests.migrationtests.libraries;
 
-public class OpenLibCH : BaseTest
+public class OpenLibCH : BaseTestCase
 {
 
     [Test, Category("OpenLibCH")]

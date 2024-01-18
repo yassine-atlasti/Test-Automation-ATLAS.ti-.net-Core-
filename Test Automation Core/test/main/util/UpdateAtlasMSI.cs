@@ -11,8 +11,8 @@ using Test_Automation_Core.test.utilities.util;
 namespace Test_Automation_Core.test.main.util
 {
     [TestFixture]
-    [Category("UpdateATLAS")]
-    public class UpdateAtlasti
+    [Category("UpdateATLASMSI")]
+    public class UpdateAtlasMSI
     {
 
 
@@ -32,20 +32,30 @@ namespace Test_Automation_Core.test.main.util
         public void SetUp()
         {
 
-            if (String.Equals("dev", branch, StringComparison.OrdinalIgnoreCase))
+            if (String.Equals("devMSI", branch, StringComparison.OrdinalIgnoreCase))
             {
                 installerPath = AtlasVariables.installerPathNightly;
                 fileName = AtlasVariables.fileNameNightly;
-                downloadUrl = AtlasVariables.downloadUrlNightly;
+                downloadUrl = AtlasVariables.downloadUrlNightlyMSI;
             }
             else
 
-            if (String.Equals("rc", branch, StringComparison.OrdinalIgnoreCase))
+            if (String.Equals("rcMSI", branch, StringComparison.OrdinalIgnoreCase))
             {
                 installerPath = AtlasVariables.installerPathRC;
                 fileName = AtlasVariables.fileNameRC;
-                downloadUrl = AtlasVariables.downloadUrlRC;
+                downloadUrl = AtlasVariables.downloadUrlRCMSI;
             }
+            else
+             if (String.Equals("releaseMSI", branch, StringComparison.OrdinalIgnoreCase))
+            {
+                installerPath = AtlasVariables.installerPathRC;
+                fileName = AtlasVariables.fileNameRC;
+                downloadUrl = AtlasVariables.downloadURLReleaseMSI;
+
+            }
+             
+
         }
 
         [Test,Order(1)]
@@ -61,12 +71,27 @@ namespace Test_Automation_Core.test.main.util
         public void UninstallATLAS()
         {
 
-            WindowsDriver<WindowsElement> _driver = systemActions.ClassInitialize("Root");
+           // WindowsDriver<WindowsElement> _driver = systemActions.ClassInitialize("Root");
 
-            systemActions = new SystemActions(_driver);
-            systemActions.UninstallAtlas();
-            
-            SystemActions.KillProcessByName("WinAppDriver");
+            // systemActions = new SystemActions(_driver);
+            //systemActions.UninstallAtlas();
+
+            string installDir = AtlasVariables.installationPath;
+
+            ProcessStartInfo processStartInfo = new ProcessStartInfo();
+            processStartInfo.FileName = "msiexec";
+            processStartInfo.Arguments = $"/qb /x \"{installerPath}\" INSTALLDIR=\"{installDir}\"";
+            processStartInfo.UseShellExecute = false;
+
+            try
+            {
+                Process process = Process.Start(processStartInfo);
+                process.WaitForExit(); // Wait for the installation process to complete
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+            }
 
         }
 

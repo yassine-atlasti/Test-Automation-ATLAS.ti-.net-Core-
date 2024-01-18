@@ -4,7 +4,7 @@ using Test_Automation_Core.test.resources.test;
 
 namespace Test_Automation_Core.test.main.tests.smoketests.migrationtests.libraries;
 
-public class OpenEmptyLibA22:BaseTest
+public class OpenEmptyLibA22:BaseTestCase
 {
     
 

@@ -8,7 +8,7 @@ using Test_Automation_Core.test.resources.test_data.onedrive.projects;
 
 namespace Test_Automation_Core.test.main.tests.releasetests.migrationtests.projects.imports
 {
-    public class ImportReleaseProjects:BaseTest
+    public class ImportReleaseProjects:BaseTestCase
     {
        
 

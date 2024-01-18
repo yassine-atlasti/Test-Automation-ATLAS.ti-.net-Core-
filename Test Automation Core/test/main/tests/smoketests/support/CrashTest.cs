@@ -4,7 +4,7 @@ using Test_Automation_Core.test.resources.test;
 namespace Test_Automation_Core.test.main.tests.smoketests.support
 
 {
-    public class CrashTest:BaseTest
+    public class CrashTest:BaseTestCase
     {
         [Test, Order(1),Category("support")]
         public void TestCrash()

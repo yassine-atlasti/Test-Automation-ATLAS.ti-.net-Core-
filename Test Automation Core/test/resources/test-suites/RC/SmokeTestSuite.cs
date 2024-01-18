@@ -1,59 +1,21 @@
 ﻿using Test_Automation_Core.test.main.util;
 using Test_Automation_Core.test.resources.test;
 using Test_Automation_Core.test.resources.test_data.releasetestdata;
+using Test_Automation_Core.test.resources.test_suites;
 using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.test.main.tests.smoketests
 {
-    public class SmokeTestSuite 
+    public class SmokeTestSuite:BaseTestSuite
     {
-        string testAssemblyPath = "TestAutomationFramework.dll";
-        string targetNameSpace = "Test_Automation_Core.test.main.tests.smoketests";
-        string targetNameSpaceUtil = "Test_Automation_Core.test.main.util";
 
-
-
-       // [OneTimeSetUp]
-        public void downloadRC()
-        {
-            bool success =true;
-            if (AtlasVariables.winRC != AtlasVariables.InstalledVersion)
-            {
-                UpdateAtlasti.branch = "rc";
-                success= TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLAS");
-
-            }
-
-            Assert.IsTrue(success);
-
-
-        }
-      [SetUp]
+        [SetUp]
         public void setUp()
         {
-            BaseTest._testSuiteFolder = SmokeTestVariables.smokeTestFolderPath;
+            testType = "SmokeTest";
         }
 
         [Test, Order(1)]
-        public  void initTestData()
-        {
-          BaseTest.initSmokeTest();
-
-        }
-
-
-
-
-          [Test, Order(2)]
-        public void OpenEmptyLibTest()
-        {
-          bool success=  TestRunner.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.migrationtests.libraries", "OpenEmptyLibA22");
-
-            Assert.IsTrue(success);
-        }
-
-       
-        [Test, Order(3)]
         public void OpenYanikLibTest()
         {
            bool success = TestRunner.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.migrationtests.libraries", "OpenYanikLib");
@@ -61,7 +23,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
 
         }
 
-        [Test, Order(4)]
+        [Test, Order(2)]
         public void BackUpTests()
 
         {
@@ -71,7 +33,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
 
         }
 
-        [Test, Order(5)]
+        [Test, Order(3)]
         public void OpenCHLibTest()
         {
            bool success= TestRunner.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.migrationtests.libraries", "OpenLibCH");
@@ -83,7 +45,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
 
         }
 
-        [Test, Order(6)]
+        [Test, Order(4)]
 
         public void SupportTests()
         {
@@ -102,7 +64,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
 
         }
 
-        [Test, Order(7)]
+        [Test, Order(5)]
         public void OtherCHImportTests()
         {
            bool success= TestRunner.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.migrationtests.chprojects.otherversions", "otherversions");

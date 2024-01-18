@@ -2,9 +2,9 @@
 
 namespace Test_Automation_Core.test.main.tests.smoketests.support
 {
-    public class LiveChat : BaseTest
+    public class LiveChat : BaseTestCase
     {
-        BaseTest smokeTestClass = new BaseTest();
+        BaseTestCase smokeTestClass = new BaseTestCase();
 
         [Test, Category("support")]
         public void testLiveChat()

@@ -20,7 +20,7 @@ namespace Test_Automation_Core.test.resources.test_suites
         [SetUp]
         public void setUp()
         {
-            BaseTest._testSuiteFolder = SystemActions.GetDesktopPath() + "\\" + "BatchProjectImport" + AtlasVariables.InstalledVersion;
+            BaseTestCase._testSuiteFolder = SystemActions.GetDesktopPath() + "\\" + "BatchProjectImport" + AtlasVariables.InstalledVersion;
         }
 
 
