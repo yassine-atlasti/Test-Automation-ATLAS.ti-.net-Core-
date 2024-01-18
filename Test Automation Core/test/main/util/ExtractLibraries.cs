@@ -17,12 +17,12 @@ namespace Test_Automation_Core.test.main.util
 
             //Create Smoke Test Folder
 
-            systemActions.CreateFolder(ReleaseTestVariables.releaseTestFolderPath);
-            systemActions.CreateFolder(ReleaseTestVariables.releaseTestFolderPath + "\\"+ ReleaseTestVariables.library1);
+            SystemActions.CreateFolder(ReleaseTestVariables.releaseTestFolderPath);
+            SystemActions.CreateFolder(ReleaseTestVariables.releaseTestFolderPath + "\\"+ ReleaseTestVariables.library1);
 
-            systemActions.CreateFolder(ReleaseTestVariables.releaseTestFolderPath + "\\Screenshots");
-            systemActions.CreateFolder(ReleaseTestVariables.releaseTestFolderPath + "\\Screenshots\\Failed");
-            systemActions.CreateFolder(ReleaseTestVariables.releaseTestFolderPath + "\\Screenshots\\Succeeded");
+            SystemActions.CreateFolder(ReleaseTestVariables.releaseTestFolderPath + "\\Screenshots");
+            SystemActions.CreateFolder(ReleaseTestVariables.releaseTestFolderPath + "\\Screenshots\\Failed");
+            SystemActions.CreateFolder(ReleaseTestVariables.releaseTestFolderPath + "\\Screenshots\\Succeeded");
 
 
 
@@ -43,7 +43,7 @@ namespace Test_Automation_Core.test.main.util
 
             //Create Smoke Test Folder
 
-            systemActions.CreateFolder(SmokeTestVariables.smokeTestFolderPath);
+            SystemActions.CreateFolder(SmokeTestVariables.smokeTestFolderPath);
             
 
 

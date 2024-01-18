@@ -9,6 +9,7 @@ using Test_Automation_Core.src;
 using Test_Automation_Core.src.pages.atlasti.actions;
 using Test_Automation_Core.src.pages.atlasti.ui.windows;
 using Test_Automation_Core.src.pages.backup;
+using Test_Automation_Core.src.pages.updater;
 using Test_Automation_Core.test.main.util;
 using Test_Automation_Core.test.resources.test;
 using Test_Automation_Core.test.resources.test_data.winappdriver;
@@ -100,10 +101,15 @@ namespace Test_Automation_Core.test.main.tests
 
             while (retryCount < maxRetries && !isSuccessful)
             {
+              
+
+
+
                 try  
                 {
+                    
 
-                     welcomeWindow.MaximizeATLASti();
+                    welcomeWindow.MaximizeATLASti();
                      
 
                     _driver.FindElementByName("Options Dialog Link");
@@ -119,6 +125,7 @@ namespace Test_Automation_Core.test.main.tests
                     Thread.Sleep(1500);  // Wait for 1 second before retrying. Adjust the delay as needed.
                 }
             }
+           
 
             if (!isSuccessful)
             {
@@ -137,7 +144,7 @@ namespace Test_Automation_Core.test.main.tests
 
         }
 
-        public void SetupUpdater()
+        public void SetUpSatelliteUpdater()
         {
             _driver = systemActions.ClassInitialize(AtlasVariables.updaterPath);
             systemActions = new SystemActions(_driver);
@@ -165,7 +172,7 @@ namespace Test_Automation_Core.test.main.tests
 
 
         //This saves screenshots in the test suite folder
-        public void saveScreenshot()
+        public  void saveScreenshot()
         {
                 WindowsDriver<WindowsElement> _rootdriver = systemActions.ClassInitialize("Root");
 
@@ -189,7 +196,7 @@ namespace Test_Automation_Core.test.main.tests
         }
 
        [TearDown]
-        public void cleanUp() {
+        public  void cleanUp() {
 
            
 

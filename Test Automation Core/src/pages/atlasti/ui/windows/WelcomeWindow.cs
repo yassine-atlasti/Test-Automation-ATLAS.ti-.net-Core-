@@ -265,6 +265,11 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.windows
 
                 if (driver.Title == "ATLAS.ti")
                 {
+                    Thread.Sleep(2000);
+                    try { driver.FindElementByName("release notes").SendKeys(Keys.Escape); }
+                    catch(Exception e) { }
+
+
                     driver.Manage().Window.Maximize();
                 }
                 Task.Delay(2000);

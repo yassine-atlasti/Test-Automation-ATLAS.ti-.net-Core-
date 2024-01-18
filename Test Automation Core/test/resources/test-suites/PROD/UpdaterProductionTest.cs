@@ -36,7 +36,7 @@ namespace Test_Automation_Core.test.resources.test_suites
 
             //run manually .reg script too change updateUrl in Registry edtior  (See TestingStuff => Smoke Test Data/Win)
 
-            bool success = TestRunner.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.smoketests.support.Production", "ProdUpdaterMSI");
+            bool success = TestRunner.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.smoketests.support.Production", "ProductionUpdater");
 
 
     }
@@ -59,7 +59,7 @@ namespace Test_Automation_Core.test.resources.test_suites
 
             //run manually .reg script too change updateUrl in Registry edtior  (See TestingStuff => Smoke Test Data/Win)
 
-            bool success = TestRunner.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.smoketests.support.Production", "ProdUpdaterEXE");
+            bool success = TestRunner.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.smoketests.support.Production", "ProductionUpdater");
 
 
         }

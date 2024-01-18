@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using Test_Automation_Core.src.pages.atlasti.ui.dialogs;
 using Test_Automation_Core.src.pages.atlasti.ui.wizards;
@@ -85,7 +86,7 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.windows
             return new FeedBackDialog(driver);
         }
 
-        public bool OpenCheckForUpdatesDialog()
+        public bool OpenCheckForUpdatesDialogRC()
         {
             bool updateDialog = false;
             ClickCheckForUpdatesButton();
@@ -95,6 +96,26 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.windows
             updateDialog= systemActions.WaitForElementToBeDisplayedByName(driver, "OK", 5);
              
             return updateDialog;
+
+
+        }
+
+        public bool OpenCheckForUpdatesDialogProd()
+        {
+            bool updateDialog = false;
+            ClickCheckForUpdatesButton();
+            // Wait for a unique element in the Check for Updates Dialog to appear.
+            // Replace "UniqueElementInCheckForUpdatesDialog" with an actual unique element name or locator.
+            SystemActions systemActions = new SystemActions();
+            updateDialog = systemActions.WaitForElementToBeDisplayedByName(driver, "release notes", 5);
+            if(updateDialog) {
+
+                 driver.FindElementByName("SSD.ATLASti.UI.Controls.TaskDialogViewModel").SendKeys(Keys.Tab);
+                 driver.FindElementByName("SSD.ATLASti.UI.Controls.TaskDialogViewModel").SendKeys(Keys.Space);
+
+            }
+            return updateDialog;
+
 
 
         }

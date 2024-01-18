@@ -268,7 +268,7 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
         }
 
-        public bool CheckForUpdates()
+        public bool CheckForUpdatesRC()
         {
             var welcomeWindow = _app.GetWelcomeControl();
             var optionsWindow = _app.GetOptionsWindow();
@@ -283,11 +283,30 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
             optionsWindow.ClickATLASti();
             Thread.Sleep(500);
 
-           bool dialog = optionsWindow.OpenCheckForUpdatesDialog();
+           bool dialog = optionsWindow.OpenCheckForUpdatesDialogProd();
 
             return dialog;
         }
-            public bool OpenProject(string projectName)
+        public bool CheckForUpdatesProd()
+        {
+            var welcomeWindow = _app.GetWelcomeControl();
+            var optionsWindow = _app.GetOptionsWindow();
+            var switchLibraryWizard = _app.GetSwitchLibraryWizard();
+
+
+
+            // Open the options window and click the 'Switch Library' button
+            welcomeWindow.ClickOptionsButton();
+            Thread.Sleep(500);
+
+            optionsWindow.ClickATLASti();
+            Thread.Sleep(500);
+
+            bool dialog = optionsWindow.OpenCheckForUpdatesDialogProd();
+            
+            return dialog;
+        }
+        public bool OpenProject(string projectName)
         {
             var welcomeWindow = _app.GetWelcomeControl();
             var projectWindow = _app.GetProjectWindow();

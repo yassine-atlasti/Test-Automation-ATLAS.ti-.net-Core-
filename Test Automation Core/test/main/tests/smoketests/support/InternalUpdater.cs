@@ -7,7 +7,7 @@
         [Test, Category("support")]
         public void TestBuiltInUpdater()
         {
-            bool result = GetAppActions().CheckForUpdates();
+            bool result = GetAppActions().CheckForUpdatesRC();
             Assert.IsTrue(result);
         }
     }
