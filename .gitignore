@@ -368,3 +368,5 @@ FodyWeavers.xsd
 /.DS_Store
 /Test Automation Core/.DS_Store
 /Test Automation Core/.idea/.gitignore
+/Test Automation Core/test/resources/test-data/local-config
+
