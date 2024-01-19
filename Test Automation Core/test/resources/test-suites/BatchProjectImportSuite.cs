@@ -9,7 +9,7 @@ using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.test.resources.test_suites
 {
-    public class BatchProjectImportSuite
+    public class BatchProjectImportSuite:BaseTestSuite
     {
 
         string testAssemblyPath = "TestAutomationFramework.dll";
@@ -20,7 +20,8 @@ namespace Test_Automation_Core.test.resources.test_suites
         [SetUp]
         public void setUp()
         {
-            BaseTestCase._testSuiteFolder = SystemActions.GetDesktopPath() + "\\" + "BatchProjectImport" + AtlasVariables.InstalledVersion;
+            testType = "BatchProjectImport";
+             
         }
 
 

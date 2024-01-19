@@ -10,7 +10,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests.backuptests;
     public class BackupTest2
     {
 
-        BaseTestCase SmokeTestClass = new BaseTestCase();
+        BaseTestCase baseTestClass = new BaseTestCase();
         [Category("backuptests")]
 
         [Test]
@@ -18,10 +18,10 @@ namespace Test_Automation_Core.test.main.tests.smoketests.backuptests;
         public void CreateBackUp()
         {
 
-            SmokeTestClass.SetupBackupApp();
+            baseTestClass.SetupBackupApp();
             string backUp = AtlasVariables.InstalledVersion + "_BackUp";
 
-            if (SmokeTestClass.GetBackUpActions().CheckWarning())
+            if (baseTestClass.GetBackUpActions().CheckWarning())
             {
                 Thread.Sleep(2000);
 
@@ -29,7 +29,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests.backuptests;
             Thread.Sleep(2000);
 
 
-            bool backUpState = SmokeTestClass.GetBackUpActions().CreateBackUp(SmokeTestVariables.smokeTestFolderPath, backUp);
+            bool backUpState = baseTestClass.GetBackUpActions().CreateBackUp(SmokeTestVariables.smokeTestFolderPath, backUp);
             Assert.IsTrue(backUpState);
 
 
@@ -42,7 +42,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests.backuptests;
     [TearDown]
     public void cleanUp()
     {
-        SmokeTestClass.cleanUp();
+        baseTestClass.cleanUp();
 
     }
 

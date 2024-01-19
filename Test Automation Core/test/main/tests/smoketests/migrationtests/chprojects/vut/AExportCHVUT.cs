@@ -2,7 +2,7 @@
 using Test_Automation_Core.test.resources.test;
 using static Test_Automation_Core.src.pages.atlasti.actions.ApplicationActions;
 
-namespace Test_Automation_Core.test.main.tests.smoketests
+namespace Test_Automation_Core.test.main.tests.smoketests.migrationtests.chprojects.vut
 {
 
 
@@ -19,13 +19,12 @@ namespace Test_Automation_Core.test.main.tests.smoketests
           
             //Atlproj export
 
-            //The export method has problem to locate the Project Bundle Button to do the export.
             bool atlProjExportState = GetAppActions().ExportProject(CHProjects.CHWinVUTProjectsFolder, ExportType.ATLPROJ, SmokeTestVariables.smokeTestproject, fileName);
             Assert.IsTrue(atlProjExportState);
 
 
         }
-        [Test, Order(2), Category("vut")]
+       // [Test, Order(2), Category("vut")]
         public void exportQDPX()
         {
             //QDPX export

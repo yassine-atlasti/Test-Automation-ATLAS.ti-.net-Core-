@@ -2,55 +2,18 @@
 using System.Xml;
 using Test_Automation_Core.test.main.tests;
 using Test_Automation_Core.test.main.util;
+using Test_Automation_Core.test.resources.test_suites;
 
 public class TestRunner
 {
 
-    public static string passedTestsPath;
-
-    public static string failedTestsPath;
+    public static string testCategory;
 
 
-    //Create Test Results Folder for the running test category
-    public static void InitializeTestRun(string testCategory)
-    {
-
-
-
-        // Construct a unique folder path for the test run
-        string uniqueTestRunFolder = Path.Combine(BaseTestCase._testSuiteFolder + "\\TestResults", $"TestRun_{testCategory}");
-
-        if(Directory.Exists(uniqueTestRunFolder))
-        {
-            Directory.Delete(uniqueTestRunFolder, recursive:true );
-        }
-        // Create the main directory for the test run
-        Directory.CreateDirectory(uniqueTestRunFolder);
-
-        // Create subdirectories for passed and failed tests
-        passedTestsPath = Path.Combine(uniqueTestRunFolder, "Passed");
-
-        failedTestsPath = Path.Combine(uniqueTestRunFolder, "Failed");
-
-        Directory.CreateDirectory(passedTestsPath);
-        Directory.CreateDirectory(failedTestsPath);
-
-
-        // Optional: Create an additional directory for logs or other artifacts
-        string logsPath = Path.Combine(uniqueTestRunFolder, "Logs");
-        Directory.CreateDirectory(logsPath);
-
-
-
-
-
-
-    }
 
     public static bool RunTestByCategory(string testAssemblyPath, string targetNamespace, string folderName)
     {
-        InitializeTestRun(folderName);
-        BaseTestCase.TestRunnerEnabled = true;
+        TestRunner.testCategory = folderName;
         // Initialize the test engine
         var testEngine = TestEngineActivator.CreateInstance();
 

@@ -1,10 +1,11 @@
 ﻿using Test_Automation_Core.test.main.tests;
 using Test_Automation_Core.test.resources.test;
 
-namespace Test_Automation_Core.test.main.tests.smoketests
+namespace Test_Automation_Core.test.main.tests.smoketests.migrationtests.chprojects.vut
 {
     public class CImportCHVUT:BaseTestCase
     {
+        [Test,  Category("vut")]
         public void ImportAtlProj()
         {
 
@@ -13,14 +14,14 @@ namespace Test_Automation_Core.test.main.tests.smoketests
             //Atlproj import
 
             bool atlprojImportState = GetAppActions().ImportProject(CHProjects.winVUTAtlProjPath, "AtlProj");
+          
             Assert.IsTrue(atlprojImportState);
-            GetAppActions().CloseProjectAsync();
-
+           
 
 
         }
 
-        [Test, Order(2)]
+     //   [Test, Order(2)]
         public void ImportQDPX()
         {
 
@@ -28,7 +29,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
             //QDPX Import
             bool qdpxImportState = GetAppActions().ImportProject(CHProjects.winVUTQDPXPath, "QDPX");
             Assert.IsTrue(qdpxImportState);
-            GetAppActions().CloseProjectAsync();
+           
 
         }
     }

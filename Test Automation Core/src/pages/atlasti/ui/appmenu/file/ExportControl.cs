@@ -65,17 +65,11 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.appmenu.file
         }
         // Devs need to automation IDs to the buttons needed for Project Export (Atlproj and QDPX
 
-        public FilePicker ClickProjectBundleButton(string tabType)
+        public FilePicker HitEnter(string tabType)
         {
 
 
-            // Locate the TabItem by name
-            var button = _driver.FindElementByAccessibilityId("TransferBundleTab").FindElementByName("Project Bundle");
-
-            // Find the button within the TabItem
-
-            // Click the button
-            button.Click();
+            _driver.FindElementByName("Export").SendKeys(Keys.Enter);
             return new FilePicker(_driver);
         }
 

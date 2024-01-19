@@ -13,6 +13,7 @@ using Test_Automation_Core.src.pages.updater;
 using Test_Automation_Core.test.main.util;
 using Test_Automation_Core.test.resources.test;
 using Test_Automation_Core.test.resources.test_data.winappdriver;
+using Test_Automation_Core.test.resources.test_suites;
 using Test_Automation_Core.test.utilities.util;
 using TextCopy;
 
@@ -24,7 +25,7 @@ namespace Test_Automation_Core.test.main.tests
         SystemActions systemActions = new SystemActions();
         
         
-        public static string _testSuiteFolder;
+        public static string _testSuiteFolder="";
 
         // Getter method for testSuiteFolder
         public static string TestSuiteFolder
@@ -85,9 +86,14 @@ namespace Test_Automation_Core.test.main.tests
 
         
         [SetUp]
-        public void SetupATLAS()
+        public  void SetupATLAS()
         {
-            initSmokeTest();
+            if (TestRunnerEnabled==false) { initSmokeTest(); }
+            RunAtlas();
+        }
+
+        public bool RunAtlas()
+        {
             _driver = systemActions.ClassInitialize(AtlasVariables.appPath);
             Thread.Sleep(3000);
             systemActions = new SystemActions(_driver);
@@ -101,16 +107,16 @@ namespace Test_Automation_Core.test.main.tests
 
             while (retryCount < maxRetries && !isSuccessful)
             {
-              
 
 
 
-                try  
+
+                try
                 {
-                    
+
 
                     welcomeWindow.MaximizeATLASti();
-                     
+
 
                     _driver.FindElementByName("Options Dialog Link");
 
@@ -125,15 +131,18 @@ namespace Test_Automation_Core.test.main.tests
                     Thread.Sleep(1500);  // Wait for 1 second before retrying. Adjust the delay as needed.
                 }
             }
-           
+
 
             if (!isSuccessful)
             {
                 // Log or throw an exception indicating that all retries have failed.
                 Console.WriteLine("All attempts to interact with the window failed.");
             }
+            return isSuccessful;
         }
 
+
+       
         public void SetupBackupApp()
         {
             _driver = systemActions.ClassInitialize(AtlasVariables.backUpPath);
@@ -171,41 +180,19 @@ namespace Test_Automation_Core.test.main.tests
 
 
 
-        //This saves screenshots in the test suite folder
-        public  void saveScreenshot()
-        {
-                WindowsDriver<WindowsElement> _rootdriver = systemActions.ClassInitialize("Root");
-
-
-            var screenShotFileName = DateTime.Now.ToString("HH-mm-ss") +"-"+ TestContext.CurrentContext.Test.Name+".png";
-
-            if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
-            {
-                // The test failed
-                SystemActions.TakeScreenshot(_rootdriver, TestRunner.failedTestsPath, screenShotFileName);
-
-            }
-            else if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed)
-            {
-                // The test passed
-                SystemActions.TakeScreenshot(_rootdriver,TestRunner.passedTestsPath, screenShotFileName);
-            }
-
-            _rootdriver.Close();
-
-        }
+        
 
        [TearDown]
         public  void cleanUp() {
 
-           
 
-            if (TestRunnerEnabled==true)
-            {
-                //We actually only save screenshots when the tests are triggered via the TestRunner, as in the SmokeTestSuite and ReleaseTestSuite
-                saveScreenshot();
+
+            BaseTestSuite.InitTestResults(TestRunner.testCategory);
+          
+        
+            BaseTestSuite.saveScreenshot();
                 Thread.Sleep(1000);
-            }
+           
            // _driver.Close();
             SystemActions.KillProcessByName("Atlasti" + AtlasVariables.actualMajor);
             SystemActions.KillProcessByName("SSD.ATLASti.Backup");

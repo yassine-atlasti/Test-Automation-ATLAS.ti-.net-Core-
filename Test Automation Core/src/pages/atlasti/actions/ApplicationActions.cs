@@ -138,7 +138,7 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
             fileName = string.IsNullOrEmpty(fileName) ? projectName : fileName;
             filePickerDialog.EnterFileName(Path.Combine(filePath, fileName));
             filePickerDialog.ClickSaveButton();
-
+            filePickerDialog.ClickYesIfVisible();
             Thread.Sleep(mediumDelay); // Consider replacing with a more robust synchronization
 
             return DetermineExportState(exportType);
@@ -151,10 +151,10 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
                 case ExportType.QDPX:
                     exportControl.ClickQDPXProjectBundleTabItem();
                     //Or ExportBackstageTab
-                    return exportControl.ClickProjectBundleButton("ExportBackstageTab");
+                    return exportControl.HitEnter("ExportBackstageTab");
                 case ExportType.ATLPROJ:
-                     exportControl.UnselectCheckBox(); // If needed
-                    return exportControl.ClickProjectBundleButton("TheExportControl");
+                     //exportControl.UnselectCheckBox(); // If needed
+                    return exportControl.HitEnter("TheExportControl");
                 default:
                     throw new ArgumentException($"Invalid export type: {exportType}");
             }
@@ -283,7 +283,7 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
             optionsWindow.ClickATLASti();
             Thread.Sleep(500);
 
-           bool dialog = optionsWindow.OpenCheckForUpdatesDialogProd();
+           bool dialog = optionsWindow.OpenCheckForUpdatesDialogRC();
 
             return dialog;
         }

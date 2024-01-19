@@ -53,7 +53,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
             Assert.IsTrue(success);
         }
 
-       // [Test, Order(5)]
+       [Test, Order(5)]
        //Devs need to add Automation IDs to the Export Project Buttons in the ExportControls
         public void CHVUTTests()
         {

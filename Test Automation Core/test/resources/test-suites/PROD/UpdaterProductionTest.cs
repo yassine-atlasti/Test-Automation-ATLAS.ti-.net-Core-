@@ -10,7 +10,7 @@ using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.test.resources.test_suites
 {
-    public class UpdaterProductionTest
+    public class UpdaterProductionTest:BaseTestSuite
     {
         string testAssemblyPath = "TestAutomationFramework.dll";
         string targetNameSpaceUtil = "Test_Automation_Core.test.main.util";
@@ -18,9 +18,7 @@ namespace Test_Automation_Core.test.resources.test_suites
         [SetUp]
         public void setUp()
         {
-                BaseTestCase._testSuiteFolder = SmokeTestVariables.smokeTestFolderPath;
-            SystemActions.CreateFolder(SmokeTestVariables.smokeTestFolderPath);
-
+            testType = "ProdTest";
 
         }
 
