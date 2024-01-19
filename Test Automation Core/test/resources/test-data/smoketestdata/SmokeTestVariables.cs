@@ -31,7 +31,7 @@ namespace Test_Automation_Core.test.resources.test
 
         public static readonly string smokeTestproject = "C&H II + hierarchy";
 
-        public static readonly string enableDebugMode = OneDriveConfig.testingStuffPath + "\\Test Data\\Smoke Tests data\\Win\\A" +AtlasVariables.actualMajor + "- Debug - Enable.reg\\";
+        public static readonly string enableDebugMode = OneDriveConfig.testingStuffPath + "\\Test Data\\Smoke Tests data\\Win\\A" + AtlasVariables.actualMajor + "- Debug - Enable.reg\\";
 
 
     }
