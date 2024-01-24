@@ -4,6 +4,7 @@
 Welcome to the ATLAS.ti Test Automation Framework, designed to automate smoke testing using WinAppDriver. 
 This document will guide you through the installation, configuration, and usage of the framework.
 
+
 ## Getting Started
 
 ### System Requirements
@@ -25,17 +26,14 @@ This document will guide you through the installation, configuration, and usage 
    ```bash
    git clone https://github.com/yassine-atlasti/Test-Automation-ATLAS.ti-.net-Core-.git
    ```
-7. **Start WinAppDriver:** Launch WinAppDriver from its installation directory, 
-usually at `C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe`. 
-Go to WinAppDriverConfig.cs and adjust the path if needed
 
-8. Install NuGet Packages. Read steps at "documentation\NugetPackages.txt"
+7. Install NuGet Packages. Read steps at "documentation\NugetPackages.txt"
 
-9. Configure Local Variables and environnement. Read "documentation\Local.txt"
+8. Configure Local Variables and environnement. Read "documentation\LocalConfigs.txt"
 
-10. Configure ATLAS.ti related Variables. Read "documentation\Variables.txt"
+9. Configure ATLAS.ti related Variables. Read "documentation\GlobalVariables.txt"
 
-11. Try to run the Smoke Test Suite:
+10. Try to run the Smoke Test Suite:
 -right-click "test\resources\test-suites\SmokeTestSuite.cs"=> Click on Run Tests
 
 
