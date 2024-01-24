@@ -5,6 +5,7 @@ using Test_Automation_Core.src.pages.windowsos;
 using Test_Automation_Core.test.main.tests;
 using Test_Automation_Core.test.resources.test;
 using Test_Automation_Core.test.utilities.util;
+using static Test_Automation_Core.test.resources.test.AtlasVariables;
 
 namespace Test_Automation_Core.src.pages.atlasti.actions
 {
@@ -109,13 +110,9 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
 
 
-        public enum ExportType
-        {
-            QDPX,
-            ATLPROJ
-        }
+        
 
-        public bool ExportProject(string filePath, ExportType exportType, string projectName, string fileName = "")
+        public bool ExportProject(string filePath, ExportTypes exportType, string projectName, string fileName = "")
         {
             const int shortDelay = 1500;
             const int mediumDelay = 2000;
@@ -144,15 +141,16 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
             return DetermineExportState(exportType);
         }
 
-        private FilePicker HandleExportType(ExportControl exportControl, ExportType exportType)
+        private FilePicker HandleExportType(ExportControl exportControl, ExportTypes exportType)
         {
             switch (exportType)
             {
-                case ExportType.QDPX:
+                case ExportTypes.QDPX:
                     exportControl.ClickQDPXProjectBundleTabItem();
                     //Or ExportBackstageTab
                     return exportControl.HitEnter("ExportBackstageTab");
-                case ExportType.ATLPROJ:
+                case ExportTypes.atlasti:
+                case ExportTypes.atlproj :
                      //exportControl.UnselectCheckBox(); // If needed
                     return exportControl.HitEnter("TheExportControl");
                 default:
@@ -160,23 +158,23 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
             }
         }
 
-        private bool DetermineExportState(ExportType exportType)
+        private bool DetermineExportState(ExportTypes exportType)
         {
             SystemActions systemActions = new SystemActions();
 
-            if (exportType == ExportType.QDPX)
+            if (exportType == ExportTypes.QDPX)
             {
                 var exportResultsDialog = _app.GetExportResultsDialog();
                 bool exportState = systemActions.WaitForElementToBeDisplayedByName(_app.getDriver(), "Cancel", 30);
                 exportResultsDialog.CancelQDPXResultsExport();
                 return exportState;
             }
-            else if (exportType == ExportType.ATLPROJ)
+            else 
             {
                 return systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "TabItem", "Home", 30);
             }
 
-            return false;
+          //  return false;
         }
 
 

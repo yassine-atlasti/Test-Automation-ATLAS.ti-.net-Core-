@@ -194,7 +194,7 @@ namespace Test_Automation_Core.test.main.tests
                 Thread.Sleep(1000);
            
            // _driver.Close();
-            SystemActions.KillProcessByName("Atlasti" + AtlasVariables.actualMajor);
+            SystemActions.KillProcessByName("Atlasti" + AtlasVariables.vutMajor);
             SystemActions.KillProcessByName("SSD.ATLASti.Backup");
             SystemActions.KillProcessByName("WinAppDriver");
             SystemActions.KillProcessByName("SSD.ATLASti.Updater");

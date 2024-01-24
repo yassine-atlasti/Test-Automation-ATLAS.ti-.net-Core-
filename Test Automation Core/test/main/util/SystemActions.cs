@@ -330,7 +330,7 @@ namespace Test_Automation_Core.test.utilities.util
         {
             try
             {
-                using (RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Scientific Software\ATLAS.ti."+ AtlasVariables.actualMajor))
+                using (RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Scientific Software\ATLAS.ti."+ AtlasVariables.rcMajor))
                 {
                     if (key != null)
                     {
@@ -727,7 +727,7 @@ public static string GetCurrentInstalledVersion()
 
         public static void CloseInstallerWindow()
         {
-            string targetTitle = "Setup - ATLAS.ti " + AtlasVariables.actualMajor;
+            string targetTitle = "Setup - ATLAS.ti " + AtlasVariables.rcMajor;
 
             EnumWindows((hWnd, lParam) =>
             {

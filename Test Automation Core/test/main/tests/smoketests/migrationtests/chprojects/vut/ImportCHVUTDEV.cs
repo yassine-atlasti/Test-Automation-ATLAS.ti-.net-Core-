@@ -20,7 +20,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests.migrationtests.chproje
 
             //Atlproj import
 
-            bool atlprojImportState = test.GetAppActions().ImportProject(CHProjects.winVUTAtlProjPath, "AtlProj");
+            bool atlprojImportState = test.GetAppActions().ImportProject(CHProjects.winVUTAtlProjPath, AtlasVariables.rcExportType);
             Assert.IsTrue(atlprojImportState);
            
 

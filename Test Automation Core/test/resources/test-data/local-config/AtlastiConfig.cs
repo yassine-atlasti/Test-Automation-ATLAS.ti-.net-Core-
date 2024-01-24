@@ -9,7 +9,9 @@ namespace Test_Automation_Core.test.resources.test_data.local_config
 {
     public class AtlastiConfig
     {
-        public static string installationPath = @"C:\Program Files\Scientific Software\ATLASti." + AtlasVariables.actualMajor;
+        public static string installationPath = @"C:\Program Files\Scientific Software\ATLASti." + AtlasVariables.rcMajor;
+
+
 
     }
 }

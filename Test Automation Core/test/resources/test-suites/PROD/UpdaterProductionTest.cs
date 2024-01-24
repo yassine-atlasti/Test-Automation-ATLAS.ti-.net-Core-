@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Test_Automation_Core.test.main.tests;
 using Test_Automation_Core.test.main.util;
 using Test_Automation_Core.test.resources.test;
+using Test_Automation_Core.test.resources.test_data.local_config;
 using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.test.resources.test_suites
@@ -19,7 +20,7 @@ namespace Test_Automation_Core.test.resources.test_suites
         public void setUp()
         {
             testType = "ProdTest";
-
+            AtlastiConfig.installationPath= @"C:\Program Files\Scientific Software\ATLASti." + AtlasVariables.prodMajor;
         }
 
         [Test, Order(1)]

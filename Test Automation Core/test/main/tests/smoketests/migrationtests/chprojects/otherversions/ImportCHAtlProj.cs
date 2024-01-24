@@ -8,10 +8,10 @@ public class ImportCHAtlProj:BaseTestCase
 
     public static IEnumerable<TestCaseData> AtlProjTestData()
     {
-        yield return new TestCaseData(CHProjects.MacPreviousAtlProjPath, "AtlProj").SetName("MacPrevMajorAtlProj");
-        yield return new TestCaseData(CHProjects.MacProductionAtlProjPath, "AtlProj").SetName("MacProductionAtlProj");
-        yield return new TestCaseData(CHProjects.WinPreviousAtlProjPath, "AtlProj").SetName("WinPrevMajorAtlProj");
-        yield return new TestCaseData(CHProjects.WinProductionAtlProjPath, "AtlProj").SetName("WinProductionAtlProj");
+        yield return new TestCaseData(CHProjects.MacPreviousAtlProjPath, AtlasVariables.previousExportType).SetName("MacPrevMajor"+ AtlasVariables.previousExportType);
+        yield return new TestCaseData(CHProjects.MacProductionAtlProjPath, AtlasVariables.prodExportType).SetName("MacProduction"+ AtlasVariables.prodExportType);
+        yield return new TestCaseData(CHProjects.WinPreviousAtlProjPath, AtlasVariables.previousExportType).SetName("WinPrevMajor"+ AtlasVariables.previousExportType);
+        yield return new TestCaseData(CHProjects.WinProductionAtlProjPath, AtlasVariables.prodExportType).SetName("WinProduction"+ AtlasVariables.prodExportType);
 
         // You can add more cases or read them from an external source
     }
@@ -25,7 +25,7 @@ public class ImportCHAtlProj:BaseTestCase
 
         //Atlproj import
 
-        bool atlprojImportState = GetAppActions().ImportProject(filePath, "AtlProj");
+        bool atlprojImportState = GetAppActions().ImportProject(filePath, AtlasVariables.prodExportType);
         
         Assert.IsTrue(atlprojImportState);
 

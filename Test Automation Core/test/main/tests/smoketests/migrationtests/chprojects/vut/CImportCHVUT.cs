@@ -1,5 +1,6 @@
 ﻿using Test_Automation_Core.test.main.tests;
 using Test_Automation_Core.test.resources.test;
+using static Test_Automation_Core.test.resources.test.AtlasVariables;
 
 namespace Test_Automation_Core.test.main.tests.smoketests.migrationtests.chprojects.vut
 {
@@ -13,7 +14,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests.migrationtests.chproje
 
             //Atlproj import
 
-            bool atlprojImportState = GetAppActions().ImportProject(CHProjects.winVUTAtlProjPath, "AtlProj");
+            bool atlprojImportState = GetAppActions().ImportProject(CHProjects.winVUTAtlProjPath, AtlasVariables.rcExportType);
           
             Assert.IsTrue(atlprojImportState);
            
