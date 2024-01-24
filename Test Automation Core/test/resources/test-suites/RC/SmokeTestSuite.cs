@@ -8,11 +8,26 @@ namespace Test_Automation_Core.test.main.tests.smoketests
 {
     public class SmokeTestSuite:BaseTestSuite
     {
-
+       
         [SetUp]
         public void setUp()
         {
             testType = "SmokeTest";
+        }
+        [Test]
+        public static void downloadRCMSI()
+        {
+            bool success = true;
+            if (AtlasVariables.winRC != AtlasVariables.InstalledVersion)
+            {
+                UpdateAtlasMSI.branch = "rcMSI";
+                success = TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLASMSI");
+
+            }
+
+            Assert.IsTrue(success);
+
+
         }
 
         [Test, Order(1)]

@@ -24,21 +24,7 @@ namespace Test_Automation_Core.test.resources.test_suites
 
         public static string failedTestsPath="";
      
-        // [OneTimeSetUp]
-        public static void downloadRCMSI()
-        {
-            bool success = true;
-            if (AtlasVariables.winRC != AtlasVariables.InstalledVersion)
-            {
-                UpdateAtlasMSI.branch = "rcMSI";
-                success = TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLASMSI");
-
-            }
-
-            Assert.IsTrue(success);
-
-
-        }
+        
         
         public static void SetUpTestFolder()
         {
