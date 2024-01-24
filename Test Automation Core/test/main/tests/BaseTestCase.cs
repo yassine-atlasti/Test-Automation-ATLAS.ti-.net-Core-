@@ -187,10 +187,10 @@ namespace Test_Automation_Core.test.main.tests
 
 
 
-            BaseTestSuite.InitTestResults(TestRunner.testCategory);
+            //BaseTestSuite.InitTestResults(TestRunner.testCategory);
           
         
-            BaseTestSuite.saveScreenshot();
+           // BaseTestSuite.saveScreenshot();
                 Thread.Sleep(1000);
            
            // _driver.Close();

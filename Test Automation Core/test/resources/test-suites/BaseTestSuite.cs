@@ -19,14 +19,14 @@ namespace Test_Automation_Core.test.resources.test_suites
         public static string testAssemblyPath = "TestAutomationFramework.dll";
         public static string targetNameSpaceUtil = "Test_Automation_Core.test.main.util";
         public static string testType="";
-        public static string testSuiteFolder="";
-        public static string passedTestsPath="";
+        public static string testSuiteFolder = "";
+        public static string passedTestsPath = "";
 
-        public static string failedTestsPath="";
-     
-        
-        
-        public static void SetUpTestFolder()
+        public static string failedTestsPath = "";
+
+
+
+        public static void SetUpTestData()
         {
 
             switch (testType)
@@ -62,7 +62,7 @@ namespace Test_Automation_Core.test.resources.test_suites
         public static void saveScreenshot()
         {
             SystemActions systemActions = new SystemActions();
-            WindowsDriver<WindowsElement> _rootdriver= systemActions.ClassInitialize("Root");
+            WindowsDriver<WindowsElement> _rootdriver = systemActions.ClassInitialize("Root");
 
 
 
@@ -85,10 +85,10 @@ namespace Test_Automation_Core.test.resources.test_suites
         }
 
         //This method is called by the cleanup method in BaseTestCase.cs
-        public  static void InitTestResults(string testCategory)
+        public static void InitTestResults(string testCategory)
         {
-            SetUpTestFolder();
-            string testName= testType;
+            SetUpTestData();
+            string testName = testType;
             if (testCategory != null)
             {
                 testName = testCategory;
@@ -124,6 +124,8 @@ namespace Test_Automation_Core.test.resources.test_suites
 
 
         }
+
+
 
     }
 }

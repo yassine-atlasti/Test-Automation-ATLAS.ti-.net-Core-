@@ -13,6 +13,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
         public void setUp()
         {
             testType = "SmokeTest";
+            SetUpTestData();
         }
        // [Test]
         public static void downloadRCMSI()

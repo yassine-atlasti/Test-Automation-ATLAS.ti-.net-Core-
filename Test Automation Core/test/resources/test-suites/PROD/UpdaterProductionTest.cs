@@ -21,6 +21,8 @@ namespace Test_Automation_Core.test.resources.test_suites
         {
             testType = "ProdTest";
             AtlastiConfig.installationPath= @"C:\Program Files\Scientific Software\ATLASti." + AtlasVariables.prodMajor;
+            SetUpTestData();
+
         }
 
         [Test, Order(1)]

@@ -21,8 +21,10 @@ namespace Test_Automation_Core.test.resources.test_suites
         public void setUp()
         {
             testType = "ReleaseTest";
-         }
-       
+            SetUpTestData();
+
+        }
+
 
 
         [Test, Order(1)]
