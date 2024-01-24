@@ -6,17 +6,27 @@ namespace Test_Automation_Core.test.main.tests.smoketests.migrationtests.librari
 public class OpenLibCH : BaseTestCase
 {
 
-    [Test, Category("OpenLibCH")]
+    [Test,Order(1), Category("OpenLibCH")]
 
     public void openLibraryCH()
     {
 
 
         //Open ATLAS.ti with empty A22 Library
-        GetAppActions().SwitchLibrary(SmokeTestVariables.library3Extracted);
+       bool libSwitch=  GetAppActions().SwitchLibrary(SmokeTestVariables.library3Extracted);
+        SetupATLAS();
+        Assert.IsTrue(libSwitch);
+        
 
-        //We need to change the driver because the application will restart after library switch
-        SetupATLAS(); ;
+
+
+    }
+    [Test, Order(2), Category("OpenLibCH")]
+
+    public void HasAtlasCrashed()
+    {
+
+      
 
         bool crashState = GetWelcomeWindow().HasAtlasCrashed(TimeSpan.FromSeconds(60));
 

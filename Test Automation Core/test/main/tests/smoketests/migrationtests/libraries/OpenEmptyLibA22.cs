@@ -10,18 +10,33 @@ public class OpenEmptyLibA22:BaseTestCase
 
     
 
-    [Test, Category("OpenEmptyLibA22")]
+    [Test,Order(1), Category("OpenEmptyLibA22")]
     public void OpenEmptyLib()
     {
         //Open ATLAS.ti with empty A22 Library
-        GetAppActions().SwitchLibrary(SmokeTestVariables.library1Extracted);
+       bool switchLib= GetAppActions().SwitchLibrary(SmokeTestVariables.library1Extracted);
 
-        //We need to change the driver because the application will restart after library switch
         SetupATLAS();
 
-        bool crashState = GetWelcomeWindow().HasAtlasCrashed(TimeSpan.FromSeconds(60));
-        Assert.IsFalse(crashState);
+        Assert.IsTrue(switchLib);
 
     }
+
+    [Test, Order(2), Category("OpenEmptyLibA22")]
+
+    public void HasAtlasCrashed()
+    {
+
+
+
+
+        bool crashState = GetWelcomeWindow().HasAtlasCrashed(TimeSpan.FromSeconds(60));
+
+        Assert.IsFalse(crashState);
+
+
+
+    }
+
 
 }

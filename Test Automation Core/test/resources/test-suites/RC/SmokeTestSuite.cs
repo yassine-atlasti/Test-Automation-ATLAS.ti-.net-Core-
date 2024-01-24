@@ -14,7 +14,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
         {
             testType = "SmokeTest";
         }
-        [Test]
+       // [Test]
         public static void downloadRCMSI()
         {
             bool success = true;

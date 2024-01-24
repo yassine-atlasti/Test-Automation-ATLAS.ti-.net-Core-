@@ -179,11 +179,12 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
 
 
-        public void SwitchLibrary(string libraryPath)
+        public bool SwitchLibrary(string libraryPath)
         {
             var welcomeWindow = _app.GetWelcomeControl();
             var optionsWindow = _app.GetOptionsWindow();
             var switchLibraryWizard = _app.GetSwitchLibraryWizard();
+            bool finishButtonVisible = false;
 
 
 
@@ -234,8 +235,12 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
             Thread.Sleep(500);
 
             // Confirm the switch by clicking the 'Finish' button
-            switchLibraryWizard.ClickFinishButton();
+            try { switchLibraryWizard.ClickFinishButton();
+                finishButtonVisible = true;
+            }
+            catch(Exception e) { }
 
+            return finishButtonVisible;
 
             //The App will restart so the connection with the driver will be lost. We need to compare the results in another method ValidateLibSwitch() that will be called in the test method after reinitilazing the WinAppDriver parameters
             /**

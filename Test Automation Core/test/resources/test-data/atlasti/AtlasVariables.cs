@@ -8,13 +8,9 @@ namespace Test_Automation_Core.test.resources.test
     {
 
 
-        public static string prodMajor = winProduction.Substring(0,2);
-        public static string previousMajor = winPreviousMajor.Substring(0,2);
-        public static string vutMajor = InstalledVersion.Substring(0, 2);
-        public static string rcMajor = winRC.Substring(0, 2);
-     
-        public static string InstalledVersion { get => SystemActions.GetCurrentInstalledVersion(); }
-      
+        //The order of this variables is important
+
+
         public static string macVUT = "";
 
         public static string winRC = "24.0.0.29576";
@@ -25,7 +21,15 @@ namespace Test_Automation_Core.test.resources.test
 
         public static string winPreviousMajor = "22.2.5";
         public static string macPreviousMajor = "22.2.3-3738";
+
+        public static string prodMajor = winProduction.Substring(0, 2);
+        public static string previousMajor = winPreviousMajor.Substring(0, 2);
+        public static string rcMajor = winRC.Substring(0, 2);
         public static string installationPath = AtlastiConfig.installationPath;
+
+        public static string InstalledVersion { get => SystemActions.GetCurrentInstalledVersion(); }
+        public static string vutMajor = InstalledVersion.Substring(0, 2);
+
 
         public enum ExportTypes
         {

@@ -42,7 +42,7 @@ namespace Test_Automation_Core.test.resources.test
 
 
         //C&H Exported from actual VUT
-        public static readonly string winVUTAtlProjPath = SystemActions.FindFilesByPartialName(CHWinVUTProjectsFolder, AtlasVariables.InstalledVersion, "." + AtlasVariables.rcExportType + AtlasVariables.rcMajor, out bool isFound);
+        public static readonly string winVUTAtlProjPath = SystemActions.FindFilesByPartialName(CHWinVUTProjectsFolder, AtlasVariables.InstalledVersion, "." + AtlasVariables.rcExportType, out bool isFound);
         public static readonly string winVUTQDPXPath = SystemActions.FindFilesByPartialName(CHWinVUTProjectsFolder, AtlasVariables.InstalledVersion, ".qdpx", out bool isFound);
 
 

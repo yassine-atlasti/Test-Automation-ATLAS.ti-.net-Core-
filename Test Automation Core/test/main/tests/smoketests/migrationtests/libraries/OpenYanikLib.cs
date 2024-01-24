@@ -7,24 +7,35 @@ public class OpenYanikLib:BaseTestCase
 {
     
 
-    [Test, Category("OpenYanikLib")]
+    [Test,Order(1) ,Category("OpenYanikLib")]
 
     public void openLibraryYanik()
     {
 
         //Open ATLAS.ti with empty A22 Library
-        GetAppActions().SwitchLibrary(SmokeTestVariables.library2Extracted);
+      bool switchLib=  GetAppActions().SwitchLibrary(SmokeTestVariables.library2Extracted);
 
-        Thread.Sleep(3000);
-        //We need to change the driver because the application will restart after library switch
+
         SetupATLAS();
-        
+
+        Assert.IsTrue(switchLib);
+    }
+    [Test, Order(2), Category("OpenYanikLib")]
+
+    public void HasAtlasCrashed()
+    {
+
+
+
+
         bool crashState = GetWelcomeWindow().HasAtlasCrashed(TimeSpan.FromSeconds(60));
 
         Assert.IsFalse(crashState);
 
 
+
     }
 
-    
+
+
 }
