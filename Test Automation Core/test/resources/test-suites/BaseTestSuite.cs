@@ -65,6 +65,7 @@ namespace Test_Automation_Core.test.resources.test_suites
         //This method is called by the cleanup method in BaseTestCase.cs
         public static void saveScreenshot()
         {
+            //If a new test category is run, we setup the corresponding Test Results folder
             if (testCategory != TestContext.CurrentContext.Test.Properties["Category"].First().ToString())
             {
                 testCategory= TestContext.CurrentContext.Test.Properties["Category"].First().ToString();
