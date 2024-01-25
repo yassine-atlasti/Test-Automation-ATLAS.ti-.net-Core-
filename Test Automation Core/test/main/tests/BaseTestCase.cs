@@ -25,21 +25,7 @@ namespace Test_Automation_Core.test.main.tests
         SystemActions systemActions = new SystemActions();
         
         
-        public static string _testSuiteFolder="";
-
-        // Getter method for testSuiteFolder
-        public static string TestSuiteFolder
-        {
-            get
-            {
-                return _testSuiteFolder;
-            }
-            set
-            {
-                // You can add validation or additional logic here if needed
-                _testSuiteFolder = value;
-            }
-        }
+         
 
         public static bool TestRunnerEnabled = false;
 
@@ -88,8 +74,10 @@ namespace Test_Automation_Core.test.main.tests
         [SetUp]
         public  void SetupATLAS()
         {
-            if (TestRunnerEnabled==false) { initSmokeTest(); }
-            RunAtlas();
+            if (TestRunnerEnabled==false)
+        
+            { initSmokeTest(); }
+           RunAtlas();
         }
 
         public bool RunAtlas()
@@ -187,12 +175,11 @@ namespace Test_Automation_Core.test.main.tests
 
 
 
-            //BaseTestSuite.InitTestResults(TestRunner.testCategory);
-          
-        
-           // BaseTestSuite.saveScreenshot();
-                Thread.Sleep(1000);
-           
+            // Screenshots are saved in distinct locations based on the execution context:
+            // - If executed as part of a test suite, screenshots are stored in the corresponding test suite folder in Desktop.
+            // - If executed individually from a test case, screenshots are saved in "Desktop/TestResults".
+            BaseTestSuite.saveScreenshot();
+            
            // _driver.Close();
             SystemActions.KillProcessByName("Atlasti" + AtlasVariables.vutMajor);
             SystemActions.KillProcessByName("SSD.ATLASti.Backup");

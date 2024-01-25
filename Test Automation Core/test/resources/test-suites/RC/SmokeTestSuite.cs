@@ -13,7 +13,6 @@ namespace Test_Automation_Core.test.main.tests.smoketests
         public void setUp()
         {
             testType = "SmokeTest";
-            SetUpTestData();
         }
        // [Test]
         public static void downloadRCMSI()
@@ -34,7 +33,11 @@ namespace Test_Automation_Core.test.main.tests.smoketests
         [Test, Order(1)]
         public void OpenYanikLibTest()
         {
-           bool success = TestRunner.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.migrationtests.libraries", "OpenYanikLib");
+
+           
+            
+
+            bool success = TestRunner.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.migrationtests.libraries", "OpenYanikLib");
             Assert.IsTrue(success);
 
         }
@@ -43,7 +46,8 @@ namespace Test_Automation_Core.test.main.tests.smoketests
         public void BackUpTests()
 
         {
-          bool success=  TestRunner.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.backuptests", "backuptests");
+            
+            bool success=  TestRunner.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.backuptests", "backuptests");
             Assert.IsTrue(success);
 
 

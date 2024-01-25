@@ -13,6 +13,10 @@ public class TestRunner
 
     public static bool RunTestByCategory(string testAssemblyPath, string targetNamespace, string folderName)
     {
+        //BaseTestSuite.SetUpTestResults(folderName);
+        BaseTestSuite.SetUpTestData();
+        BaseTestCase.TestRunnerEnabled = true;
+
         TestRunner.testCategory = folderName;
         // Initialize the test engine
         var testEngine = TestEngineActivator.CreateInstance();

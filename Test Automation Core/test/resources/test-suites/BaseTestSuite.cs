@@ -3,6 +3,7 @@ using OpenQA.Selenium.Appium.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Test_Automation_Core.test.main.tests;
@@ -19,12 +20,19 @@ namespace Test_Automation_Core.test.resources.test_suites
         public static string testAssemblyPath = "TestAutomationFramework.dll";
         public static string targetNameSpaceUtil = "Test_Automation_Core.test.main.util";
         public static string testType="";
-        public static string testSuiteFolder = "";
+        public static string testSuiteFolder = SystemActions.GetDesktopPath();
         public static string passedTestsPath = "";
 
         public static string failedTestsPath = "";
+        public static string testCategory = "";
 
-
+        public static void SetUpTestResults(string testCategory)
+        {
+           // SetUpTestData();
+            InitTestResults(testCategory);
+            ClearDirectory(passedTestsPath);
+            ClearDirectory(failedTestsPath);
+        }
 
         public static void SetUpTestData()
         {
@@ -51,16 +59,18 @@ namespace Test_Automation_Core.test.resources.test_suites
                     testSuiteFolder = SystemActions.GetDesktopPath() + "\\" + "BatchProjectImport" + AtlasVariables.InstalledVersion;
                     SystemActions.CreateFolder(testSuiteFolder);
                     break;
-                default:
-                    // Handle unexpected testType, possibly throw an exception or log a warning
-                    testType = DateTime.Now.ToString("HH-mm-ss");
-                    testSuiteFolder = SystemActions.GetDesktopPath();
-                    break;
+                
             }
         }
         //This method is called by the cleanup method in BaseTestCase.cs
         public static void saveScreenshot()
         {
+            if (testCategory != TestContext.CurrentContext.Test.Properties["Category"].First().ToString())
+            {
+                testCategory= TestContext.CurrentContext.Test.Properties["Category"].First().ToString();
+              SetUpTestResults(testCategory);     }
+          
+
             SystemActions systemActions = new SystemActions();
             WindowsDriver<WindowsElement> _rootdriver = systemActions.ClassInitialize("Root");
 
@@ -83,48 +93,55 @@ namespace Test_Automation_Core.test.resources.test_suites
             _rootdriver.Close();
 
         }
+        
 
-        //This method is called by the cleanup method in BaseTestCase.cs
+
+
         public static void InitTestResults(string testCategory)
         {
-            SetUpTestData();
+             
             string testName = testType;
             if (testCategory != null)
             {
                 testName = testCategory;
-
             }
 
             // Construct a unique folder path for the test run
             string uniqueTestRunFolder = Path.Combine(testSuiteFolder + "\\TestResults", $"TestRun_{testName}");
 
-            if (Directory.Exists(uniqueTestRunFolder))
+            // Create the main directory for the test run if it doesn't exist
+            if (!Directory.Exists(uniqueTestRunFolder))
             {
-                Directory.Delete(uniqueTestRunFolder, recursive: true);
+                Directory.CreateDirectory(uniqueTestRunFolder);
             }
-            // Create the main directory for the test run
-            Directory.CreateDirectory(uniqueTestRunFolder);
 
-            // Create subdirectories for passed and failed tests
+            // Create or clear subdirectories for passed and failed tests
             passedTestsPath = Path.Combine(uniqueTestRunFolder, "Passed");
-
             failedTestsPath = Path.Combine(uniqueTestRunFolder, "Failed");
 
-            Directory.CreateDirectory(passedTestsPath);
-            Directory.CreateDirectory(failedTestsPath);
 
 
-            // Optional: Create an additional directory for logs or other artifacts
+            // Optional: Create or clear an additional directory for logs or other artifacts
             string logsPath = Path.Combine(uniqueTestRunFolder, "Logs");
-            Directory.CreateDirectory(logsPath);
-
-
-
-
-
-
         }
 
+        public static void ClearDirectory(string path)
+        {
+            if (Directory.Exists(path))
+            {
+                // Delete existing screenshots
+                var files = Directory.GetFiles(path, "*.png");
+                foreach (var file in files)
+                {
+                    File.Delete(file);
+                }
+            }
+            else
+            {
+                // Create directory if it doesn't exist
+                Directory.CreateDirectory(path);
+            }
+        }
 
 
     }

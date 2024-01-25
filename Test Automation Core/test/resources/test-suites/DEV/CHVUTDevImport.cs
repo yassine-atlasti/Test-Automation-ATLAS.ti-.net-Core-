@@ -16,7 +16,6 @@ namespace Test_Automation_Core.test.resources.test_suites.DEV
         public void setUp()
         {
             testType = "devTest";
-            SetUpTestData();
 
         }
         [Test, Order(1)]
