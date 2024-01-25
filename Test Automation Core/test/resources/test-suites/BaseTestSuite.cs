@@ -25,28 +25,27 @@ namespace Test_Automation_Core.test.resources.test_suites
 
         public static string failedTestsPath = "";
         public static string testCategory = "";
-
+        public bool testRunnerEnabled;
         public static void SetUpTestResults(string testCategory)
         {
-           // SetUpTestData();
             InitTestResults(testCategory);
             ClearDirectory(passedTestsPath);
             ClearDirectory(failedTestsPath);
         }
 
-        public static void SetUpTestData()
+        public static void SetUpTestSuiteFolder()
         {
 
             switch (testType)
             {
                 case "SmokeTest":
+
                     testSuiteFolder = SmokeTestVariables.smokeTestFolderPath;
-                    BaseTestCase.initSmokeTest();
                     break;
 
                 case "ReleaseTest":
+
                     testSuiteFolder = ReleaseTestVariables.releaseTestFolderPath;
-                    BaseTestCase.initReleaseTest();
                     break;
 
                 case "ProdTest":

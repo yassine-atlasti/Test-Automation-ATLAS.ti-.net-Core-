@@ -264,10 +264,53 @@ namespace Test_Automation_Core.test.utilities.util
             }
         }
 
+        public void UninstallAtlasManually(string uninstallPath)
+        {
+            KillProcessByName("Atlasti" + AtlasVariables.rcMajor);
+
+            if (Directory.Exists(AtlasVariables.installationPath))
+            {
+                ClipboardService.SetText(uninstallPath);
+                Thread.Sleep(1000);
+
+
+                // Launch the 'Add or Remove Programs' window
+
+                // Create an instance of Actions class
+                var action = new Actions(driver);
+
+                // Press Win key
+                action.KeyDown(Keys.Meta);
+
+                // Press E key
+                action.SendKeys("e");
+
+                // Release Win key
+                action.KeyUp(Keys.Meta);
+
+                // Perform the action
+                action.Perform();
+
+
+                Thread.Sleep(2000);
+
+
+                SetFocusToFileExplorer();
+
+                // Use CTRL+L to focus on the address bar, then paste the clipboard content 
+                action.KeyDown(Keys.Control).SendKeys("l").KeyUp(Keys.Control).SendKeys(Keys.Control + "v").KeyUp(Keys.Control).SendKeys(Keys.Enter).Perform();
+
+                //Wait for app to uninstall
+                Thread.Sleep(90000);
 
 
 
-        public static void UninstallAtlas(string installerPath)
+
+            }
+        }
+
+
+            public static void UninstallAtlas(string installerPath)
         {
             string installDir = AtlasVariables.installationPath;
 

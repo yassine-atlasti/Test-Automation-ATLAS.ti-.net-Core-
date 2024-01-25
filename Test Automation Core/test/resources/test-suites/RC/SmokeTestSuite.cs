@@ -13,8 +13,11 @@ namespace Test_Automation_Core.test.main.tests.smoketests
         public void setUp()
         {
             testType = "SmokeTest";
+            testRunnerEnabled = true;
+             SetUpTestSuiteFolder();
+
         }
-       // [Test]
+        //[Test]
         public static void downloadRCMSI()
         {
             bool success = true;

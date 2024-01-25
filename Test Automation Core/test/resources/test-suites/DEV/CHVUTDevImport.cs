@@ -16,6 +16,8 @@ namespace Test_Automation_Core.test.resources.test_suites.DEV
         public void setUp()
         {
             testType = "devTest";
+            testRunnerEnabled = true;
+            SetUpTestSuiteFolder();
 
         }
         [Test, Order(1)]

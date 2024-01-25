@@ -71,7 +71,7 @@ namespace Test_Automation_Core.test.main.util
         [Test, Order(2)]
         public static void UninstallATLAS()
         {
-            if (String.Equals("devEXE", branch, StringComparison.OrdinalIgnoreCase))
+           if (String.Equals("devEXE", branch, StringComparison.OrdinalIgnoreCase))
             {
                 SystemActions.UninstallAtlas(AtlasVariables.installerPathNightlyMSI);
             }

@@ -70,7 +70,25 @@ namespace Test_Automation_Core.test.main.util
         [Test, Order(2),Category("UninstallMSI")]
         public static void UninstallATLAS()
         {
-            SystemActions.UninstallAtlas(installerPath);
+            if (String.Equals("devEXE", branch, StringComparison.OrdinalIgnoreCase))
+            {
+                SystemActions.UninstallAtlas(AtlasVariables.installerPathNightlyMSI);
+            }
+
+            else
+
+                      if (String.Equals("rcEXE", branch, StringComparison.OrdinalIgnoreCase))
+            {
+                SystemActions.UninstallAtlas(AtlasVariables.installerPathRCMSI);
+
+            }
+            else
+                       if (String.Equals("releaseEXE", branch, StringComparison.OrdinalIgnoreCase))
+            {
+                SystemActions.UninstallAtlas(AtlasVariables.installerPathRCMSI);
+
+
+            }
         }
 
 

@@ -16,7 +16,9 @@ namespace Test_Automation_Core.test.resources.test_suites
         public void setUp()
         {
             testType = "vanillaState";
- 
+            testRunnerEnabled = true;
+            SetUpTestSuiteFolder();
+
 
         }
         [Test, Order(1)]

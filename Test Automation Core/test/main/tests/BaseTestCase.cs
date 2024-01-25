@@ -27,7 +27,6 @@ namespace Test_Automation_Core.test.main.tests
         
          
 
-        public static bool TestRunnerEnabled = false;
 
 
         //ATLAS.ti
@@ -74,9 +73,9 @@ namespace Test_Automation_Core.test.main.tests
         [SetUp]
         public  void SetupATLAS()
         {
-            if (TestRunnerEnabled==false)
-        
-            { initSmokeTest(); }
+                initSmokeTest();
+                initReleaseTest();
+            
            RunAtlas();
         }
 
