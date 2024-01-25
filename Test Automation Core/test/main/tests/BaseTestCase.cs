@@ -51,7 +51,7 @@ namespace Test_Automation_Core.test.main.tests
         public WindowsDriver<WindowsElement> GetDriver() { return _driver; }
         //Should maybe go to SmokeTest Data
        
-        public static void initSmokeTest()
+        public static void initSmokeTestData()
         {
              ExtractLibraries.extractSmokeTestLibs();
 
@@ -63,7 +63,7 @@ namespace Test_Automation_Core.test.main.tests
 
         
 
-        public static void initReleaseTest()
+        public static void initReleaseTestData()
         {
             ExtractLibraries.extractReleaseTestLibs();
 
@@ -73,8 +73,8 @@ namespace Test_Automation_Core.test.main.tests
         [SetUp]
         public  void SetupATLAS()
         {
-                initSmokeTest();
-                initReleaseTest();
+                initSmokeTestData();
+                initReleaseTestData();
             
            RunAtlas();
         }
