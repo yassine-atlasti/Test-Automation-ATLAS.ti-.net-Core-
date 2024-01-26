@@ -21,17 +21,14 @@ namespace Test_Automation_Core.test.resources.test_suites
         public void setUp()
         {
             testType = "ReleaseTest";
-            testRunnerEnabled = true;
-             SetUpTestSuiteFolder();
-
-        }
-
+         }
+       
 
 
         [Test, Order(1)]
         public void Test1()
         {
-            bool success = TestRunner.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.releasetests.migrationtests.projects.imports", "ImportReleaseProjects");
+            bool success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.releasetests.migrationtests.projects.imports", "ImportReleaseProjects");
 
             Assert.IsTrue(success);
         }

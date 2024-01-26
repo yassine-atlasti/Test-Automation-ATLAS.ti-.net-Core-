@@ -25,13 +25,13 @@ namespace Test_Automation_Core.test.utilities.util
 {
 
 
-    public class SystemActions
+    public class SystemUtil
     {
 
         public WindowsDriver<WindowsElement> driver;
-        public SystemActions() { }
+        public SystemUtil() { }
 
-        public SystemActions(WindowsDriver<WindowsElement> driver)
+        public SystemUtil(WindowsDriver<WindowsElement> driver)
         {
             this.driver = driver;
         }

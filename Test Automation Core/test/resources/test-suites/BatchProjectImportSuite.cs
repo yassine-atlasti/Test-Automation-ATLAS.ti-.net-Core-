@@ -21,9 +21,7 @@ namespace Test_Automation_Core.test.resources.test_suites
         public void setUp()
         {
             testType = "BatchProjectImport";
-            testRunnerEnabled = true;
-            SetUpTestSuiteFolder();
-
+             
         }
 
 
@@ -32,7 +30,7 @@ namespace Test_Automation_Core.test.resources.test_suites
         [Test, Order(1)]
         public void Test1()
         {
-            bool success = TestRunner.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.specialtests", "specialtests");
+            bool success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.specialtests", "specialtests");
 
             Assert.IsTrue(success);
         }

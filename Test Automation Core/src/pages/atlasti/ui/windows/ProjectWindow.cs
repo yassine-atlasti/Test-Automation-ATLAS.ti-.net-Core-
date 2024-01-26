@@ -16,7 +16,7 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.windows
         public bool IsProjectOpen(string projectName)
         {
 
-            SystemActions systemActions = new SystemActions();
+            SystemUtil systemActions = new SystemUtil();
             string windowName = projectName + " - ATLAS.ti";
             bool projectState = systemActions.WaitForElementToBeDisplayedByTagName(driver, "Window", windowName, 2);
 

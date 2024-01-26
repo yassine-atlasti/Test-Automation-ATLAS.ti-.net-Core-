@@ -16,7 +16,7 @@ namespace Test_Automation_Core.test.main.util
     {
 
 
-        SystemActions systemActions = new SystemActions();
+        SystemUtil systemActions = new SystemUtil();
 
 
         //default branch is dev
@@ -72,20 +72,20 @@ namespace Test_Automation_Core.test.main.util
         {
             if (String.Equals("devEXE", branch, StringComparison.OrdinalIgnoreCase))
             {
-                SystemActions.UninstallAtlas(AtlasVariables.installerPathNightlyMSI);
+                SystemUtil.UninstallAtlas(AtlasVariables.installerPathNightlyMSI);
             }
 
             else
 
                       if (String.Equals("rcEXE", branch, StringComparison.OrdinalIgnoreCase))
             {
-                SystemActions.UninstallAtlas(AtlasVariables.installerPathRCMSI);
+                SystemUtil.UninstallAtlas(AtlasVariables.installerPathRCMSI);
 
             }
             else
                        if (String.Equals("releaseEXE", branch, StringComparison.OrdinalIgnoreCase))
             {
-                SystemActions.UninstallAtlas(AtlasVariables.installerPathRCMSI);
+                SystemUtil.UninstallAtlas(AtlasVariables.installerPathRCMSI);
 
 
             }

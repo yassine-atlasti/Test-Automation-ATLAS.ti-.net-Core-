@@ -30,7 +30,7 @@ namespace Test_Automation_Core.test.resources.test_suites
         public void InstallProdMSI()
         {
             UpdateAtlasMSI.branch = "releaseMSI";
-            bool success = TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLASMSI");
+            bool success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLASMSI");
         }
 
         [Test, Order(2)]
@@ -38,7 +38,7 @@ namespace Test_Automation_Core.test.resources.test_suites
 
             //run manually .reg script too change updateUrl in Registry edtior  (See TestingStuff => Smoke Test Data/Win)
 
-            bool success = TestRunner.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.smoketests.support.Production", "ProductionUpdater");
+            bool success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.smoketests.support.Production", "ProductionUpdater");
 
 
     }
@@ -49,7 +49,7 @@ namespace Test_Automation_Core.test.resources.test_suites
         {
 
             UpdateAtlasEXE.branch = "releaseEXE";
-            bool success = TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLASEXE");
+            bool success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLASEXE");
 
         }
 
@@ -61,7 +61,7 @@ namespace Test_Automation_Core.test.resources.test_suites
 
             //run manually .reg script too change updateUrl in Registry edtior  (See TestingStuff => Smoke Test Data/Win)
 
-            bool success = TestRunner.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.smoketests.support.Production", "ProductionUpdater");
+            bool success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, "Test_Automation_Core.test.main.tests.smoketests.support.Production", "ProductionUpdater");
 
 
         }

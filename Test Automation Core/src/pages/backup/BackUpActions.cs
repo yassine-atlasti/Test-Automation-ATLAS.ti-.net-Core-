@@ -70,7 +70,7 @@ namespace Test_Automation_Core.src.pages.backup
 
             backUpDialog.ClickYesIfVisible();
             //Wait for Back Up to be completed
-            SystemActions systemActions = new SystemActions();
+            SystemUtil systemActions = new SystemUtil();
             bool backUpState = systemActions.WaitForElementToBeDisplayedByTagName(driver, "Text", "Backup Completed", 80);
 
 
@@ -87,7 +87,7 @@ namespace Test_Automation_Core.src.pages.backup
             backUpDialog.EnterFileName(backUpName);
             backUpDialog.ClickOpenButton();
             //Wait for Restore to be completed
-            SystemActions systemActions = new SystemActions();
+            SystemUtil systemActions = new SystemUtil();
             bool restoreState = systemActions.WaitForElementToBeDisplayedByTagName(driver, "Text", "Restore Completed", 30);
             return restoreState;
 
@@ -96,7 +96,7 @@ namespace Test_Automation_Core.src.pages.backup
         public bool CheckWarning()
         {
 
-            SystemActions systemActions = new SystemActions();
+            SystemUtil systemActions = new SystemUtil();
             bool runingState = systemActions.WaitForElementToBeDisplayedByTagName(driver, "Text", "ATLAS.ti Is Running", 10);
             return runingState;
         }

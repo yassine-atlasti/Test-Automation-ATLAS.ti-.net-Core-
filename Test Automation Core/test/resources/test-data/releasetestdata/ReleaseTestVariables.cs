@@ -11,14 +11,14 @@ namespace Test_Automation_Core.test.resources.test_data.releasetestdata
     public class ReleaseTestVariables
     {
         //OS Versions Used for Smoke Tests
-        public static string actualWinOS { get => SystemActions.GetOperatingSystemVersion(); }
+        public static string actualWinOS { get => SystemUtil.GetOperatingSystemVersion(); }
 
 
 
         //Release Test Folder Path 
 
         public static readonly string releaseTestFolder = "ReleaseTest_" + AtlasVariables.InstalledVersion;
-        public static readonly string releaseTestFolderPath = SystemActions.GetDesktopPath() + "\\" + releaseTestFolder;
+        public static readonly string releaseTestFolderPath = SystemUtil.GetDesktopPath() + "\\" + releaseTestFolder;
 
 
         //Libraries  Names used for Release Tests

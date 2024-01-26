@@ -25,7 +25,7 @@ namespace Test_Automation_Core.src.pages.installer
 
 
             //Wait for Installer to be displayed
-            SystemActions systemActions = new SystemActions();
+            SystemUtil systemActions = new SystemUtil();
             bool installerState = systemActions.WaitForElementToBeDisplayedByTagName(driver, "Window", $"Setup - ATLAS.ti {AtlasVariables.rcMajor}", 120);
 
             if (installerState)

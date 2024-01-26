@@ -5,15 +5,15 @@ using Test_Automation_Core.src.pages.atlasti.ui.windows;
 using Test_Automation_Core.src.pages.atlasti.ui.wizards;
 using Test_Automation_Core.src.pages.windowsos;
 
-namespace Test_Automation_Core.src
+namespace Test_Automation_Core.src.pages.atlasti.ui
 {
-    public class App
+    public class UIController
     {
         private static WindowsDriver<WindowsElement> _driver;
         private static readonly TimeSpan _timeout = TimeSpan.FromSeconds(10);
 
 
-        public App(WindowsDriver<WindowsElement> driver)
+        public UIController(WindowsDriver<WindowsElement> driver)
         {
             _driver = driver;
         }

@@ -5,24 +5,24 @@ using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.test.main.util
 {
-    public class ExtractLibraries
+    public class ExtractUtil
     {
 
         public static void  extractReleaseTestLibs()
         {
-            SystemActions systemActions = new SystemActions();
+            SystemUtil systemActions = new SystemUtil();
 
 
             //Add Method that automatically updates AtlastiVariables (need to be implemented)
 
             //Create Smoke Test Folder
 
-            SystemActions.CreateFolder(ReleaseTestVariables.releaseTestFolderPath);
-            SystemActions.CreateFolder(ReleaseTestVariables.releaseTestFolderPath + "\\"+ ReleaseTestVariables.library1);
+            SystemUtil.CreateFolder(ReleaseTestVariables.releaseTestFolderPath);
+            SystemUtil.CreateFolder(ReleaseTestVariables.releaseTestFolderPath + "\\"+ ReleaseTestVariables.library1);
 
-            SystemActions.CreateFolder(ReleaseTestVariables.releaseTestFolderPath + "\\Screenshots");
-            SystemActions.CreateFolder(ReleaseTestVariables.releaseTestFolderPath + "\\Screenshots\\Failed");
-            SystemActions.CreateFolder(ReleaseTestVariables.releaseTestFolderPath + "\\Screenshots\\Succeeded");
+            SystemUtil.CreateFolder(ReleaseTestVariables.releaseTestFolderPath + "\\Screenshots");
+            SystemUtil.CreateFolder(ReleaseTestVariables.releaseTestFolderPath + "\\Screenshots\\Failed");
+            SystemUtil.CreateFolder(ReleaseTestVariables.releaseTestFolderPath + "\\Screenshots\\Succeeded");
 
 
 
@@ -36,14 +36,14 @@ namespace Test_Automation_Core.test.main.util
 
         public static void extractSmokeTestLibs()
         {
-            SystemActions systemActions = new SystemActions();
+            SystemUtil systemActions = new SystemUtil();
 
 
             //Add Method that automatically updates AtlastiVariables (need to be implemented)
 
             //Create Smoke Test Folder
 
-            SystemActions.CreateFolder(SmokeTestVariables.smokeTestFolderPath);
+            SystemUtil.CreateFolder(SmokeTestVariables.smokeTestFolderPath);
             
 
 

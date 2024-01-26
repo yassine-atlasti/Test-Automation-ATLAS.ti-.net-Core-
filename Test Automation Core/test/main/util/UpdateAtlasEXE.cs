@@ -15,7 +15,7 @@ namespace Test_Automation_Core.test.main.util
     [Category("UpdateATLASEXE")]
     public class UpdateAtlasEXE
     {
-        SystemActions systemActions = new SystemActions();
+        SystemUtil systemActions = new SystemUtil();
         private static WindowsDriver<WindowsElement> _driver;
 
 
@@ -71,22 +71,22 @@ namespace Test_Automation_Core.test.main.util
         [Test, Order(2)]
         public static void UninstallATLAS()
         {
-           if (String.Equals("devEXE", branch, StringComparison.OrdinalIgnoreCase))
+            if (String.Equals("devEXE", branch, StringComparison.OrdinalIgnoreCase))
             {
-                SystemActions.UninstallAtlas(AtlasVariables.installerPathNightlyMSI);
+                SystemUtil.UninstallAtlas(AtlasVariables.installerPathNightlyMSI);
             }
 
             else
 
            if (String.Equals("rcEXE", branch, StringComparison.OrdinalIgnoreCase))
             {
-                SystemActions.UninstallAtlas(AtlasVariables.installerPathRCMSI);
+                SystemUtil.UninstallAtlas(AtlasVariables.installerPathRCMSI);
 
             }
             else
             if (String.Equals("releaseEXE", branch, StringComparison.OrdinalIgnoreCase))
             {
-                SystemActions.UninstallAtlas(AtlasVariables.installerPathRCMSI);
+                SystemUtil.UninstallAtlas(AtlasVariables.installerPathRCMSI);
 
 
             }

@@ -4,7 +4,7 @@ using Test_Automation_Core.test.main.tests;
 using Test_Automation_Core.test.main.util;
 using Test_Automation_Core.test.resources.test_suites;
 
-public class TestRunner
+public class TestRunnerUtil
 {
 
     public static string testCategory;
@@ -14,7 +14,7 @@ public class TestRunner
     public static bool RunTestByCategory(string testAssemblyPath, string targetNamespace, string folderName)
     {
 
-        TestRunner.testCategory = folderName;
+        TestRunnerUtil.testCategory = folderName;
         // Initialize the test engine
         var testEngine = TestEngineActivator.CreateInstance();
 

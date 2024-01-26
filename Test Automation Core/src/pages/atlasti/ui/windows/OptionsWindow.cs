@@ -92,7 +92,7 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.windows
             ClickCheckForUpdatesButton();
             // Wait for a unique element in the Check for Updates Dialog to appear.
             // Replace "UniqueElementInCheckForUpdatesDialog" with an actual unique element name or locator.
-            SystemActions systemActions = new SystemActions();
+            SystemUtil systemActions = new SystemUtil();
             updateDialog= systemActions.WaitForElementToBeDisplayedByName(driver, "OK", 5);
              
             return updateDialog;
@@ -106,7 +106,7 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.windows
             ClickCheckForUpdatesButton();
             // Wait for a unique element in the Check for Updates Dialog to appear.
             // Replace "UniqueElementInCheckForUpdatesDialog" with an actual unique element name or locator.
-            SystemActions systemActions = new SystemActions();
+            SystemUtil systemActions = new SystemUtil();
             updateDialog = systemActions.WaitForElementToBeDisplayedByName(driver, "release notes", 5);
             if(updateDialog) {
 

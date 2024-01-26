@@ -27,7 +27,7 @@ namespace Test_Automation_Core.test.resources.test
         public static string rcMajor = winRC.Substring(0, 2);
         public static string installationPath = AtlastiConfig.installationPath;
 
-        public static string InstalledVersion { get => SystemActions.GetCurrentInstalledVersion(); }
+        public static string InstalledVersion { get => SystemUtil.GetCurrentInstalledVersion(); }
         public static string vutMajor = InstalledVersion.Substring(0, 2);
 
 
@@ -59,7 +59,7 @@ namespace Test_Automation_Core.test.resources.test
         public static string fileNameNightlyEXE = "ATLASti-Win-DEV.exe";
 
         // This stores automatically the path of the Downloads Folder
-        public static string downloadPath { get => SystemActions.GetDownloadsFolderPath(); }
+        public static string downloadPath { get => SystemUtil.GetDownloadsFolderPath(); }
 
         public static string installerPathRCMSI =downloadPath+ @"\" + fileNameRCMSI;
         public static string installerPathNightlyMSI = downloadPath + @"\" + fileNameNightlyMSI;

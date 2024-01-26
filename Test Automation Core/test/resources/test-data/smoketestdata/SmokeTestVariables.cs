@@ -5,14 +5,14 @@ namespace Test_Automation_Core.test.resources.test
     public class SmokeTestVariables
     {
         //OS Versions Used for Smoke Tests
-        public static  string actualWinOS { get => SystemActions.GetOperatingSystemVersion(); }
+        public static  string actualWinOS { get => SystemUtil.GetOperatingSystemVersion(); }
 
 
 
         //Smoke Test Folder Path 
 
         public static readonly string smokeTestFolder = "SmokeTest_" + AtlasVariables.InstalledVersion;
-        public static readonly string smokeTestFolderPath = SystemActions.GetDesktopPath()+"\\" + smokeTestFolder;
+        public static readonly string smokeTestFolderPath = SystemUtil.GetDesktopPath()+"\\" + smokeTestFolder;
 
 
         //Libraries  Names used for Smoke Tests

@@ -10,7 +10,7 @@ using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.test.resources.test_suites
 {
-    public class VanillaStateTestMSI:BaseTestSuite
+    public class MsiTestSuite:BaseTestSuite
     {
         [SetUp]
         public void setUp()
@@ -25,7 +25,7 @@ namespace Test_Automation_Core.test.resources.test_suites
         public void InstallRCMSI()
         {
             UpdateAtlasMSI.branch = "rcMSI";
-            bool success = TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLASMSI");
+            bool success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLASMSI");
         }
         [Test, Order(2)]
         public void OpenAtlas()

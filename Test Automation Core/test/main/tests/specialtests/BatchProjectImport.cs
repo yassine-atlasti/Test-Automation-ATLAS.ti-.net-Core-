@@ -20,7 +20,7 @@ namespace Test_Automation_Core.test.main.tests.specialtests
 
         public static IEnumerable<TestCaseData> AtlProjTestData()
         {
-            string[] projectsFileNames = SystemActions.GetFilenamesInDirectoryByType(projectsFilePath, "atlproj");
+            string[] projectsFileNames = SystemUtil.GetFilenamesInDirectoryByType(projectsFilePath, "atlproj");
 
             foreach (var fileName in projectsFileNames)
             {

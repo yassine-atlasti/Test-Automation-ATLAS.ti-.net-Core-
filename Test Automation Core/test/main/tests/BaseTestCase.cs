@@ -5,8 +5,8 @@ using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System.Diagnostics;
-using Test_Automation_Core.src;
 using Test_Automation_Core.src.pages.atlasti.actions;
+using Test_Automation_Core.src.pages.atlasti.ui;
 using Test_Automation_Core.src.pages.atlasti.ui.windows;
 using Test_Automation_Core.src.pages.backup;
 using Test_Automation_Core.src.pages.updater;
@@ -22,7 +22,7 @@ namespace Test_Automation_Core.test.main.tests
     public class BaseTestCase
     {//General
         private static WindowsDriver<WindowsElement> _driver;
-        SystemActions systemActions = new SystemActions();
+        SystemUtil systemActions = new SystemUtil();
         
         
          
@@ -30,7 +30,7 @@ namespace Test_Automation_Core.test.main.tests
 
 
         //ATLAS.ti
-        App appControl;
+        UIController appControl;
         ApplicationActions appActions;
         WelcomeWindow welcomeWindow;
 
@@ -46,17 +46,17 @@ namespace Test_Automation_Core.test.main.tests
             return backUpActions;
         }
         public WelcomeWindow GetWelcomeWindow() { return welcomeWindow; }
-        public SystemActions GetSystemActions() { return systemActions; }
+        public SystemUtil GetSystemActions() { return systemActions; }
 
         public WindowsDriver<WindowsElement> GetDriver() { return _driver; }
         //Should maybe go to SmokeTest Data
        
         public static void initSmokeTestData()
         {
-             ExtractLibraries.extractSmokeTestLibs();
+             ExtractUtil.extractSmokeTestLibs();
 
             //Enable Debug Mode
-            SystemActions.SetLoadDeveloperModule();
+            SystemUtil.SetLoadDeveloperModule();
 
 
         }
@@ -65,7 +65,7 @@ namespace Test_Automation_Core.test.main.tests
 
         public static void initReleaseTestData()
         {
-            ExtractLibraries.extractReleaseTestLibs();
+            ExtractUtil.extractReleaseTestLibs();
 
         }
 
@@ -83,8 +83,8 @@ namespace Test_Automation_Core.test.main.tests
         {
             _driver = systemActions.ClassInitialize(AtlasVariables.appPath);
             Thread.Sleep(3000);
-            systemActions = new SystemActions(_driver);
-            appControl = new App(_driver);
+            systemActions = new SystemUtil(_driver);
+            appControl = new UIController(_driver);
             appActions = new ApplicationActions(appControl);
             welcomeWindow = appControl.GetWelcomeControl();
 
@@ -134,7 +134,7 @@ namespace Test_Automation_Core.test.main.tests
         {
             _driver = systemActions.ClassInitialize(AtlasVariables.backUpPath);
             Thread.Sleep(2000);
-            systemActions = new SystemActions(_driver);
+            systemActions = new SystemUtil(_driver);
             backUpActions = new BackUpActions(_driver);
 
 
@@ -143,7 +143,7 @@ namespace Test_Automation_Core.test.main.tests
         public void SetUpSatelliteUpdater()
         {
             _driver = systemActions.ClassInitialize(AtlasVariables.updaterPath);
-            systemActions = new SystemActions(_driver);
+            systemActions = new SystemUtil(_driver);
 
         }
         public static void SwitchWindow(string windowName)
@@ -180,10 +180,10 @@ namespace Test_Automation_Core.test.main.tests
             BaseTestSuite.saveScreenshot();
             
            // _driver.Close();
-            SystemActions.KillProcessByName("Atlasti" + AtlasVariables.vutMajor);
-            SystemActions.KillProcessByName("SSD.ATLASti.Backup");
-            SystemActions.KillProcessByName("WinAppDriver");
-            SystemActions.KillProcessByName("SSD.ATLASti.Updater");
+            SystemUtil.KillProcessByName("Atlasti" + AtlasVariables.vutMajor);
+            SystemUtil.KillProcessByName("SSD.ATLASti.Backup");
+            SystemUtil.KillProcessByName("WinAppDriver");
+            SystemUtil.KillProcessByName("SSD.ATLASti.Updater");
 
         }
 

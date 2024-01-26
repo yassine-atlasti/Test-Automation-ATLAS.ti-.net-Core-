@@ -21,29 +21,29 @@ namespace Test_Automation_Core.test.resources.test
 
         //Actual CH Projects exported from Windows
 
-        public static readonly string WinProductionAtlProjPath = SystemActions.FindFilesByPartialName(CHWinProdProjectsFolder, AtlasVariables.winProduction,"." + AtlasVariables.prodExportType + AtlasVariables.prodMajor, out bool isFound);
-        public static readonly string WinProductionQDPXPath = SystemActions.FindFilesByPartialName(CHWinProdProjectsFolder, AtlasVariables.winProduction, ".qdpx", out bool isFound);
+        public static readonly string WinProductionAtlProjPath = SystemUtil.FindFilesByPartialName(CHWinProdProjectsFolder, AtlasVariables.winProduction,"." + AtlasVariables.prodExportType + AtlasVariables.prodMajor, out bool isFound);
+        public static readonly string WinProductionQDPXPath = SystemUtil.FindFilesByPartialName(CHWinProdProjectsFolder, AtlasVariables.winProduction, ".qdpx", out bool isFound);
 
         //Previous Major CH Projects exported from Windows
-        public static readonly string WinPreviousAtlProjPath = SystemActions.FindFilesByPartialName(CHWinPrevMajorProjectsFolder,  SmokeTestVariables.smokeTestproject, "." + AtlasVariables.previousExportType + AtlasVariables.previousMajor, out bool isFound);
-        public static readonly string WinPreviousQDPXPath = SystemActions.FindFilesByPartialName(CHWinPrevMajorProjectsFolder, SmokeTestVariables.smokeTestproject, ".qdpx", out bool isFound);
+        public static readonly string WinPreviousAtlProjPath = SystemUtil.FindFilesByPartialName(CHWinPrevMajorProjectsFolder,  SmokeTestVariables.smokeTestproject, "." + AtlasVariables.previousExportType + AtlasVariables.previousMajor, out bool isFound);
+        public static readonly string WinPreviousQDPXPath = SystemUtil.FindFilesByPartialName(CHWinPrevMajorProjectsFolder, SmokeTestVariables.smokeTestproject, ".qdpx", out bool isFound);
         public static readonly string WinPreviousFolderMedia = CHWinPrevMajorProjectsFolder + @"\" + Path.GetFileNameWithoutExtension(WinPreviousQDPXPath) + " Media";
 
 
         //Actual CH Projects exported from Mac
-        public static readonly string MacProductionAtlProjPath = SystemActions.FindFilesByPartialName(CHMacProdProjectsFolder, AtlasVariables.macProduction, "."+AtlasVariables.prodExportType + AtlasVariables.prodMajor, out bool isFound);
-        public static readonly string MacProductionQDPXPath = SystemActions.FindFilesByPartialName(CHMacProdProjectsFolder, AtlasVariables.macProduction, ".qdpx", out bool isFound);
+        public static readonly string MacProductionAtlProjPath = SystemUtil.FindFilesByPartialName(CHMacProdProjectsFolder, AtlasVariables.macProduction, "."+AtlasVariables.prodExportType + AtlasVariables.prodMajor, out bool isFound);
+        public static readonly string MacProductionQDPXPath = SystemUtil.FindFilesByPartialName(CHMacProdProjectsFolder, AtlasVariables.macProduction, ".qdpx", out bool isFound);
 
 
         //Previous CH Projects exported from Mac
-        public static readonly string MacPreviousAtlProjPath = SystemActions.FindFilesByPartialName(CHMacPrevMajorProjectsFolder, AtlasVariables.macPreviousMajor, "."+AtlasVariables.previousExportType + AtlasVariables.previousMajor, out bool isFound);
-        public static readonly string MacPreviousQDPXPath = SystemActions.FindFilesByPartialName(CHMacPrevMajorProjectsFolder, AtlasVariables.macPreviousMajor, ".qdpx", out bool isFound);
+        public static readonly string MacPreviousAtlProjPath = SystemUtil.FindFilesByPartialName(CHMacPrevMajorProjectsFolder, AtlasVariables.macPreviousMajor, "."+AtlasVariables.previousExportType + AtlasVariables.previousMajor, out bool isFound);
+        public static readonly string MacPreviousQDPXPath = SystemUtil.FindFilesByPartialName(CHMacPrevMajorProjectsFolder, AtlasVariables.macPreviousMajor, ".qdpx", out bool isFound);
         public static readonly string MacPreviousFolderMedia = CHMacPrevMajorQDPXProjectsFolder + @"\" + Path.GetFileNameWithoutExtension(MacPreviousQDPXPath) + " Media";
 
 
         //C&H Exported from actual VUT
-        public static readonly string winVUTAtlProjPath = SystemActions.FindFilesByPartialName(CHWinVUTProjectsFolder, AtlasVariables.InstalledVersion, "." + AtlasVariables.rcExportType, out bool isFound);
-        public static readonly string winVUTQDPXPath = SystemActions.FindFilesByPartialName(CHWinVUTProjectsFolder, AtlasVariables.InstalledVersion, ".qdpx", out bool isFound);
+        public static readonly string winVUTAtlProjPath = SystemUtil.FindFilesByPartialName(CHWinVUTProjectsFolder, AtlasVariables.InstalledVersion, "." + AtlasVariables.rcExportType, out bool isFound);
+        public static readonly string winVUTQDPXPath = SystemUtil.FindFilesByPartialName(CHWinVUTProjectsFolder, AtlasVariables.InstalledVersion, ".qdpx", out bool isFound);
 
 
 

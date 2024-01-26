@@ -8,7 +8,7 @@ namespace Test_Automation_Core.src.pages.atlasti.ui.dialogs
     {
         private WindowsDriver<WindowsElement> _driver;
         private WindowsElement _dialog;
-        SystemActions systemActions = new SystemActions();
+        SystemUtil systemActions = new SystemUtil();
 
         public LiveChatDialog(WindowsDriver<WindowsElement> driver)
         {

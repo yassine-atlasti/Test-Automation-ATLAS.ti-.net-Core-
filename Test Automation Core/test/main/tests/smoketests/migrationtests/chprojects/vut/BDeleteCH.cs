@@ -10,15 +10,15 @@ namespace Test_Automation_Core.test.main.tests.smoketests.migrationtests.chproje
         public async Task deleteCHProject()
         {
 
-            await GetAppActions().CloseProjectAsync();
 
 
             //Delete VUT
 
-          GetAppActions().DeleteProject(SmokeTestVariables.smokeTestproject);
+         bool isDeleted=  GetAppActions().DeleteProject(SmokeTestVariables.smokeTestproject);
 
-            //It's actually not working after closing a project. Delete works actually only when project is closed=>Invesitagte
+            Assert.IsTrue(isDeleted);
 
+ 
         }
     }
 }

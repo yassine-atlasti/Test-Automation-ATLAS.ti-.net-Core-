@@ -370,3 +370,9 @@ FodyWeavers.xsd
 /Test Automation Core/.idea/.gitignore
 /Test Automation Core/test/resources/test-data/local-config
 
+/Test Automation Core/test/.DS_Store
+/Test Automation Core/test/resources/.DS_Store
+/Test Automation Core/test/main/tests/smoketests/.DS_Store
+/Test Automation Core/test/main/tests/.DS_Store
+/Test Automation Core/test/main/.DS_Store
+/Test Automation Core/test/resources/test-data/.DS_Store

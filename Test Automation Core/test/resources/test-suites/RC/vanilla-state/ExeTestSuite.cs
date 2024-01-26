@@ -10,7 +10,7 @@ using Test_Automation_Core.test.utilities.util;
 
 namespace Test_Automation_Core.test.resources.test_suites
 {
-    public class VanillaStateTestEXE:BaseTestSuite
+    public class ExeTestSuite:BaseTestSuite
     {
         [SetUp]
         public void setUp()
@@ -25,7 +25,7 @@ namespace Test_Automation_Core.test.resources.test_suites
         public void InstallRCEXE()
         {
             UpdateAtlasMSI.branch = "rcEXE";
-            bool success = TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLASEXE");
+            bool success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLASEXE");
         }
         [Test,Order(2)]
         public void OpenAtlas()

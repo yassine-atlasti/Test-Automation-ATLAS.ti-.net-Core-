@@ -24,13 +24,13 @@ namespace Test_Automation_Core.test.resources.test_suites.DEV
         public void InstallDEVMSI()
         {
             UpdateAtlasMSI.branch = "devMSI";
-            bool success = TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLASMSI");
+            bool success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLASMSI");
         }
         [Test, Order(2)]
         public void ImportCHVUT()
         {
            
-                bool success = TestRunner.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.migrationtests.chprojects.vut", "DEVimportCHVUT");
+                bool success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.migrationtests.chprojects.vut", "DEVimportCHVUT");
 
 
             Assert.IsTrue(success);

@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using Test_Automation_Core.src.pages.atlasti.ui;
 using Test_Automation_Core.src.pages.atlasti.ui.appmenu.file;
 using Test_Automation_Core.src.pages.atlasti.ui.dialogs;
 using Test_Automation_Core.src.pages.windowsos;
@@ -11,9 +12,9 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 {
     public class ApplicationActions
     {
-        private readonly App _app;
+        private readonly UIController _app;
 
-        public ApplicationActions(App app)
+        public ApplicationActions(UIController app)
         {
             _app = app;
         }
@@ -90,7 +91,7 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
                 // if (!CheckForImportProjectErrors())  => continue;
 
-                SystemActions systemActions = new SystemActions();
+                SystemUtil systemActions = new SystemUtil();
                 string windowName = projectName + " - ATLAS.ti";
 
                 //Don't check for mobile and atlcb project until bug with project names is fixed
@@ -160,7 +161,7 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
         private bool DetermineExportState(ExportTypes exportType)
         {
-            SystemActions systemActions = new SystemActions();
+            SystemUtil systemActions = new SystemUtil();
 
             if (exportType == ExportTypes.QDPX)
             {
@@ -242,18 +243,6 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
             return finishButtonVisible;
 
-            //The App will restart so the connection with the driver will be lost. We need to compare the results in another method ValidateLibSwitch() that will be called in the test method after reinitilazing the WinAppDriver parameters
-            /**
-            // You can add more actions or checks here, such as validating that the library was switched correctly 
-
-            //We should check that there are no errors or crashes (the solution below is a temporary solution for testing purposes)
-
-            SystemActions systemActions = new SystemActions();
-            bool switchLibState = systemActions.WaitForElementToBeDisplayed(_app.getDriver(), "SearchControl", 35);
-
-            return switchLibState;
-            **/
-
             // Wait for 20 second for Library Switch
             Thread.Sleep(20000);
         }
@@ -265,7 +254,7 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
             //We should check that there are no errors or crashes (the solution below is a temporary solution for testing purposes)
 
-            SystemActions systemActions = new SystemActions();
+            SystemUtil systemActions = new SystemUtil();
             bool switchState = systemActions.WaitForElementToBeDisplayed(_app.getDriver(), "SearchControl", 35);
             return switchState;
 
@@ -319,7 +308,7 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
             welcomeWindow.OpenProject(projectName);
             // You can add more actions or checks here, such as validating that the project was imported correctly
 
-            SystemActions systemActions = new SystemActions();
+            SystemUtil systemActions = new SystemUtil();
 
 
             string windowName = projectName + " - ATLAS.ti";
@@ -340,52 +329,35 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
       
 
 
-        public async Task CloseProjectAsync()
-        {
-            var welcomeWindow = _app.GetWelcomeControl();
-            var projectWindow = _app.GetProjectWindow();
-            var appMenu = projectWindow.getAppMenu();
+       
 
-            if (!welcomeWindow.IsWelcomeWindowDisplayed())
-            {
-                // Assume that each method performs the action that its name suggests
-                var fileTab = appMenu.ClickFile();
-                Thread.Sleep(1000);
-                fileTab.ClickSave();
-                Thread.Sleep(500);
-                fileTab.ClickClose();
+        
 
-
-                /**  // You can add more actions or checks here, such as validating that the project was closed correctly
-                  SystemActions systemActions = new SystemActions();
-                  string windowName = "ATLAS.ti";
-                  systemActions.WaitForElementToBeDisplayedByTagName(_app.getDriver(), "Name", "Your Projects", 30);
-                  **/
-                Thread.Sleep(10000);
-
-
-            }
-
-
-        }
-
-        public void DeleteProject(string projectName)
+        public bool DeleteProject(string projectName)
         {
 
             var welcomeWindow = _app.GetWelcomeControl();
             var projectWindow = _app.GetProjectWindow();
+            bool isDeleted = false;
 
             welcomeWindow.SelectProjectContextMenuOption(projectName, "Delete");
            
             Thread.Sleep(1000);
             //Confirm Delete in Dialog
-            _app.getDriver().FindElementByTagName("Button").FindElementByName("Delete").SendKeys(Keys.Enter);
+            try { _app.getDriver().FindElementByTagName("Button").FindElementByName("Delete").SendKeys(Keys.Enter);
+                isDeleted = true;
+            }
+
+            catch(Exception e)
+            {isDeleted = false;
+
+            }
 
             //Wait 2 second to ensure that the project is deleted
             Thread.Sleep(2000);
 
             //Check if project is deleted
-
+            return isDeleted;
 
         }
 
@@ -412,7 +384,7 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
 
 
-            SystemActions systemActions = new SystemActions();
+            SystemUtil systemActions = new SystemUtil();
 
             bool reportState = systemActions.WaitForElementToBeDisplayedByName(_app.getDriver(), "OK", 60);
 

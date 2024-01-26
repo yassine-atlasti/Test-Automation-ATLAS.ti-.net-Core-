@@ -20,7 +20,8 @@ namespace Test_Automation_Core.test.resources.test_suites
         public static string testAssemblyPath = "TestAutomationFramework.dll";
         public static string targetNameSpaceUtil = "Test_Automation_Core.test.main.util";
         public static string testType="";
-        public static string testSuiteFolder = SystemActions.GetDesktopPath();
+        //Default folder for TestResults is desktop
+        public static string testSuiteFolder = SystemUtil.GetDesktopPath();
         public static string passedTestsPath = "";
 
         public static string failedTestsPath = "";
@@ -52,11 +53,11 @@ namespace Test_Automation_Core.test.resources.test_suites
                 case "devTest":
                 case "vanillaState":
                     testSuiteFolder = SmokeTestVariables.smokeTestFolderPath;
-                    SystemActions.CreateFolder(testSuiteFolder);
+                    SystemUtil.CreateFolder(testSuiteFolder);
                     break;
                 case "BatchProjectImport":
-                    testSuiteFolder = SystemActions.GetDesktopPath() + "\\" + "BatchProjectImport" + AtlasVariables.InstalledVersion;
-                    SystemActions.CreateFolder(testSuiteFolder);
+                    testSuiteFolder = SystemUtil.GetDesktopPath() + "\\" + "BatchProjectImport" + AtlasVariables.InstalledVersion;
+                    SystemUtil.CreateFolder(testSuiteFolder);
                     break;
                 
             }
@@ -71,7 +72,7 @@ namespace Test_Automation_Core.test.resources.test_suites
               SetUpTestResults(testCategory);     }
           
 
-            SystemActions systemActions = new SystemActions();
+            SystemUtil systemActions = new SystemUtil();
             WindowsDriver<WindowsElement> _rootdriver = systemActions.ClassInitialize("Root");
 
 
@@ -81,13 +82,13 @@ namespace Test_Automation_Core.test.resources.test_suites
             if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
             {
                 // The test failed
-                SystemActions.TakeScreenshot(_rootdriver, failedTestsPath, screenShotFileName);
+                SystemUtil.TakeScreenshot(_rootdriver, failedTestsPath, screenShotFileName);
 
             }
             else if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed)
             {
                 // The test passed
-                SystemActions.TakeScreenshot(_rootdriver, passedTestsPath, screenShotFileName);
+                SystemUtil.TakeScreenshot(_rootdriver, passedTestsPath, screenShotFileName);
             }
 
             _rootdriver.Close();

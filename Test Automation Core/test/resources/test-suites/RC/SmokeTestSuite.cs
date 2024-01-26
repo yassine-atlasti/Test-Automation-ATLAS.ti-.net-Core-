@@ -24,7 +24,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
             if (AtlasVariables.winRC != AtlasVariables.InstalledVersion)
             {
                 UpdateAtlasMSI.branch = "rcMSI";
-                success = TestRunner.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLASMSI");
+                success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLASMSI");
 
             }
 
@@ -40,7 +40,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
            
             
 
-            bool success = TestRunner.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.migrationtests.libraries", "OpenYanikLib");
+            bool success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.migrationtests.libraries", "OpenYanikLib");
             Assert.IsTrue(success);
 
         }
@@ -50,7 +50,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
 
         {
             
-            bool success=  TestRunner.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.backuptests", "backuptests");
+            bool success=  TestRunnerUtil.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.backuptests", "backuptests");
             Assert.IsTrue(success);
 
 
@@ -59,7 +59,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
         [Test, Order(3)]
         public void OpenCHLibTest()
         {
-           bool success= TestRunner.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.migrationtests.libraries", "OpenLibCH");
+           bool success= TestRunnerUtil.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.migrationtests.libraries", "OpenLibCH");
 
             Assert.IsTrue(success);
 
@@ -72,7 +72,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
 
         public void SupportTests()
         {
-            bool success= TestRunner.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.support", "support");
+            bool success= TestRunnerUtil.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.support", "support");
             Assert.IsTrue(success);
         }
 
@@ -80,7 +80,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
        //Devs need to add Automation IDs to the Export Project Buttons in the ExportControls
         public void CHVUTTests()
         {
-           bool success= TestRunner.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.migrationtests.chprojects.vut", "vut");
+           bool success= TestRunnerUtil.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.migrationtests.chprojects.vut", "vut");
 
 
         Assert.IsTrue(success);
@@ -90,7 +90,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests
         [Test, Order(5)]
         public void OtherCHImportTests()
         {
-           bool success= TestRunner.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.migrationtests.chprojects.otherversions", "otherversions");
+           bool success= TestRunnerUtil.RunTestByCategory(testAssemblyPath, " Test_Automation_Core.test.main.tests.smoketests.migrationtests.chprojects.otherversions", "otherversions");
 
             Assert.IsTrue(success);
 
