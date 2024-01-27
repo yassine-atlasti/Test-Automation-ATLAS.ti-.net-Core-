@@ -198,7 +198,7 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
 
             optionsWindow.ClickSwitchLibraryButton();
 
-            Thread.Sleep(500);
+            Thread.Sleep(1000);
 
             // In the Switch Library Wizard, click the 'Next' button
             switchLibraryWizard.ClickNextButton();
@@ -238,13 +238,14 @@ namespace Test_Automation_Core.src.pages.atlasti.actions
             // Confirm the switch by clicking the 'Finish' button
             try { switchLibraryWizard.ClickFinishButton();
                 finishButtonVisible = true;
+                Thread.Sleep(20000);
+
             }
-            catch(Exception e) { }
+            catch (Exception e) { }
 
+        
             return finishButtonVisible;
-
-            // Wait for 20 second for Library Switch
-            Thread.Sleep(20000);
+ 
         }
 
         public bool ValidateLibSwitch()

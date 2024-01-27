@@ -25,6 +25,7 @@ namespace Test_Automation_Core.test.main.tests.smoketests.migrationtests.chproje
 
         }
        // [Test, Order(2), Category("vut")]
+       //QDPX Export is actually not working. 
         public void exportQDPX()
         {
             //QDPX export
