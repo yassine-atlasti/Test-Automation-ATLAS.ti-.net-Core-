@@ -29,8 +29,8 @@ namespace Test_Automation_Core.test.resources.test_suites
         [Test, Order(1)]
         public void InstallProdMSI()
         {
-            UpdateAtlasMSI.branch = "releaseMSI";
-            bool success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLASMSI");
+            UpdateAtlas.branch = "releaseMSI";
+            bool success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLAS");
         }
 
         [Test, Order(2)]
@@ -48,8 +48,8 @@ namespace Test_Automation_Core.test.resources.test_suites
         public void InstallProdEXE()
         {
 
-            UpdateAtlasEXE.branch = "releaseEXE";
-            bool success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLASEXE");
+            UpdateAtlas.branch = "releaseEXE";
+            bool success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLAS");
 
         }
 

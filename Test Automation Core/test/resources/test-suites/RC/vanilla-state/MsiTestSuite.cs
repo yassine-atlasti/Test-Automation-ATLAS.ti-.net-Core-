@@ -24,8 +24,8 @@ namespace Test_Automation_Core.test.resources.test_suites
         [Test, Order(1)]
         public void InstallRCMSI()
         {
-            UpdateAtlasMSI.branch = "rcMSI";
-            bool success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLASMSI");
+            UpdateAtlas.branch = "rcMSI";
+            bool success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLAS");
         }
         [Test, Order(2)]
         public void OpenAtlas()

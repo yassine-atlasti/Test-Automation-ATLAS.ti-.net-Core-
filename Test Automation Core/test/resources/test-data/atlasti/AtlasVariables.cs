@@ -28,9 +28,21 @@ namespace Test_Automation_Core.test.resources.test
         public static string installationPath = AtlastiConfig.installationPath;
 
         public static string InstalledVersion { get => SystemUtil.GetCurrentInstalledVersion(); }
-        public static string vutMajor = InstalledVersion.Substring(0, 2);
 
+        public static string vutMajor = GetVutMajor();
 
+        public static string GetVutMajor()
+        {
+            string applicationName = SystemUtil.GetApplicationName("ATLAS.ti");
+
+            if (!string.IsNullOrEmpty(applicationName) && applicationName.Length >= 18)
+            {
+                return applicationName.Substring(8, 10);
+            }
+
+            // Handle the case when the application name is null or shorter than expected.
+            return "Null"; // You can replace this with an appropriate default value.
+        }
         public enum ExportTypes
         {
             QDPX,
@@ -67,7 +79,10 @@ namespace Test_Automation_Core.test.resources.test
         public static string installerPathRCEXE = downloadPath + @"\" + fileNameRCEXE;
         public static string installerPathNightlyEXE = downloadPath + @"\" + fileNameNightlyEXE;
 
-        public static string uninstallPathDirectory = @"Control Panel\Programs\Programs and Features";
+        public static string uninstallPath = @"Control Panel\Programs\Programs and Features\" + SystemUtil.GetApplicationName("ATLAS.ti ");
+        
+
+
 
         public static string downloadUrlNightlyEXE = @"https://releases.atlasti.com/dev-87fa7d2f-b398-4b13-96b5-d0b1a290061f/win/ATLASti-DEV.exe";
         public static string downloadUrlNightlyMSI = @"https://releases.atlasti.com/dev-87fa7d2f-b398-4b13-96b5-d0b1a290061f/win/ATLASti-DEV.msi";

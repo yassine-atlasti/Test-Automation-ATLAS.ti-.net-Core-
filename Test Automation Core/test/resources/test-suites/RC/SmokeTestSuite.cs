@@ -23,8 +23,8 @@ namespace Test_Automation_Core.test.main.tests.smoketests
             bool success = true;
             if (AtlasVariables.winRC != AtlasVariables.InstalledVersion)
             {
-                UpdateAtlasMSI.branch = "rcMSI";
-                success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLASMSI");
+                UpdateAtlas.branch = "rcMSI";
+                success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLAS");
 
             }
 

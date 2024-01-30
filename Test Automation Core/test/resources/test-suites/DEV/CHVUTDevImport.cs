@@ -23,8 +23,8 @@ namespace Test_Automation_Core.test.resources.test_suites.DEV
         [Test, Order(1)]
         public void InstallDEVMSI()
         {
-            UpdateAtlasMSI.branch = "devMSI";
-            bool success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLASMSI");
+            UpdateAtlas.branch = "devMSI";
+            bool success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLAS");
         }
         [Test, Order(2)]
         public void ImportCHVUT()

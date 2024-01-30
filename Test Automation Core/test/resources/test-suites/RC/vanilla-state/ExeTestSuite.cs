@@ -24,8 +24,8 @@ namespace Test_Automation_Core.test.resources.test_suites
         [Test, Order(1)]
         public void InstallRCEXE()
         {
-            UpdateAtlasMSI.branch = "rcEXE";
-            bool success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLASEXE");
+            UpdateAtlas.branch = "rcEXE";
+            bool success = TestRunnerUtil.RunTestByCategory(testAssemblyPath, targetNameSpaceUtil, "UpdateATLAS");
         }
         [Test,Order(2)]
         public void OpenAtlas()

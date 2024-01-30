@@ -6,20 +6,15 @@ using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Interactions;
 using System.Diagnostics;
 using System.IO.Compression;
+using System.Management;
 using System.Net.Http.Headers;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Text.RegularExpressions;
 using Test_Automation_Core.test.resources.test;
 using Test_Automation_Core.test.resources.test_data.winappdriver;
 using TextCopy;
-using System.Diagnostics;
-using System.Management;
-using System.Text.RegularExpressions;
-using System.Globalization;
-
-using System.Windows.Forms;
-using System.Text;
-using System.Security;
 
 namespace Test_Automation_Core.test.utilities.util
 {
@@ -67,7 +62,7 @@ namespace Test_Automation_Core.test.utilities.util
 
             StartWinAppDriver(); // start the WinAppDriver service
 
-           
+
 
             AppiumOptions appOptions = new AppiumOptions();
             appOptions.AddAdditionalCapability("app", applicationPath);
@@ -84,10 +79,10 @@ namespace Test_Automation_Core.test.utilities.util
             else
             {
 
-          
 
-            //OpenApp(applicationPath, applicationName);
-            while (attempt < maxRetryCount && !isDriverInitialized)
+
+                //OpenApp(applicationPath, applicationName);
+                while (attempt < maxRetryCount && !isDriverInitialized)
                 {
                     try
                     {
@@ -266,9 +261,9 @@ namespace Test_Automation_Core.test.utilities.util
 
         public void UninstallAtlasManually(string uninstallPath)
         {
-            KillProcessByName("Atlasti" + AtlasVariables.rcMajor);
-
-            if (Directory.Exists(AtlasVariables.installationPath))
+            KillProcessByName("Atlasti" + AtlasVariables.vutMajor);
+            driver = ClassInitialize("Root");
+            if (AtlasVariables.vutMajor != "nullllllllllll")
             {
                 ClipboardService.SetText(uninstallPath);
                 Thread.Sleep(1000);
@@ -299,10 +294,15 @@ namespace Test_Automation_Core.test.utilities.util
 
                 // Use CTRL+L to focus on the address bar, then paste the clipboard content 
                 action.KeyDown(Keys.Control).SendKeys("l").KeyUp(Keys.Control).SendKeys(Keys.Control + "v").KeyUp(Keys.Control).SendKeys(Keys.Enter).Perform();
+                Thread.Sleep(2000);
+
+                try { driver.FindElementByName("Yes").Click(); }
+                catch (Exception e) { }
 
                 //Wait for app to uninstall
                 Thread.Sleep(90000);
-
+                action.SendKeys(Keys.Enter);
+                MinimizeAllWindows(driver);
 
 
 
@@ -310,7 +310,7 @@ namespace Test_Automation_Core.test.utilities.util
         }
 
 
-            public static void UninstallAtlas(string installerPath)
+        public static void UninstallAtlasMSI(string installerPath)
         {
             string installDir = AtlasVariables.installationPath;
 
@@ -331,9 +331,9 @@ namespace Test_Automation_Core.test.utilities.util
 
 
         }
-           
 
-        
+
+
 
 
 
@@ -368,12 +368,34 @@ namespace Test_Automation_Core.test.utilities.util
             }
         }
 
-       
+        public static string GetApplicationName(string appNameStartsWith)
+        {
+            string keyPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
+            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(keyPath))
+            {
+                if (key != null)
+                {
+                    foreach (string subKeyName in key.GetSubKeyNames())
+                    {
+                        using (RegistryKey subKey = key.OpenSubKey(subKeyName))
+                        {
+                            object displayName = subKey.GetValue("DisplayName");
+                            if (displayName != null && displayName.ToString().StartsWith(appNameStartsWith, StringComparison.OrdinalIgnoreCase))
+                            {
+                                return displayName.ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
         public static void SetLoadDeveloperModule()
         {
             try
             {
-                using (RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Scientific Software\ATLAS.ti."+ AtlasVariables.rcMajor))
+                using (RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Scientific Software\ATLAS.ti." + AtlasVariables.rcMajor))
                 {
                     if (key != null)
                     {
@@ -387,9 +409,9 @@ namespace Test_Automation_Core.test.utilities.util
                 Console.WriteLine($"Error: {ex.Message}");
             }
         }
-        
-        
-        
+
+
+
         public static string GetDesktopPath()
         {
             return Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -679,49 +701,49 @@ namespace Test_Automation_Core.test.utilities.util
 
 
 
-public static string GetCurrentInstalledVersion()
-    {
-        // Check if the directory exists
-        if (!Directory.Exists(AtlasVariables.installationPath))
+        public static string GetCurrentInstalledVersion()
         {
-            Console.WriteLine("Installation path does not exist.");
-            return ""; // Return empty string as the directory does not exist
-        }
-
-        try
-        {
-            string versionFilePath = Path.Combine(AtlasVariables.installationPath, "ATLAS.ti.txt");
-
-            if (!File.Exists(versionFilePath))
+            // Check if the directory exists
+            if (!Directory.Exists(AtlasVariables.installationPath))
             {
-
-                Console.WriteLine("Version file does not exist.");
-                return ""; // Return empty string as the file does not exist
+                Console.WriteLine("Installation path does not exist.");
+                return "null"; // Return empty string as the directory does not exist
             }
 
-            string content = File.ReadAllText(versionFilePath);
-            // This regex matches a version number pattern like "23.3.28949.2"
-            Match match = Regex.Match(content, @"\d+(\.\d+)+");
-
-            if (match.Success)
+            try
             {
+                string versionFilePath = Path.Combine(AtlasVariables.installationPath, "ATLAS.ti.txt");
+
+                if (!File.Exists(versionFilePath))
+                {
+
+                    Console.WriteLine("Version file does not exist.");
+                    return ""; // Return empty string as the file does not exist
+                }
+
+                string content = File.ReadAllText(versionFilePath);
+                // This regex matches a version number pattern like "23.3.28949.2"
+                Match match = Regex.Match(content, @"\d+(\.\d+)+");
+
+                if (match.Success)
+                {
 
                     return match.Value; // Return the matched version string
-            }
-            else
-            {
+                }
+                else
+                {
 
                     Console.WriteLine("No version number found in the file.");
+                }
             }
-        }
-        catch (Exception ex)
-        {
+            catch (Exception ex)
+            {
 
                 Console.WriteLine("Error reading version file: " + ex.Message);
-        }
+            }
 
-        return ""; // Return empty string if unable to read version or other issues
-    }
+            return ""; // Return empty string if unable to read version or other issues
+        }
 
         public static string GetOperatingSystemVersion()
         {
