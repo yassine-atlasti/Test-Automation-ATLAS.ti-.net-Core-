@@ -263,7 +263,7 @@ namespace Test_Automation_Core.test.utilities.util
         {
             KillProcessByName("Atlasti" + AtlasVariables.vutMajor);
             driver = ClassInitialize("Root");
-            if (AtlasVariables.vutMajor != "nullllllllllll")
+            if (AtlasVariables.vutMajor != "Null")
             {
                 ClipboardService.SetText(uninstallPath);
                 Thread.Sleep(1000);
@@ -294,7 +294,7 @@ namespace Test_Automation_Core.test.utilities.util
 
                 // Use CTRL+L to focus on the address bar, then paste the clipboard content 
                 action.KeyDown(Keys.Control).SendKeys("l").KeyUp(Keys.Control).SendKeys(Keys.Control + "v").KeyUp(Keys.Control).SendKeys(Keys.Enter).Perform();
-                Thread.Sleep(2000);
+                Thread.Sleep(3000);
 
                 try { driver.FindElementByName("Yes").Click(); }
                 catch (Exception e) { }

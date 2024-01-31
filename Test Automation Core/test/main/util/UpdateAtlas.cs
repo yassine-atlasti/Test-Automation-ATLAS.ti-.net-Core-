@@ -57,7 +57,7 @@ namespace Test_Automation_Core.test.main.util
             await systemActions.DownloadFileAsync(downloadUrl, fileName);
         }
 
-        [Test, Order(2),Category("UninstallMSI")]
+        [Test, Order(2)]
         public static void UninstallATLAS()
         { 
                  systemActions.UninstallAtlasManually(AtlasVariables.uninstallPath);
